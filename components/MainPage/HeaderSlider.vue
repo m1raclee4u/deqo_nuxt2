@@ -21,7 +21,7 @@
       <main>
         <div class="assortment">
           <Nuxt-Link to="/">Мужчинам</Nuxt-Link>
-          <Nuxt-Link to="/">Женшинам</Nuxt-Link>
+          <Nuxt-Link to="/">Женщинам</Nuxt-Link>
           <Nuxt-Link to="/">Детям</Nuxt-Link>
           <Nuxt-Link to="/">Аксессуары</Nuxt-Link>
         </div>
@@ -32,10 +32,10 @@
       <footer>
         <div class="text">
           <h1>Co-ed collection<br><span><i>spring-summer</i></span></h1>
-          <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio excepturi quis nihil quasi fugit dicta odit iusto nemo quos est voluptatem,
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio excepturi quis nihil quasi fugit dicta odit iusto nemo quos est voluptatem,
             ducimus minima explicabo, nam animi necessitatibus beatae velit voluptate rem. Sed perspiciatis et vero, ex iusto odio odit accusamus molestias eum,
             quam maxime ad consequuntur nihil nam possimus asperiores!
-            </h2>
+            </p>
           <div class="swiper-pagination"></div>  
         </div>         
       </footer>
@@ -46,7 +46,6 @@
 
 <script>
 import Header from '../General/Header.vue'
-import HeaderSlider from '../MainPage/HeaderSlider.vue'
 
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
@@ -71,7 +70,7 @@ export default {
       },
     })
     },
-     components: { Header, HeaderSlider },
+     components: { Header},
     name: 'IndexPage'
 }
     
@@ -84,12 +83,13 @@ export default {
     position: absolute;
     align-self: flex-end;
   }
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-  margin: 0 auto !important;
-}
+    section{
+        max-width: 100%;
+        width: 100vh;
+    }
   .swiper{
     position: absolute;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
   }
@@ -144,7 +144,7 @@ export default {
     h1{
       font-size: 106px;
     }
-    h2{
+    p{
       margin-top: 50px;
       width: 460px;
       font-size: 14px;

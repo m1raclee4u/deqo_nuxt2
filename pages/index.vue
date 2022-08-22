@@ -1,23 +1,22 @@
 <template>
   <div class="wrapper">
     <HeaderSlider/>
-    <ItemCart/>
+    <ItemsSlider/>
+    
   </div>
 </template>
 
 <script>
-import ItemCart from '~/components/General/ItemCart.vue'
+import ItemsSlider from '~/components/General/ItemsSlider.vue'
 import HeaderSlider from '../components/MainPage/HeaderSlider.vue'
 
 export default {
   
-    components: {HeaderSlider, ItemCart},
+    components: {HeaderSlider, ItemsSlider},
     name: 'IndexPage'
 }
 </script>
 
 <style lang="scss" scoped>
-  .wrapper{
 
-  }
 </style>
