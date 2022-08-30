@@ -54,4 +54,5 @@ export default {
     .cart{
         padding-left: 30px;
     }
+    
 </style>

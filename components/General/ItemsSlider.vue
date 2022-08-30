@@ -2,40 +2,58 @@
     <section>
         <h2>Bestsellers</h2>
         <div class="bestsellers">
-        <div class="ItemSlider swiper-container">            
-            <div class="ItemCart swiper-slide">
-                <img src="" alt="">
-                <p>Брюки-чиносы из твила с ремнём</p>
-                <div class="ItemCart__price">
-                    <p class="old">3,299 ₽ </p>
-                    <p>3,299 ₽</p>
+        <!-- Additional required wrapper -->
+            <div class="ItemSlider swiper-wrapper">
+                <!-- Slides -->
+                <div class="ItemCart swiper-slide">
+                    <img src="../../assets/img/slider-popular/67475690299.jpg" alt="">
+                    <p>Брюки-чиносы из твила с ремнём</p>
+                    <div class="ItemCart__price">
+                        <p class="old">3,299 ₽ </p>
+                        <p>3,299 ₽</p>
+                    </div>
                 </div>
-            </div>
-            <div class="ItemCart swiper-slide">
-                <img src="" alt="">
-                <p>Брюки-чиносы из твила с ремнём</p>
-                <div class="ItemCart__price">
-                    <p class="old">3,299 ₽ </p>
-                    <p>3,299 ₽</p>
+                <div class="ItemCart swiper-slide">
+                    <img src="../../assets/img/slider-popular/69607270299.jpg" alt="">
+                    <p>Брюки-чиносы из твила с ремнём</p>
+                    <div class="ItemCart__price">
+                        <p class="old">3,299 ₽ </p>
+                        <p>3,299 ₽</p>
+                    </div>
                 </div>
-            </div>
-            <div class="ItemCart swiper-slide">
-                <img src="" alt="">
-                <p>Брюки-чиносы из твила с ремнём</p>
-                <div class="ItemCart__price">
-                    <p class="old">3,299 ₽ </p>
-                    <p>3,299 ₽</p>
-                </div>
-            </div>
-            <div class="ItemCart swiper-slide">
-                <img src="" alt="">
-                <p>Брюки-чиносы из твила с ремнём</p>
-                <div class="ItemCart__price">
-                    <p class="old">3,299 ₽ </p>
-                    <p>3,299 ₽</p>
-                </div>
-            </div>
-        </div>
+                <div class="ItemCart swiper-slide">
+                    <img src="../../assets/img/slider-popular/67475690299.jpg" alt="">
+                    <p>Брюки-чиносы из твила с ремнём</p>
+                    <div class="ItemCart__price">
+                        <p class="old">3,299 ₽ </p>
+                        <p>3,299 ₽</p>
+                    </div>
+                </div> 
+                <div class="ItemCart swiper-slide">
+                    <img src="../../assets/img/slider-popular/69607270299.jpg" alt="">
+                    <p>Брюки-чиносы из твила с ремнём</p>
+                    <div class="ItemCart__price">
+                        <p class="old">3,299 ₽ </p>
+                        <p>3,299 ₽</p>
+                    </div>
+                </div> 
+                <div class="ItemCart swiper-slide">
+                    <img src="../../assets/img/slider-popular/67475690299.jpg" alt="">
+                    <p>Брюки-чиносы из твила с ремнём</p>
+                    <div class="ItemCart__price">
+                        <p class="old">3,299 ₽ </p>
+                        <p>3,299 ₽</p>
+                    </div>
+                </div> 
+                <div class="ItemCart swiper-slide">
+                    <img src="../../assets/img/slider-popular/69607270299.jpg" alt="">
+                    <p>Брюки-чиносы из твила с ремнём</p>
+                    <div class="ItemCart__price">
+                        <p class="old">3,299 ₽ </p>
+                        <p>3,299 ₽</p>
+                    </div>
+                </div> 
+            </div>        
         </div>
     </section>
 </template>
@@ -50,8 +68,8 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 export default {
      mounted() {
       new Swiper('.bestsellers', {
-      slidesPerView: 5,  
-      spaceBetween: 42,
+      slidesPerView: 3.8,
+      spaceBetween: 15,
     })
     },
     
@@ -59,12 +77,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .bestsellers{
+        overflow-x: hidden;
+    }
     .ItemSlider{
         display: flex;
-        gap: 42px;
+        // gap: 52px;
     }
     section{
-        padding: 100px 60px;
+        margin: 0 auto;
+        padding: 100px 0px 0 60px;
+        max-width: 1920px;
+        width: 100%;
         h2{
             padding-bottom: 60px;
             font-size: 35px;

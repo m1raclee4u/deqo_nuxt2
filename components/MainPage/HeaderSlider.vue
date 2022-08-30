@@ -138,15 +138,23 @@ export default {
   }
   .text{
     display: flex;
-    justify-content: space-between;
-    max-width: 1366px;
+    gap: 10%;
     padding-bottom: 100px;
     h1{
-      font-size: 106px;
+      // font-size: 106px;
+      font-size: 6.35vw;
+      color: white;
+    }
+    span{
+      i{
+        color: white;
+      }      
     }
     p{
+      
+      color: white;
       margin-top: 50px;
-      width: 460px;
+      width: 33%;
       font-size: 14px;
     }
   }
@@ -160,6 +168,17 @@ export default {
       text-decoration: none;
     }
   }
+
+  @media (min-width:1280px) and (max-width: 1369px) {
+    .assortment{
+      a{
+        font-size: 36px;
+      }
+    }
+    }
+  @media  (max-width: 1279px) {
+        
+    }
 </style>
 
 
