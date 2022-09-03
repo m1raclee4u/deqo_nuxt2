@@ -1,64 +1,35 @@
 <template>
     <section>
-        <h2>Bestsellers</h2>
+        <div class="jcsb p60">
+            <h2>Bestsellers</h2>
+            <Nuxt-Link to="catalog">View all</Nuxt-Link>
+        </div>
         <div class="bestsellers">
         <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="ItemCart swiper-slide">
-                    <img src="../../assets/img/slider-popular/67475690299.jpg" alt="">
-                    <p>Брюки-чиносы из твила с ремнём</p>
-                    <div class="ItemCart__price">
-                        <p class="old">3,299 ₽ </p>
-                        <p>3,299 ₽</p>
-                    </div>
-                </div>
-                <div class="ItemCart swiper-slide">
-                    <img src="../../assets/img/slider-popular/69607270299.jpg" alt="">
-                    <p>Брюки-чиносы из твила с ремнём</p>
-                    <div class="ItemCart__price">
-                        <p class="old">3,299 ₽ </p>
-                        <p>3,299 ₽</p>
-                    </div>
-                </div>
-                <div class="ItemCart swiper-slide">
-                    <img src="../../assets/img/slider-popular/67475690299.jpg" alt="">
-                    <p>Брюки-чиносы из твила с ремнём</p>
-                    <div class="ItemCart__price">
-                        <p class="old">3,299 ₽ </p>
-                        <p>3,299 ₽</p>
-                    </div>
-                </div> 
-                <div class="ItemCart swiper-slide">
-                    <img src="../../assets/img/slider-popular/69607270299.jpg" alt="">
-                    <p>Брюки-чиносы из твила с ремнём</p>
-                    <div class="ItemCart__price">
-                        <p class="old">3,299 ₽ </p>
-                        <p>3,299 ₽</p>
-                    </div>
-                </div> 
-                <div class="ItemCart swiper-slide">
-                    <img src="../../assets/img/slider-popular/67475690299.jpg" alt="">
-                    <p>Брюки-чиносы из твила с ремнём</p>
-                    <div class="ItemCart__price">
-                        <p class="old">3,299 ₽ </p>
-                        <p>3,299 ₽</p>
-                    </div>
-                </div> 
-                <div class="ItemCart swiper-slide">
-                    <img src="../../assets/img/slider-popular/69607270299.jpg" alt="">
-                    <p>Брюки-чиносы из твила с ремнём</p>
-                    <div class="ItemCart__price">
-                        <p class="old">3,299 ₽ </p>
-                        <p>3,299 ₽</p>
-                    </div>
-                </div> 
+                <!-- Slides -->       
+                <!-- <Item class="swiper-slide"
+                :Item="Item"
+                v-for="item in $store.state.items" 
+                :key="item.id"
+                >
+                </Item> -->
+                <div
+                 v-for="item in $store.state.items" 
+                 :key="item.id"
+                 class="swiper-slide">                
+                    <item :item="item" 
+                        :key="item.id">               
+                    </item>
+                </div>          
             </div>        
         </div>
     </section>
 </template>
 
 <script>
+import Item from '~/components/General/Item.vue'
+
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
 
@@ -66,10 +37,11 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 
 export default {
+     components: { Item },
      mounted() {
       new Swiper('.bestsellers', {
       slidesPerView: 3.9,
-      spaceBetween: 15,
+      spaceBetween: 40,
       breakpoints: {
         // // when window width is >= 320px
         //     320: {
@@ -106,6 +78,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    a{
+        text-decoration: none;
+        color: #b8b8b8;
+    }
     .bestsellers{
         overflow-x: hidden;
     }
@@ -123,39 +99,5 @@ export default {
             font-size: 35px;
         }
     }
-     .ItemCart{        
-        padding-bottom: 60px;
-        img{
-            max-width: 100%;
-            height: auto;
-            background-color: black;
-            margin-bottom: 25px;
-        }
-        p{
-            margin-bottom: 20px;
-        }
-    }
-    .ItemCart__price{
-        display: flex;
-        gap: 30px;
-        .old{
-            color: grey;
-            text-decoration: line-through;
-        }
-    }
-    @media (max-width: 1280px) {
-        .ItemCart{        
-        padding-bottom: 60px;
-        img{
-            max-width: 100%;
-            height: auto;
-            background-color: black;
-            margin-bottom: 25px;
-        }
-        p{
-            margin-bottom: 20px;
-            font-size: 13px;
-        }
-    }
-    }
+     
 </style>
