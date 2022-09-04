@@ -109,11 +109,11 @@ export const state = () => ({
         id: 'pink',
         name: 'Розоватый'
       },
-    ]
+    ],
+    checkedCategories: []
 })
 
 export const mutations = {
- 
 }
 
 export const actions = {

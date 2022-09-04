@@ -5,17 +5,19 @@
             <div class="category" 
             v-for="category in $store.state.categories" 
             :key="category.id">
-                <input type="checkbox" class="custom-checkbox" name="" :id="category.id">
+                <input type="checkbox" class="custom-checkbox" :value="category.name" name="" :id="category.id" v-model="checkedCategories">
                 <label :for="category.id">{{category.name}}</label>
             </div>
-            
+            <h1>{{checkedCategories}}</h1>            
         </div>      
     </div>
 </template>
 
 <script>
 export default {
-    
+    data() {
+      return { checkedCategories: [] }
+    },
 }
 </script>
 
@@ -42,10 +44,10 @@ export default {
     margin-right: 0.5em;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 50% 50%;
+    background-size: 60% 60%;
     }
     .custom-checkbox:checked+label::before {
-    border-color: none;
+    border-color: #ec3012;
     background-color: #ec3012;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
     }

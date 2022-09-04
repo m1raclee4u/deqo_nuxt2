@@ -61,6 +61,9 @@ export default {
         align-items: center;        
         margin-bottom: 40px;
         gap: 20px;
+        p{
+            width: 195px;
+        }
     }
     .items__main{
         p{
@@ -73,7 +76,7 @@ export default {
     .items{
         display: flex;
         flex-wrap: wrap;
-        gap: 19px;
+        gap: 19.6px;
     }
     .item:nth-child(3n+3) {
         margin-right: 0;
