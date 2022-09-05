@@ -114,6 +114,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  checkedCategoriesMutation(state, value) {
+    state.checkedCategories = value;
+  }
 }
 
 export const actions = {

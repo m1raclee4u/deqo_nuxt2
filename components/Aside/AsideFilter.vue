@@ -2,7 +2,7 @@
     <div class="filter">
         <h3>Фильтр по цене</h3>
         <div class="row">
-            <p>Цена: &nbsp; <span>₽ <number>0</number> — ₽ <number>270</number></span> </p>
+            <p>Цена: &nbsp; <span>₽ <b>0</b> — ₽ <b>270</b></span> </p>
             <button>Фильтр</button>
         </div>
         <input type="range" name="" id="">

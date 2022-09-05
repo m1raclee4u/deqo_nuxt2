@@ -5,10 +5,16 @@
             <div class="category" 
             v-for="category in $store.state.categories" 
             :key="category.id">
-                <input type="checkbox" class="custom-checkbox" :value="category.name" name="" :id="category.id" v-model="checkedCategories">
+                <input 
+                type="checkbox" 
+                class="custom-checkbox" 
+                :value="category.name" 
+                name="" 
+                :id="category.id" 
+                v-model="checkedCategories">
                 <label :for="category.id">{{category.name}}</label>
             </div>
-            <h1>{{checkedCategories}}</h1>            
+            <span>{{checkedCategories}}</span>            
         </div>      
     </div>
 </template>
@@ -59,10 +65,6 @@ export default {
     .custom-checkbox:not(:disabled):active+label::before {
     background-color: #ec3012;
     border-color: none;
-    }
-    /* стили для чекбокса, находящегося в фокусе */
-    .custom-checkbox:focus+label::before {
-    // box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
     /* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
     .custom-checkbox:focus:not(:checked)+label::before {
