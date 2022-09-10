@@ -55,7 +55,9 @@ export default {
         padding: 0 60px;
         border-bottom: 1px solid #8c8c8c30;
         position: sticky;
-        margin-bottom: 40px;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.938);
+        // margin-bottom: 40px;
     }
     button{        
         cursor: pointer;

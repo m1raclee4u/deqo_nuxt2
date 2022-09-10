@@ -87,7 +87,7 @@ export default {
         display: flex;
         justify-content: space-between;
         gap: 60px;
-        padding: 0 60px;
+        padding: 40px 60px;
     }
     aside{
         width: 280px;
