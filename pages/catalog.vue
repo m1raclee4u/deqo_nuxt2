@@ -11,14 +11,14 @@
                 <div class="aic">
                     <p>Показаны 16 из 30 результатов</p>
                     <div
-                    v-for="category in $store.state.categories" 
-                    :key="category.id">                
-                        <filters
-                        :category="category" 
-                        :key="category.id"
-                        v-if="{}"
-                        >
-                        </filters>
+                    v-for="category in $store.state.categories"  
+                    :key="category.id"
+                     v-if="category.checked == true"
+                    >  
+                        <button>
+                            <i class="delete"></i>       
+                            {{category.name}}
+                        </button>                        
                     </div>  
                 </div>                       
                 
@@ -49,17 +49,45 @@ import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
 export default {
   components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories },
-    
+
+    methods: {
+        // addChecked () {
+        //     this.$store.commit('checkedChange', this.categoriesChecked)
+        // }
+    }
 }
+
+    
 </script>
 
 <style lang="scss" scoped>
+    .delete{
+    display: block;
+    flex-shrink: 0;
+    width: 11px;
+    height: 11px;
+    margin-right: 9px;
+    background: url('../assets/img/icons/delete.svg');
+    background-size: cover;
+    cursor: pointer;
+    }
+    button{
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        padding: 10px 9px;
+        font-weight: 600;
+    }
+
+
+
     .aic{
         position: relative;
         width: 100%;
         display: flex;
         align-items: center;        
         margin-bottom: 40px;
+        min-height: 32px;
         gap: 20px;
         p{
             width: 195px;
@@ -76,12 +104,10 @@ export default {
     .items{
         display: flex;
         flex-wrap: wrap;
-        gap: 19.6px;
+        gap: 17.6px;
     }
     .item:nth-child(3n+3) {
         margin-right: 0;
-    }
-    .item{
     }
     main {
         display: flex;

@@ -1,6 +1,6 @@
 <template>
     <div class="colors">
-        <h3>Категории товаров</h3>
+        <h3>Цвет</h3>
         <div class="checkboxes">
             <div class="color" 
             v-for="color in $store.state.colors" 

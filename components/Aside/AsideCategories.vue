@@ -1,6 +1,6 @@
 <template>
     <div class="categories">
-        <h3>Категории товаров</h3>
+        <h3>Категория</h3>
         <div class="checkboxes">
             <div class="category" 
             v-for="category in $store.state.categories" 
@@ -11,10 +11,13 @@
                 :value="category.name" 
                 name="" 
                 :id="category.id" 
-                v-model="checkedCategories">
+                v-model="categoriesChecked"
+                @change="addChecked"
+                >                
+                
                 <label :for="category.id">{{category.name}}</label>
             </div>
-            <span>{{checkedCategories}}</span>            
+            <span></span>            
         </div>      
     </div>
 </template>
@@ -22,8 +25,16 @@
 <script>
 export default {
     data() {
-      return { checkedCategories: [] }
+      return {       
+        categoriesChecked : [],  
+      }
     },
+    methods: {
+        addChecked () {
+            // this.$store.commit('clearCheckedCategories')
+            this.$store.dispatch('checkedChange', this.categoriesChecked)
+        }
+    }
 }
 </script>
 

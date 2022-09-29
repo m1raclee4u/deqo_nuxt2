@@ -44,38 +44,46 @@ export const state = () => ({
     ],
     categories: [
       {
-        id: 'tshorts',
-        name: 'Футболки и поло'
+          id: 'tshorts',
+          checked: false,
+          name: 'Футболки и поло'
       },
       {
-        id: 'outerwear',
-        name: 'Верхняя одежда'
+          id: 'outerwear',
+          checked: false,
+          name: 'Верхняя одежда'
       },
       {
-        id: 'shorts',
-        name: 'Шорты'
+          id: 'shorts',
+          checked: false,
+          name: 'Шорты'
       },
       {
-        id: 'hoodies',
-        name: 'Толстовки'
+          id: 'hoodies',
+          checked: false,
+          name: 'Толстовки'
       },
       {
-        id: 'jumpers',
-        name: 'Джемперы и кардиганы'
+          id: 'jumpers',
+          checked: false,
+          name: 'Джемперы и кардиганы'
       },
       {
-        id: 'jackets',
-        name: 'Жакеты и пиджаки'
+          id: 'jackets',
+          checked: false,
+          name: 'Жакеты и пиджаки'
       },
       {
-        id: 'sportswear',
-        name: 'Спортивная одежда'
+          id: 'sportswear',
+          checked: false,
+          name: 'Спортивная одежда'
       },
       {
-        id: 'swimmingShorts',
-        name: 'Плавательные шорты'
+          id: 'swimmingShorts',
+          checked: false,
+          name: 'Плавательные шорты'
       },
-    ],
+      ],
     colors: [      
       {
         id: 'white',
@@ -110,18 +118,51 @@ export const state = () => ({
         name: 'Розоватый'
       },
     ],
-    checkedCategories: []
+    checkedCategories: [],
+    isVisible: false
 })
 
 export const mutations = {
-  checkedCategoriesMutation(state, value) {
-    state.checkedCategories = value;
+  checkedChange (state, checked) {
+      state.checkedCategories.push({
+        name: ''
+      })
+      for (let el = 0; el < state.checkedCategories.length; el++) {
+        const element = state.checkedCategories[el];
+        element.name = checked[el];      
+      }
+      for (let i = 0; i < state.checkedCategories.length; i++) {      
+        let cache = state.checkedCategories[i];
+        for (let j = 0; j < state.categories.length; j++) {        
+          if (cache.name == state.categories[j].name) {
+            state.categories[j].checked = true;
+            console.log(state.categories[j].checked);
+          }
+          else {
+            state.categories[j].checked = false
+          }
+        }        
+    }
+    console.log(state.categories);
+    console.log(checked);
+    console.log(state.checkedCategories);
+  },
+
+  clearCheckedCategories (state){    
+    let array = state.checkedCategories
+    array = array.splice(-1, array.length)
+    console.log(array);
   }
 }
 
 export const actions = {
- 
+  checkedChange ({commit}, checked) {
+    commit('clearCheckedCategories')
+    commit('checkedChange', checked)    
+  }
+  
 }
+
 
 export const getters = {
     

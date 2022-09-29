@@ -13,6 +13,8 @@
     "cookie-universal-nuxt": "^2.2.1",
     "core-js": "^3.19.3",
     "element-ui": "^2.15.6",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-webpack-plugin": "^2.4.2",
     "npm-git-install": "^0.3.0",
     "nuxt": "^2.15.8",
     "swiper": "^6.8.4",
