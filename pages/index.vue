@@ -3,8 +3,7 @@
     <HeaderSlider/>
     <ItemsSlider/>
     <Collections/>
-    <Footer/>
-    
+    <Footer/>    
   </div>
 </template>
 

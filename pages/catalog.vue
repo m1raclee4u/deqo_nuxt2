@@ -11,9 +11,8 @@
                 <div class="aic">
                     <p>Показаны 16 из 30 результатов</p>
                     <div
-                    v-for="category in $store.state.categories"  
+                    v-for="category in $store.state.categories.filter(el=>el.checked == true)"  
                     :key="category.id"
-                     v-if="category.checked == true"
                     >  
                         <button>
                             <i class="delete"></i>       
