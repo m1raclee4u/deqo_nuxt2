@@ -21,11 +21,11 @@
                     </div>  
                 </div>                       
                 
-                <div class="items">
+                <div class="items row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <div
                     v-for="item in $store.state.items" 
                     :key="item.id"
-                    class="item"
+                    class="col item"
                     >                
                         <item 
                         :item="item" 
@@ -103,7 +103,7 @@ export default {
     .items{
         display: flex;
         flex-wrap: wrap;
-        gap: 17.6px;
+        // gap: 17.6px;
     }
     .item:nth-child(3n+3) {
         margin-right: 0;
