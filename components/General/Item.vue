@@ -2,11 +2,16 @@
     <div class="ItemCart">
         <div class="swiper-slide">
             <Nuxt-Link to="">
-                <img :src="require('../../assets/img/item/' + item.img)" alt="" >
+                <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
+                <img
+                class="card__img"
+                :src="'https://frontend-test.idaproject.com' + item.photo"
+                :alt="item.name"
+                />
             </Nuxt-Link>
             <p>{{item.name}}</p>
             <div class="ItemCart__price">
-                <p class="old">{{item.priceOld}} ₽ </p>
+                <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
                 <p>{{item.price}} ₽</p>
             </div>
         </div>

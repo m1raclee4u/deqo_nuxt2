@@ -3,16 +3,19 @@
         <HeaderBlack/>
         <main class="main">
             <aside class="aside">
-                <aside-categories/>
+                <aside-categories 
+                    @updateChecked="sortByChecked"                    
+                />
                 <aside-filter/>
                 <aside-color/>
             </aside>
             <div class="items__main">
                 <div class="aic">
                     <p>Показаны 16 из 30 результатов</p>
+                    <span>{{this.checkedId}}</span>
                     <div
                     v-for="category in $store.state.categories.filter(el=>el.checked == true)"  
-                    :key="category.id"
+                    :key="category.id"                 
                     >  
                         <button>
                             <i class="delete"></i>       
@@ -21,12 +24,12 @@
                     </div>  
                 </div>                       
                 
-                <div class="items row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
                     <div
-                    v-for="item in $store.state.items" 
+                    v-for="item in this.products" 
                     :key="item.id"
-                    class="col item"
-                    >                
+                    class="col item"                    
+                    >
                         <item 
                         :item="item" 
                         :key="item.id"                        
@@ -47,14 +50,52 @@ import Filters from '~/components/General/Filters.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
 export default {
-  components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories },
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories },
 
+    props: ["category"],
+    data() {
+
+        return {
+        showFilter: false,
+        filterLabel: "цене",
+        productsInCartId: [],
+        checkedId: 'all',
+        };
+    },
     methods: {
-        // addChecked () {
-        //     this.$store.commit('checkedChange', this.categoriesChecked)
+        sortByChecked(checkedId) {
+           this.checkedId = checkedId
+        }
+    },
+    computed: {
+        products() {
+            if (this.category) {
+                for (let index = 0; index < checkedId.length; index++) {
+                    const element = checkedId[index];
+                    // if (element == 
+                    
+                }
+                return this.$store.getters["products"].filter(
+                (c) => c.category + "" == this.category
+                );
+            } else return this.$store.getters["products"];
+        },
+        productsInCart() {
+            return this.$store.getters["productsInCart"];
+        },
+    },
+    mounted() {
+        if (this.$store.getters["products"].length === 0) {
+        this.$store.dispatch("fetchProducts");
+        }
+        if (this.$store.getters["categories"].length === 0) {
+        this.$store.dispatch("fetchCategories");
+        }
+        // if (this.productsInCart.length) {
+        // this.productsInCart.forEach((c) => this.productsInCartId.push(c.id));
         // }
-    }
-}
+    },
+};
 
     
 </script>
@@ -92,7 +133,8 @@ export default {
             width: 195px;
         }
     }
-    .items__main{
+    .items__main{        
+        width: 100%;
         p{
             display: flex;
             gap: 20px;

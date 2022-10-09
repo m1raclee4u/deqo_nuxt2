@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Брюки-чиносы из твила с ремнём",
+        "price": "3,299",
+        "photo": "item_1.jpg",
+        "category": 1
+    },
+    {
+        "id": 2,
+        "title": "Брюки-чиносы из твила с ремнём",
+        "price": "3,299",
+        "photo": "item_2.jpg",
+        "category": 1
+    },
+    {
+        "id": 3,
+        "title": "Брюки-чиносы из твила с ремнём",
+        "price": "3,299",
+        "photo": "item_3.jpg",
+        "category": 2
+    },
+    {
+        "id": 4,
+        "title": "Брюки-чиносы из твила с ремнём",
+        "price": "3,299",
+        "photo": "item_4.jpg",
+        "category": 2
+    },
+    {
+        "id": 5,
+        "title": "Брюки-чиносы из твила с ремнём",
+        "price": "3,299",
+        "photo": "item_5.jpg",
+        "category": 3
+    }
+]

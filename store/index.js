@@ -1,89 +1,7 @@
 export const state = () => ({
-    items: [
-        {
-          id: 1,
-          articleNumber: '',
-          name: 'Брюки-чиносы из твила с ремнём',
-          img: 'item_1.jpg',
-          price: '3,299',
-          priceOld: '3,299',
-        },
-        {
-          id: 2,
-          articleNumber: '',
-          name: 'Брюки-чиносы из твила с ремнём',
-          img: 'item_2.jpg',
-          price: '3,299',
-          priceOld: '3,299',
-        },
-        {
-          id: 3,
-          articleNumber: '',
-          name: 'Брюки-чиносы из твила с ремнём',
-          img: 'item_3.jpg',
-          price: '3,299',
-          priceOld: '3,299',
-        },
-        {
-          id: 4,
-          articleNumber: '',
-          name: 'Брюки-чиносы из твила с ремнём',
-          img: 'item_4.jpg',
-          price: '3,299',
-          priceOld: '3,299',
-        },
-        {
-          id: 5,
-          articleNumber: '',
-          name: 'Брюки-чиносы из твила с ремнём',
-          img: 'item_5.jpg',
-          price: '3,299',
-          priceOld: '3,299',
-        },
-       
-    ],
-    categories: [
-      {
-          id: 'tshorts',
-          checked: false,
-          name: 'Футболки и поло'
-      },
-      {
-          id: 'outerwear',
-          checked: false,
-          name: 'Верхняя одежда'
-      },
-      {
-          id: 'shorts',
-          checked: false,
-          name: 'Шорты'
-      },
-      {
-          id: 'hoodies',
-          checked: false,
-          name: 'Толстовки'
-      },
-      {
-          id: 'jumpers',
-          checked: false,
-          name: 'Джемперы и кардиганы'
-      },
-      {
-          id: 'jackets',
-          checked: false,
-          name: 'Жакеты и пиджаки'
-      },
-      {
-          id: 'sportswear',
-          checked: false,
-          name: 'Спортивная одежда'
-      },
-      {
-          id: 'swimmingShorts',
-          checked: false,
-          name: 'Плавательные шорты'
-      },
-      ],
+    products: [],
+    categories: [],
+    productsInCart: [],
     colors: [      
       {
         id: 'white',
@@ -123,47 +41,74 @@ export const state = () => ({
 })
 
 export const mutations = {
-  checkedChange (state, checked) {
-      state.checkedCategories.push({
-        name: ''
-      })
-      for (let el = 0; el < state.checkedCategories.length; el++) {
-        const element = state.checkedCategories[el];
-        element.name = checked[el];      
-      }
-      for (let i = 0; i < state.checkedCategories.length; i++) {      
-        let cache = state.checkedCategories[i];
-        for (let j = 0; j < state.categories.length; j++) {        
-          if (cache.name == state.categories[j].name) {
-            state.categories[j].checked = true;
-            console.log(state.categories[j].checked);
-          }
-          else {
-            state.categories[j].checked = false
-          }
-        }        
-    }
-    console.log(state.categories);
-    console.log(checked);
-    console.log(state.checkedCategories);
+  SET_PRODUCTS(state, products) {
+    state.products = products;
+  },
+  SET_CATEGORIES(state, categories) {
+    state.categories = categories;
   },
 
-  clearCheckedCategories (state){    
-    let array = state.checkedCategories
-    array = array.splice(-1, array.length)
-    console.log(array);
-  }
+  // checkedChange (state, checked) {
+  //     state.checkedCategories.push({
+  //       name: ''
+  //     })
+  //     for (let el = 0; el < state.checkedCategories.length; el++) {
+  //       const element = state.checkedCategories[el];
+  //       element.name = checked[el];      
+  //     }
+  //     for (let i = 0; i < state.checkedCategories.length; i++) {      
+  //       let cache = state.checkedCategories[i];
+  //       for (let j = 0; j < state.categories.length; j++) {        
+  //         if (cache.name == state.categories[j].name) {
+  //           state.categories[j].checked = true;
+  //           console.log(state.categories[j].checked);
+  //         }
+  //         else {
+  //           state.categories[j].checked = false
+  //         }
+  //       }        
+  //   }
+  //   console.log(state.categories);
+  //   console.log(checked);
+  //   console.log(state.checkedCategories);
+  // },
+
+  // clearCheckedCategories (state){    
+  //   let array = state.checkedCategories
+  //   array = array.splice(-1, array.length)
+  //   console.log(array);
+  // }
 }
 
 export const actions = {
-  checkedChange ({commit}, checked) {
-    commit('clearCheckedCategories')
-    commit('checkedChange', checked)    
+
+  async fetchProducts({ commit }) {
+    let products = [];
+    await this.$axios
+      .get('https://frontend-test.idaproject.com/api/product?category=1')
+      .then(response => (products = response.data));
+    await this.$axios
+      .get('https://frontend-test.idaproject.com/api/product?category=2')
+      .then(response => (products = products.concat(response.data)));
+    await this.$axios
+      .get('https://frontend-test.idaproject.com/api/product?category=3')
+      .then(response => (products = products.concat(response.data)));
+    commit("SET_PRODUCTS", products);
+    // console.log(products);
+  },
+  
+  async fetchCategories({ commit }) {
+    let categories;
+    await this.$axios
+      .get("https://frontend-test.idaproject.com/api/product-category")
+      .then(response => (categories = response.data));
+    commit("SET_CATEGORIES", categories);
   }
   
 }
 
-
 export const getters = {
-    
-}
+  products: s => s.products,
+  categories: s => s.categories,
+  productsInCart: s => s.productsInCart
+};

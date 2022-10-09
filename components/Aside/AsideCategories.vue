@@ -3,19 +3,15 @@
         <h3>Категория</h3>
         <div class="checkboxes">
             <div class="category" 
-            v-for="category in $store.state.categories" 
+            v-for="category in this.categories" 
             :key="category.id">
                 <input 
-                type="checkbox" 
-                class="custom-checkbox" 
-                :value="category.name" 
-                name="" 
-                :id="category.id" 
-                v-model="categoriesChecked"
+                type="checkbox"                 
+                :value="category.id" 
+                v-model="checkedId"
                 @change="addChecked"
-                >                
-                
-                <label :for="category.id">{{category.name}}</label>
+                >                                
+                <label>{{category.name}}</label>
             </div>
             <span></span>            
         </div>      
@@ -26,15 +22,24 @@
 export default {
     data() {
       return {       
-        categoriesChecked : [],  
+        checkedId: []
       }
     },
+    computed: {
+       categories() {
+            return this.$store.getters["categories"];
+        },
+    },
     methods: {
-        addChecked () {
-            // this.$store.commit('clearCheckedCategories')
-            this.$store.dispatch('checkedChange', this.categoriesChecked)
+         addChecked(){
+            this.$emit('updateChecked', this.checkedId);
+         }
+    },
+    mounted() {
+        if (this.$store.getters["categories"].length === 0) {
+        this.$store.dispatch("fetchCategories");
         }
-    }
+    },
 }
 </script>
 
