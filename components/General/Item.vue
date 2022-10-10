@@ -8,6 +8,7 @@
                 :src="'https://frontend-test.idaproject.com' + item.photo"
                 :alt="item.name"
                 />
+                {{item}}
             </Nuxt-Link>
             <p>{{item.name}}</p>
             <div class="ItemCart__price">

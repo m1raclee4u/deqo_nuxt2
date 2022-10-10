@@ -59,7 +59,7 @@ export default {
         showFilter: false,
         filterLabel: "цене",
         productsInCartId: [],
-        checkedId: 'all',
+        checkedId: '',
         };
     },
     methods: {
@@ -69,16 +69,24 @@ export default {
     },
     computed: {
         products() {
-            if (this.category) {
-                for (let index = 0; index < checkedId.length; index++) {
-                    const element = checkedId[index];
-                    // if (element == 
-                    
+            let checkedArray = [];
+            if (this.checkedId.length !== 0) {
+                for (let i = 0; i < this.checkedId.length; i++) {
+                    const checked = this.checkedId[i]
+                    for (let j = 0; j < this.$store.getters["products"].length; j++) {
+                        const find = this.$store.getters["products"][j];
+                        if (find.category == checked) {     
+                            console.log(find);     
+                            checkedArray.push(find);
+                        }
+                    }
                 }
-                return this.$store.getters["products"].filter(
-                (c) => c.category + "" == this.category
-                );
-            } else return this.$store.getters["products"];
+            // console.log(checkedArray);
+            return checkedArray
+
+            } 
+            else                
+                return this.$store.getters["products"];
         },
         productsInCart() {
             return this.$store.getters["productsInCart"];

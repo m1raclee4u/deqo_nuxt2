@@ -2,16 +2,25 @@
     <div class="filter">
         <h3>Цена</h3>
         <div class="row">
-            <p>Цена: &nbsp; <span>₽ <b>0</b> — ₽ <b>270</b></span> </p>
+            <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{value[1]}}</b></span> </p>
             <button>Фильтр</button>
         </div>
-        <input type="range" name="" id="">
-    </div>
+            <el-slider
+            class=""
+            v-model="value"
+            range
+            :max="200">
+            </el-slider>
+        </div>
 </template>
 
 <script>
 export default {
-    
+    data () {
+        return {
+            value: [0, 200]
+        }
+    }
 }
 </script>
 
