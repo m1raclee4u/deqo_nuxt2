@@ -2,29 +2,46 @@
     <div class="filter">
         <h3>Цена</h3>
         <div class="row">
-            <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{value[1]}}</b></span> </p>
-            <button>Фильтр</button>
+            <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{this.maxPrice}}</b></span> </p>
+            <button
+            @click="updateFiltered"
+            >Фильтр</button>
         </div>
             <el-slider
-            class=""
-            v-model="value"
+            class="filter"
+            v-model="value"            
             range
-            :max="200">
+            :max="Number(this.maxPrice)"
+            >
             </el-slider>
         </div>
 </template>
 
 <script>
 export default {
-    data () {
+    props: ['maxPrice'],
+    data () {        
         return {
-            value: [0, 200]
+            value: [0, 0]
+        }
+    },
+    updated() {
+
+        console.log(this.value[1]);
+        this.value[1] = Number(this.maxPrice)
+    },
+    methods: {
+        updateFiltered() {
+            this.$emit('updateFiltered', this.value);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+    .el-slider__runway{
+        color: white !important; 
+    }
     .row{
         display: flex;
         align-items: center;

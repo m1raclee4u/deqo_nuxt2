@@ -6,10 +6,14 @@
                 <aside-categories 
                     @updateChecked="sortByChecked"                    
                 />
-                <aside-filter/>
+                <aside-filter
+                    @updateFiltered="sortByFiltered"
+                    v-bind="propsToPass"
+                />
                 <aside-color/>
             </aside>
             <div class="items__main">
+                {{propsToPass.maxPrice}}        
                 <div class="aic">
                     <p>Показаны 16 из 30 результатов</p>
                     <span>{{this.checkedId}}</span>
@@ -60,11 +64,19 @@ export default {
         filterLabel: "цене",
         productsInCartId: [],
         checkedId: '',
+        checkedFiltered: '',
+        propsToPass: {
+            maxPrice: '',
+        }
         };
     },
     methods: {
         sortByChecked(checkedId) {
            this.checkedId = checkedId
+        },
+        sortByFiltered(checkedFiltered) {
+            this.checkedFiltered = checkedFiltered
+            console.log(this.checkedFiltered);
         }
     },
     computed: {
@@ -76,16 +88,17 @@ export default {
                     for (let j = 0; j < this.$store.getters["products"].length; j++) {
                         const find = this.$store.getters["products"][j];
                         if (find.category == checked) {     
-                            console.log(find);     
                             checkedArray.push(find);
                         }
                     }
                 }
-            // console.log(checkedArray);
+            this.propsToPass.maxPrice = Math.max(...checkedArray.map(o => o.price));
+            checkedArray
             return checkedArray
 
             } 
             else                
+                this.propsToPass.maxPrice = Math.max(...this.$store.getters["products"].map(o => o.price));
                 return this.$store.getters["products"];
         },
         productsInCart() {
@@ -98,7 +111,8 @@ export default {
         }
         if (this.$store.getters["categories"].length === 0) {
         this.$store.dispatch("fetchCategories");
-        }
+        }        
+        // console.log(this.maxPriceFunc);
         // if (this.productsInCart.length) {
         // this.productsInCart.forEach((c) => this.productsInCartId.push(c.id));
         // }
