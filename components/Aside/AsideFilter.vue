@@ -1,34 +1,50 @@
 <template>
     <div class="filter">
         <h3>Цена</h3>
-        <div class="row">
-            <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{this.maxPrice}}</b></span> </p>
-            <button
+        <div class="customRow">
+            <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{value[1]}}</b></span> </p>            
+        </div>        
+        <el-slider
+        class="filterRange"
+        range
+        v-model="value"
+        :min="min"
+        :max="max"
+        >
+        </el-slider>
+        <button
             @click="updateFiltered"
             >Фильтр</button>
-        </div>
-            <el-slider
-            class="filter"
-            v-model="value"            
-            range
-            :max="Number(this.maxPrice)"
-            >
-            </el-slider>
-        </div>
+    </div>
+        
 </template>
 
 <script>
 export default {
-    props: ['maxPrice'],
-    data () {        
-        return {
-            value: [0, 0]
+    data(){
+    return {
+        // value: [0, 100]
         }
     },
-    updated() {
-
-        console.log(this.value[1]);
-        this.value[1] = Number(this.maxPrice)
+    computed: {
+        value:{
+            get: function (){
+                return [this.min, this.max]
+            },
+            set: function (newValue) {
+                var names = newValue
+                this.min = names[0]
+                this.max = names[1]
+                // newValue[0] = newValue[0]  
+                // newValue[1] = newValue[1]
+            }
+        },
+        max(){
+            return Math.max(...this.$store.getters["products"].map(o => o.price))
+        },
+        min(){
+            return Math.min(...this.$store.getters["products"].map(o => o.price))
+        }
     },
     methods: {
         updateFiltered() {
@@ -39,21 +55,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    
     .el-slider__runway{
         color: white !important; 
     }
-    .row{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 25px;
-        button{
+    button{
             font-size: 11px;
             font-weight: bold;
             width: 100px;
             height: 35px;
             text-transform: uppercase;
-        }
+    }
+    .customRow{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        flex-wrap: nowrap;
+        
     }
     .filter{
         margin-top: 60px;

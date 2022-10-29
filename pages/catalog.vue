@@ -8,15 +8,12 @@
                 />
                 <aside-filter
                     @updateFiltered="sortByFiltered"
-                    v-bind="propsToPass"
                 />
                 <aside-color/>
             </aside>
-            <div class="items__main">
-                {{propsToPass.maxPrice}}        
+            <div class="items__main">   
                 <div class="aic">
                     <p>Показаны 16 из 30 результатов</p>
-                    <span>{{this.checkedId}}</span>
                     <div
                     v-for="category in $store.state.categories.filter(el=>el.checked == true)"  
                     :key="category.id"                 
@@ -26,8 +23,7 @@
                             {{category.name}}
                         </button>                        
                     </div>  
-                </div>                       
-                
+                </div>  
                 <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
                     <div
                     v-for="item in this.products" 
@@ -54,7 +50,7 @@ import Filters from '~/components/General/Filters.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories },
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories},
 
     props: ["category"],
     data() {
@@ -65,9 +61,6 @@ export default {
         productsInCartId: [],
         checkedId: '',
         checkedFiltered: '',
-        propsToPass: {
-            maxPrice: '',
-        }
         };
     },
     methods: {
@@ -79,7 +72,7 @@ export default {
             console.log(this.checkedFiltered);
         }
     },
-    computed: {
+    computed: {        
         products() {
             let checkedArray = [];
             if (this.checkedId.length !== 0) {
@@ -92,13 +85,9 @@ export default {
                         }
                     }
                 }
-            this.propsToPass.maxPrice = Math.max(...checkedArray.map(o => o.price));
-            checkedArray
             return checkedArray
-
             } 
             else                
-                this.propsToPass.maxPrice = Math.max(...this.$store.getters["products"].map(o => o.price));
                 return this.$store.getters["products"];
         },
         productsInCart() {
@@ -111,11 +100,7 @@ export default {
         }
         if (this.$store.getters["categories"].length === 0) {
         this.$store.dispatch("fetchCategories");
-        }        
-        // console.log(this.maxPriceFunc);
-        // if (this.productsInCart.length) {
-        // this.productsInCart.forEach((c) => this.productsInCartId.push(c.id));
-        // }
+        }
     },
 };
 
