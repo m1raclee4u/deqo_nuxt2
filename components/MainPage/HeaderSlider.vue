@@ -20,13 +20,13 @@
       <Header/>
       <main>
         <div class="assortment">
-          <Nuxt-Link to="/">Мужчинам</Nuxt-Link>
-          <Nuxt-Link to="/">Женщинам</Nuxt-Link>
-          <Nuxt-Link to="/">Детям</Nuxt-Link>
-          <Nuxt-Link to="/">Аксессуары</Nuxt-Link>
+          <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>
+          <Nuxt-Link class="todo" to="/">Женщинам</Nuxt-Link>
+          <Nuxt-Link class="todo" to="/">Детям</Nuxt-Link>
+          <Nuxt-Link class="todo" to="/">Аксессуары</Nuxt-Link>
         </div>
         <div class="sale">
-          <Nuxt-Link to="/">Распродажа</Nuxt-Link>
+          <Nuxt-Link class="todo" to="/">Распродажа</Nuxt-Link>
         </div>      
       </main>
       <footer>
@@ -40,13 +40,15 @@
         </div>         
       </footer>
     </div>    
+    
+
   </section>
   
 </template>
 
 <script>
 import Header from '../General/Header.vue'
-
+import BurgerMenu from '../General/BurgerMenu.vue'
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
 
@@ -70,7 +72,7 @@ export default {
       },
     })
     },
-     components: { Header},
+     components: { Header, BurgerMenu},
     name: 'IndexPage'
 }
     
@@ -129,6 +131,7 @@ export default {
         margin-bottom: 40px;
         text-decoration: none;
         color: white;
+        width: 110px;
       }
   }
   
@@ -166,6 +169,7 @@ export default {
       z-index: 1;
       color: #fff;
       text-decoration: none;
+      
     }
   }
 

@@ -7,15 +7,8 @@
         <div class="bestsellers">
         <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-                <!-- Slides -->       
-                <!-- <Item class="swiper-slide"
-                :Item="Item"
-                v-for="item in $store.state.items" 
-                :key="item.id"
-                >
-                </Item> -->
                 <div
-                 v-for="item in $store.state.items" 
+                 v-for="item in this.products" 
                  :key="item.id"
                  class="swiper-slide">                
                     <item :item="item" 
@@ -37,40 +30,33 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 
 export default {
-     components: { Item },
-     mounted() {
-      new Swiper('.bestsellers', {
-      slidesPerView: 3.9,
-      spaceBetween: 40,
-      breakpoints: {
-        // // when window width is >= 320px
-        //     320: {
-        //     slidesPerView: 2,
-        //     // spaceBetween: 20
-        //     },
-        //     // when window width is >= 480px
-        //     480: {
-        //     slidesPerView: 3,
-        //     // spaceBetween: 30
-        //     },
-        //     // when window width is >= 640px
-        //     640: {
-        //     slidesPerView: 1.5,
-        //     // spaceBetween: 40
-        //     },
-        //     800: {
-        //     slidesPerView: 1.8,
-        //     // spaceBetween: 40
-        //     },
-        //     960: {
-        //     slidesPerView: 1.8,
-        //     // spaceBetween: 40
-        //     },
-        //     1120: {
-        //     slidesPerView: 1.8,
-        //     // spaceBetween: 40
-        //     },
+    components: { Item },
+    computed: {        
+        products() {               
+            return this.$store.getters["products"];
+        },
+        productsInCart() {
+            return this.$store.getters["productsInCart"];
+        },
+    },
+    beforeMount() {
+        if (this.$store.getters["products"].length === 0) {
+        this.$store.dispatch("fetchProducts");
         }
+        if (this.$store.getters["categories"].length === 0) {
+        this.$store.dispatch("fetchCategories");
+        }
+    },
+    updated() {
+        new Swiper('.bestsellers', {
+        slidesPerView: 3.9,
+        spaceBetween: 40,
+        })
+    },
+    mounted() {
+        new Swiper('.bestsellers', {
+        slidesPerView: 3.9,
+        spaceBetween: 40,
         })
     },
     

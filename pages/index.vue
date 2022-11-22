@@ -1,9 +1,11 @@
 <template>
   <div class="wrapper">
+    <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
     <HeaderSlider/>
     <ItemsSlider/>
     <Collections/>
     <Footer/>    
+
   </div>
 </template>
 
@@ -12,10 +14,10 @@ import Collections from '~/components/General/Collections.vue'
 import Footer from '~/components/General/Footer.vue'
 import ItemsSlider from '~/components/General/ItemsSlider.vue'
 import HeaderSlider from '../components/MainPage/HeaderSlider.vue'
-
+import BurgerMenu from '~/components/General/BurgerMenu.vue'
 export default {
   
-    components: {HeaderSlider, ItemsSlider, Collections, Footer},
+    components: {HeaderSlider, ItemsSlider, Collections, Footer, BurgerMenu},
     name: 'IndexPage'
 }
 </script>

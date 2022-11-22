@@ -2,6 +2,7 @@
     <header>
         <button class="burger__menu">
            <svg 
+            @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="17px" height="16px">
@@ -11,7 +12,7 @@
         </button>
         <Nuxt-link to="/"><img src="../../assets/img/logo.png" alt=""></Nuxt-link>
         <div class="buttons">
-            <button>
+            <button class="todo">
                 <svg 
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -19,7 +20,7 @@
                 <image  x="0px" y="0px" width="15px" height="18px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAQAAAAul0yEAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfmCBUDLQh3ydLXAAAAzklEQVQoz32PPUtCURyHn3sJg0oEoUHaiqLBKSqH5j5Tm3uLe1/AL+AqUkS70NvSENHgIAQWl8ThcfF6z7lpz5nO7znn/5JIQIUGE76CxPzUvDFT9d7TPM3ltkMLfr2IdduYF5NQP1mmKZIuRtijTANY6o8/+jPU3ZIc8houtulD0Pfbk3hy3PLasTqz53GeJsZFa2TMiusGsMMVLSrRM3mnwyNi39X8uI+Hrqed8h8p4t2av5kHiLverpAjL4vFzjjniDpVpkx445kBGcwBhvcFFtTux6MAAAAASUVORK5CYII=" />
                 </svg>
             </button>
-            <button class="cart">
+            <button class="cart todo">
             <svg 
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -28,19 +29,16 @@
             </svg>
         </button>
         </div>
-        
     </header>
 </template>
 
 <script>
-export default {
-    
-}
+
 </script>
 
 <style lang="scss" scoped>
     header{
-        z-index: 1;
+        z-index: 2;
         width: 100%;
         height: 100px;
         display: flex;
@@ -51,8 +49,9 @@ export default {
         cursor: pointer;
         background: none;
     }
-    .cart{
-        padding-left: 30px;
+    .buttons{
+        display: flex;
+        gap: 30px;
     }
     
 </style>

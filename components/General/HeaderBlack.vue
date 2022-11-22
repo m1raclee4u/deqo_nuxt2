@@ -1,7 +1,8 @@
 <template>
     <header>
-        <button class="burger__menu">
+        <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
            <svg 
+           
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="17px" height="16px">
@@ -17,7 +18,7 @@
         </svg>
         </Nuxt-link>
         <div class="buttons">
-            <button>
+            <button class="todo">
                <svg 
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -25,7 +26,7 @@
                 <image  x="0px" y="0px" width="15px" height="17px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAARCAQAAACoAz4qAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfmCQMPDxiMxFwEAAAAp0lEQVQoz7XNMWoCYRBA4W9/tVv2R4xsYauFnV1OYGPjCdJLQK+R1s5raCBga2VOECKeQwXBaBHWIrp2edXwHjOT5K4MTHVsTSwLFa6xa25t6NO7biEraTGNtfRtLLw4Wf3djr6d8eNLvZBVpNpoinog09TD1i7JmRm5x8xrwJP7NH5/ZyU5Ps7ZP+ck56yMJIjKyULpaYjB4UHeV9K9mmfVm3T05uMCzFQbPglQaR8AAAAASUVORK5CYII=" />
                 </svg>
             </button>
-            <button class="cart">
+            <button class="cart todo">
             <svg 
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -63,8 +64,9 @@ export default {
         cursor: pointer;
         background: none;
     }
-    .cart{
-        padding-left: 30px;
+    .buttons{
+        display: flex;
+        gap: 30px;
     }
     
 </style>

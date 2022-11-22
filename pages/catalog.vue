@@ -1,5 +1,6 @@
 <template>
     <div class="catalog">
+        <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
         <main class="main">
             <aside class="aside">
@@ -49,8 +50,11 @@ import AsideFilter from '~/components/Aside/AsideFilter.vue'
 import Filters from '~/components/General/Filters.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
+import BurgerMenu from '~/components/General/BurgerMenu.vue'
+
+
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories},
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu},
 
     props: ["category"],
     data() {

@@ -37,7 +37,8 @@ export const state = () => ({
       },
     ],
     checkedCategories: [],
-    isVisible: false
+    isVisible: false,
+    burgerMenuOpened: false
 })
 
 export const mutations = {
@@ -47,6 +48,9 @@ export const mutations = {
   SET_CATEGORIES(state, categories) {
     state.categories = categories;
   },
+  SET_MENU_OPENED(state, opened) {
+    state.burgerMenuOpened = opened
+  }
 
   // checkedChange (state, checked) {
   //     state.checkedCategories.push({
