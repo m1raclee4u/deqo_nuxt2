@@ -1,4 +1,4 @@
-# trust
+# deqo
 
 ## Build Setup
 
