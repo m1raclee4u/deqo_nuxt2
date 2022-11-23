@@ -13,7 +13,19 @@
 }
 
 .p60{
-  padding: 0 60px 0 0;
+  padding: 0 60px;
+}
+
+@media (max-width:1400px) {
+  .p60{
+    padding: 0 30px;
+  }
+}
+
+@media (max-width:1200px) {
+  .p60{
+    padding: 0 15px;
+  }
 }
 
 .el-input__inner,

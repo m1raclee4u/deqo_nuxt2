@@ -1,7 +1,7 @@
 <template>
     <div class="ItemCart">
         <div class="swiper-slide">
-            <Nuxt-Link to="">
+            <Nuxt-Link :to="`${item.category}/${item.name}`">
                 <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
                 <img
                 class="card__img"

@@ -4,7 +4,7 @@
             <h2>Bestsellers</h2>
             <Nuxt-Link to="catalog">View all</Nuxt-Link>
         </div>
-        <div class="bestsellers">
+        <div class="bestsellers p60">
         <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <div
@@ -30,6 +30,7 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 
 export default {
+    
     components: { Item },
     computed: {        
         products() {               
@@ -77,7 +78,7 @@ export default {
     }       
     section{
         margin: 0 auto;
-        padding: 100px 0px 0 60px;
+        padding: 100px 0px 0 0;
         max-width: 1920px;
         width: 100%;
         h2{

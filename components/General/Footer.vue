@@ -1,6 +1,6 @@
 <template>
     <section>
-        <footer>
+        <footer class="p60">
             <div class="left">
                 <div class="text">
                     <h5>Получайте скидки</h5>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="right">
-                <div class="column1">
+                <div class="column">
                     <h5>Информация</h5>
                     <div class="links">
                         <Nuxt-Link to="">Частые вопросы</Nuxt-Link>
@@ -25,7 +25,7 @@
                         <Nuxt-Link to="">Адреса магазинов</Nuxt-Link>
                     </div>
                 </div>
-                <div class="column2">
+                <div class="column">
                     <h5>Контакты</h5>
                     <div class="links">
                         <Nuxt-Link to="">example@mail.ru</Nuxt-Link>
@@ -47,7 +47,7 @@ export default {
 section{
     max-width: 1920px;
     width: 100%;
-    padding: 50px 60px 40px 60px;
+    padding: 50px 0 40px 0;
     margin: 0 auto;
     background-color: #f7f7f7;
 }
@@ -90,13 +90,9 @@ form {
     gap: 150px;    
     font-size: 15px;
     letter-spacing: -0.001em;
-    .column1{
+    .column{
     display: flex;
-    gap: 80px;
-    }
-    .column2{
-    display: flex;
-    gap: 80px;
+    gap: 50px;
     }
     .links{
         display: flex;
@@ -116,5 +112,15 @@ button {
     background-color: inherit;
     font-size: 16px;
     font-weight: 600;
+}
+
+@media (max-width:1200px) {
+  .right{
+    .column{
+    flex-direction: column;
+    gap: 30px;
+  }
+  }
+  
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="collections">
+        <div class="collections p60">
             <div class="collection_left">
                 <img src="../../assets/img/collections/bc0e3668564533.5b6171f3d0b17.jpg" alt="">
                 <div class="text">
@@ -32,7 +32,7 @@ section{
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 60px;
+    padding: 100px 0;
 }
 .collections{
     display: flex;

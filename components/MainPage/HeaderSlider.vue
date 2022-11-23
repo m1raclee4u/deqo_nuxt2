@@ -16,34 +16,32 @@
             </div>   
         </div>        
     </div>
-    <div class="wrapper">                      
-      <Header/>
-      <main>
-        <div class="assortment">
-          <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>
-          <Nuxt-Link class="todo" to="/">Женщинам</Nuxt-Link>
-          <Nuxt-Link class="todo" to="/">Детям</Nuxt-Link>
-          <Nuxt-Link class="todo" to="/">Аксессуары</Nuxt-Link>
-        </div>
-        <div class="sale">
-          <Nuxt-Link class="todo" to="/">Распродажа</Nuxt-Link>
-        </div>      
-      </main>
-      <footer>
-        <div class="text">
-          <h1>Co-ed collection<br><span><i>spring-summer</i></span></h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio excepturi quis nihil quasi fugit dicta odit iusto nemo quos est voluptatem,
-            ducimus minima explicabo, nam animi necessitatibus beatae velit voluptate rem. Sed perspiciatis et vero, ex iusto odio odit accusamus molestias eum,
-            quam maxime ad consequuntur nihil nam possimus asperiores!
-            </p>
-          <div class="swiper-pagination"></div>  
-        </div>         
-      </footer>
-    </div>    
-    
-
-  </section>
-  
+    <div class="wrapper p60">                   
+      <div class="flex">
+        <main>
+          <div class="assortment">
+            <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>
+            <Nuxt-Link class="todo" to="/">Женщинам</Nuxt-Link>
+            <Nuxt-Link class="todo" to="/">Детям</Nuxt-Link>
+            <Nuxt-Link class="todo" to="/">Аксессуары</Nuxt-Link>
+          </div>
+          <div class="sale">
+            <Nuxt-Link class="todo" to="/">Распродажа</Nuxt-Link>
+          </div>      
+        </main>
+        <footer>
+          <div class="text">
+            <h1>Co-ed collection<br><span><i>spring-summer</i></span></h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio excepturi quis nihil quasi fugit dicta odit iusto nemo quos est voluptatem,
+              ducimus minima explicabo, nam animi necessitatibus beatae velit voluptate rem. Sed perspiciatis et vero, ex iusto odio odit accusamus molestias eum,
+              quam maxime ad consequuntur nihil nam possimus asperiores!
+              </p>
+            <div class="swiper-pagination"></div>  
+          </div>         
+        </footer>  
+      </div>
+    </div> 
+  </section>  
 </template>
 
 <script>
@@ -80,15 +78,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 100px;
+  }
+
   .swiper-pagination{
     right: 0 + 60px;
     position: absolute;
     align-self: flex-end;
   }
-    section{
-        max-width: 100%;
-        width: 100vh;
-    }
+  section{
+      max-width: 100%;
+      width: 100vh;
+  }
   .swiper{
     position: absolute;
     width: 100%;
@@ -108,10 +113,9 @@ export default {
   }
   .wrapper {
     height: 100vh;
-    padding: 0 60px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: end;
     margin: 0 auto;
     background-color: orange;
   }
@@ -143,23 +147,23 @@ export default {
     display: flex;
     gap: 10%;
     padding-bottom: 100px;
-    h1{
-      // font-size: 106px;
-      font-size: 6.35vw;
-      color: white;
-    }
-    span{
-      i{
+      h1{
+        // font-size: 106px;
+        font-size: 6.35vw;
         color: white;
-      }      
-    }
-    p{
-      
-      color: white;
-      margin-top: 50px;
-      width: 33%;
-      font-size: 14px;
-    }
+      }
+      span{
+        i{
+          color: white;
+        }      
+      }
+      p{
+        
+        color: white;
+        margin-top: 50px;
+        width: 33%;
+        font-size: 14px;
+      }
   }
   .sale{
       z-index: 1;
@@ -172,17 +176,6 @@ export default {
       
     }
   }
-
-  @media (min-width:1280px) and (max-width: 1369px) {
-    .assortment{
-      a{
-        font-size: 36px;
-      }
-    }
-    }
-  @media  (max-width: 1279px) {
-        
-    }
 </style>
 
 

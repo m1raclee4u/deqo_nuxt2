@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="p60">
         <button class="burger__menu">
            <svg 
             @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)"
@@ -44,6 +44,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: fixed;
+        top: 0;
+        background: rgb(25,25,25);
+background: linear-gradient(180deg, rgba(25,25,25,1) 0%, rgba(0,0,0,0) 100%);
     }
     button{        
         cursor: pointer;
