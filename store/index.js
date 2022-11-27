@@ -1,5 +1,6 @@
 export const state = () => ({
     products: [],
+    sizes: ['s', 'm', 'l', 'xl'],
     categories: [],
     productsInCart: [],
     colors: [      

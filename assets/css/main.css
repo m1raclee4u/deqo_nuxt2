@@ -7,13 +7,55 @@
   embed, figure, figcaption, footer, header, menu, nav, output, ruby, section,
   summary, time, mark, audio, video, * { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%;font-family: 'RF Dewi'; box-sizing: border-box;}
 
+
+.flex{
+  display: flex;
+}
+
 .jcsb {
   display: flex;
   justify-content: space-between;
 }
 
+.swiper-pagination-bullet{
+  background-color: white !important;
+}
+
 .p60{
   padding: 0 60px;
+}
+
+label#green::before{
+  background-color: green;
+}
+label#black::before{
+  background-color: black;
+}
+label#blue::before{
+  background-color: blue;
+}
+label#red::before{
+  background-color: red;
+}
+label#white::before{
+  background-color: white;
+  border: 1px solid #adb5bd;
+
+}
+label#brown::before{
+  background-color: brown;
+}
+label#yellow::before{
+  background-color: yellow;
+}
+label#orange::before{
+  background-color: orange;
+}
+label#lightblue::before{
+  background-color: lightblue;
+}
+label#pink::before{
+  background-color: pink;
 }
 
 @media (max-width:1400px) {

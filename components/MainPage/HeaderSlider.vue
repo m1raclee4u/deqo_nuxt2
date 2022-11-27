@@ -86,10 +86,13 @@ export default {
   }
 
   .swiper-pagination{
+    display: flex;
+    gap: 20px;
     right: 0 + 60px;
     position: absolute;
     align-self: flex-end;
   }
+  
   section{
       max-width: 100%;
       width: 100vh;
@@ -117,22 +120,22 @@ export default {
     flex-direction: column;
     justify-content: end;
     margin: 0 auto;
-    background-color: orange;
+    // background-color: orange;
   }
   main{
     z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 315px;
+    gap: 80px;
   }
   .assortment{
     z-index: 1;
     display: flex;
     flex-direction: column;
+    gap: 35px;
       a{
         font-size: 15px;
-        margin-bottom: 40px;
         text-decoration: none;
         color: white;
         width: 110px;
@@ -167,7 +170,6 @@ export default {
   }
   .sale{
       z-index: 1;
-      margin-top: 60px;
     a{
       font-size: 15px;
       z-index: 1;

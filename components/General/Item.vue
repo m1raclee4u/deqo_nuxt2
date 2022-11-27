@@ -34,6 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .ItemCart{        
         padding-bottom: 60px;
         img{
