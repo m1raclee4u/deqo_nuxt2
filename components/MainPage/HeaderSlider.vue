@@ -6,19 +6,20 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide">
-              <img src="../../assets/img/back.jpg" alt="">
+              <img class="slide" src="../../assets/img/back.jpg" alt="">
             </div>
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <img src="../../assets/img/back2.jpg" alt="">
             </div>
             <div class="swiper-slide">
               <img src="../../assets/img/back3.jpg" alt="">
-            </div>   
+            </div>    -->
         </div>        
     </div>
     <div class="wrapper p60">                   
       <div class="flex">
-        <main>
+        <img src="../../assets/img/icons/slogan.svg" alt="">
+        <!-- <main>
           <div class="assortment">
             <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>
             <Nuxt-Link class="todo" to="/">Женщинам</Nuxt-Link>
@@ -38,7 +39,7 @@
               </p>
             <div class="swiper-pagination"></div>  
           </div>         
-        </footer>  
+        </footer>   -->
       </div>
     </div> 
   </section>  
@@ -83,6 +84,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     gap: 100px;
+      
   }
 
   .swiper-pagination{
@@ -106,20 +108,27 @@ export default {
   section {
     width: 100vw;
     margin: 0 auto;
-    img {
+    img.slide {
       position: absolute;
       object-fit: cover;
       width: 100%;
       height: 100vh;
-      z-index: 0;
+      z-index: 1;
     }
   }
   .wrapper {
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     margin: 0 auto;
+    img{
+        width: 100%;
+        height: auto;
+        z-index: 1;
+      }
+
     // background-color: orange;
   }
   main{

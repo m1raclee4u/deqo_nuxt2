@@ -13,7 +13,7 @@
                 >                                
                 <label>{{category.name}}</label>
             </div>
-            <span></span>            
+            <!-- <span></span>             -->
         </div>      
     </div>
 </template>
@@ -44,6 +44,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .checkboxes{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
     .custom-checkbox {
     position: absolute;
     z-index: -1;
@@ -92,6 +97,9 @@ export default {
     }
 
     .categories{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
         width: 280px;
         h3{
             margin-bottom: 40px;

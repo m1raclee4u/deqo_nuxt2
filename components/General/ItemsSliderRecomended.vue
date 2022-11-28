@@ -1,8 +1,8 @@
 <template>
     <section>
         <div class="jcsb p60">
-            <h2>Bestsellers</h2>
-            <Nuxt-Link to="catalog">View all</Nuxt-Link>
+            <h2>Recomended</h2>
+            <Nuxt-Link to="catalog">смотреть все</Nuxt-Link>
         </div>
         <div class="bestsellers p60">
         <!-- Additional required wrapper -->
@@ -83,7 +83,10 @@ export default {
         width: 100%;
         h2{
             padding-bottom: 60px;
-            font-size: 35px;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 29px;
+            color: #685F5F;
         }
     }
      

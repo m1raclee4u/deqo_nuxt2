@@ -5,7 +5,7 @@
   u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
   caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
   embed, figure, figcaption, footer, header, menu, nav, output, ruby, section,
-  summary, time, mark, audio, video, * { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%;font-family: 'RF Dewi'; box-sizing: border-box;}
+  summary, time, mark, audio, video, * { margin: 0 !important; padding: 0; border: 0; outline: 0; font-size: 100%;font-family: 'RF Dewi'; box-sizing: border-box;}
 
 
 .flex{
@@ -58,6 +58,7 @@ label#pink::before{
   background-color: pink;
 }
 
+
 @media (max-width:1400px) {
   .p60{
     padding: 0 30px;
@@ -80,5 +81,5 @@ label#pink::before{
     .todo{
       /* padding: 5px; */
       /* box-sizing: border-box; */
-      border: 1px solid red;
+      border: 1px solid red !important;
     }

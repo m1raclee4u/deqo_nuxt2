@@ -2,15 +2,34 @@
   <div class="wrapper">
     <HeaderBlack/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
-    <div class="itemPage  p60">
-        <div class="left">
-            <img
-                class="card__img"
-                :src="'https://frontend-test.idaproject.com' + photo"
-                :alt="name"
-                />
-            <!-- TODO -->
-            <p style="max-width: 855px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+    <div class="itemPage p60">
+       <div class="left">
+          <!-- <div class="item_images p60">
+              <div class="swiper-wrapper">
+                  <img
+              class="card__img swiper-slide"
+              :src="'https://frontend-test.idaproject.com' + photo"
+              :alt="name"
+              />
+                  <img
+              class="card__img swiper-slide"
+              :src="'https://frontend-test.idaproject.com' + photo"
+              :alt="name"
+              />
+                  <img
+              class="card__img swiper-slide"
+              :src="'https://frontend-test.idaproject.com' + photo"
+              :alt="name"
+              />
+              </div>        
+          </div> -->
+          <img
+              class="card__img"
+              :src="'https://frontend-test.idaproject.com' + photo"
+              :alt="name"
+              />
+          <!-- TODO -->
+          <!-- <p style="max-width: 855px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p> -->
         </div>
         <div class="right">
             <h4>{{name}}</h4>
@@ -23,18 +42,16 @@
               </div>
             </div>
             <div class="jcsb">
-              <div class="color">
+              <div class="color todo">
                 <p>Color</p>
                 <div class="flex colors">
                   <div class="input_color" v-for="color in $store.state.colors" :key="color.id">
-                    <input class="custom-radio" :name="color" type="radio" :id="color.id" :value="color.id">
+                    <input class="custom-radio" :name="color.id" type="radio" :id="color.id" :value="color.id">
                     <label :id="color.id" :for="color.id"></label>
                   </div>
-                  
-                 
                 </div>
               </div>
-              <div class="size">
+              <div class="size todo">
                 <p>Size</p>
                 <div class="sizes flex">
                   <div class="input_size" v-for="size in $store.state.sizes" :key="size.id">
@@ -44,8 +61,25 @@
                 </div>
               </div>
             </div>
+            <div class="buttons">
+               <ButtonCart/>
+               <ButtonBuy/>
+            </div>         
+            <div class="info">
+              <div class="jcsb todo">
+                <p>Состав</p>
+                <span>Хлопок - 97%, Эластан - 3%</span>
+              </div>
+              <div class="jcsb todo">
+                <p>Артикул</p>
+                <span>ART00001</span>
+              </div>
+              <p class="todo" style="margin-top: 36px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione vel quis nesciunt dolorum, aut laborum animi, minima est, porro aspernatur incidunt ipsam. Odio optio sint ab, veritatis necessitatibus ipsum et.</p>
+            </div>  
+            
         </div>
     </div>
+    <ItemsSliderRecomended/>
     <Footer/>    
 
   </div>
@@ -55,14 +89,28 @@
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Footer from '~/components/General/Footer.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
+import ItemsSliderRecomended from '~/components/General/ItemsSliderRecomended.vue'
+import ButtonBuy from '~/components/Buttons/ButtonBuy.vue'
+import ButtonCart from '~/components/Buttons/ButtonCart.vue'
+
+import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
+import 'swiper/swiper-bundle.css'
+
+Swiper.use([ Navigation, Pagination, Autoplay ])
+
 export default {
+    mounted() {
+        new Swiper('.item_images', {
+        slidesPerView: 3.9,
+        spaceBetween: 40,
+        })
+    },
 
     async asyncData({ params, redirect }) {
     const items = await fetch('https://frontend-test.idaproject.com/api/product')
     .then((res) => res.json())
     
     const filteredItem = items.find((el) => el.name === params.item)
-    console.log(params.item);  
     if (filteredItem) {
       return {
         category: filteredItem.category,
@@ -75,14 +123,26 @@ export default {
     }
     },
   
-    components: {Footer, BurgerMenu, HeaderBlack}, 
+    components: {Footer, BurgerMenu, HeaderBlack, ItemsSliderRecomended, ButtonBuy, ButtonCart}, 
 }
 
 </script>
 
 <style lang="scss" scoped>
+    .buttons{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
     .jcsb{
       gap: 95px;
+    }
+    .right{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 60px;
+      max-width: 435px;
     }
     .colors{
       max-width: 128px;
@@ -97,6 +157,7 @@ export default {
     }
     .right{
         h4{
+          font-style: normal;
           font-weight: 600;
           font-size: 32px;
           line-height: 38px;
@@ -116,6 +177,7 @@ export default {
     .itemPage{
         display: flex;
         // gap: 150px;
+        padding-top: 110px;
         justify-content: space-between;
     }
     /* для элемента input c type="radio" */

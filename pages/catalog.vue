@@ -169,5 +169,8 @@ export default {
     }
     aside{
         width: 280px;
+        display: flex;
+        flex-direction: column;
+        gap: 45px;
     }
 </style>

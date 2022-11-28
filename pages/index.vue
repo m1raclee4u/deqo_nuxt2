@@ -3,7 +3,8 @@
     <Header/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
     <HeaderSlider/>
-    <ItemsSlider/>
+    <ItemsSliderBestsellers/>
+    <ItemsSliderNew/>
     <Collections/>
     <Footer/>    
 
@@ -14,12 +15,13 @@
 import Collections from '~/components/General/Collections.vue'
 import Header from '~/components/General/Header.vue'
 import Footer from '~/components/General/Footer.vue'
-import ItemsSlider from '~/components/General/ItemsSlider.vue'
+import ItemsSliderBestsellers from '~/components/General/ItemsSliderBestsellers.vue'
+import ItemsSliderNew from '~/components/General/ItemsSliderNew.vue'
 import HeaderSlider from '../components/MainPage/HeaderSlider.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
 export default {
   
-    components: {HeaderSlider, ItemsSlider, Collections, Footer, BurgerMenu, Header},
+    components: {HeaderSlider, ItemsSliderBestsellers, Collections, Footer, BurgerMenu, Header, ItemsSliderNew},
     name: 'IndexPage'
 }
 </script>

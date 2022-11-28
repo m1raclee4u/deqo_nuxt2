@@ -1,5 +1,5 @@
 <template>
-    <div class="filter">
+    <div class="filter todo">
         <h3>Цена</h3>
         <div class="customRow">
             <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{value[1]}}</b></span> </p>            
@@ -75,8 +75,9 @@ export default {
         
     }
     .filter{
-        margin-top: 60px;
-        margin-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         h3{
             margin-bottom: 20px;
         }

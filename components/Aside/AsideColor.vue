@@ -1,12 +1,11 @@
 <template>
-    <div class="colors">
+    <div class="colors todo">
         <h3>Цвет</h3>
         <div class="checkboxes">
-            <div class="color" 
-            v-for="color in $store.state.colors" 
-            :key="color.id">
-                <input type="checkbox" class="custom-checkbox" name="" :id="color.id" >
-                <label :for="color.id">{{color.name}}</label>
+            <!-- todo //добавить :style="bc: #{data.color}" -->
+            <div class="input_color" v-for="color in $store.state.colors" :key="color.id">
+            <input class="custom-radio" :name="color.id" type="radio" :id="color.id" :value="color.id">
+            <label :id="color.id" :for="color.id">{{color.name}}</label>
             </div>
             
         </div>      
@@ -20,6 +19,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .checkboxes{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
     .custom-checkbox {
     position: absolute;
     z-index: -1;
@@ -71,6 +75,9 @@ export default {
     background-color: #e9ecef;
     }
     .colors{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
         width: 280px;
         h3{
             margin-bottom: 40px;
