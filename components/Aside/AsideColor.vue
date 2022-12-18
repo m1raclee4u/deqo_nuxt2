@@ -4,8 +4,8 @@
         <div class="checkboxes">
             <!-- todo //добавить :style="bc: #{data.color}" -->
             <div class="input_color" v-for="color in $store.state.colors" :key="color.id">
-            <input class="custom-radio" :name="color.id" type="radio" :id="color.id" :value="color.id">
-            <label :id="color.id" :for="color.id">{{color.name}}</label>
+                <input class="custom-radio" name="colors" type="checkbox" :id="color.id" :value="color.id">
+                <label :id="color.id" :for="color.id"></label>
             </div>
             
         </div>      
@@ -21,7 +21,8 @@ export default {
 <style lang="scss" scoped>
     .checkboxes{
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        // flex-direction: column;
         gap: 20px;
     }
     .custom-checkbox {
@@ -78,16 +79,6 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 25px;
-        width: 280px;
-        h3{
-            margin-bottom: 40px;
-        }
-        .color:not(:last-child){
-            margin-bottom: 25px;
-        }
-        label::before{
-            margin-right: 25px;
-
-        }
+        width: 280px;      
     }
 </style>

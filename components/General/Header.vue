@@ -64,7 +64,7 @@
     header{
         z-index: 2;
         width: 100%;
-        height: 100px;
+        height: 58px;
         display: flex;
         justify-content: space-between;
         align-items: center;

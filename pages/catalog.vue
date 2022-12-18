@@ -7,14 +7,14 @@
                 <aside-categories 
                     @updateChecked="sortByChecked"                    
                 />
-                <aside-filter
+                <!-- <aside-filter
                     @updateFiltered="sortByFiltered"
-                />
+                /> -->
                 <aside-color/>
             </aside>
             <div class="items__main">   
                 <div class="aic">
-                    <p>Показаны 16 из 30 результатов</p>
+                    <p>Найдено {{}} подходящих товаров</p>
                     <div
                     v-for="category in $store.state.categories.filter(el=>el.checked == true)"  
                     :key="category.id"                 
@@ -27,7 +27,7 @@
                 </div>  
                 <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
                     <div
-                    v-for="item in this.products" 
+                    v-for="item in this.paginatedProducts" 
                     :key="item.id"
                     class="col item"                    
                     >
@@ -38,6 +38,7 @@
                         </item>
                     </div>   
                 </div>
+                <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button>
             </div>
             
         </main>
@@ -65,6 +66,9 @@ export default {
         productsInCartId: [],
         checkedId: '',
         checkedFiltered: '',
+        currentPage: 1,
+        maxPerPage: 9,
+        showReadMore: true
         };
     },
     methods: {
@@ -74,6 +78,9 @@ export default {
         sortByFiltered(checkedFiltered) {
             this.checkedFiltered = checkedFiltered
             console.log(this.checkedFiltered);
+        },
+        loadMore() {
+            this.currentPage += 1;
         }
     },
     computed: {        
@@ -97,6 +104,18 @@ export default {
         productsInCart() {
             return this.$store.getters["productsInCart"];
         },
+        totalResults() {
+            return Object.keys(this.orders).length;
+        },
+        pageCount() {
+            return Math.ceil(this.totalResults / this.maxPerPage);
+        },
+        pageOffest() {
+         return this.maxPerPage * this.currentPage;
+        },
+        paginatedProducts() {
+            return this.products.slice(0, this.currentPage * this.maxPerPage);
+        }
     },
     mounted() {
         if (this.$store.getters["products"].length === 0) {
@@ -151,6 +170,27 @@ export default {
             gap: 20px;
             font-size: 12.5px;
             font-weight: 600;
+        }
+        button{
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 109px;
+            gap: 10px;
+
+            width: 410px;
+            height: 64px;
+
+            /* основной */
+
+            background: #685F5F;
+            border-radius: 4px;
+
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+
+            color: white;
         }
     }
     .items{

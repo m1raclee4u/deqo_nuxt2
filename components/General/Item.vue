@@ -11,10 +11,13 @@
                 <div class="tag">
                     <p>ХИТ</p>
                 </div>
+                <button class="like">
+                    <!-- <p>ХИТ</p> -->
+                </button>
                 
                 <!-- {{item}} -->
             </Nuxt-Link>
-            <p>{{item.name}}</p>
+            <p style="margin-bottom: 10px;">{{item.name}}</p>
             <div class="ItemCart__price">
                 <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
                 <p>{{item.price}} ₽</p>
@@ -56,31 +59,61 @@ export default {
     line-height: 100%;
         p{
             position: absolute;
-            top: 20px;
+            top: 17px;
             left: 13px;
             color: #685F5F;
         }
+}
+.like{
+    position: absolute;
+    background-image: url('../../assets/img/icons/heart.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: unset;
+    width: 30px;
+    height: 30px;
+    top: 14px;
+    right: 14px;
+    border-radius: 50%;
+    // border: 1px solid #685F5F;
+    text-align: center;
+    line-height: 100%;
 }
 
 .ItemCart{        
         padding-bottom: 60px;
         img{
-            max-width: 100%;
-            height: auto;
+            max-width: 411px;
+            width: 100%;
+            height: 587px;
             background-color: black;
             margin-bottom: 25px;
         }
         p{
-            margin-bottom: 20px;
+            font-family: 'RF Dewi';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 19px;
+
+            /* основной */
+
+            color: #685F5F;
         }
+    }
+    .colors{
+        gap: 10px;
     }
     .ItemCart__price{
         display: flex;
         gap: 30px;
             p{
-                font-weight: 600;
+                font-style: normal;
+                font-weight: 700;
                 font-size: 20px;
-                line-height: 24px;
+                line-height: 23px;
+
+                /* основной */
 
                 color: #685F5F;
         }

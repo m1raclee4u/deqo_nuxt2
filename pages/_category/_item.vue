@@ -37,11 +37,19 @@
               <!--TODO dynamic -->
               <p>Bestsellers</p> 
               <div class="flex">
-                <p style="text-decoration: line-through;">4.299 Р</p>
-                <p class="price">{{price}} Р</p>
+                <p style="text-decoration: line-through;" class="price old">4,299 ₽</p>
+                <p class="price">{{price}} ₽</p>
               </div>
             </div>
-            <div class="jcsb">
+            <div class="size todo">
+                <p>Размер</p>
+                <div class="sizes flex">
+                  <div class="input_size" v-for="size in $store.state.sizes" :key="size.id">
+                   <input class="custom-radio" :name="size" type="radio" :id="size" :value="size">
+                   <label :id="size" :for="size">{{size}}</label>
+                  </div>
+                </div>
+              </div>
               <div class="color todo">
                 <p>Color</p>
                 <div class="flex colors">
@@ -51,16 +59,7 @@
                   </div>
                 </div>
               </div>
-              <div class="size todo">
-                <p>Size</p>
-                <div class="sizes flex">
-                  <div class="input_size" v-for="size in $store.state.sizes" :key="size.id">
-                   <input class="custom-radio" :name="size" type="radio" :id="size" :value="size">
-                   <label :id="size" :for="size">{{size}}</label>
-                  </div>
-                </div>
-              </div>
-            </div>
+              
             <div class="buttons">
                <ButtonCart/>
                <ButtonBuy/>
@@ -129,6 +128,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .size{
+      p{
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      /* identical to box height */
+      /* средний */
+
+      color: #A9A1A1;
+
+      margin-bottom: 10px;
+      }
+    }
+
     .buttons{
       display: flex;
       flex-direction: column;
@@ -141,28 +154,42 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 60px;
+      gap: 44px;
       max-width: 435px;
+       
     }
     .colors{
       max-width: 128px;
       flex-wrap: wrap;
     }
     .price{
-      font-weight: 600;
+      font-weight: 700;
       font-size: 24px;
-      line-height: 29px;
-      /* identical to box height */
+      line-height: 28px;
+
+      /* тёмный */
+
       color: #1A1A1A;
+       
+    }
+    .old{
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 23px;
+      text-decoration-line: line-through;
+
+      /* средний */
+
+      color: #A9A1A1;
+
     }
     .right{
         h4{
-          font-style: normal;
           font-weight: 600;
-          font-size: 32px;
-          line-height: 38px;
+          font-size: 28px;
+          line-height: 33px;
 
-          color: #1A1A1A;
+          color: #4A4444;
         }
     }
     .flex{

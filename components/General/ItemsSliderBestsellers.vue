@@ -50,13 +50,13 @@ export default {
     },
     updated() {
         new Swiper('.bestsellers', {
-        slidesPerView: 3.9,
+        slidesPerView: 4,
         spaceBetween: 40,
         })
     },
     mounted() {
         new Swiper('.bestsellers', {
-        slidesPerView: 3.9,
+        slidesPerView: 4,
         spaceBetween: 40,
         })
     },

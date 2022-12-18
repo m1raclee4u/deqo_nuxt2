@@ -8,12 +8,12 @@
             <div class="swiper-slide">
               <img class="slide" src="../../assets/img/back.jpg" alt="">
             </div>
-            <!-- <div class="swiper-slide">
-              <img src="../../assets/img/back2.jpg" alt="">
+            <div class="swiper-slide">
+              <img class="slide" src="../../assets/img/back2.jpg" alt="">
             </div>
             <div class="swiper-slide">
-              <img src="../../assets/img/back3.jpg" alt="">
-            </div>    -->
+              <img class="slide" src="../../assets/img/back3.jpg" alt="">
+            </div>   
         </div>        
     </div>
     <div class="wrapper p60">                   

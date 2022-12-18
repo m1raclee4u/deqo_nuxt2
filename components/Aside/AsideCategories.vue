@@ -100,15 +100,6 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 25px;
-        width: 280px;
-        h3{
-            margin-bottom: 40px;
-        }
-        .category:not(:last-child){
-            margin-bottom: 25px;
-        }
-        label::before {
-            margin-right: 25px;
-        }
+        width: 280px;       
     }
 </style>
