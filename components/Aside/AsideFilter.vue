@@ -23,28 +23,32 @@
 export default {
     data(){
     return {
-        // value: [0, 100]
+        value: [0, 3500]
         }
     },
     computed: {
-        value:{
-            get: function (){
-                return [this.min, this.max]
-            },
-            set: function (newValue) {
-                var names = newValue
-                this.min = names[0]
-                this.max = names[1]
-                // newValue[0] = newValue[0]  
-                // newValue[1] = newValue[1]
-            }
-        },
+        // value:{
+        //     get: function (){
+        //         return [this.min, this.max]
+        //     },
+        //     set: function (newValue) {
+        //         var names = newValue
+        //         this.min = names[0]
+        //         this.max = names[1]
+        //         // newValue[0] = newValue[0]  
+        //         // newValue[1] = newValue[1]
+        //     }
+        // },
         max(){
             return Math.max(...this.$store.getters["products"].map(o => o.price))
         },
         min(){
             return Math.min(...this.$store.getters["products"].map(o => o.price))
         }
+    },
+    updated(){
+        this.max;
+        this.min;
     },
     methods: {
         updateFiltered() {
@@ -79,6 +83,14 @@ export default {
         flex-direction: column;
         gap: 20px;
         h3{
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 23px;
+
+            /* основной */
+
+            color: #685F5F;
             margin-bottom: 20px;
         }
         P{

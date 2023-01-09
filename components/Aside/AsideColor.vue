@@ -80,5 +80,15 @@ export default {
         flex-direction: column;
         gap: 25px;
         width: 280px;      
+            h3{
+                font-style: normal;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 23px;
+
+                /* основной */
+
+                color: #685F5F;
+            }
     }
 </style>

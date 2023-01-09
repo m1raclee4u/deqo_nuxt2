@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
     button{
-        font-weight: 600;
+        // font-weight: 600;
         font-size: 20px;
         line-height: 24px;
         /* identical to box height */

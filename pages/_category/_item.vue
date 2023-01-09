@@ -2,7 +2,8 @@
   <div class="wrapper">
     <HeaderBlack/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
-    <div class="itemPage p60">
+    <section>
+      <div class="itemPage p60">
        <div class="left">
           <!-- <div class="item_images p60">
               <div class="swiper-wrapper">
@@ -44,14 +45,15 @@
             <div class="size todo">
                 <p>Размер</p>
                 <div class="sizes flex">
-                  <div class="input_size" v-for="size in $store.state.sizes" :key="size.id">
-                   <input class="custom-radio" :name="size" type="radio" :id="size" :value="size">
+                  <div class="form_radio_btn" v-for="size in $store.state.sizes" :key="size.id">
+                   <input :name="size" type="radio" :id="size" :value="size">
                    <label :id="size" :for="size">{{size}}</label>
+                   <!-- <p class="p_size"></p> -->
                   </div>
                 </div>
               </div>
               <div class="color todo">
-                <p>Color</p>
+                <p>Цвет: {{бежевый}}</p>
                 <div class="flex colors">
                   <div class="input_color" v-for="color in $store.state.colors" :key="color.id">
                     <input class="custom-radio" :name="color.id" type="radio" :id="color.id" :value="color.id">
@@ -78,7 +80,8 @@
             
         </div>
     </div>
-    <ItemsSliderRecomended/>
+    </section>    
+    <ItemsSlider/>
     <Footer/>    
 
   </div>
@@ -88,7 +91,7 @@
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Footer from '~/components/General/Footer.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
-import ItemsSliderRecomended from '~/components/General/ItemsSliderRecomended.vue'
+import ItemsSlider from '~/components/General/ItemsSlider.vue'
 import ButtonBuy from '~/components/Buttons/ButtonBuy.vue'
 import ButtonCart from '~/components/Buttons/ButtonCart.vue'
 
@@ -122,13 +125,16 @@ export default {
     }
     },
   
-    components: {Footer, BurgerMenu, HeaderBlack, ItemsSliderRecomended, ButtonBuy, ButtonCart}, 
+    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart}, 
 }
 
 </script>
 
 <style lang="scss" scoped>
     .size{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       p{
       font-weight: 400;
       font-size: 16px;
@@ -138,7 +144,23 @@ export default {
 
       color: #A9A1A1;
 
-      margin-bottom: 10px;
+      // margin-bottom: 10px;
+      }
+    }
+    .color{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      p{
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      /* identical to box height */
+      /* средний */
+
+      color: #A9A1A1;
+
+      // margin-bottom: 10px;
       }
     }
 
@@ -157,10 +179,6 @@ export default {
       gap: 44px;
       max-width: 435px;
        
-    }
-    .colors{
-      max-width: 128px;
-      flex-wrap: wrap;
     }
     .price{
       font-weight: 700;
@@ -232,6 +250,8 @@ export default {
       background-repeat: no-repeat;
       background-position: center center;
       background-size: 50% 50%;
+      
+     
     }
     /* стили при наведении курсора на радио */
     .custom-radio:not(:disabled):not(:checked)+label:hover::before {
@@ -261,66 +281,23 @@ export default {
       background-color: #e9ecef;
     }
   }
+  .p_size{
+    position: absolute;
+    // bottom: -87px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 38px;    
+    height: 38px;
+    margin-top: -35px !important;
+    pointer-events: none;
+  }
   .input_size{
-      .custom-radio {
+    .custom-radio {
       position: absolute;
       z-index: -1;
       opacity: 0;
     }
-    /* для элемента label связанного с .custom-radio */
-    .custom-radio+label {
-      display: inline-flex;
-      align-items: center;
-      user-select: none;
-    }
-    /* создание в label псевдоэлемента  before со следующими стилями */
-    .custom-radio+label #text{
-      margin-left: -4px;
-    }
-    .custom-radio+label::before {
-      content: '';
-      display: inline-block;
-      text-transform: uppercase;          
-      width: 38px;
-      height: 38px;
 
-      background: #017358;
-      border-radius: 4px;
-      font-size: 18px;
-      line-height: 22px;
-      /* identical to box height */
-
-      text-align: center;
-
-      color: #FFFFFF;
-    }
-    /* стили при наведении курсора на радио */
-    .custom-radio:not(:disabled):not(:checked)+label:hover::before {
-      border-color: #b3d7ff;
-    }
-    /* стили для активной радиокнопки (при нажатии на неё) */
-    .custom-radio:not(:disabled):active+label::before {
-      background-color: #b3d7ff;
-      border-color: #b3d7ff;
-    }
-    /* стили для радиокнопки, находящейся в фокусе */
-    .custom-radio:focus+label::before {
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-    /* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
-    .custom-radio:focus:not(:checked)+label::before {
-      border-color: #80bdff;
-    }
-    /* стили для радиокнопки, находящейся в состоянии checked */
-    .custom-radio:checked+label::before {
-      border-color: #0b76ef;
-      // background-color: #0b76ef;
-      // background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-    }
-    /* стили для радиокнопки, находящейся в состоянии disabled */
-    .custom-radio:disabled+label::before {
-      background-color: #e9ecef;
-    }
   }
   
 </style>

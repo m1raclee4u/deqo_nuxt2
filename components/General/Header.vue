@@ -1,12 +1,15 @@
 <template>
     <header class="p60">
         <div class="flex">
-            <button class="burger__menu">
-                <img src="../../assets/img/icons/menu.svg" alt="" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
+            <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
+                <img src="../../assets/img/icons/menu.svg" alt="">
+                каталог
             </button>
-            каталог
+            
         </div>       
-        <Nuxt-link id="logo" to="/"><img src="../../assets/img/icons/logo.svg" alt=""></Nuxt-link>
+        <Nuxt-link id="logo" to="/">
+            <img src="../../assets/img/icons/logo.svg" alt="">
+        </Nuxt-link>
         <div class="buttons">
             <img class="todo" src="../../assets/img/icons/search.svg" alt="">
             <img class="todo" src="../../assets/img/icons/heart.svg" alt="">
@@ -16,7 +19,6 @@
         <!-- <h1 style="position: absolute">{{scrollPosition}}</h1> -->
 
     </header>
-    
 </template>
 
 <script>
@@ -57,6 +59,20 @@
 </script>
 
 <style lang="scss" scoped>
+    a#logo{
+        position: absolute;
+        margin: 0 auto;
+        top: 14px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        max-width: 91px;
+    }
+    .burger__menu{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
     .flex {
         gap: 15px;
         align-items: center;

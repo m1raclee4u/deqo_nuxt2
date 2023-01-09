@@ -8,7 +8,7 @@
         <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <div
-                 v-for="item in this.products" 
+                 v-for="item in this.products.slice(0, 8)" 
                  :key="item.id"
                  class="swiper-slide">                
                     <item :item="item" 
@@ -69,15 +69,12 @@ export default {
         text-decoration: none;
         color: #b8b8b8;
     }
-    .bestsellers{
-        overflow-x: hidden;
-    }
     img{
         max-width: 100%;
         height: auto;
     }       
     section{
-        margin: 0 auto;
+        // margin: 0 auto;
         padding: 100px 0px 0 0;
         max-width: 1920px;
         width: 100%;

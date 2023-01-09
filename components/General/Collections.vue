@@ -31,7 +31,7 @@ export default {
 section{
     max-width: 1920px;
     width: 100%;
-    margin: 0 auto;
+    // margin: 0 auto;
     padding: 100px 0;
 }
 .collections{

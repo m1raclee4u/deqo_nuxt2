@@ -96,8 +96,9 @@ export default {
   }
   
   section{
-      max-width: 100%;
-      width: 100vh;
+    padding: 0 !important;
+    width: 100vw !important;
+    margin: 0 !important;
   }
   .swiper{
     position: absolute;
@@ -106,8 +107,6 @@ export default {
     overflow: hidden;
   }
   section {
-    width: 100vw;
-    margin: 0 auto;
     img.slide {
       position: absolute;
       object-fit: cover;

@@ -1,7 +1,9 @@
 <template>
-    <div class="ItemCart">
-        <div class="swiper-slide">
-            <Nuxt-Link :to="`${item.category}/${item.name}`">
+        <div class="ItemCart">
+            <button class="like">
+                <!-- <p>ХИТ</p> -->
+            </button>
+            <Nuxt-Link :to="`/${item.category}/${item.name}`">
                 <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
                 <img
                 class="card__img"
@@ -11,13 +13,11 @@
                 <div class="tag">
                     <p>ХИТ</p>
                 </div>
-                <button class="like">
-                    <!-- <p>ХИТ</p> -->
-                </button>
+                
                 
                 <!-- {{item}} -->
             </Nuxt-Link>
-            <p style="margin-bottom: 10px;">{{item.name}}</p>
+            <p style="margin-bottom: 10px !important;">{{item.name}}</p>
             <div class="ItemCart__price">
                 <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
                 <p>{{item.price}} ₽</p>
@@ -29,7 +29,6 @@
                 </div>
             </div>
         </div>
-    </div>
     
 </template>
 
@@ -74,19 +73,23 @@ export default {
     height: 30px;
     top: 14px;
     right: 14px;
-    border-radius: 50%;
-    // border: 1px solid #685F5F;
-    text-align: center;
-    line-height: 100%;
+    // border-radius: 50%;
+    &:hover{
+        background-image: url('../../assets/img/icons/heart_on.svg');
+    }
 }
 
 .ItemCart{        
-        padding-bottom: 60px;
-        img{
+            position: relative;
             max-width: 411px;
             width: 100%;
             height: 587px;
+            padding-bottom: 60px;
+        img{           
+            width: 100%;
+            height: auto;
             background-color: black;
+            margin-top: 100px;
             margin-bottom: 25px;
         }
         p{

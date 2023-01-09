@@ -48,7 +48,7 @@ section{
     max-width: 1920px;
     width: 100%;
     padding: 50px 0 40px 0;
-    margin: 0 auto;
+    // margin: 0 auto;
     background-color: #f7f7f7;
 }
 footer{

@@ -2,19 +2,20 @@
     <div class="catalog">
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
-        <main class="main">
+        <Nuxt-Link class="Breadcrumbs" to="#"></Nuxt-Link>
+        <main class="main">            
             <aside class="aside">
                 <aside-categories 
                     @updateChecked="sortByChecked"                    
                 />
-                <!-- <aside-filter
+                <aside-filter
                     @updateFiltered="sortByFiltered"
-                /> -->
+                />
                 <aside-color/>
             </aside>
             <div class="items__main">   
-                <div class="aic">
-                    <p>Найдено {{}} подходящих товаров</p>
+                <div v-if="this.checkedId != ''" class="aic">
+                    <p >Найдено {{foundResults}} подходящих товаров</p>
                     <div
                     v-for="category in $store.state.categories.filter(el=>el.checked == true)"  
                     :key="category.id"                 
@@ -104,6 +105,9 @@ export default {
         productsInCart() {
             return this.$store.getters["productsInCart"];
         },
+        foundResults() {
+            return this.products.length      
+        },
         totalResults() {
             return Object.keys(this.orders).length;
         },
@@ -131,6 +135,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .Breadcrumbs{
+        width: 100%;
+    }
     .delete{
     display: block;
     flex-shrink: 0;
@@ -160,19 +167,22 @@ export default {
         min-height: 32px;
         gap: 20px;
         p{
-            width: 195px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+
+            /* средний */
+
+            color: #A9A1A1;
+            // width: 195px;
         }
     }
     .items__main{        
         width: 100%;
-        p{
-            display: flex;
-            gap: 20px;
-            font-size: 12.5px;
-            font-weight: 600;
-        }
+        
         button{
-            margin: 0 auto;
+            margin: 40px auto 0 auto;
             justify-content: center;
             align-items: center;
             padding: 20px 109px;

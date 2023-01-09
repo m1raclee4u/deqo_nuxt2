@@ -51,8 +51,7 @@ export const mutations = {
     state.categories = categories;
   },
   SET_MENU_OPENED(state, opened) {
-    state.burgerMenuOpened = opened
-  }
+    state.burgerMenuOpened = opened  }
 
   // checkedChange (state, checked) {
   //     state.checkedCategories.push({
