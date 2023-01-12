@@ -3,25 +3,25 @@
     <HeaderBlack/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
     <section>
-      <div class="itemPage p60">
-       <div class="left">
+      <div class="itemPage">
+        <div class="left">       
           <!-- <div class="item_images p60">
               <div class="swiper-wrapper">
                   <img
-              class="card__img swiper-slide"
-              :src="'https://frontend-test.idaproject.com' + photo"
-              :alt="name"
-              />
+                  class="card__img swiper-slide"
+                  :src="'https://frontend-test.idaproject.com' + photo"
+                  :alt="name"
+                  />
                   <img
-              class="card__img swiper-slide"
-              :src="'https://frontend-test.idaproject.com' + photo"
-              :alt="name"
-              />
+                  class="card__img swiper-slide"
+                  :src="'https://frontend-test.idaproject.com' + photo"
+                  :alt="name"
+                  />
                   <img
-              class="card__img swiper-slide"
-              :src="'https://frontend-test.idaproject.com' + photo"
-              :alt="name"
-              />
+                  class="card__img swiper-slide"
+                  :src="'https://frontend-test.idaproject.com' + photo"
+                  :alt="name"
+                  />
               </div>        
           </div> -->
           <img
@@ -29,6 +29,7 @@
               :src="'https://frontend-test.idaproject.com' + photo"
               :alt="name"
               />
+            <p>Брюки с комфортным поясом на кулиске не создают лишний объем благодаря зауженному книзу силуэту. Модель сшита из плотного трикотажа экстра-пенье без начеса, для которого отобрали самые длинные и прочные волокна австралийского хлопка. Материал отлично регулирует температуру тела, мало мнется и долго служит. Произведено в России.</p>
           <!-- TODO -->
           <!-- <p style="max-width: 855px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p> -->
         </div>
@@ -37,26 +38,27 @@
             <div class="tag__price">
               <!--TODO dynamic -->
               <p>Bestsellers</p> 
-              <div class="flex">
+              <div class="flex prices">
                 <p style="text-decoration: line-through;" class="price old">4,299 ₽</p>
                 <p class="price">{{price}} ₽</p>
               </div>
             </div>
-            <div class="size todo">
+            <div class="size">
                 <p>Размер</p>
                 <div class="sizes flex">
-                  <div class="form_radio_btn" v-for="size in $store.state.sizes" :key="size.id">
-                   <input :name="size" type="radio" :id="size" :value="size">
-                   <label :id="size" :for="size">{{size}}</label>
+                  <div class="form_radio_btn" v-for="size in this.sizes" :key="size.id">
+                    <input name="size" type="radio" :value="size" v-model="sizeChecked" @change="sizeCheck" :id="size">
+                    <label :id="size" :for="size">{{size}}</label>
+                  
                    <!-- <p class="p_size"></p> -->
                   </div>
                 </div>
               </div>
-              <div class="color todo">
-                <p>Цвет: {{бежевый}}</p>
+              <div class="color">
+                <p>Цвет <span v-if="colorChecked != ''">: {{colorChecked}}</span></p>
                 <div class="flex colors">
-                  <div class="input_color" v-for="color in $store.state.colors" :key="color.id">
-                    <input class="custom-radio" :name="color.id" type="radio" :id="color.id" :value="color.id">
+                  <div class="form_radio_btn_color" v-for="color in this.colors" :key="color.id">
+                    <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
                     <label :id="color.id" :for="color.id"></label>
                   </div>
                 </div>
@@ -101,13 +103,56 @@ import 'swiper/swiper-bundle.css'
 Swiper.use([ Navigation, Pagination, Autoplay ])
 
 export default {
-    mounted() {
-        new Swiper('.item_images', {
-        slidesPerView: 3.9,
-        spaceBetween: 40,
-        })
+    data(){
+      return{
+        colorChecked: [],
+        sizeChecked: [],
+        sizes: ['os', 'xs', 's', 'm', 'l', 'xl', '2xl'],
+        colors: [      
+        {
+          id: 'white',
+          name: 'Белый'
+        },
+        {
+          id: 'black',
+          name: 'Черный'
+        },
+        {
+          id: 'red',
+          name: 'Красный'
+        },
+        {
+          id: 'blue',
+          name: 'Синий'
+        },
+        {
+          id: 'orange',
+          name: 'Оранжевый'
+        },
+        {
+          id: 'lightblue',
+          name: 'Голубой'
+        },
+        {
+          id: 'green',
+          name: 'Зеленоватый'
+        },
+        {
+          id: 'pink',
+          name: 'Розоватый'
+        },
+      ],
+      }
     },
-
+    methods:{
+      sizeCheck(){
+        console.log(this.sizeChecked);
+      },
+      colorCheck(){
+        this.colorChecked = this.colorChecked.name
+        console.log(this.colorChecked);
+      },
+    },
     async asyncData({ params, redirect }) {
     const items = await fetch('https://frontend-test.idaproject.com/api/product')
     .then((res) => res.json())
@@ -131,6 +176,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .wrapper{
+      // max-width: 1920px;
+      margin: 0 auto;
+    }
     .size{
       display: flex;
       flex-direction: column;
@@ -210,8 +259,17 @@ export default {
           color: #4A4444;
         }
     }
+    .colors{
+      gap: 18px;
+    }
+    .sizes{
+      gap: 10px;
+    }
+    .prices{
+      gap: 20px;
+    }
     .flex{
-    gap: 20px;
+    // gap: 10px;
     align-items: center;
     }
     .tag__price{
@@ -221,9 +279,20 @@ export default {
     }
     .itemPage{
         display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
         // gap: 150px;
         padding-top: 110px;
+        gap: 44px;
         justify-content: space-between;
+        .left{
+          max-width: 980px;
+          p{
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 180%;
+          }
+        }
     }
     /* для элемента input c type="radio" */
   .input_color{

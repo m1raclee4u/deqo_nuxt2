@@ -2,7 +2,7 @@
     <div class="filter todo">
         <h3>Цена</h3>
         <div class="customRow">
-            <p>Цена: &nbsp; <span>₽ <b>{{value[0]}}</b> — ₽ <b>{{value[1]}}</b></span> </p>            
+            <p>От {{value[0]}}₽ до ₽ {{value[1]}}</p>            
         </div>        
         <el-slider
         class="filterRange"
@@ -83,10 +83,11 @@ export default {
         flex-direction: column;
         gap: 20px;
         h3{
-            font-style: normal;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 20px;
-            line-height: 23px;
+            line-height: 24px;
+            /* identical to box height */
+
 
             /* основной */
 
@@ -94,8 +95,13 @@ export default {
             margin-bottom: 20px;
         }
         P{
-            font-size: 12.5px;
-            color: #a8a8a8;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+
+            /* средний */
+
+            color: #A9A1A1;
             span{
                 font-weight: 600;
             }

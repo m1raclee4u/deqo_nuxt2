@@ -97,8 +97,9 @@ export default {
   
   section{
     padding: 0 !important;
-    width: 100vw !important;
+    // width: 100vw !important;
     margin: 0 !important;
+    // overflow-x: hidden;
   }
   .swiper{
     position: absolute;

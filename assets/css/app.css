@@ -1,0 +1,89 @@
+.form_radio_btn {
+    display: inline-block;
+}
+.form_radio_btn input[type=radio] {
+    display: none;
+}
+.form_radio_btn label {
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    width: 38px;
+    height: 38px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 35px;
+    color: #A9A1A1;
+    border: 2px solid #A9A1A1;
+    border-radius: 4px;
+    user-select: none;
+    transition: 0.3s all;
+}
+    
+/* Checked */
+.form_radio_btn input[type=radio]:checked + label {
+    color: white;
+    background-color: #685F5F;
+}
+    
+/* Hover */
+.form_radio_btn label:hover {
+    color: white;
+    background-color: #685F5F;
+}
+    
+/* Disabled */
+.form_radio_btn input[type=radio]:disabled + label {
+    background: #efefef;
+    color: #666;
+}
+
+
+.form_radio_btn_color {
+    display: inline-block;
+}
+.form_radio_btn_color input[type=radio] {
+    display: none;
+}
+.form_radio_btn_color label {
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 35px;
+    color: #A9A1A1;
+    /* border: 2px solid #A9A1A1; */
+    border-radius: 50%;
+    user-select: none;
+    transition: 0.3s all;
+}
+    
+/* Checked */
+.form_radio_btn_color input[type=radio]:checked + label {
+    /* color: white; */
+    box-shadow: inset 0 0 0 2px white;
+    border: 1px solid black !important;
+    /* background-color: #685F5F; */
+}
+    
+/* Hover */
+.form_radio_btn_color label:hover {
+    /* color: white; */
+    /* padding: 3px; */
+    /* width: 20px;
+    height: 20px; */
+    box-shadow: inset 0 0 0 2px white;
+    border: 1px solid black !important;
+    /* background-color: #685F5F; */
+}
+    
+/* Disabled */
+.form_radio_btn_color input[type=radio]:disabled + label {
+    background: #efefef;
+    color: #666;
+}

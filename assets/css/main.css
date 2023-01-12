@@ -5,16 +5,11 @@
   u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
   caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
   embed, figure, figcaption, footer, header, menu, nav, output, ruby, section,
-  summary, time, mark, audio, video, * { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%;font-family: 'RF Dewi'; box-sizing: border-box;}
+  summary, time, mark, audio, video, * {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%;font-family: 'RF Dewi'; box-sizing: border-box;}
 
   h1, h2, h3, h4, h5, h6,p {
     margin: 0 !important;
   }
-
-/* .wrapper{
-  max-width: 1920px;
-  margin: 0 auto;
-} */
 
 .flex{
   display: flex;
@@ -33,36 +28,36 @@
   padding: 0 60px;
 }
 
-label#green::before{
+label#green{
   background-color: green;
 }
-label#black::before{
+label#black{
   background-color: black;
 }
-label#blue::before{
+label#blue{
   background-color: blue;
 }
-label#red::before{
+label#red{
   background-color: red;
 }
-label#white::before{
+label#white{
   background-color: white;
   border: 1px solid #adb5bd;
 
 }
-label#brown::before{
+label#brown{
   background-color: brown;
 }
-label#yellow::before{
+label#yellow{
   background-color: yellow;
 }
-label#orange::before{
+label#orange{
   background-color: orange;
 }
-label#lightblue::before{
+label#lightblue{
   background-color: lightblue;
 }
-label#pink::before{
+label#pink{
   background-color: pink;
 }
 

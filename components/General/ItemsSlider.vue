@@ -48,18 +48,19 @@ export default {
         this.$store.dispatch("fetchCategories");
         }
     },
-    updated() {
-        new Swiper('.bestsellers', {
-        slidesPerView: 4,
-        spaceBetween: 40,
-        })
-    },
     mounted() {
         new Swiper('.bestsellers', {
         slidesPerView: 4,
         spaceBetween: 40,
         })
     },
+    updated() {
+        new Swiper('.bestsellers', {
+        slidesPerView: 4,
+        spaceBetween: 40,
+        })
+    },
+   
     
 }
 </script>
@@ -75,9 +76,11 @@ export default {
     }       
     section{
         // margin: 0 auto;
+    margin: 0 auto;
         padding: 100px 0px 0 0;
         max-width: 1920px;
         width: 100%;
+        overflow: hidden;
         h2{
             padding-bottom: 60px;
             font-weight: 600;

@@ -1,7 +1,6 @@
 export const state = () => ({
     products: [],
-    categoryTags: ['oversized', 'slim', 'tall', 'petit'],
-    sizes: ['s', 'm', 'l', 'xl'],
+    categoryTags: ['oversized', 'slim', 'tall', 'petit'],   
     categories: [],
     productsInCart: [],
     colors: [      

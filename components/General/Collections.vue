@@ -30,9 +30,11 @@ export default {
 <style lang="scss" scoped>
 section{
     max-width: 1920px;
+    margin: 0 auto;
     width: 100%;
     // margin: 0 auto;
     padding: 100px 0;
+    // overflow-x: hidden;
 }
 .collections{
     display: flex;

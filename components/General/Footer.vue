@@ -45,17 +45,22 @@ export default {
 
 <style lang="scss" scoped>
 section{
-    max-width: 1920px;
+    margin: 0 auto;
+    // max-width: 1920px;
     width: 100%;
     padding: 50px 0 40px 0;
     // margin: 0 auto;
     background-color: #f7f7f7;
+    // overflow-x: hidden;
 }
 footer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     height: 300px;
+    max-width: 1920px;
+    margin: 0 auto;
+
 }
 form {
     margin-bottom: 40px;

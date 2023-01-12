@@ -102,10 +102,11 @@ export default {
         gap: 25px;
         width: 280px;       
             h3{
-                font-style: normal;
-                font-weight: 500;
+                font-weight: 600;
                 font-size: 20px;
-                line-height: 23px;
+                line-height: 24px;
+                /* identical to box height */
+
 
                 /* основной */
 
