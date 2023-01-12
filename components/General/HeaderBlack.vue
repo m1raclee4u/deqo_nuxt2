@@ -9,7 +9,7 @@
         <Nuxt-link id="logo" to="/"><img src="../../assets/img/icons/logo.svg" alt=""></Nuxt-link>
         <div class="buttons">
             <img class="todo" src="../../assets/img/icons/search.svg" alt="">
-            <img class="like todo" src="../../assets/img/icons/heart.svg" alt="">
+            <Nuxt-link to="/favorite"><img class="todo" src="../../assets/img/icons/heart.svg" alt=""></Nuxt-link>
             <img class="todo" src="../../assets/img/icons/cart.svg" alt="">
             <img class="todo" src="../../assets/img/icons/account.svg" alt="">
         </div>

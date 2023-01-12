@@ -1,6 +1,6 @@
 <template>
         <div class="ItemCart">
-            <button class="like">
+            <button class="like" @click="addToFavorite">
                 <!-- <p>ХИТ</p> -->
             </button>
             <Nuxt-Link :to="`/${item.category}/${item.name}`">
@@ -17,14 +17,16 @@
                 
                 <!-- {{item}} -->
             </Nuxt-Link>
-            <p style="margin-bottom: 10px !important;">{{item.name}}</p>
+            <div class="top">
+                <p>{{item.name}}</p>
+                <p class="quantity">осталось {{3}} шт.</p>
+            </div>
             <div class="ItemCart__price">
                 <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
                 <p>{{item.price}} ₽</p>
                 <div class="flex colors">
-                  <div class="input_color" v-for="color in $store.state.colors" :key="color.id" disabled>
-                    <input class="custom-radio" :name="color" type="radio" :id="color.id" :value="color.id">
-                    <label :id="color.id" :for="color.id"></label>
+                  <div class="input_color_1" :id="color.id" v-for="color in $store.state.colors" :key="color.id" disabled>
+                    <!-- <label  class="colorItem"></label> -->
                   </div>
                 </div>
             </div>
@@ -46,6 +48,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.input_color_1{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 400;
+
+        .quantity{
+            font-size: 14px;
+            line-height: 17px;
+            color: #A9A1A1;
+            font-weight: 400;
+        }
+}
 .tag{
     position: absolute;
     width: 58px;
@@ -109,6 +130,7 @@ export default {
     }
     .ItemCart__price{
         display: flex;
+        align-items: center;
         gap: 30px;
             p{
                 font-style: normal;

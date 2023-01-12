@@ -28,36 +28,36 @@
   padding: 0 60px;
 }
 
-label#green{
+#green{
   background-color: green;
 }
-label#black{
+#black{
   background-color: black;
 }
-label#blue{
+#blue{
   background-color: blue;
 }
-label#red{
+#red{
   background-color: red;
 }
-label#white{
+#white{
   background-color: white;
   border: 1px solid #adb5bd;
 
 }
-label#brown{
+#brown{
   background-color: brown;
 }
-label#yellow{
+#yellow{
   background-color: yellow;
 }
-label#orange{
+#orange{
   background-color: orange;
 }
-label#lightblue{
+#lightblue{
   background-color: lightblue;
 }
-label#pink{
+#pink{
   background-color: pink;
 }
 

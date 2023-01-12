@@ -69,15 +69,15 @@
                <ButtonBuy/>
             </div>         
             <div class="info">
-              <div class="jcsb todo">
+              <div class="jcsb">
                 <p>Состав</p>
-                <span>Хлопок - 97%, Эластан - 3%</span>
+                <p><span>Хлопок - {{'97'}}%</span>, <span>Эластан - {{'3'}}%</span></p>
               </div>
-              <div class="jcsb todo">
+              <div class="jcsb">
                 <p>Артикул</p>
-                <span>ART00001</span>
+                <span>{{'ART00001'}}</span>
               </div>
-              <p class="todo" style="margin-top: 36px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione vel quis nesciunt dolorum, aut laborum animi, minima est, porro aspernatur incidunt ipsam. Odio optio sint ab, veritatis necessitatibus ipsum et.</p>
+              <!-- <p class="todo" style="margin-top: 36px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione vel quis nesciunt dolorum, aut laborum animi, minima est, porro aspernatur incidunt ipsam. Odio optio sint ab, veritatis necessitatibus ipsum et.</p> -->
             </div>  
             
         </div>
@@ -183,7 +183,7 @@ export default {
     .size{
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       p{
       font-weight: 400;
       font-size: 16px;
@@ -199,7 +199,7 @@ export default {
     .color{
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       p{
       font-weight: 400;
       font-size: 16px;
@@ -212,7 +212,12 @@ export default {
       // margin-bottom: 10px;
       }
     }
-
+    .info{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      color: #A9A1A1;
+    }
     .buttons{
       display: flex;
       flex-direction: column;
