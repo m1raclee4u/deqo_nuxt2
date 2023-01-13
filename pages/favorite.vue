@@ -2,33 +2,25 @@
     <div class="catalog">
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
-        <Nuxt-Link class="Breadcrumbs" to="#"></Nuxt-Link>
+        <Breadcrumbs/>
         <main class="main">            
             <aside class="aside">
-                <aside-categories 
-                    @updateChecked="sortByChecked"                    
-                />
-                <aside-filter
-                    @updateFiltered="sortByFiltered"
-                />
-                <aside-color/>
+                <h3>Избранное</h3>
+                <ul>
+                    <li><Nuxt-link to="#">Список заказов</Nuxt-link></li>
+                    <li><Nuxt-link to="#">Личные данные</Nuxt-link></li>
+                    <li><Nuxt-link to="#">Избранное</Nuxt-link></li>
+                    <li><Nuxt-link to="#">Подписки</Nuxt-link></li>
+                    <li><Nuxt-link to="#">Выйти</Nuxt-link></li>
+                </ul>
             </aside>
             <div class="items__main">   
-                <div v-if="this.checkedId != ''" class="aic">
-                    <p >Найдено {{foundResults}} подходящих товаров</p>
-                    <div
-                    v-for="category in $store.state.categories.filter(el=>el.checked == true)"  
-                    :key="category.id"                 
-                    >  
-                        <button>
-                            <i class="delete"></i>       
-                            {{category.name}}
-                        </button>                        
-                    </div>  
+                <div class="aic">
+                    <p >{{$store.state.favorites.products.length}} товаров</p>
                 </div>  
                 <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
                     <div
-                    v-for="item in this.paginatedProducts" 
+                    v-for="item in $store.state.favorites.products" 
                     :key="item.id"
                     class="col item"                    
                     >
@@ -39,10 +31,11 @@
                         </item>
                     </div>   
                 </div>
-                <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button>
+                <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
             </div>
             
         </main>
+        <Footer/>
     </div>
 </template>
 
@@ -53,10 +46,11 @@ import Filters from '~/components/General/Filters.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
+import Breadcrumbs from '~/components/General/Breadcrumbs.vue'
 
 
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu},
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs},
 
     props: ["category"],
     data() {
@@ -82,51 +76,6 @@ export default {
         },
         loadMore() {
             this.currentPage += 1;
-        }
-    },
-    computed: {        
-        products() {
-            let checkedArray = [];
-            if (this.checkedId.length !== 0) {
-                for (let i = 0; i < this.checkedId.length; i++) {
-                    const checked = this.checkedId[i]
-                    for (let j = 0; j < this.$store.getters["products"].length; j++) {
-                        const find = this.$store.getters["products"][j];
-                        if (find.category == checked) {     
-                            checkedArray.push(find);
-                        }
-                    }
-                }
-            return checkedArray
-            } 
-            else                
-                return this.$store.getters["products"];
-        },
-        productsInCart() {
-            return this.$store.getters["productsInCart"];
-        },
-        foundResults() {
-            return this.products.length      
-        },
-        totalResults() {
-            return Object.keys(this.orders).length;
-        },
-        pageCount() {
-            return Math.ceil(this.totalResults / this.maxPerPage);
-        },
-        pageOffest() {
-         return this.maxPerPage * this.currentPage;
-        },
-        paginatedProducts() {
-            return this.products.slice(0, this.currentPage * this.maxPerPage);
-        }
-    },
-    mounted() {
-        if (this.$store.getters["products"].length === 0) {
-        this.$store.dispatch("fetchProducts");
-        }
-        if (this.$store.getters["categories"].length === 0) {
-        this.$store.dispatch("fetchCategories");
         }
     },
 };
@@ -206,6 +155,7 @@ export default {
     .items{
         display: flex;
         flex-wrap: wrap;
+        gap: 14px;
         // gap: 17.6px;
     }
     .item:nth-child(3n+3) {
@@ -220,7 +170,31 @@ export default {
     aside{
         width: 280px;
         display: flex;
+        align-items: flex-end;
         flex-direction: column;
         gap: 45px;
+        h3{
+            font-size: 28px;
+            line-height: 33px;
+            /* identical to box height */
+
+
+            color: #4A4444;
+        }
+        ul {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+            a{
+                text-decoration: none;
+                color: #A9A1A1;
+                font-size: 20px;
+            }
+            li {    
+                text-align: right;
+                list-style-type: none;
+                text-decoration: none;
+            }
+        }
     }
 </style>

@@ -1,7 +1,12 @@
 <template>
         <div class="ItemCart">
-            <button class="like" @click="addToFavorite">
-                <!-- <p>ХИТ</p> -->
+            <button class="like" v-if="!isProductAdded"
+            @click.prevent="buyClickHandler"
+            >
+            </button>
+             <button class="like added" v-else
+            @click.prevent="addedClickHandler"
+            >
             </button>
             <Nuxt-Link :to="`/${item.category}/${item.name}`">
                 <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
@@ -35,15 +40,45 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
 
 Swiper.use([ Navigation, Pagination, Autoplay ])
 export default {
      name: "item",
-     props: [
-        "item"
-    ],
+      props: {
+        item: {
+        type: Object,
+        required: true
+        }
+    },
+    data(){
+        return{
+            favorites: [],
+        }
+    },
+    computed: {
+        ...mapState({
+        products: state => state.favorites.products
+        }),
+        isProductAdded () {
+        return this.products.find(p => p.id === this.item.id)
+        }
+    },
+    methods: {
+        ...mapActions({
+        addProduct: 'favorites/addProduct',
+        removeProduct: 'favorites/removeProduct'
+        }),
+        buyClickHandler () {
+        this.addProduct(this.item)
+        },
+        addedClickHandler () {
+        this.removeProduct(this.item.id)
+        }
+    }
 }
 </script>
 
@@ -84,6 +119,10 @@ export default {
             color: #685F5F;
         }
 }
+.added{
+        background-image: url('../../assets/img/icons/heart_on.svg') !important;
+
+    }
 .like{
     position: absolute;
     background-image: url('../../assets/img/icons/heart.svg');
@@ -95,6 +134,7 @@ export default {
     top: 14px;
     right: 14px;
     // border-radius: 50%;
+    
     &:hover{
         background-image: url('../../assets/img/icons/heart_on.svg');
     }

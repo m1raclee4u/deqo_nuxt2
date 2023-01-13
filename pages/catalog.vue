@@ -206,6 +206,7 @@ export default {
     .items{
         display: flex;
         flex-wrap: wrap;
+        gap: 14px;
         // gap: 17.6px;
     }
     .item:nth-child(3n+3) {

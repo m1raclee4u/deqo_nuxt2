@@ -37,6 +37,9 @@ export const state = () => ({
         name: 'Розоватый'
       },
     ],
+    // favorites: [
+      
+    // ],
     checkedCategories: [],
     isVisible: false,
     burgerMenuOpened: false
@@ -49,8 +52,9 @@ export const mutations = {
   SET_CATEGORIES(state, categories) {
     state.categories = categories;
   },
-  SET_MENU_OPENED(state, opened) {
-    state.burgerMenuOpened = opened  }
+  // SET_FAVORITES(state, favorites) {
+  //   state.favorites = favorites  
+  // },
 
   // checkedChange (state, checked) {
   //     state.checkedCategories.push({

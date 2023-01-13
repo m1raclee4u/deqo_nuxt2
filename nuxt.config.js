@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV !== 'production'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   
@@ -43,6 +45,12 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    ['nuxt-vuex-localstorage', {
+      ...(isDev && {
+        mode: 'debug'
+      }),
+      localStorage: ['favorites'] //  If not entered, “localStorage” is the default value
+    }]
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
