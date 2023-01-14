@@ -1,8 +1,10 @@
 <template>
     <button @click="buyClickHandler" v-if="!isProductAdded">Добавить в корзину 
     </button>    
-    <button class="remove" @click="addedClickHandler" v-else>Удалить из корзины
-    </button>    
+    <Nuxt-link to="/cart" v-else>
+        <button class="remove" >Перейти в корзину
+        </button>    
+    </Nuxt-link>
 </template>
 
 <script>
@@ -48,10 +50,9 @@ export default {
                     
                 }             
             } else {
-                this.item.quantity = 0;
-                this.item.quantity++;
                 this.item.color = this.color
                 this.item.size = this.size
+                this.item.quantity = 1;
                 this.addProduct(this.item)
             }
             

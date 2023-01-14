@@ -1,5 +1,5 @@
 <template>
-    <header class="p60">
+    <header class="">
         <div class="header">
             <div class="flex">
                 <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
@@ -14,7 +14,10 @@
             <div class="buttons">
                 <img class="todo" src="../../assets/img/icons/search.svg" alt="">
                 <Nuxt-link to="/favorite"><img class="" src="../../assets/img/icons/heart.svg" alt=""></Nuxt-link>
-                <Nuxt-link to="/cart"><img class="" src="../../assets/img/icons/cart.svg" alt=""></Nuxt-link>
+                <Nuxt-link to="/cart">
+                    <img class="" src="../../assets/img/icons/cart.svg" alt="">
+                    <p class="cartCounter" v-if="productsQuantity > 0">{{productsQuantity}}</p>
+                </Nuxt-link>
                 <img class="todo" src="../../assets/img/icons/account.svg" alt="">
             </div>
             <!-- <h1 style="position: absolute">{{scrollPosition}}</h1> -->
@@ -23,43 +26,52 @@
 </template>
 
 <script>
-// export default {
-//     data(){
-//         return {
-//             scrollPosition: 0,
-//         }
-//     },
-//     methods: {
-//         handleScroll () {
-//         // Your scroll handling here
-//         this.scrollPosition = window.scrollY;
-//         if (this.scrollPosition < 350) {
-//             window.document.getElementById('logo').style.top = `calc(400px - ${this.scrollPosition}px)`;
-//             if (this.scrollPosition == 100)
-//             window.document.getElementById('logo').style.transform = `scale(calc(300/${this.scrollPosition}))`;
-//         } else {
-//             window.document.getElementById('logo').style.top = `unset`;
-//             window.document.getElementById('logo').style.transform = `unset`;
-            
+import {mapGetters } from 'vuex'
 
-//         }
-//         }
-//     },
-//     updated() {
-//         window.addEventListener('scroll', this.handleScroll)
-//     },
-//     beforeMount () {
-//         window.document.getElementById('logo').style.top = '400px';
-//         window.document.getElementById('logo').style.transform = 'scale(3)';
-//         window.addEventListener('scroll', this.handleScroll)
-//     },
-//     beforeDestroy () {
-//         window.removeEventListener('scroll', this.handleScroll)
-//     }
-// }
+export default {
+    data(){
+        return {
+            scrollPosition: 0,
+        }
+    },
+    computed:{
+        ...mapGetters('cart', [
+            'getProducts'
+        ]),
+        productsQuantity(){
+            let quantityComputed = 0;
+            for (const item in this.getProducts) {
+                if (Object.hasOwnProperty.call(this.getProducts, item)) {
+                    const element = this.getProducts[item];
+                    if (element.quantity != 0) {
+                        quantityComputed = quantityComputed+element.quantity
+                    }
+                }
+            
+            }
+            return quantityComputed
+        }
+    }
+    
+}
 </script>
 
 <style lang="scss" scoped>
+    .cartCounter{
+        position: absolute;
+        top: 0;
+        margin-top: 12px !important;
+        margin-left: 12px !important;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #9E8B7B;
+        text-align: center;
+        font-size: 13px;
+        line-height: 15px;
+        color: white;
+        border: 1px solid white;
+    }
     a#logo{
         position: absolute;
         margin: 0 auto;

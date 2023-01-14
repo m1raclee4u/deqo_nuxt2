@@ -37,6 +37,7 @@ export const state = () => ({
         name: 'Розоватый'
       },
     ],
+    sizes: ['os', 'xs', 's', 'm', 'l', 'xl', '2xl'],
     // favorites: [
       
     // ],
@@ -52,41 +53,11 @@ export const mutations = {
   SET_CATEGORIES(state, categories) {
     state.categories = categories;
   },
-  // SET_FAVORITES(state, favorites) {
-  //   state.favorites = favorites  
-  // },
-
-  // checkedChange (state, checked) {
-  //     state.checkedCategories.push({
-  //       name: ''
-  //     })
-  //     for (let el = 0; el < state.checkedCategories.length; el++) {
-  //       const element = state.checkedCategories[el];
-  //       element.name = checked[el];      
-  //     }
-  //     for (let i = 0; i < state.checkedCategories.length; i++) {      
-  //       let cache = state.checkedCategories[i];
-  //       for (let j = 0; j < state.categories.length; j++) {        
-  //         if (cache.name == state.categories[j].name) {
-  //           state.categories[j].checked = true;
-  //           console.log(state.categories[j].checked);
-  //         }
-  //         else {
-  //           state.categories[j].checked = false
-  //         }
-  //       }        
-  //   }
-  //   console.log(state.categories);
-  //   console.log(checked);
-  //   console.log(state.checkedCategories);
-  // },
-
-  // clearCheckedCategories (state){    
-  //   let array = state.checkedCategories
-  //   array = array.splice(-1, array.length)
-  //   console.log(array);
-  // }
+  SET_MENU_OPENED(state, opened) {
+    state.burgerMenuOpened = opened  
+  }
 }
+
 
 export const actions = {
 

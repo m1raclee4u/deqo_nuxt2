@@ -1,11 +1,13 @@
 <template>
     <div class="item">
         <div class="left">
-            <img
-            class="cart__img"
-            :src="'https://frontend-test.idaproject.com' + item.photo"
-            :alt="item.name"
-            />
+             <Nuxt-Link :to="`/${item.category}/${item.name}`">
+                <img
+                class="cart__img"
+                :src="'https://frontend-test.idaproject.com' + item.photo"
+                :alt="item.name"
+                />
+            </Nuxt-link>            
             <div class="name">
                 <p>{{item.name}}</p>
             </div>
@@ -19,7 +21,7 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1.05078C5.4186e-08 0.636568 0.30526 0.300781 0.681818 0.300781L14.3182 0.300782C14.6947 0.300782 15 0.636569 15 1.05078C15 1.465 14.6947 1.80078 14.3182 1.80078L0.681818 1.80078C0.30526 1.80078 -5.4186e-08 1.46499 0 1.05078Z" fill="#A9A1A1"/>
                     </svg>
                 </div>                
-                {{item.quantity}}
+                <p>{{item.quantity}}</p>
                 <div @click="buyClickHandler" class="buttons">
                     <svg  width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.50007 0.5C7.87662 0.500036 8.18185 0.805325 8.18182 1.18188L8.18123 7.31818H14.3182C14.6947 7.31818 15 7.62344 15 8C15 8.37656 14.6947 8.68182 14.3182 8.68182H8.18182V14.8182C8.18182 15.1947 7.87656 15.5 7.5 15.5C7.12344 15.5 6.81818 15.1947 6.81818 14.8182L6.81818 8.6824L0.681753 8.68182C0.305195 8.68178 -3.59222e-05 8.37649 3.17095e-09 7.99994C3.59285e-05 7.62338 0.305325 7.31815 0.681883 7.31818L6.8176 7.31877L6.81818 1.18175C6.81822 0.805195 7.12351 0.499964 7.50007 0.5Z" fill="#A9A1A1"/>
@@ -101,6 +103,13 @@ export default {
         display: flex;
         align-items: center;
         gap: 32px;
+        p{
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;  
+            width: 25px;
+            text-align: center;
+        }
         svg{
             width: 100%;
             height: 100%;
@@ -149,6 +158,9 @@ export default {
         align-items: center;
         gap: 100px; 
         p{
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;  
             font-weight: 500;
             font-size: 22px;
             line-height: 26px;

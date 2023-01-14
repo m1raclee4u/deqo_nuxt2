@@ -9,7 +9,7 @@
                             <h5 class="title">{{category.name}}</h5>
                         </div>
                         <div class="right">
-                            <Nuxt-link to="/catalog">больше</Nuxt-link>
+                            <Nuxt-link @click="this.$emit('checked', category.name)" to="/catalog">больше</Nuxt-link>
                         </div>
                     </header>
                     <main>

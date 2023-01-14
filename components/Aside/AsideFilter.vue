@@ -1,5 +1,5 @@
 <template>
-    <div class="filter todo">
+    <div class="filter">
         <h3>Цена</h3>
         <div class="customRow">
             <p>От {{value[0]}}₽ до ₽ {{value[1]}}</p>            

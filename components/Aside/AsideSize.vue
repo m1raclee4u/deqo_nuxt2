@@ -1,12 +1,14 @@
 <template>
     <div class="colors">
-        <h3>Цвет</h3>
-        <div class="flex colors_row">
-            <div class="form_radio_btn_color"  v-for="color in $store.state.colors" :key="color.id">
-                <input name="color" type="radio" :value="color" v-model="checkedColor" @change="addCheckedColor" :id="color.id">
-                <label :id="color.id" :for="color.id"></label>
+        <h3>Размер</h3>
+        <div class="sizes flex">
+            <div class="form_radio_btn" v-for="size in $store.state.sizes" :key="size.id">
+            <input name="size" type="radio" :value="size" :id="size">
+            <label :id="size" :for="size">{{size}}</label>
+            
+            <!-- <p class="p_size"></p> -->
             </div>
-        </div> 
+        </div>
     </div>
 </template>
 
@@ -26,10 +28,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .colors_row{
+    .sizes{
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 14px;
     }
     .custom-radio {
     position: absolute;

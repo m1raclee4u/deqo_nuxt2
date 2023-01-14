@@ -171,7 +171,7 @@ export default {
         margin: 0 auto;
     }
     aside{
-        width: 200px;
+        width: 185px;
         display: flex;
         align-items: flex-start;
         flex-direction: column;

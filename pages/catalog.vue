@@ -2,16 +2,19 @@
     <div class="wrapper">
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
-        <Nuxt-Link class="Breadcrumbs" to="#"></Nuxt-Link>
         <main class="main">            
             <aside class="aside">
                 <aside-categories 
-                    @updateChecked="sortByChecked"                    
+                    @updateChecked="sortByChecked" 
+                    @checked="getChecked"
                 />
                 <aside-filter
                     @updateFiltered="sortByFiltered"
                 />
-                <aside-color/>
+                <aside-color 
+                    @updateCheckedColor="sortByCheckedColor" 
+                />
+                <aside-size/>
             </aside>
             <div class="items__main">   
                 <div v-if="this.checkedId != ''" class="aic">
@@ -55,11 +58,12 @@ import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
 import Footer from '~/components/General/Footer.vue'
+import AsideSize from '~/components/Aside/AsideSize.vue'
 
 
 
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Footer},
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Footer, AsideSize},
 
     props: ["category"],
     data() {
@@ -69,6 +73,7 @@ export default {
         filterLabel: "цене",
         productsInCartId: [],
         checkedId: '',
+        checkedColor: '',
         checkedFiltered: '',
         currentPage: 1,
         maxPerPage: 9,
@@ -79,9 +84,16 @@ export default {
         sortByChecked(checkedId) {
            this.checkedId = checkedId
         },
+        sortByCheckedColor(checkedColor) {
+           this.checkedColor = checkedColor
+        },
         sortByFiltered(checkedFiltered) {
             this.checkedFiltered = checkedFiltered
             console.log(this.checkedFiltered);
+        },
+        getChecked(data){
+            console.log(data);
+            this.checkedFiltered = data
         },
         loadMore() {
             this.currentPage += 1;
