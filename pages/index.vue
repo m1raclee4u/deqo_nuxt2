@@ -5,7 +5,11 @@
     <HeaderSlider/>
     <ItemsSlider/>
     <ItemsSlider/>
-    <Collections/>
+    <HeaderSlider :slider="slider"/>
+    <ItemsSlider/>
+    <HeaderSlider :slider="slider"/>
+    <ItemsSlider/>
+    <!-- <Collections/> -->
     <Footer/>    
 
   </div>
@@ -26,5 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+ .wrapper{
+  margin: 0;
+ }
 </style>

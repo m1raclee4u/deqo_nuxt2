@@ -3,34 +3,21 @@
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
         <Breadcrumbs/>
-        <main class="main">            
-            <aside class="aside">
-                <h3>Избранное</h3>
-                <ul>
-                    <li><Nuxt-link to="#">Список заказов</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Личные данные</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Избранное</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Подписки</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Выйти</Nuxt-link></li>
-                </ul>
-            </aside>
-            <div class="items__main">   
-                <div class="aic">
-                    <p >{{$store.state.favorites.products.length}} товаров</p>
-                </div>  
-                <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
-                    <div
-                    v-for="item in $store.state.favorites.products" 
-                    :key="item.id"
-                    class="col item"                    
+        <main class="main">                            
+            <div  class="items__main">
+                <h3>Оформление заказа</h3>
+                <div
+                v-for="item in getProducts" 
+                :key="item.id"
+                class="col item"    
+                >
+                    <cart-item 
+                    :item="item"
+                    :key="item.id" 
+                    @emitDeleteItem="addedClickHandler"                 
                     >
-                        <item 
-                        :item="item" 
-                        :key="item.id"                        
-                        >
-                        </item>
-                    </div>   
-                </div>
+                    </cart-item>
+                </div>   
                 <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
             </div>
             
@@ -44,17 +31,18 @@ import AsideCategories from '~/components/Aside/AsideCategories.vue'
 import AsideFilter from '~/components/Aside/AsideFilter.vue'
 import Filters from '~/components/General/Filters.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
-import Item from '~/components/General/Item.vue'
+import CartItem from '~/components/General/CartItem.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
 import Breadcrumbs from '~/components/General/Breadcrumbs.vue'
 import Footer from '~/components/General/Footer.vue'
 
 
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, Footer},
+    components: { HeaderBlack, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, CartItem, Footer},
+    
     data() {
-
         return {
         showFilter: false,
         filterLabel: "цене",
@@ -66,18 +54,34 @@ export default {
         showReadMore: true
         };
     },
+    computed: {
+        ...mapGetters('cart', [
+            'getProducts'
+        ]),
+        isProductAdded () {
+        return this.products.find(p => p.id === this.item.id)
+        }
+    },
     methods: {
         sortByChecked(checkedId) {
            this.checkedId = checkedId
         },
         sortByFiltered(checkedFiltered) {
             this.checkedFiltered = checkedFiltered
-            console.log(this.checkedFiltered);
         },
         loadMore() {
             this.currentPage += 1;
+        },
+        ...mapActions({
+            addProduct: 'cart/addProduct',
+            removeProduct: 'cart/removeProduct'
+        }),
+         addedClickHandler () {
+           console.log(this.item);
+            this.removeProduct(this.item)
         }
     },
+    
 };
 
     
@@ -128,6 +132,14 @@ export default {
         }
     }
     .items__main{        
+        h3{
+            font-size: 28px;
+            line-height: 33px;
+            /* identical to box height */
+
+            margin-bottom: 40px !important;
+            color: #4A4444;
+        }
         width: 100%;
         
         button{
@@ -164,23 +176,22 @@ export default {
     main {
         display: flex;
         justify-content: space-between;
-        gap: 45px;
+        gap: 60px;
         // padding: 40px 60px;
-        width: 100%;
         max-width: 1400px;
         margin: 0 auto;
+        width: 100%;
     }
     aside{
-        width: 200px;
+        width: 280px;
         display: flex;
-        align-items: flex-start;
+        align-items: flex-end;
         flex-direction: column;
         gap: 45px;
         h3{
             font-size: 28px;
             line-height: 33px;
             /* identical to box height */
-
 
             color: #4A4444;
         }
@@ -194,7 +205,7 @@ export default {
                 font-size: 20px;
             }
             li {    
-                text-align: left;
+                text-align: right;
                 list-style-type: none;
                 text-decoration: none;
             }

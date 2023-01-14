@@ -61,6 +61,13 @@
   background-color: pink;
 }
 
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  margin-top: 110px;
+}
+
 
 @media (max-width:1400px) {
   .p60{

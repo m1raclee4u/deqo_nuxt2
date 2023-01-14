@@ -1,5 +1,5 @@
 <template>
-    <div class="catalog">
+    <div class="wrapper">
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
         <Nuxt-Link class="Breadcrumbs" to="#"></Nuxt-Link>
@@ -43,6 +43,7 @@
             </div>
             
         </main>
+        <Footer/>
     </div>
 </template>
 
@@ -53,10 +54,12 @@ import Filters from '~/components/General/Filters.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Item from '~/components/General/Item.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
+import Footer from '~/components/General/Footer.vue'
+
 
 
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu},
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Footer},
 
     props: ["category"],
     data() {

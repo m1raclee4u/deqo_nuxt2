@@ -58,11 +58,13 @@ footer{
     justify-content: space-between;
     align-items: flex-start;
     height: 300px;
-    max-width: 1920px;
+    max-width: 1676px;
     margin: 0 auto;
 
 }
 form {
+    display: flex;
+    gap: 40px;
     margin-bottom: 40px;
 }
 .left{
@@ -73,6 +75,9 @@ form {
     max-width: 480px;
 
     .text{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         p{
             font-size: 16px;
             line-height: 24px;
@@ -111,7 +116,18 @@ form {
 }
 input[type=email] {
     background-color: inherit;
-    min-width: 350px;
+    min-width: 300px;
+    height: 70px;
+    border-radius: 4px;
+    color: white;
+    background: #A1A1A1;
+        padding-left: 20px;
+
+    &::placeholder{
+        color: white;
+        // padding-left: 20px;
+    }
+    
   }
 button {
     background-color: inherit;

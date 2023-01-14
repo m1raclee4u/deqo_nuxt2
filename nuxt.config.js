@@ -49,7 +49,7 @@ export default {
       ...(isDev && {
         mode: 'debug'
       }),
-      localStorage: ['favorites'] //  If not entered, “localStorage” is the default value
+      localStorage: ['favorites','cart'] //  If not entered, “localStorage” is the default value
     }]
   ],
 

@@ -53,19 +53,18 @@
                    <!-- <p class="p_size"></p> -->
                   </div>
                 </div>
-              </div>
-              <div class="color">
-                <p>Цвет <span v-if="colorChecked != ''">: {{colorChecked}}</span></p>
-                <div class="flex colors">
-                  <div class="form_radio_btn_color" v-for="color in this.colors" :key="color.id">
-                    <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
-                    <label :id="color.id" :for="color.id"></label>
-                  </div>
+            </div>
+            <div class="color">
+              <p>Цвет <span v-if="colorChecked != ''">: {{colorChecked}}</span></p>
+              <div class="flex colors">
+                <div class="form_radio_btn_color"  v-for="color in this.colors" :key="color.id">
+                  <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
+                  <label :id="color.id" :for="color.id"></label>
                 </div>
               </div>
-              
+            </div>
             <div class="buttons">
-               <ButtonCart/>
+               <ButtonCart :item="filteredItem" :color="colorChecked" :size="sizeChecked"/>
                <ButtonBuy/>
             </div>         
             <div class="info">
@@ -78,8 +77,7 @@
                 <span>{{'ART00001'}}</span>
               </div>
               <!-- <p class="todo" style="margin-top: 36px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione vel quis nesciunt dolorum, aut laborum animi, minima est, porro aspernatur incidunt ipsam. Odio optio sint ab, veritatis necessitatibus ipsum et.</p> -->
-            </div>  
-            
+            </div>
         </div>
     </div>
     </section>    
@@ -103,10 +101,14 @@ import 'swiper/swiper-bundle.css'
 Swiper.use([ Navigation, Pagination, Autoplay ])
 
 export default {
+    props:{
+      // item: {
+      // }
+    },
     data(){
       return{
-        colorChecked: [],
-        sizeChecked: [],
+        colorChecked: '',
+        sizeChecked: '',
         sizes: ['os', 'xs', 's', 'm', 'l', 'xl', '2xl'],
         colors: [      
         {
@@ -141,15 +143,16 @@ export default {
           id: 'pink',
           name: 'Розоватый'
         },
-      ],
+        ],
       }
     },
     methods:{
       sizeCheck(){
-        console.log(this.sizeChecked);
+        console.log(this.filteredItem)
+        // console.log(this.filteredItem);
       },
       colorCheck(){
-        this.colorChecked = this.colorChecked.name
+        this.colorChecked = this.colorChecked.id
         console.log(this.colorChecked);
       },
     },
@@ -159,7 +162,9 @@ export default {
     
     const filteredItem = items.find((el) => el.name === params.item)
     if (filteredItem) {
+      // console.log(filteredItem);
       return {
+        filteredItem: filteredItem,
         category: filteredItem.category,
         name: filteredItem.name,
         photo: filteredItem.photo,
@@ -176,10 +181,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .wrapper{
-      // max-width: 1920px;
-      margin: 0 auto;
-    }
+    
     .size{
       display: flex;
       flex-direction: column;
@@ -287,7 +289,7 @@ export default {
         max-width: 1400px;
         margin: 0 auto;
         // gap: 150px;
-        padding-top: 110px;
+        // padding-top: 110px;
         gap: 44px;
         justify-content: space-between;
         .left{

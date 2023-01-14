@@ -56,7 +56,7 @@ export default {
     },
     data(){
         return{
-            favorites: [],
+            // favorites: [],
         }
     },
     computed: {
@@ -69,14 +69,14 @@ export default {
     },
     methods: {
         ...mapActions({
-        addProduct: 'favorites/addProduct',
-        removeProduct: 'favorites/removeProduct'
+            addProduct: 'favorites/addProduct',
+            removeProduct: 'favorites/removeProduct'
         }),
         buyClickHandler () {
-        this.addProduct(this.item)
+            this.addProduct(this.item)
         },
         addedClickHandler () {
-        this.removeProduct(this.item.id)
+            this.removeProduct(this.item.id)
         }
     }
 }
@@ -142,7 +142,7 @@ export default {
 
 .ItemCart{        
             position: relative;
-            max-width: 411px;
+            max-width: 387px;
             width: 100%;
             height: 587px;
             padding-bottom: 60px;

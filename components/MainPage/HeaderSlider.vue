@@ -55,6 +55,13 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 
 export default {
+    props:{
+      slider: {
+        photo_1: '',
+        photo_2: '',
+        photo_3: '',
+      }
+    },
      mounted() {
       new Swiper('.swiper', {
       slidesPerView: 1,  

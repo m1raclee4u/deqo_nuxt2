@@ -17,8 +17,9 @@ export default {
         display: flex;
         gap: 15px;
         height: 20px;
+        width: 100%;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 0 60px;
         a{
             text-decoration: none;
         }

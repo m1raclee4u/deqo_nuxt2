@@ -1,10 +1,10 @@
 <template>
     <section>
-        <div class="jcsb p60">
+        <div class="jcsb">
             <h2>Лидеры продаж</h2>
             <Nuxt-Link to="catalog">смотреть все</Nuxt-Link>
         </div>
-        <div class="bestsellers p60">
+        <div class="bestsellers">
         <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <div
@@ -76,9 +76,9 @@ export default {
     }       
     section{
         // margin: 0 auto;
-    margin: 0 auto;
-        padding: 100px 0px 0 0;
-        max-width: 1920px;
+        margin: 0 auto;
+        // padding: 100px 0px 0 0;
+        max-width: 1676px;
         width: 100%;
         overflow: hidden;
         h2{

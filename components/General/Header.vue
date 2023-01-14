@@ -1,23 +1,24 @@
 <template>
     <header class="p60">
-        <div class="flex">
-            <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
-                <img src="../../assets/img/icons/menu.svg" alt="">
-                каталог
-            </button>
-            
-        </div>       
-        <Nuxt-link id="logo" to="/">
-            <img src="../../assets/img/icons/logo.svg" alt="">
-        </Nuxt-link>
-        <div class="buttons">
-            <img class="todo" src="../../assets/img/icons/search.svg" alt="">
-            <Nuxt-link to="/favorite"><img class="todo" src="../../assets/img/icons/heart.svg" alt=""></Nuxt-link>
-            <img class="todo" src="../../assets/img/icons/cart.svg" alt="">
-            <img class="todo" src="../../assets/img/icons/account.svg" alt="">
+        <div class="header">
+            <div class="flex">
+                <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
+                    <img src="../../assets/img/icons/menu.svg" alt="">
+                    каталог
+                </button>
+                
+            </div>       
+            <Nuxt-link id="logo" to="/">
+                <img src="../../assets/img/icons/logo.svg" alt="">
+            </Nuxt-link>
+            <div class="buttons">
+                <img class="todo" src="../../assets/img/icons/search.svg" alt="">
+                <Nuxt-link to="/favorite"><img class="" src="../../assets/img/icons/heart.svg" alt=""></Nuxt-link>
+                <Nuxt-link to="/cart"><img class="" src="../../assets/img/icons/cart.svg" alt=""></Nuxt-link>
+                <img class="todo" src="../../assets/img/icons/account.svg" alt="">
+            </div>
+            <!-- <h1 style="position: absolute">{{scrollPosition}}</h1> -->
         </div>
-        <!-- <h1 style="position: absolute">{{scrollPosition}}</h1> -->
-
     </header>
 </template>
 
@@ -80,14 +81,19 @@
     header{
         z-index: 2;
         width: 100%;
+        
+        position: fixed;
+        top: 0;
+        // border-bottom: 1px solid gray;
+        // background: white
+    }
+    .header{
+        max-width: 1676px;
+        margin: 0 auto;
         height: 58px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: fixed;
-        top: 0;
-        // background: rgb(25,25,25);
-        // background: linear-gradient(180deg, rgba(25,25,25,1) 0%, rgba(0,0,0,0) 100%);
     }
     button{        
         cursor: pointer;
