@@ -55,6 +55,10 @@ export default {
         };
     },
     computed: {
+        // local(){
+        //     localStorage.length
+        //     return  0
+        // },
         ...mapGetters('cart', [
             'getProducts'
         ]),

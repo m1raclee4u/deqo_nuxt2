@@ -30,11 +30,9 @@
             </div>
         </div>
         <div class="right">
-            <p>{{item.price}}&nbsp;₽</p>
+            <p>{{item.price * item.quantity}}&nbsp;₽</p>
             <div class="delete" @click="deleteClickHandler"></div>
         </div>
-        
-        
     </div>
 </template>
 
@@ -48,11 +46,11 @@ export default {
             type: Object,
             required: true
         },       
+        getProducts: {
+
+        },
     },
     computed: {
-        ...mapGetters('cart', [
-            'getProducts'
-        ]),
         isProductAdded () {
         return this.products.find(p => p.id === this.item.id)
         }
@@ -145,7 +143,7 @@ export default {
         display: flex;
         align-items: center;
         gap: 20px;
-        max-width: 778px;
+        min-width: 570px;
         width: 100%;
     }
     .center{

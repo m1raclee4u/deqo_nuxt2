@@ -3,6 +3,7 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 
 export const state = () => ({
   products: [],
+  fullPrice: 0,
   version: '0.0.1'
 
 })
@@ -28,22 +29,37 @@ export const mutations = {
   },
   REMOVE_PRODUCT (state, productId) {
       state.products = Array.from(state.products.filter(prod => prod.id !== productId))
-  }
+  },
+  // FULL_PRICE (state, product) {
+  //   for (const item in object) {
+  //     if (Object.hasOwnProperty.call(object, item)) {
+  //       const element = object[item];
+        
+  //     }
+  //   }
+  //   state.fullPrice = product
+  // },
 
 }
 export const actions = {
   async addProduct ({ commit }, data) {
     await sleep(300)
     await commit('ADD_PRODUCT', data)
+    // await sleep(300)
+    // await commit('FULL_PRICE', data)
   },
   async removeProduct ({ commit }, data) {
     await sleep(300)
     await commit('REMOVE_PRODUCT', data)
+    // await sleep(300)
+    // await commit('FULL_PRICE', data)
   },
-  async incrementProduct ({ commit }, productId) {
+  async incrementProduct ({ commit }, data) {
     await sleep(300)
-    await commit('INCREMENT_PRODUCT', productId)
-  }
+    await commit('INCREMENT_PRODUCT', data)
+    // await sleep(300)
+    // await commit('FULL_PRICE', data)
+  },
 
 }
 
