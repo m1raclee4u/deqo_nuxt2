@@ -22,7 +22,7 @@
                     </svg>
                 </div>                
                 <p>{{item.quantity}}</p>
-                <div @click="buyClickHandler" class="buttons">
+                <div @click="incrementProduct" class="buttons">
                     <svg  width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.50007 0.5C7.87662 0.500036 8.18185 0.805325 8.18182 1.18188L8.18123 7.31818H14.3182C14.6947 7.31818 15 7.62344 15 8C15 8.37656 14.6947 8.68182 14.3182 8.68182H8.18182V14.8182C8.18182 15.1947 7.87656 15.5 7.5 15.5C7.12344 15.5 6.81818 15.1947 6.81818 14.8182L6.81818 8.6824L0.681753 8.68182C0.305195 8.68178 -3.59222e-05 8.37649 3.17095e-09 7.99994C3.59285e-05 7.62338 0.305325 7.31815 0.681883 7.31818L6.8176 7.31877L6.81818 1.18175C6.81822 0.805195 7.12351 0.499964 7.50007 0.5Z" fill="#A9A1A1"/>
                     </svg>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
         // name: "item",
@@ -50,22 +50,21 @@ export default {
 
         },
     },
-    computed: {
-        isProductAdded () {
-        return this.products.find(p => p.id === this.item.id)
-        }
-    },
     methods: {
         ...mapActions({
             addProduct: 'cart/addProduct',
             removeProduct: 'cart/removeProduct',
-            incrementProduct: 'cart/incrementProduct',
+            incrementProductCart: 'cart/incrementProduct',
+            decrementProductCart: 'cart/decrementProduct',
         }),
         buyClickHandler () {
             this.addProduct(this.item)
         },
+        incrementProduct () {
+            this.incrementProductCart(this.item.id)
+        },
         addedClickHandler () {
-            this.incrementProduct(this.item)
+            this.decrementProductCart(this.item)
         },
         deleteClickHandler () {
             this.removeProduct(this.item.id)

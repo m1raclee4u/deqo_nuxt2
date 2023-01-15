@@ -102,8 +102,8 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 export default {
     props:{
-      // item: {
-      // }
+      item: {
+      }
     },
     data(){
       return{

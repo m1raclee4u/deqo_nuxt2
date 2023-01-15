@@ -52,7 +52,7 @@ export default {
             } else {
                 this.item.color = this.color
                 this.item.size = this.size
-                this.item.quantity = 1;
+                this.$set(this.item, 'quantity', 1)
                 this.addProduct(this.item)
             }
             
