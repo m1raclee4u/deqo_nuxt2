@@ -89,10 +89,8 @@ export default {
         },
         sortByFiltered(checkedFiltered) {
             this.checkedFiltered = checkedFiltered
-            console.log(this.checkedFiltered);
         },
         getChecked(data){
-            console.log(data);
             this.checkedFiltered = data
         },
         loadMore() {

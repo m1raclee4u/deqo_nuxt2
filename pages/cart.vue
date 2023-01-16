@@ -81,7 +81,6 @@ export default {
             removeProduct: 'cart/removeProduct'
         }),
          addedClickHandler () {
-           console.log(this.item);
             this.removeProduct(this.item)
         }
     },

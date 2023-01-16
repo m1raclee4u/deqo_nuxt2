@@ -72,7 +72,6 @@ export default {
         },
         sortByFiltered(checkedFiltered) {
             this.checkedFiltered = checkedFiltered
-            console.log(this.checkedFiltered);
         },
         loadMore() {
             this.currentPage += 1;

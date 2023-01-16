@@ -1,16 +1,11 @@
 <template>
-    <button class="todo" @click="log">
+    <button class="todo">
         Купить сейчас
     </button>
 </template>
 
 <script>
 export default {
-    methods:{
-        log(){
-            // console.log(filteredItem);
-        }
-    }
 }
 </script>
 

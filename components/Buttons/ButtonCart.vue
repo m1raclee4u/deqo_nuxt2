@@ -50,9 +50,9 @@ export default {
                     
                 }             
             } else {
-                this.item.color = this.color
-                this.item.size = this.size
                 this.$set(this.item, 'quantity', 1)
+                console.log(this.item);
+
                 this.addProduct(this.item)
             }
             
@@ -60,6 +60,12 @@ export default {
         addedClickHandler () {
             this.removeProduct(this.item.id)
         }
+    },
+    updated(){
+        this.$set(this.item, 'color', this.color)
+        this.$set(this.item, 'size', this.size)
+        // this.$set(this.item, 'quantity', 1)
+
     }
 }
 </script>

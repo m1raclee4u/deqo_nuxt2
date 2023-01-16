@@ -1,6 +1,6 @@
 <template>
     <section>
-        <footer class="p60">
+        <footer class="">
             <div class="left">
                 <div class="text">
                     <h5>Получайте скидки</h5>

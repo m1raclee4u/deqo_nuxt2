@@ -73,7 +73,6 @@ export const actions = {
       .get('https://frontend-test.idaproject.com/api/product?category=3')
       .then(response => (products = products.concat(response.data)));
     commit("SET_PRODUCTS", products);
-    // console.log(products);
   },
   
   async fetchCategories({ commit }) {

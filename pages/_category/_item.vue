@@ -148,12 +148,10 @@ export default {
     },
     methods:{
       sizeCheck(){
-        console.log(this.filteredItem)
-        // console.log(this.filteredItem);
+        
       },
       colorCheck(){
         this.colorChecked = this.colorChecked.id
-        console.log(this.colorChecked);
       },
     },
     async asyncData({ params, redirect }) {
@@ -162,7 +160,6 @@ export default {
     
     const filteredItem = items.find((el) => el.name === params.item)
     if (filteredItem) {
-      // console.log(filteredItem);
       return {
         filteredItem: filteredItem,
         category: filteredItem.category,
