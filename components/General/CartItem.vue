@@ -61,13 +61,13 @@ export default {
             this.addProduct(this.item)
         },
         incrementProduct () {
-            this.incrementProductCart(this.item.id)
+            this.incrementProductCart(this.item)
         },
         addedClickHandler () {
             this.decrementProductCart(this.item)
         },
         deleteClickHandler () {
-            this.removeProduct(this.item.id)
+            this.removeProduct(this.item)
         }
     }
 }

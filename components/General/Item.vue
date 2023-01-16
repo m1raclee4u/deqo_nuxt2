@@ -47,7 +47,6 @@ import 'swiper/swiper-bundle.css'
 
 Swiper.use([ Navigation, Pagination, Autoplay ])
 export default {
-     name: "item",
       props: {
         item: {
         type: Object,

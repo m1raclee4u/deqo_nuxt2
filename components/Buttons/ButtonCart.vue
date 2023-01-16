@@ -11,62 +11,59 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
-      name: "item",
       props: {
         item: {
-        type: Object,
-        required: true
+            type: Object,
+            required: true
         },
-        color: {
-        
-        },
-        size: {
-       
-        }
     },
     computed: {
+        itemComputed(){
+            return JSON.parse(JSON.stringify(this.item))
+        },
         ...mapState({
         products: state => state.cart.products
         }),
         isProductAdded () {
-        return this.products.find(p => p.id === this.item.id)
+            let added = this.products.find((p) => {if(p.id === this.itemComputed.id && p.color === this.itemComputed.color && p.size === this.itemComputed.size){return true}})
+      
+            return added
         }
     },
     methods: {
         ...mapActions({
-            addProduct: 'cart/addProduct',
-            removeProduct: 'cart/removeProduct'
+            addProduct: 'cart/addProduct'
         }),
-        buyClickHandler () {
-            if (this.color == '' || this.size == ''){
+         async buyClickHandler () {        
+            const delay = ms => new Promise(res => setTimeout(res, ms));
+            
+            if (!this.itemComputed.hasOwnProperty('color') || !this.itemComputed.hasOwnProperty('size')){
                 let uncheckedRadio = window.document.querySelector('input[type=radio]:checked');
                 if (uncheckedRadio){
                     if (uncheckedRadio.name == 'size'){
-                        // this.$emit('colorRadioColor', '1px solid blue')
+                        this.$emit('highlightedColor')
+                        await delay(1000)
+                        this.$emit('highlightedColor')
                     } else if (uncheckedRadio.name == 'color'){                
-                        // this.$emit('colorSizeColor', '1px solid blue')                        
+                        this.$emit('highlightedSize')     
+                        await delay(1000)
+                        this.$emit('highlightedSize')                           
                     }
                 } else {
-                    
+                    this.$emit('highlightedColor')
+                    this.$emit('highlightedSize')  
+                    await delay(1000)
+                    this.$emit('highlightedColor')
+                    this.$emit('highlightedSize')  
+
                 }             
             } else {
-                this.$set(this.item, 'quantity', 1)
-                console.log(this.item);
-
-                this.addProduct(this.item)
+                this.$set(this.itemComputed, 'quantity', 1)
+                this.$set(this.itemComputed, 'arcticle', this.itemComputed.name + this.itemComputed.color + this.itemComputed.size)
+                this.addProduct(this.itemComputed)     
             }
-            
         },
-        addedClickHandler () {
-            this.removeProduct(this.item.id)
-        }
     },
-    updated(){
-        this.$set(this.item, 'color', this.color)
-        this.$set(this.item, 'size', this.size)
-        // this.$set(this.item, 'quantity', 1)
-
-    }
 }
 </script>
 

@@ -5,6 +5,7 @@
     <section>
       <div class="itemPage">
         <div class="left">       
+          <!-- TODO -->
           <!-- <div class="item_images p60">
               <div class="swiper-wrapper">
                   <img
@@ -26,21 +27,19 @@
           </div> -->
           <img
               class="card__img"
-              :src="'https://frontend-test.idaproject.com' + photo"
-              :alt="name"
+              :src="'https://frontend-test.idaproject.com' + item.photo"
+              :alt="item.name"
               />
             <p>Брюки с комфортным поясом на кулиске не создают лишний объем благодаря зауженному книзу силуэту. Модель сшита из плотного трикотажа экстра-пенье без начеса, для которого отобрали самые длинные и прочные волокна австралийского хлопка. Материал отлично регулирует температуру тела, мало мнется и долго служит. Произведено в России.</p>
-          <!-- TODO -->
-          <!-- <p style="max-width: 855px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p> -->
         </div>
         <div class="right">
-            <h4>{{name}}</h4>
+            <h4>{{item.name}}</h4>
             <div class="tag__price">
               <!--TODO dynamic -->
               <p>Bestsellers</p> 
               <div class="flex prices">
                 <p style="text-decoration: line-through;" class="price old">4,299 ₽</p>
-                <p class="price">{{price}} ₽</p>
+                <p class="price">{{item.price}} ₽</p>
               </div>
             </div>
             <div class="size">
@@ -48,23 +47,21 @@
                 <div class="sizes flex">
                   <div class="form_radio_btn" v-for="size in this.sizes" :key="size.id">
                     <input name="size" type="radio" :value="size" v-model="sizeChecked" @change="sizeCheck" :id="size">
-                    <label :id="size" :for="size">{{size}}</label>
-                  
-                   <!-- <p class="p_size"></p> -->
+                    <label :class="{highlightedSizeClass: highlightedSize}" :id="size" :for="size">{{size}}</label>
                   </div>
                 </div>
             </div>
             <div class="color">
               <p>Цвет <span v-if="colorChecked != ''">: {{colorChecked}}</span></p>
               <div class="flex colors">
-                <div class="form_radio_btn_color"  v-for="color in this.colors" :key="color.id">
+                <div class="form_radio_btn_color" v-for="color in this.colors" :key="color.id">
                   <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
-                  <label :id="color.id" :for="color.id"></label>
+                  <label :class="{highlightedColorClass: highlightedColor}" :id="color.id" :for="color.id"></label>
                 </div>
               </div>
             </div>
             <div class="buttons">
-               <ButtonCart :item="filteredItem" :color="colorChecked" :size="sizeChecked"/>
+               <ButtonCart @highlightedSize="highlightedSizeMethod" @highlightedColor="highlightedColorMethod" :item="item"/>
                <ButtonBuy/>
             </div>         
             <div class="info">
@@ -76,7 +73,6 @@
                 <p>Артикул</p>
                 <span>{{'ART00001'}}</span>
               </div>
-              <!-- <p class="todo" style="margin-top: 36px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione vel quis nesciunt dolorum, aut laborum animi, minima est, porro aspernatur incidunt ipsam. Odio optio sint ab, veritatis necessitatibus ipsum et.</p> -->
             </div>
         </div>
     </div>
@@ -101,12 +97,10 @@ import 'swiper/swiper-bundle.css'
 Swiper.use([ Navigation, Pagination, Autoplay ])
 
 export default {
-    props:{
-      item: {
-      }
-    },
     data(){
       return{
+        highlightedSize: false,
+        highlightedColor: false,
         colorChecked: '',
         sizeChecked: '',
         sizes: ['os', 'xs', 's', 'm', 'l', 'xl', '2xl'],
@@ -148,24 +142,28 @@ export default {
     },
     methods:{
       sizeCheck(){
-        
+        this.$set(this.item, 'size', this.sizeChecked)
       },
       colorCheck(){
-        this.colorChecked = this.colorChecked.id
+        this.$set(this.item, 'color', this.colorChecked.id)
+        this.colorChecked = this.colorChecked.name
+      },
+      highlightedSizeMethod() {
+        this.highlightedSize = !this.highlightedSize;
+      },
+      highlightedColorMethod() {
+        this.highlightedColor = !this.highlightedColor;
       },
     },
     async asyncData({ params, redirect }) {
     const items = await fetch('https://frontend-test.idaproject.com/api/product')
     .then((res) => res.json())
-    
-    const filteredItem = items.find((el) => el.name === params.item)
-    if (filteredItem) {
+
+    const filteredItem = items.find(el => el.name === params.item)
+    if (filteredItem) { 
+      let copiedItem = JSON.parse(JSON.stringify(filteredItem))   
       return {
-        filteredItem: filteredItem,
-        category: filteredItem.category,
-        name: filteredItem.name,
-        photo: filteredItem.photo,
-        price: filteredItem.price,
+        item: copiedItem,
       }
     } else {
       redirect('/')
@@ -178,7 +176,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+    .highlightedColorClass{
+      border: 2px solid red !important;
+      box-sizing: border-box;
+
+    }
+    .highlightedSizeClass{
+      box-sizing: border-box;
+      border: 2px solid red !important;
+
+    }
     .size{
       display: flex;
       flex-direction: column;

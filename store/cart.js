@@ -8,70 +8,56 @@ export const state = () => ({
 })
 export const mutations = {
   ADD_PRODUCT (state, product) {
-    // if cart doesn't have product add it, if have increment its quantity
-    if (!state.products.find(p => product.id === p.id)) {
+    let arr = state.products
+    if (!arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}})) {
       state.products = [...state.products, product]
-    } 
+    }
   },
   SET_PRODUCT (state, { productId, data }) {
     state.products = [...state.products.filter(prod => prod.id !== productId), data]
   },
-  INCREMENT_PRODUCT (state, productId) {
-    if (state.products.find(p => productId === p.id)){
-      state.products.find(p => productId === p.id).quantity++
+  INCREMENT_PRODUCT (state, product) {
+    let arr = state.products
+    if (arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}})){
+      arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}}).quantity++
     }
   },
   DECREMENT_PRODUCT (state, product) {
-    if (state.products.find(p => product.id === p.id).quantity === 1){
-      state.products = Array.from(state.products.filter(prod => prod.id !== product.id))
+    let arr = state.products
+    if (arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}}).quantity === 1){
+      arr = arr.splice(arr.indexOf(arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}})), 1)
     } else {
-      state.products.find(p => product.id === p.id).quantity--
+      arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}}).quantity--
     }
   },
-  REMOVE_PRODUCT (state, productId) {
-      state.products = Array.from(state.products.filter(prod => prod.id !== productId))
+  REMOVE_PRODUCT (state, product) {
+    let arr = state.products
+    arr = arr.splice(arr.indexOf(arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}})), 1)
   },
-  // FULL_PRICE (state, product) {
-  //   for (const item in object) {
-  //     if (Object.hasOwnProperty.call(object, item)) {
-  //       const element = object[item];
-        
-  //     }
-  //   }
-  //   state.fullPrice = product
-  // },
 
 }
 export const actions = {
   async addProduct ({ commit }, data) {
     await sleep(300)
     await commit('ADD_PRODUCT', data)
-    // await sleep(300)
-    // await commit('FULL_PRICE', data)
   },
   async removeProduct ({ commit }, data) {
     await sleep(300)
     await commit('REMOVE_PRODUCT', data)
-    // await sleep(300)
-    // await commit('FULL_PRICE', data)
   },
   async decrementProduct ({ commit }, data) {
     await sleep(300)
     await commit('DECREMENT_PRODUCT', data)
-    // await sleep(300)
-    // await commit('FULL_PRICE', data)
   },
   async incrementProduct ({ commit }, data) {
     await sleep(300)
     await commit('INCREMENT_PRODUCT', data)
-    // await sleep(300)
-    // await commit('FULL_PRICE', data)
   },
 
 }
 
 export const getters = {
-  getProducts (state) {
-    return state.products
+  getProducts: (state) => {
+    return [...state.products]
   }
 }

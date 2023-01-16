@@ -8,8 +8,8 @@
                 <h3>Оформление заказа</h3>
                 <div
                 v-for="item in getProducts" 
-                :key="item.id"
-                class="col item"    
+                :key="item.article"
+                class="col cartItem"    
                 >
                     <cart-item 
                     :item="item"
@@ -91,6 +91,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .cartItem{
+        transition: 0.5ms ease all;
+    }
     .wrapper{
         gap: 50px;
     }
@@ -184,6 +187,7 @@ export default {
         max-width: 1400px;
         margin: 0 auto;
         width: 100%;
+        min-height: 50vh;
     }
     aside{
         width: 280px;

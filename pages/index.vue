@@ -5,9 +5,9 @@
     <HeaderSlider/>
     <ItemsSlider/>
     <ItemsSlider/>
-    <HeaderSlider :slider="slider"/>
+    <HeaderSlider/>
     <ItemsSlider/>
-    <HeaderSlider :slider="slider"/>
+    <HeaderSlider/>
     <ItemsSlider/>
     <!-- <Collections/> -->
     <Footer/>    

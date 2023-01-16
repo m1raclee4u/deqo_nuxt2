@@ -230,6 +230,8 @@ export default {
         justify-content: space-between;
         gap: 60px;
         padding: 40px 60px;
+        min-height: 50vh;
+
     }
     aside{
         width: 280px;

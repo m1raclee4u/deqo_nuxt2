@@ -168,6 +168,8 @@ export default {
         width: 100%;
         max-width: 1400px;
         margin: 0 auto;
+        min-height: 50vh;
+
     }
     aside{
         width: 185px;
