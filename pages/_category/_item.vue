@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <DimensionalGrid/>
     <HeaderBlack/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
     <section>
@@ -48,7 +49,11 @@
                   <div class="form_radio_btn" v-for="size in this.sizes" :key="size.id">
                     <input name="size" type="radio" :value="size" v-model="sizeChecked" @change="sizeCheck" :id="size">
                     <label :class="{highlightedSizeClass: highlightedSize}" :id="size" :for="size">{{size}}</label>
-                  </div>
+                  </div>                  
+                </div>
+                <div class="sizesPopup">
+                  <img src="../../assets/img/icons/sizesPopup.svg" alt="">
+                  <p>размерная сетка</p>
                 </div>
             </div>
             <div class="color">
@@ -58,6 +63,7 @@
                   <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
                   <label :class="{highlightedColorClass: highlightedColor}" :id="color.id" :for="color.id"></label>
                 </div>
+                
               </div>
             </div>
             <div class="buttons">
@@ -88,6 +94,7 @@ import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Footer from '~/components/General/Footer.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
 import ItemsSlider from '~/components/General/ItemsSlider.vue'
+import DimensionalGrid from '~/components/General/DimensionalGrid.vue'
 import ButtonBuy from '~/components/Buttons/ButtonBuy.vue'
 import ButtonCart from '~/components/Buttons/ButtonCart.vue'
 
@@ -170,23 +177,39 @@ export default {
     }
     },
   
-    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart}, 
+    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart, DimensionalGrid}, 
 }
 
 </script>
 
 <style lang="scss" scoped>
     .highlightedColorClass{
-      border: 2px solid red !important;
+      // border: 2px solid #BD270F !important;
+      background-color: #BC716E !important;
+      opacity: 0.5;
+      background-image: url('../../assets/img/icons/colorNotChecked.svg');
+      background-position: center;
+      background-size: 10px 10px;
+      background-repeat: no-repeat;
       box-sizing: border-box;
 
     }
     .highlightedSizeClass{
       box-sizing: border-box;
-      border: 2px solid red !important;
+      border: 2px solid #BD270F !important;
+      color: #BD270F !important;
 
     }
     .size{
+      .sizesPopup{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+      }
+      .sizes{
+        margin-bottom: 10px;
+      }
       display: flex;
       flex-direction: column;
       gap: 12px;
