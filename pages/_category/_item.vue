@@ -78,6 +78,35 @@
                 <p>Артикул</p>
                 <span>{{'ART00001'}}</span>
               </div>
+              <div class="jcsb">
+                <p style="line-height: 29px; width: 330px;">На модели размер: S <br>
+                Параметры модели: 176 | 90 | 61 | 90</p>
+                <i :class="{downActive: checkOpenedModel}" @click="checkedOpenedMethod" class="down"></i>
+              </div>
+              <div v-if="checkOpenedModel === true" class="jcsb">
+                <ul>
+                  <li>Рост 176 см</li>
+                  <li>Tall size - размерная сетка для высоких</li>
+                  <li>Объём груди 90 см</li>
+                  <li>Объём талии 61 см</li>
+                  <li>Объём бёдер 90 см</li>
+                </ul>
+                <i></i>
+              </div>
+              <div class="jcsb">
+                <p style="line-height: 29px; width: 330px;">Рекомендации по уходу</p>
+                <i :class="{downActive: checkedOpenedRecomendations}" @click="checkedOpenedMethodRecomendations" class="down"></i>
+              </div>
+              <div v-if="checkedOpenedRecomendations === true" class="jcsb">
+                <ul>
+                  <li>Деликатная стирка до 30 °C</li>
+                  <li>Не отбеливать</li>
+                  <li>Температура утюга до 150 °C</li>
+                  <li>Барабанная сушка запрещена</li>
+                  <li>Сухая чистка (химчистка)</li>
+                </ul>
+                <i></i>
+              </div>
             </div>
         </div>
     </div>
@@ -105,6 +134,8 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 export default {
     data(){
       return{
+        checkOpenedModel: false,
+        checkedOpenedRecomendations: false,
         highlightedSize: false,
         highlightedColor: false,
         colorChecked: '',
@@ -147,6 +178,12 @@ export default {
       }
     },
     methods:{
+      checkedOpenedMethod(){
+          this.checkOpenedModel = !this.checkOpenedModel
+      },
+      checkedOpenedMethodRecomendations(){
+          this.checkedOpenedRecomendations = !this.checkedOpenedRecomendations
+      },
       sizeCheck(){
         this.$set(this.item, 'size', this.sizeChecked)
       },
@@ -182,6 +219,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .downActive{
+        background-image: url('../../assets/img/icons/buttonDown_active.svg') !important;
+    }
+    .down{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        background-image: url('../../assets/img/icons/buttonDown.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: 0.9s ease all;
+        &:hover{
+            background-image: url('../../assets/img/icons/buttonDown_active.svg');
+        }
+
+    }
     .highlightedColorClass{
       // border: 2px solid #BD270F !important;
       background-color: #BC716E !important;
@@ -191,7 +244,7 @@ export default {
       background-size: 10px 10px;
       background-repeat: no-repeat;
       box-sizing: border-box;
-
+  
     }
     .highlightedSizeClass{
       box-sizing: border-box;
@@ -253,6 +306,36 @@ export default {
     }
     .jcsb{
       gap: 95px;
+      align-items: center;
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      ul li {
+        position: relative;
+        padding-left: 16px;
+        margin-left: 12px;
+
+      }
+      ul li::before {
+        content: '';
+        position: absolute;
+        // margin-left: 16px;
+
+        top: 10px;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: #8BD74B;
+      }
+      ul li:not(:last-child) {
+        margin-bottom: 8px;
+      }
+      ul li::before {
+        background-color: #A9A1A1;
+      }
     }
     .right{
       display: flex;
@@ -318,8 +401,14 @@ export default {
         // gap: 150px;
         // padding-top: 110px;
         gap: 44px;
+        align-items: start;
         justify-content: space-between;
         .left{
+          .card__img{
+            width: 820px;
+            height: 900px;
+            border: 1px solid #A9A1A1;
+          }
           max-width: 980px;
           p{
             font-weight: 400;

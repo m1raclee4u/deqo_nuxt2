@@ -1,14 +1,30 @@
 <template>
     <div class="breadcrumbs">
         <Nuxt-Link :to="`/`">Главная</Nuxt-Link>
-        <!-- <Nuxt-Link :to="`/${item.category}/${item.name}`">
-        <Nuxt-Link :to="`/${item.category}/${item.name}`"> -->
+        <img src="../../assets/img/icons/breadcrumbsIcon.svg" alt="">
+        <Nuxt-Link :to="`#`">{{currentRouteName}}</Nuxt-Link>
     </div>
 </template>
 
 <script>
 export default {
-    
+    data() {
+        return{
+            
+        }
+    },
+    computed:{
+        currentRouteName() {
+            if (this.$route.name === 'cart'){
+                return 'Корзина'
+            } else if (this.$route.name === 'favorite') {
+                return 'Избранное'
+            } else if (this.$route.name == 'catalog') {
+                return 'Каталог'
+            }
+        // return this.$route.name;
+        }
+    }
 }
 </script>
 
@@ -22,6 +38,17 @@ export default {
         margin: 0 auto;
         a{
             text-decoration: none;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #CDCACA;
+        }
+        p{
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #CDCACA;
         }
     }
 </style>
