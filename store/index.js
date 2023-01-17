@@ -43,7 +43,8 @@ export const state = () => ({
     // ],
     checkedCategories: [],
     isVisible: false,
-    burgerMenuOpened: false
+    burgerMenuOpened: false,
+    dimensionalGrid: false,
 })
 
 export const mutations = {
@@ -55,7 +56,10 @@ export const mutations = {
   },
   SET_MENU_OPENED(state, opened) {
     state.burgerMenuOpened = opened  
-  }
+  },
+  SET_POPUP_OPENED(state, opened) {
+    state.dimensionalGrid = opened  
+  },
 }
 
 

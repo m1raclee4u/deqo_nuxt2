@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <DimensionalGrid/>
+    <DimensionalGrid v-if="$store.state.dimensionalGrid != false" />
     <HeaderBlack/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
     <section>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="sizesPopup">
                   <img src="../../assets/img/icons/sizesPopup.svg" alt="">
-                  <p>размерная сетка</p>
+                  <p @click="$store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)">размерная сетка</p>
                 </div>
             </div>
             <div class="color">
@@ -62,8 +62,7 @@
                 <div class="form_radio_btn_color" v-for="color in this.colors" :key="color.id">
                   <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
                   <label :class="{highlightedColorClass: highlightedColor}" :id="color.id" :for="color.id"></label>
-                </div>
-                
+                </div>                
               </div>
             </div>
             <div class="buttons">
@@ -315,6 +314,7 @@ export default {
         display: flex;
         max-width: 1400px;
         margin: 0 auto;
+        // margin-top: 110px;
         // gap: 150px;
         // padding-top: 110px;
         gap: 44px;

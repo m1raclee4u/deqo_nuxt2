@@ -1,6 +1,49 @@
-* {
+    .gridSizes {
     scrollbar-width: thin;
     scrollbar-color: blue orange;
+    }
+
+    /* для Chrome/Edge/Safari */
+    .gridSizes::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    }
+    .gridSizes::-webkit-scrollbar-track {
+    background: #4A4444;
+    border-radius: 5px;
+
+    }
+    .gridSizes::-webkit-scrollbar-thumb {
+    background-color:  #7F7777;
+    border-radius: 5px;
+    /* border: 3px solid orange; */
+    }
+
+    .popup {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+    }
+
+    /* для Chrome/Edge/Safari */
+    .popup::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    }
+    .popup::-webkit-scrollbar-track {
+    background: #4A4444;
+    border-radius: 5px;
+
+    }
+    .popup::-webkit-scrollbar-thumb {
+    background-color:  #7F7777;
+    border-radius: 5px;
+    /* border: 3px solid orange; */
+    }
+
+
+    *{
+    scrollbar-width: thin;
+    scrollbar-color: white #d3d3d3;
     }
 
     /* для Chrome/Edge/Safari */
@@ -9,14 +52,12 @@
     width: 12px;
     }
     *::-webkit-scrollbar-track {
-    background: #4A4444;
+    background: #eeeeee;
     border-radius: 5px;
-
     }
     *::-webkit-scrollbar-thumb {
-    background-color:  #7F7777;
+    background-color:  #d3d3d3;
     border-radius: 5px;
-    /* border: 3px solid orange; */
     }
 
 
