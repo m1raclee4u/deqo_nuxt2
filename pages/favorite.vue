@@ -3,37 +3,39 @@
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
         <Breadcrumbs/>
-        <main class="main">            
-            <aside class="aside">
-                <h3>Избранное</h3>
-                <ul>
-                    <li><Nuxt-link to="#">Список заказов</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Личные данные</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Избранное</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Подписки</Nuxt-link></li>
-                    <li><Nuxt-link to="#">Выйти</Nuxt-link></li>
-                </ul>
-            </aside>
-            <div class="items__main">   
-                <div class="aic">
-                    <p >{{$store.state.favorites.products.length}} товаров</p>
-                </div>  
-                <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
-                    <div
-                    v-for="item in $store.state.favorites.products" 
-                    :key="item.id"
-                    class="col item"                    
-                    >
-                        <item 
-                        :item="item" 
-                        :key="item.id"                        
+        <main class="main">       
+            <p class="favoriteBlank" v-if="$store.state.favorites.products.length < 1">У вас пока нет избранных товаров,<br> а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link></p>  
+            <div v-if="$store.state.favorites.products.length > 0" class="catalog">
+                <aside class="aside">
+                    <h3>Избранное</h3>
+                    <ul>
+                        <li><Nuxt-link to="#">Список заказов</Nuxt-link></li>
+                        <li><Nuxt-link to="#">Личные данные</Nuxt-link></li>
+                        <li><Nuxt-link to="#">Избранное</Nuxt-link></li>
+                        <li><Nuxt-link to="#">Подписки</Nuxt-link></li>
+                        <li><Nuxt-link to="#">Выйти</Nuxt-link></li>
+                    </ul>
+                </aside>
+                <div class="items__main">
+                    <div class="aic">
+                        <p >{{$store.state.favorites.products.length}} товаров</p>
+                    </div>
+                    <div class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3">
+                        <div
+                        v-for="item in $store.state.favorites.products"
+                        :key="item.id"
+                        class="col item"
                         >
-                        </item>
-                    </div>   
+                            <item
+                            :item="item"
+                            :key="item.id"
+                            >
+                            </item>
+                        </div>
+                    </div>
+                    <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
                 </div>
-                <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
             </div>
-            
         </main>
         <Footer/>
     </div>
@@ -162,14 +164,31 @@ export default {
     }
     main {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        gap: 45px;
         // padding: 40px 60px;
-        width: 100%;
         max-width: 1400px;
         margin: 0 auto;
+        width: 100%;
         min-height: 50vh;
+        .favoriteBlank{
+            width: 100%;
+            text-align: center;
+            font-size: 20px;
+            line-height: 24px;
+            color: #685F5F;;
+            a{
+                font-size: 20px;
+                line-height: 24px;
+                color: #685F5F;;
+            }
+        }
+        .catalog{
+            display: flex;
+            justify-content: space-between;
+            gap: 45px;
 
+        }
     }
     aside{
         width: 185px;

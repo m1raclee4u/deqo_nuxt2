@@ -6,25 +6,61 @@
     <section>
       <div class="itemPage">
         <div class="left">       
-          <!-- TODO -->
-          <!-- <div class="item_images p60">
-              <div class="swiper-wrapper">
-                  <img
-                  class="card__img swiper-slide"
-                  :src="'https://frontend-test.idaproject.com' + photo"
-                  :alt="name"
-                  />
-                  <img
-                  class="card__img swiper-slide"
-                  :src="'https://frontend-test.idaproject.com' + photo"
-                  :alt="name"
-                  />
-                  <img
-                  class="card__img swiper-slide"
-                  :src="'https://frontend-test.idaproject.com' + photo"
-                  :alt="name"
-                  />
-              </div>        
+          <!-- <div class="container">
+            <div class="slider__flex">
+              <div class="slider__col">
+
+                <div class="slider__prev">Prev</div> 
+
+                <div class="slider__thumbs">
+                  <div class="swiper-container"> 
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
+                      </div>
+                      <div class="swiper-slide">
+                        <div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="slider__next">Next</div> 
+
+              </div>
+
+              <div class="slider__images">
+                <div class="swiper-container"> 
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div> -->
           <img
               class="card__img"

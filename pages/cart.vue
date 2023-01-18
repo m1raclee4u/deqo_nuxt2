@@ -3,24 +3,28 @@
         <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
         <HeaderBlack/>
         <Breadcrumbs/>
-        <main class="main">                            
-            <div  class="items__main">
-                <h3>Оформление заказа</h3>
-                <div
-                v-for="item in getProducts" 
-                :key="item.article"
-                class="col cartItem"    
-                >
-                    <cart-item 
-                    :item="item"
-                    :key="item.id" 
-                    @emitDeleteItem="addedClickHandler"                 
+        <main class="main">   
+            <div class="title">
+                <h3 v-if="$store.state.cart.products.length > 0">Оформление заказа</h3>
+                <p v-if="$store.state.cart.products.length < 1">Ваша корзина пока пуста,<br> а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link></p>  
+            </div>         
+            <div v-if="$store.state.cart.products.length > 0" class="cart">
+                <div class="cartItems">
+                    <div
+                    v-for="item in getProducts" 
+                    :key="item.article"
+                    class="cartItem"    
                     >
-                    </cart-item>
-                </div>   
-                <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
+                        <cart-item 
+                        :item="item"
+                        :key="item.id" 
+                        @emitDeleteItem="addedClickHandler"                 
+                        >
+                        </cart-item>
+                    </div>   
+                </div>
+                <InformationWindowCart/>
             </div>
-            
         </main>
         <Footer/>
     </div>
@@ -38,9 +42,10 @@ import Footer from '~/components/General/Footer.vue'
 
 
 import { mapActions, mapGetters } from 'vuex'
+import InformationWindowCart from '~/components/General/InformationWindowCart.vue'
 
 export default {
-    components: { HeaderBlack, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, CartItem, Footer},
+    components: { HeaderBlack, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, CartItem, Footer, InformationWindowCart},
     
     data() {
         return {
@@ -91,11 +96,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .cartItem{
+    .cartItems{
         transition: 0.5ms ease all;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
     .wrapper{
         gap: 50px;
+    }
+    .title{
+        width: 100%;
+        h3{
+            font-size: 28px;
+            line-height: 33px;
+            color: #4A4444;
+        }
+        p{
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            line-height: 24px;
+
+            color: #685F5F;
+            a{
+                font-size: 20px;
+                line-height: 24px;
+
+                color: #685F5F;
+            }
+        }
     }
     .delete{
     display: block;
@@ -137,15 +167,7 @@ export default {
             // width: 195px;
         }
     }
-    .items__main{        
-        h3{
-            font-size: 28px;
-            line-height: 33px;
-            /* identical to box height */
-
-            margin-bottom: 40px !important;
-            color: #4A4444;
-        }
+    .items__main{    
         width: 100%;
         
         button{
@@ -181,6 +203,7 @@ export default {
     }
     main {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         gap: 60px;
         // padding: 40px 60px;
@@ -188,6 +211,11 @@ export default {
         margin: 0 auto;
         width: 100%;
         min-height: 50vh;
+        .cart{
+            display: flex;
+            gap: 40px;
+            justify-content: space-between;
+        }
     }
     aside{
         width: 280px;
