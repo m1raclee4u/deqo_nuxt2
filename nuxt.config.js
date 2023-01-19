@@ -4,6 +4,9 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   
   tagret: 'static',
+  router: {
+    base: '/<m1raclee4u.github.io>/'
+  },
   head: {
     title: 'deqo',
     htmlAttrs: {

@@ -67,6 +67,9 @@ export default {
         },
         deleteClickHandler () {
             this.removeProduct(this.item)
+        },
+        computed: {
+
         }
     }
 }
