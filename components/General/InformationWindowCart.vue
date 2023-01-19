@@ -15,7 +15,7 @@
         </div>
         <div class="line">
             <p><b>Итого</b></p>
-            <p><b>{{'1000'}} ₽</b></p>
+            <p><b>{{fullprice}} ₽</b></p>
         </div>
         <button>Оплатить</button>
         <p class="offer">Нажимая на кнопку «оплатить», я принимаю условия <Nuxt-link to="">публичной оферты</Nuxt-link>, <Nuxt-link to="">политики конфиденциальности</Nuxt-link> и <Nuxt-link to="">публичной оферты (предзаказ)</Nuxt-link></p>
@@ -23,8 +23,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-    
+    computed: {
+         ...mapGetters('cart', [
+            'getProducts'
+        ]),
+        fullprice(){
+            let fullPrice = 0;
+            for (const item in this.getProducts) {
+                if (Object.hasOwnProperty.call(this.getProducts, item)) {
+                    const element = this.getProducts[item];
+                    fullPrice += element.quantity * element.price;            
+                    
+                }
+            }
+            return fullPrice
+        }
+    }
 }
 </script>
 
