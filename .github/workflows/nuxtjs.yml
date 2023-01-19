@@ -9,6 +9,7 @@ on:
   push:
     branches: ["main"]
 
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -22,6 +23,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
+#   continue-on-error: true
 
 jobs:
   # Build job
@@ -72,9 +74,9 @@ jobs:
       - name: Static HTML export with Nuxt
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./dist
+#         uses: actions/upload-pages-artifact@v2
+#         with:
+#           path: ./dist
 
   # Deployment job
   deploy:
