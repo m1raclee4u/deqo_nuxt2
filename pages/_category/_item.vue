@@ -273,7 +273,7 @@ export default {
     }
     .highlightedColorClass{
       // border: 2px solid #BD270F !important;
-      background-color: #BC716E !important;
+      // background-color: #BC716E !important;
       opacity: 0.5;
       background-image: url('../../assets/img/icons/colorNotChecked.svg');
       background-position: center;

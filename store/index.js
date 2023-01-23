@@ -1,5 +1,6 @@
 export const state = () => ({
     products: [],
+    brandId: 1,
     categoryTags: ['oversized', 'slim', 'tall', 'petit'],   
     categories: [],
     productsInCart: [],
