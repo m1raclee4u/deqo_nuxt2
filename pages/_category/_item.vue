@@ -62,6 +62,7 @@
 
             </div>
           </div> -->
+          <ButtonFavorite :item="item"/>
           <img
               class="card__img"
               :src="'https://frontend-test.idaproject.com' + item.photo"
@@ -161,6 +162,8 @@ import ItemsSlider from '~/components/General/ItemsSlider.vue'
 import DimensionalGrid from '~/components/General/DimensionalGrid.vue'
 import ButtonBuy from '~/components/Buttons/ButtonBuy.vue'
 import ButtonCart from '~/components/Buttons/ButtonCart.vue'
+import ButtonFavorite from '~/components/Buttons/ButtonFavorite.vue'
+
 
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
@@ -249,7 +252,7 @@ export default {
     }
     },
   
-    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart, DimensionalGrid}, 
+    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart, DimensionalGrid, ButtonFavorite}, 
 }
 
 </script>
@@ -440,8 +443,10 @@ export default {
         align-items: start;
         justify-content: space-between;
         .left{
+          position: relative;
           .card__img{
-            width: 820px;
+            // width: 820px;
+            width: unset;
             height: 900px;
             border: 1px solid #A9A1A1;
           }

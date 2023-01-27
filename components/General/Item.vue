@@ -1,13 +1,6 @@
 <template>
         <div class="ItemCart">
-            <button class="like" v-if="!isProductAdded"
-            @click.prevent="buyClickHandler"
-            >
-            </button>
-             <button class="like added" v-else
-            @click.prevent="addedClickHandler"
-            >
-            </button>
+            <ButtonFavorite :item="item"/>
             <Nuxt-Link :to="`/${item.category}/${item.name}`">
                 <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
                 <img
@@ -40,10 +33,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import ButtonFavorite from '~/components/Buttons/ButtonFavorite.vue'
 
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
+
 
 Swiper.use([ Navigation, Pagination, Autoplay ])
 export default {
@@ -58,26 +52,9 @@ export default {
             // favorites: [],
         }
     },
-    computed: {
-        ...mapState({
-        products: state => state.favorites.products
-        }),
-        isProductAdded () {
-        return this.products.find(p => p.id === this.item.id)
-        }
-    },
-    methods: {
-        ...mapActions({
-            addProduct: 'favorites/addProduct',
-            removeProduct: 'favorites/removeProduct'
-        }),
-        buyClickHandler () {
-            this.addProduct(this.item)
-        },
-        addedClickHandler () {
-            this.removeProduct(this.item.id)
-        }
-    }
+    components: {ButtonFavorite}, 
+
+   
 }
 </script>
 
@@ -118,26 +95,7 @@ export default {
             color: #685F5F;
         }
 }
-.added{
-        background-image: url('../../assets/img/icons/heart_on.svg') !important;
 
-    }
-.like{
-    position: absolute;
-    background-image: url('../../assets/img/icons/heart.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color: unset;
-    width: 30px;
-    height: 30px;
-    top: 14px;
-    right: 14px;
-    // border-radius: 50%;
-    
-    &:hover{
-        background-image: url('../../assets/img/icons/heart_on.svg');
-    }
-}
 
 .ItemCart{        
             position: relative;
