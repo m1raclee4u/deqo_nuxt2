@@ -1,5 +1,6 @@
 <template>
-    <header class="">
+    <div style="position: absolute" class="">
+        <header class="">
         <div class="header">
             <div class="flex">
                 <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
@@ -12,21 +13,24 @@
                 <img src="../../assets/img/icons/logo.svg" alt="">
             </Nuxt-link>
             <div class="buttons">
-                <img class="todo" src="../../assets/img/icons/search.svg" alt="">
-                <Nuxt-link to="/favorite"><img class="" src="../../assets/img/icons/heart.svg" alt=""></Nuxt-link>
-                <Nuxt-link to="/cart">
-                    <img class="" src="../../assets/img/icons/cart.svg" alt="">
+                <img class="todo search" src="../../assets/img/icons/search.svg" alt="">
+                <Nuxt-link to="/favorite" class="favorite"></Nuxt-link>
+                <Nuxt-link to="/cart" class="cart">
                     <p class="cartCounter" v-if="productsQuantity > 0">{{productsQuantity}}</p>
                 </Nuxt-link>
-                <img class="todo" src="../../assets/img/icons/account.svg" alt="">
+                <div @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)" class="account"></div>
             </div>
             <!-- <h1 style="position: absolute">{{scrollPosition}}</h1> -->
         </div>
-    </header>
+        </header>
+        <Login v-if="$store.state.login != false"/>
+    </div>
+    
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Login from '~/components/General/Login.vue'
 
 export default {
     data(){
@@ -34,6 +38,7 @@ export default {
             scrollPosition: 0,
         }
     },    
+    components: {Login},
     computed:{
         ...mapGetters('cart', [
             'getProducts'
@@ -112,10 +117,40 @@ export default {
     }
     .buttons{
         display: flex;
+        align-items: center;
         gap: 30px;
+        .favorite{
+            width: 24px;
+            height: 24px;
+            background-size: 24px 24px;
+            background-image: url('../../assets/img/icons/heart.svg');
+            &:hover{
+                background-image: url('../../assets/img/icons/heart_on.svg');
+            }
+        }
+        .cart{
+            width: 24px;
+            height: 24px;
+            background-size: 24px 24px;
+            background-image: url('../../assets/img/icons/cart.svg');
+            &:hover{
+                background-image: url('../../assets/img/icons/cart_on.svg');
+            }
+        }
+        .account{
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            background-size: 24px 24px;
+            background-image: url('../../assets/img/icons/account.svg');
+            &:hover{
+                background-image: url('../../assets/img/icons/account_on.svg');
+            }
+        }
         img{
             width: 24px;
             height: 24px;
+            cursor: pointer;
         }
     }
     

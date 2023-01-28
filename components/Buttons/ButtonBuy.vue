@@ -1,5 +1,5 @@
 <template>
-    <button class="todo">
+    <button class="button todo">
         Купить сейчас
     </button>
 </template>
@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    button{
+    .button{
         // font-weight: 600;
         font-size: 20px;
         line-height: 24px;

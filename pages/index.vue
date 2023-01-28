@@ -22,6 +22,8 @@ import Footer from '~/components/General/Footer.vue'
 import ItemsSlider from '~/components/General/ItemsSlider.vue'
 import HeaderSlider from '../components/MainPage/HeaderSlider.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
+
+
 export default {
   
     components: {HeaderSlider, Collections, Footer, BurgerMenu, Header, ItemsSlider},
