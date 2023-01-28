@@ -17,11 +17,12 @@
             <div class="color" :id="item.color"></div>
             <div class="size" :id="item.size">{{item.size}}</div>
             <div class="quantity">
-                <div @click="addedClickHandler" class="buttons">
+                <div @click="itemQuantity--" class="buttons">
                     <img src="../../assets/img/icons/quantity/minus.svg" alt="">
-                </div>                
-                <p>{{item.quantity}}</p>
-                <div @click="incrementProduct" class="buttons">
+                </div>        
+                <input class="quantity_number" type="number" name="quantity" v-model="itemQuantity">        
+                <!-- <p>{{item.quantity}}</p> -->
+                <div @click="itemQuantity++" class="buttons">
                     <img src="../../assets/img/icons/quantity/plus.svg" alt="">
                 </div>
             </div>
@@ -39,32 +40,35 @@
 import { mapActions } from 'vuex'
 
 export default {
-        // name: "item",
+      data() {
+        return{
+            itemQuantity: 0,
+        }
+      },
       props: {
         item: {
             type: Object,
             required: true
-        },       
-        getProducts: {
-
         },
+    },
+    beforeMount() {
+        this.itemQuantity = this.item.quantity
+    },
+    watch: {
+        itemQuantity(val){
+            if (val > 0){
+                this.$store.dispatch('cart/setQuantityProductCart', {data: this.item, quantity: val})
+            }
+            if (val === 0) {
+                this.$store.dispatch('cart/removeProduct', this.item)
+            }
+        }
+
     },
     methods: {
         ...mapActions({
-            addProduct: 'cart/addProduct',
             removeProduct: 'cart/removeProduct',
-            incrementProductCart: 'cart/incrementProduct',
-            decrementProductCart: 'cart/decrementProduct',
         }),
-        buyClickHandler () {
-            this.addProduct(this.item)
-        },
-        incrementProduct () {
-            this.incrementProductCart(this.item)
-        },
-        addedClickHandler () {
-            this.decrementProductCart(this.item)
-        },
         deleteClickHandler () {
             this.removeProduct(this.item)
         },
@@ -106,7 +110,8 @@ export default {
         display: flex;
         align-items: center;
         gap: 25px;
-        p{
+        
+        .quantity_number{
             -moz-user-select: none;
             -khtml-user-select: none;
             user-select: none;  
