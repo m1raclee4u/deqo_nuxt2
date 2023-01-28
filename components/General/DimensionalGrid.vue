@@ -109,8 +109,6 @@
 export default {
     methods: {
         checkedOpenedMethod(){
-            console.log(this.checkedOpened);
-            console.log(this.checked);
             if (this.checkedOpened === false && this.checked === ''){
                 this.checkedOpened = true
                 this.checked = 'tshirt'
@@ -119,9 +117,6 @@ export default {
                 this.checked = ''
             } 
         },
-        checkedLog(){
-            console.log(this.checked);
-        }
     },
     data() {
         return{
