@@ -1,5 +1,5 @@
 <template>
-    <div  class="">
+    <div style="position: absolute" class="">
         <header class="">
         <div class="header">
             <div class="flex">

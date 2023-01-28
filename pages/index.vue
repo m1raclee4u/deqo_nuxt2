@@ -2,13 +2,13 @@
   <div class="wrapper">
     <Header/>
     <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+    <HeaderSlider photo_1="back"/>
+    <ItemsSlider title="Bestsellers"/>
+    <ItemsSlider title="Новинки"/>
     <HeaderSlider/>
-    <ItemsSlider/>
-    <ItemsSlider/>
+    <ItemsSlider title="deqo + LaPizza"/>
     <HeaderSlider/>
-    <ItemsSlider/>
-    <HeaderSlider/>
-    <ItemsSlider/>
+    <ItemsSlider title="Новая категория"/>
     <!-- <Collections/> -->
     <Footer/>    
 

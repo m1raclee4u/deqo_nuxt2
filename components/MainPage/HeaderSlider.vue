@@ -5,8 +5,8 @@
     <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide">
-              <img class="slide" src="../../assets/img/back.jpg" alt="">
+            <div class="swiper-slide">              
+              <img class="slide" :src="require('../../assets/img/back.jpg')" alt="" />
             </div>
             <div class="swiper-slide">
               <img class="slide" src="../../assets/img/back2.jpg" alt="">
@@ -56,11 +56,9 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 export default {
     props:{
-      slider: {
         photo_1: '',
         photo_2: '',
         photo_3: '',
-      }
     },
      mounted() {
       new Swiper('.swiper', {
