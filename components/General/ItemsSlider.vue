@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="jcsb">
-            <h2>Лидеры продаж</h2>
+            <h2>{{title}}</h2>
             <Nuxt-Link to="catalog">смотреть все</Nuxt-Link>
         </div>
         <div class="bestsellers">
@@ -30,7 +30,11 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 
 
 export default {
-    
+    props: {
+        title: {
+        type: String,
+        },
+    },
     components: { Item },
     computed: {        
         products() {               

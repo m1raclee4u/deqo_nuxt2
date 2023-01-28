@@ -148,7 +148,8 @@
         </div>
     </div>
     </section>    
-    <ItemsSlider/>
+    <ItemsSlider :title="title"/>
+    <ItemsSlider :title="title_recomended"/>
     <Footer/>    
 
   </div>
@@ -173,6 +174,8 @@ Swiper.use([ Navigation, Pagination, Autoplay ])
 export default {
     data(){
       return{
+        title: 'Также на модели',
+        title_recomended: 'Может подойти',
         checkOpenedModel: false,
         checkedOpenedRecomendations: false,
         highlightedSize: false,
@@ -445,9 +448,10 @@ export default {
         .left{
           position: relative;
           .card__img{
-            // width: 820px;
-            width: unset;
-            height: 900px;
+            width: 100%;
+            // width: unset;
+            height: auto;
+            // height: 900px;
             border: 1px solid #A9A1A1;
           }
           max-width: 980px;
