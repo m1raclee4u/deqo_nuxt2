@@ -19,8 +19,12 @@ export default {
                 return 'Корзина'
             } else if (this.$route.name === 'favorite') {
                 return 'Избранное'
-            } else if (this.$route.name == 'catalog') {
+            } else if (this.$route.name === 'catalog') {
                 return 'Каталог'
+            } else if (this.$route.name === 'delivery') {
+                return 'Доставка'
+            } else if (this.$route.name === 'refund') {
+                return 'Обмен и возврат'
             }
         // return this.$route.name;
         }

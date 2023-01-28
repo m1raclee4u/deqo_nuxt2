@@ -22,6 +22,12 @@ export const mutations = {
       arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}}).quantity++
     }
   },
+  SET_QUANTITY (state, {product, quantity}) {
+    let arr = state.products
+    if (arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}})){
+      arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}}).quantity = quantity
+    }
+  },
   DECREMENT_PRODUCT (state, product) {
     let arr = state.products
     if (arr.find((p) => {if(p.id === product.id && p.size === product.size && p.color === product.color){return true}}).quantity === 1){
@@ -52,6 +58,10 @@ export const actions = {
   async incrementProduct ({ commit }, data) {
     await sleep(300)
     await commit('INCREMENT_PRODUCT', data)
+  },
+  async setQuantityProductCart ({ commit }, {data, quantity}) {
+    await sleep(300)
+    await commit('SET_QUANTITY', {product: data, quantity: quantity})
   },
 
 }
