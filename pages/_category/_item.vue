@@ -438,6 +438,10 @@ export default {
       justify-content: space-between;
     }
     .itemPage{
+        .like{
+          width: 40px !important;
+          height: 40px !important;
+        }
         display: flex;
         max-width: 1400px;
         margin: 0 auto;

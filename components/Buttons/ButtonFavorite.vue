@@ -1,10 +1,10 @@
 <template>
     <div class="buttonFavorite">
-        <button class="like" v-if="!isProductAdded"
+        <button :class="{big: currentRoute}" class="like" v-if="!isProductAdded"
         @click.prevent="buyClickHandler"
         >
         </button>
-            <button class="like added" v-else
+            <button :class="{big: currentRoute}" class="like added" v-else
         @click.prevent="addedClickHandler"
         >
         </button>
@@ -27,6 +27,12 @@ export default {
         }),
         isProductAdded () {
         return this.products.find(p => p.id === this.item.id)
+        },
+        currentRoute(){
+            if (this.$route.name === 'category-item')
+            return true
+            else
+            return false
         }
     },
     methods: {
@@ -55,11 +61,16 @@ export default {
         background-image: url('../../assets/img/icons/heart_on.svg') !important;
 
     }
+    .big{
+        width: 40px !important;
+        height: 40px !important;
+    }
     .like{
         background-image: url('../../assets/img/icons/heart.svg');
         background-repeat: no-repeat;
         background-position: center center;
         background-color: unset;
+        background-size: cover;
         width: 30px;
         height: 30px;
         
