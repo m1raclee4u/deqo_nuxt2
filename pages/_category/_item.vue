@@ -421,6 +421,7 @@ export default {
     }
     .colors{
       gap: 18px;
+      align-items: center;
     }
     .sizes{
       gap: 10px;

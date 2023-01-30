@@ -111,7 +111,11 @@
 
 
 .form_radio_btn_color {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px !important;
+    height: 38px !important;
 }
 .form_radio_btn_color input[type=radio] {
     display: none;
@@ -123,13 +127,16 @@
     text-transform: uppercase;
     font-size: 18px;
     letter-spacing: -0.02em;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
+
     text-align: center;
+    /* box-shadow: inset 0 0 0 5px white; */
     display: inline-block;
     cursor: pointer;
     line-height: 35px;
     color: #A9A1A1;
+    border: none;
     /* border: 2px solid #A9A1A1; */
     border-radius: 50%;
     user-select: none;
@@ -139,18 +146,24 @@
 /* Checked */
 .form_radio_btn_color input[type=radio]:checked + label {
     /* color: white; */
-    box-shadow: inset 0 0 0 2px white;
+    width: 38px;
+    height: 38px;
+    box-shadow: inset 0 0 0 5px white;
     border: 1px solid black !important;
 }
 .form_radio_btn_color input[type=checkbox]:checked + label {
     /* color: white; */
-    box-shadow: inset 0 0 0 2px white;
+    width: 38px;
+    height: 38px;
+    box-shadow: inset 0 0 0 5px white;
     border: 1px solid black !important;
 }
     
 /* Hover */
 .form_radio_btn_color label:hover {
-    box-shadow: inset 0 0 0 2px white;
+    width: 38px;
+    height: 38px;
+    box-shadow: inset 0 0 0 5px white;
     border: 1px solid black !important;    /* background-color: #685F5F; */
 }
     
