@@ -150,12 +150,14 @@
     </section>    
     <ItemsSlider :title="title"/>
     <ItemsSlider :title="title_recomended"/>
+    <FAQ/>
     <Footer/>    
 
   </div>
 </template>
 
 <script>
+import FAQ from '~/components/General/FAQ.vue'
 import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Footer from '~/components/General/Footer.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
@@ -255,7 +257,7 @@ export default {
     }
     },
   
-    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart, DimensionalGrid, ButtonFavorite}, 
+    components: {Footer, BurgerMenu, HeaderBlack, ItemsSlider, ButtonBuy, ButtonCart, DimensionalGrid, ButtonFavorite, FAQ}, 
 }
 
 </script>
