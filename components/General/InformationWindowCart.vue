@@ -17,7 +17,8 @@
             <p><b>Итого</b></p>
             <p><b>{{fullprice}} ₽</b></p>
         </div>
-        <button>Оплатить</button>
+        <button v-if="allFieldsAreFilled === true">Оплатить</button>
+        <button v-else disabled>Заполните все поля</button>
         <p class="offer">Нажимая на кнопку «оплатить», я принимаю условия <Nuxt-link to="">публичной оферты</Nuxt-link>, <Nuxt-link to="">политики конфиденциальности</Nuxt-link> и <Nuxt-link to="">публичной оферты (предзаказ)</Nuxt-link></p>
     </div>
 </template>
@@ -26,6 +27,9 @@
 import { mapGetters } from 'vuex'
 
 export default {
+    props:{
+        allFieldsAreFilled: '',
+    },
     computed: {
          ...mapGetters('cart', [
             'getProducts'
@@ -114,6 +118,11 @@ export default {
             border: 2px solid #685F5F;
             border-radius: 4px;
             color: white;
+            &:disabled{
+                color: #685F5F;
+                background-color: #fff;
+                cursor: unset;
+            }
         }
     }
 </style>

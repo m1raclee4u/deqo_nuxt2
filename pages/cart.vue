@@ -9,22 +9,30 @@
                 <p v-if="$store.state.cart.products.length < 1">Ваша корзина пока пуста,<br> а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link></p>  
             </div>         
             <div v-if="$store.state.cart.products.length > 0" class="cart">
-                <div class="cartItems">
-                    <div
-                    v-for="item in getProducts" 
-                    :key="item.article"
-                    class="cartItem"    
-                    >
-                        <cart-item 
-                        :item="item"
-                        :key="item.id" 
-                        @emitDeleteItem="addedClickHandler"                 
+                <div class="leftGroup">
+                    <div class="cartItems">
+                        <div
+                        v-for="item in getProducts" 
+                        :key="item.article"
+                        class="cartItem"    
                         >
-                        </cart-item>
-                    </div>   
+                            <cart-item 
+                            :item="item"
+                            :key="item.id" 
+                            @emitDeleteItem="addedClickHandler"                 
+                            >
+                            </cart-item>
+                        </div>   
+                    </div>
+                    <promocode/>
+                    <CartForm @emitAllFieldsAreFilled="allFieldsAreFilled=true" @emitAllFieldsNotFilled="allFieldsAreFilled=false" v-if="$store.state.cart.products.length > 0"/>
                 </div>
-                <InformationWindowCart/>
+
+                
+
+                <InformationWindowCart :allFieldsAreFilled="allFieldsAreFilled"/>
             </div>
+
         </main>
         <Footer/>
     </div>
@@ -39,16 +47,19 @@ import CartItem from '~/components/General/CartItem.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
 import Breadcrumbs from '~/components/General/Breadcrumbs.vue'
 import Footer from '~/components/General/Footer.vue'
+import CartForm from '~/components/General/CartForm.vue'
 
 
 import { mapActions, mapGetters } from 'vuex'
 import InformationWindowCart from '~/components/General/InformationWindowCart.vue'
+import Promocode from '~/components/General/promocode.vue'
 
 export default {
-    components: { HeaderBlack, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, CartItem, Footer, InformationWindowCart},
+    components: { HeaderBlack, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, CartItem, CartForm, Footer, InformationWindowCart, Promocode},
     
     data() {
         return {
+        allFieldsAreFilled: false,
         showFilter: false,
         filterLabel: "цене",
         productsInCartId: [],
@@ -97,6 +108,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .leftGroup{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
     .cartItems{
         transition: 0.5ms ease all;
         display: flex;
