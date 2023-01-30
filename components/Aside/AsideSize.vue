@@ -3,7 +3,7 @@
         <h3>Размер</h3>
         <div class="sizes flex">
             <div class="form_radio_btn" v-for="size in $store.state.sizes" :key="size.id">
-            <input name="size" type="radio" :value="size" :id="size">
+            <input name="size" type="checkbox" :value="size" :id="size">
             <label :id="size" :for="size">{{size}}</label>
             
             <!-- <p class="p_size"></p> -->

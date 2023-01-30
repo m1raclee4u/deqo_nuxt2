@@ -1,9 +1,9 @@
 <template>
     <div class="colors">
-        <h3>Цвет</h3>
+    <h3>Цвет <span v-if="checkedColor != ''">{{aCheckedColors}}</span></h3>
         <div class="flex colors_row">
             <div class="form_radio_btn_color"  v-for="color in $store.state.colors" :key="color.id">
-                <input name="color" type="radio" :value="color" v-model="checkedColor" @change="addCheckedColor" :id="color.id">
+                <input name="color" type="checkbox" :value="color" v-model="checkedColor" @change="addCheckedColor" :id="color.id">
                 <label :id="color.id" :for="color.id"></label>
             </div>
         </div> 
@@ -14,11 +14,21 @@
 export default {
     data() {
       return {       
-        checkedColor: []
+        checkedColor: [],
+        aCheckedColors: []
       }
     },
     methods: {
          addCheckedColor(){
+            this.aCheckedColors = []
+            for (const item in this.checkedColor) {
+                if (Object.hasOwnProperty.call(this.checkedColor, item)) {
+                    const element = this.checkedColor[item];
+                    
+                    this.aCheckedColors.push(String(element.name))
+                }
+            }
+            this.aCheckedColors=String(this.aCheckedColors)
             this.$emit('updateCheckedColor', this.checkedColor);
          }
     },
@@ -86,6 +96,9 @@ export default {
         flex-direction: column;
         gap: 25px;
         width: 280px;      
+            span{
+                 word-wrap: break-word;
+            }
             h3{
                 font-weight: 600;
                 font-size: 20px;

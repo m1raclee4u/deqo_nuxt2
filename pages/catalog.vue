@@ -5,7 +5,7 @@
         <main class="main">            
             <aside class="aside">
                 <aside-categories 
-                    @updateChecked="sortByChecked" 
+                    @updateChecked="sortByChecked"
                     @checked="getChecked"
                 />
                 <aside-filter

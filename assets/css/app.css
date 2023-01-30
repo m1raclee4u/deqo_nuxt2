@@ -67,6 +67,9 @@
 .form_radio_btn input[type=radio] {
     display: none;
 }
+.form_radio_btn input[type=checkbox] {
+    display: none;
+}
 .form_radio_btn label {
     text-transform: uppercase;
     font-size: 18px;
@@ -86,6 +89,10 @@
     
 /* Checked */
 .form_radio_btn input[type=radio]:checked + label {
+    color: white;
+    background-color: #685F5F;
+}
+.form_radio_btn input[type=checkbox]:checked + label {
     color: white;
     background-color: #685F5F;
 }
@@ -109,12 +116,15 @@
 .form_radio_btn_color input[type=radio] {
     display: none;
 }
+.form_radio_btn_color input[type=checkbox] {
+    display: none;
+}
 .form_radio_btn_color label {
     text-transform: uppercase;
     font-size: 18px;
     letter-spacing: -0.02em;
-    width: 18px;
-    height: 18px;
+    width: 26px;
+    height: 26px;
     text-align: center;
     display: inline-block;
     cursor: pointer;
@@ -132,6 +142,11 @@
     box-shadow: inset 0 0 0 2px white;
     border: 1px solid black !important;
 }
+.form_radio_btn_color input[type=checkbox]:checked + label {
+    /* color: white; */
+    box-shadow: inset 0 0 0 2px white;
+    border: 1px solid black !important;
+}
     
 /* Hover */
 .form_radio_btn_color label:hover {
@@ -141,6 +156,59 @@
     
 /* Disabled */
 .form_radio_btn_color input[type=radio]:disabled + label {
+    background: #efefef;
+    color: #666;
+}
+
+
+.form_radio_btn_categories {
+    display: flex;
+    gap: 20px;
+}
+.form_radio_btn_categories input[type=radio] {
+    display: none;
+}
+.form_radio_btn_categories input[type=checkbox] {
+    display: none;
+}
+.form_radio_btn_categories label {
+    /* text-transform: uppercase; */
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    width: 18px;
+    height: 18px;
+    text-align: left;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 35px;
+    color: #A9A1A1;
+    border: 2px solid #A9A1A1;
+    border-radius: 50%;
+    user-select: none;
+    transition: 0.3s opacity;
+}
+    
+/* Checked */
+.form_radio_btn_categories input[type=checkbox]:checked + label {
+    background-color: #685F5F;
+    background-image: url('../../assets/img/icons/categoryChecked.svg');
+    /* background-size: cover; */
+    background-position: center;
+    background-size: 12px 10px;
+    background-repeat: no-repeat;
+    border: none;
+    /* box-shadow: inset 0 0 0 2px white; */
+    /* border: 1px solid black !important; */
+}
+    
+/* Hover */
+.form_radio_btn_categories label:hover {
+    background-color: #685F5F;
+    /* opacity: 0.5; */
+}
+    
+/* Disabled */
+.form_radio_btn_categories input[type=radio]:disabled + label {
     background: #efefef;
     color: #666;
 }

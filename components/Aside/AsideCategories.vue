@@ -2,16 +2,10 @@
     <div class="categories">
         <h3>Категория</h3>
         <div class="checkboxes">
-            <div class="category" 
-            v-for="category in this.categories" 
-            :key="category.id">
-                <input 
-                type="checkbox"                 
-                :value="category.id" 
-                v-model="checkedId"
-                @change="addChecked"
-                >                                
-                <label>{{category.name}}</label>
+            <div class="form_radio_btn_categories" v-for="category in this.categories" :key="category.id">
+                <input :id="category.id" name="category" type="checkbox" :value="category.id" v-model="checkedId" @change="addChecked">                                
+                <label :for="category.id"></label>
+                <p>{{category.name}}</p>
             </div>
             <!-- <span></span>             -->
         </div>      
