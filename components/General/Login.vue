@@ -1,5 +1,5 @@
 <template>
-    <div class="popup">
+    <div class="popup" :class="{margin: isItemPage}">
         <div class="login" @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"></div>
         <div class="loginPopUp">
             <h3>Вход  |  Регистрация</h3>
@@ -21,10 +21,21 @@ export default {
         inputPhoneModel: '',
       };
     },
+    computed: {
+        isItemPage(){
+            if (this.$route.name === 'index')
+            return false
+            else 
+            return true
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
+    .margin{
+        margin-top: -110px;
+    }
     .buttons{
         display: flex;
         flex-direction: column;

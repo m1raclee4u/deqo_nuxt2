@@ -204,6 +204,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 60px;
+        width: 100%;
         max-width: 1676px;
         margin: 0 auto;
         .title{
@@ -222,12 +223,14 @@ export default {
     .questions{
         display: flex;
         align-items: flex-start;
-        gap: 103px;
+        // justify-content: space-between;
+        gap: 100px;
         .question{
             display: flex;
             flex-direction: column;
             gap: 20px;
-            width: 490px;
+            width: 100%;
+            max-width: 490px;
             // height: 196px;
             background: #F9F7F7;
             border-radius: 8px;
