@@ -9,7 +9,7 @@
                             <h5 class="title">{{category.name}}</h5>
                         </div>
                         <div class="right">
-                            <Nuxt-link @click="this.$emit('checked', category.name)" to="/catalog">больше</Nuxt-link>
+                            <Nuxt-link @click="this.$emit('checked', category.name)" to="/catalog"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">больше</p></Nuxt-link>
                         </div>
                     </header>
                     <main>
@@ -19,8 +19,8 @@
                 </div>
             </div>
             <div class="bottom column">
-                <Nuxt-Link class="todo" to="">Оплата и доставка</Nuxt-Link>    
-                <Nuxt-Link class="todo" to="">Обмен и возврат</Nuxt-Link>    
+                <Nuxt-Link  to="/delivery"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">Оплата и доставка</p> </Nuxt-Link>    
+                <Nuxt-Link  to="/refund"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">Обмен и возврат</p> </Nuxt-Link>    
                 <Nuxt-Link class="todo" to="">Акции</Nuxt-Link>    
                 <Nuxt-Link class="todo" to="">Размерная сетка</Nuxt-Link>
                 <Nuxt-Link class="todo" to="">Частые вопросы</Nuxt-Link>
