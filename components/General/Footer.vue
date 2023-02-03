@@ -148,6 +148,9 @@ form {
         a{
             text-decoration: none;
             color: #848484;
+            &:hover{
+                color: #5B5353;
+            }
         }
     }
 }

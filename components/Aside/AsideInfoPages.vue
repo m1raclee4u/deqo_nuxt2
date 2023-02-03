@@ -2,13 +2,13 @@
     <aside class="aside">
         <h3>{{currentRouteName}}</h3>
         <ul>
-            <li><button><Nuxt-link to="/delivery">Доставка</Nuxt-link></button></li>
-            <li><button><Nuxt-link to="/refund">Обмен и возврат</Nuxt-link></button></li>
-            <li><button><Nuxt-link class="todo" to="#">Предзаказ</Nuxt-link></button></li>
-            <li><button><Nuxt-link class="todo" to="#">Бонусная программа</Nuxt-link></button></li>
-            <li><button><Nuxt-link class="todo" to="#">Оферта</Nuxt-link></button></li>
-            <li><button><Nuxt-link class="todo" to="#">Политика конфиденциальности</Nuxt-link></button></li>
-            <li><button><Nuxt-link class="todo" to="#">Пользовательское соглашение</Nuxt-link></button></li>
+            <li><button @click="$router.push('/delivery')">Доставка</button></li>
+            <li><button @click="$router.push('/refund')">Обмен и возврат</button></li>
+            <li><button class="todo">Предзаказ</button></li>
+            <li><button class="todo">Бонусная программа</button></li>
+            <li><button class="todo">Оферта</button></li>
+            <li><button class="todo">Политика конфиденциальности</button></li>
+            <li><button class="todo">Пользовательское соглашение</button></li>
         </ul>
     </aside>
 </template>
