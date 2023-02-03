@@ -137,13 +137,11 @@ export default {
     .opened{
         height: 100px !important;
         background: white;
-        transition: 1s all ease;
         border-bottom: 1px solid #BABABA;
     }
     .notMainPage{
-        border-bottom: 1px solid #BABABA;
         background: white;
-        transition: 1s all ease;
+        border-bottom: 1px solid #BABABA;
     }
     .header{
         max-width: 1676px;
@@ -152,7 +150,6 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        transition: 1s all ease;
     }
     button{        
         cursor: pointer;
