@@ -1,7 +1,7 @@
 <template>
     <div style="position: absolute" class="">
-        <header :class="{notMainPage: $route.name != 'index' || whiteHeader === true}">
-        <div class="header" @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{opened: headerOpened}">
+        <header @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{notMainPage: $route.name != 'index' || whiteHeader === true, opened: headerOpened}">
+        <div class="header">
             <div class="flex">
                 <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
                     <img src="../../assets/img/icons/menu.svg" alt="">
@@ -129,13 +129,16 @@ export default {
     header{
         z-index: 2;
         width: 100%;
-
-        
+        height: 58px;
         position: fixed;
         top: 0;        
+        transition: 1s all ease;
     }
     .opened{
         height: 100px !important;
+        background: white;
+        transition: 1s all ease;
+        border-bottom: 1px solid #BABABA;
     }
     .notMainPage{
         border-bottom: 1px solid #BABABA;
@@ -145,7 +148,7 @@ export default {
     .header{
         max-width: 1676px;
         margin: 0 auto;
-        height: 58px;
+        height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
