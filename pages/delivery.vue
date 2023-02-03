@@ -1,6 +1,8 @@
 <template>
     <div class="wrapper">
-        <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        <Transition name="slide-fade">            
+            <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        </Transition>
         <HeaderBlack/>
         <Breadcrumbs/>
         <main class="main">

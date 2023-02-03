@@ -1,6 +1,8 @@
 <template>
     <div class="wrapper">
-        <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        <Transition name="slide-fade">            
+            <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        </Transition>
         <HeaderBlack/>
         <Breadcrumbs/>
         <main class="main">       
@@ -9,11 +11,11 @@
                 <aside class="aside">
                     <h3>Избранное</h3>
                     <ul>
-                        <li><Nuxt-link to="#">Список заказов</Nuxt-link></li>
-                        <li><Nuxt-link to="#">Личные данные</Nuxt-link></li>
-                        <li><Nuxt-link to="#">Избранное</Nuxt-link></li>
-                        <li><Nuxt-link to="#">Подписки</Nuxt-link></li>
-                        <li><Nuxt-link to="#">Выйти</Nuxt-link></li>
+                        <li><button><Nuxt-link to="#">Список заказов</Nuxt-link></button></li>
+                        <li><button><Nuxt-link to="#">Личные данные</Nuxt-link></button></li>
+                        <li><button><Nuxt-link to="#">Избранное</Nuxt-link></button></li>
+                        <li><button><Nuxt-link to="#">Подписки</Nuxt-link></button></li>
+                        <li><button><Nuxt-link to="#">Выйти</Nuxt-link></button></li>
                     </ul>
                 </aside>
                 <div class="items__main">
@@ -97,13 +99,6 @@ export default {
     background: url('../assets/img/icons/delete.svg');
     background-size: cover;
     cursor: pointer;
-    }
-    button{
-        display: flex;
-        align-items: center;
-        font-size: 11px;
-        padding: 10px 9px;
-        font-weight: 600;
     }
 
 
@@ -191,7 +186,7 @@ export default {
         }
     }
     aside{
-        width: 185px;
+        width: 260px;
         display: flex;
         align-items: flex-start;
         flex-direction: column;
@@ -207,16 +202,33 @@ export default {
         ul {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        // gap: 20px;
             a{
                 text-decoration: none;
                 color: #A9A1A1;
+
+            }
+            button{
+                text-decoration: none;
+                text-align: left;
+                background: inherit;
+                color: #A9A1A1;
                 font-size: 20px;
+                padding: 14px 20px;
+                margin-left: -15px;
+                &:hover{
+                    padding: 14px 20px;
+                    background: #DBD7D2;
+                    border-radius: 30px;
+                }
             }
             li {    
+                
+
                 text-align: left;
                 list-style-type: none;
                 text-decoration: none;
+                
             }
         }
     }

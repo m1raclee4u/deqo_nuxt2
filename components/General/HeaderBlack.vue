@@ -1,7 +1,7 @@
 <template>
     <div style="position: absolute" class="">
-        <header class="">
-        <div class="header">
+        <header :class="{notMainPage: $route.name != 'index' || whiteHeader === true}">
+        <div class="header" @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{opened: headerOpened}">
             <div class="flex">
                 <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
                     <img src="../../assets/img/icons/menu.svg" alt="">
@@ -9,7 +9,7 @@
                 </button>
                 
             </div>       
-            <Nuxt-link id="logo" to="/">
+            <Nuxt-link id="logo" to="/" :class="{openedLogo: headerOpened}">
                 <img src="../../assets/img/icons/logo.svg" alt="">
             </Nuxt-link>
            <div class="buttons">
@@ -20,7 +20,6 @@
                 </Nuxt-link>
                 <div @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)" class="account"></div>
             </div>
-            <!-- <h1 style="position: absolute">{{scrollPosition}}</h1> -->
         </div>
         </header>
         <Login v-if="$store.state.login != false"/>
@@ -35,7 +34,24 @@ import Login from '~/components/General/Login.vue'
 export default {
     data(){
         return {
-            scrollPosition: 0,
+            headerOpened: false,
+            whiteHeader: false,
+        }
+    },
+    beforeMount () {
+        window.addEventListener('scroll', this.handleScroll)
+    },
+    beforeDestroy () {
+        window.removeEventListener('scroll', this.handleScroll)
+    },
+    methods: {
+        handleScroll () {
+            if (window.scrollY > 0){
+                this.whiteHeader = true
+            } else {
+                this.whiteHeader = false
+            }
+            
         }
     },
     components: {Login},
@@ -55,6 +71,9 @@ export default {
             
             }
             return quantityComputed
+        },
+        scrollPostion(){
+            return window.scrollY
         }
     }
     
@@ -65,7 +84,7 @@ export default {
     .cartCounter{
         position: absolute;
         top: 0;
-        margin-top: 12px !important;
+        // margin-top: 12px !important;
         margin-left: 12px !important;
         width: 18px;
         height: 18px;
@@ -80,16 +99,28 @@ export default {
     a#logo{
         position: absolute;
         margin: 0 auto;
-        top: 14px;
+        top: 8px;
         left: 0;
         right: 0;
         text-align: center;
         max-width: 91px;
+        transition: 1s all ease;
+
+    }
+    .openedLogo{
+        top: 28px !important;
     }
     .burger__menu{
         display: flex;
         align-items: center;
         gap: 20px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        /* основной */
+
+        color: #685F5F;
     }
     .flex {
         gap: 15px;
@@ -98,11 +129,18 @@ export default {
     header{
         z-index: 2;
         width: 100%;
+
         
         position: fixed;
-        top: 0;
-        border-bottom: 1px solid gray;
-        background: white
+        top: 0;        
+    }
+    .opened{
+        height: 100px !important;
+    }
+    .notMainPage{
+        border-bottom: 1px solid #BABABA;
+        background: white;
+        transition: 1s all ease;
     }
     .header{
         max-width: 1676px;
@@ -111,6 +149,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: 1s all ease;
     }
     button{        
         cursor: pointer;
@@ -130,6 +169,7 @@ export default {
             }
         }
         .cart{
+            position: relative;
             width: 24px;
             height: 24px;
             background-size: 24px 24px;

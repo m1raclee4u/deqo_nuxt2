@@ -1,32 +1,34 @@
 <template>
-    <div class="menu"  @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
+    <div class="wrapperBurgerMenu">
         <div class="burger_menu">
-            <div class="top column">
-                <div v-for="category in categories" :key="category.id" class="filter_categories">
-                    <header>
-                        <div class="left">
-                            <img src="../../assets/img/icons/burgerMenu/icon-t-shirt.svg" alt="">
-                            <h5 class="title">{{category.name}}</h5>
-                        </div>
-                        <div class="right">
-                            <Nuxt-link @click="this.$emit('checked', category.name)" to="/catalog"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">больше</p></Nuxt-link>
-                        </div>
-                    </header>
-                    <main>
-                        <button class="todo" v-for="tag in $store.state.categoryTags" :key="tag.id">{{tag}}</button>
-                    </main>
-                    <hr style="color: #7F7777"/>
+                <div class="top column">
+                    <div v-for="category in categories" :key="category.id" class="filter_categories">
+                        <header>
+                            <div class="left">
+                                <img src="../../assets/img/icons/burgerMenu/icon-t-shirt.svg" alt="">
+                                <h5 class="title">{{category.name}}</h5>
+                            </div>
+                            <div class="right">
+                                <Nuxt-link @click="this.$emit('checked', category.name)" to="/catalog"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">больше</p></Nuxt-link>
+                            </div>
+                        </header>
+                        <main>
+                            <button class="todo" v-for="tag in $store.state.categoryTags" :key="tag.id">{{tag}}</button>
+                        </main>
+                        <hr style="color: #7F7777"/>
+                    </div>
                 </div>
-            </div>
-            <div class="bottom column">
-                <Nuxt-Link  to="/delivery"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">Оплата и доставка</p> </Nuxt-Link>    
-                <Nuxt-Link  to="/refund"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">Обмен и возврат</p> </Nuxt-Link>    
-                <Nuxt-Link class="todo" to="">Акции</Nuxt-Link>    
-                <Nuxt-Link class="todo" to="">Размерная сетка</Nuxt-Link>
-                <Nuxt-Link class="todo" to="">Частые вопросы</Nuxt-Link>
-            </div>
-        </div>    
-    </div>   
+                <div class="bottom column">
+                    <Nuxt-Link  to="/delivery"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">Оплата и доставка</p> </Nuxt-Link>
+                    <Nuxt-Link  to="/refund"><p @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">Обмен и возврат</p> </Nuxt-Link>
+                    <Nuxt-Link class="todo" to="">Акции</Nuxt-Link>
+                    <Nuxt-Link class="todo" to="">Размерная сетка</Nuxt-Link>
+                    <Nuxt-Link class="todo" to="">Частые вопросы</Nuxt-Link>
+                </div>
+        </div>
+        <div class="menu"  @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
+        </div>
+    </div> 
 </template>
 
 <script>
@@ -50,6 +52,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .wrapperBurgerMenu{
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        max-width: 100%;
+        z-index: 2000;
+    }
     .filter_categories{
         display: flex;
         flex-direction: column;
@@ -110,13 +120,13 @@ export default {
     .menu{
         box-sizing: border-box;
         position: fixed;
-        background-color: #20202000;
+        background-color: #202020;
         height: 100vh;
         width: 100vw;
         max-width: 100%;
         top: 0;
         z-index: 2000;
-
+        opacity: 0.2;
         // left: -20px;
         cursor: pointer;
     }
@@ -126,17 +136,17 @@ export default {
         gap: 30px;
        
     }
-    .burger_menu{        
+    .burger_menu{         
         display: flex;
         flex-direction: column;
         justify-content: space-between; 
-        position: absolute;
+        position: fixed;
         background-color: #202020;
         top: 0;
         width: 405px;
         height: 100vh;
         padding: 60px;
-        z-index: 2000;
+        z-index: 2020;
 
         
     }

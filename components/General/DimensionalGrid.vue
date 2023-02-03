@@ -39,15 +39,15 @@
                 <header>
                     <p>Обмеры изделия</p>
                     <div class="form_radio_btn_size_popup t-shirt">
-                        <input name="sizePopup" type="radio" value="tshirt" v-model="checked" @change="checkedLog" id="sizePopup_1">
+                        <input name="sizePopup" type="radio" value="tshirt" v-model="checked" id="sizePopup_1">
                         <label  for="sizePopup_1"></label>
                     </div>
                     <div class="form_radio_btn_size_popup hoodie">
-                        <input name="sizePopup" type="radio" value="hoodie" v-model="checked" @change="checkedLog" id="sizePopup_2">
+                        <input name="sizePopup" type="radio" value="hoodie" v-model="checked" id="sizePopup_2">
                         <label  for="sizePopup_2"></label>
                     </div>
                     <div class="form_radio_btn_size_popup pants">
-                        <input name="sizePopup" type="radio" value="pants" v-model="checked" @change="checkedLog" id="sizePopup_3">
+                        <input name="sizePopup" type="radio" value="pants" v-model="checked" id="sizePopup_3">
                         <label  for="sizePopup_3"></label>
                     </div>                   
                     <i :class="{downActive: checkedOpened}" @click="checkedOpenedMethod" class="down"></i>
@@ -124,7 +124,7 @@ export default {
             checked: '',
             sizes: [
                 {
-                    size: 'os',
+                    size: '2xs',
                     ruSize: 40,
                     chest: 84,
                     waist: 64,
@@ -548,10 +548,11 @@ export default {
                     background: #4A4444;
                     /* средний */
                     box-sizing: border-box;
-                    padding: 8px 8px;
+                    padding: 9px 4px;
                     border: 2px solid #A9A1A1;
                     border-radius: 4px;
-
+                    text-transform: uppercase;
+                    text-align: center;
                 }
                 p{
                     width: 38px;

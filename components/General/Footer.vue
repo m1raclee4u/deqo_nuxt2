@@ -16,7 +16,15 @@
             </div>
             <div class="right">
                 <div class="column">
-                    <h5>Информация</h5>
+                    <h5>О нас</h5>
+                    <div class="links">
+                        <Nuxt-Link class="todo" to="">Концепция и ценности бренда</Nuxt-Link>
+                        <Nuxt-Link class="todo" to="">Сотрудничество</Nuxt-Link>
+                        <Nuxt-Link class="todo" to="">Работа в DEQO</Nuxt-Link>
+                    </div>
+                </div>
+                <div class="column">
+                    <h5>Покупателям</h5>
                     <div class="links">
                         <Nuxt-Link to="/delivery">Оплата и доставка</Nuxt-Link>
                         <Nuxt-Link to="/refund">Обмен и возврат</Nuxt-Link>
@@ -28,8 +36,12 @@
                 <div class="column">
                     <h5>Контакты</h5>
                     <div class="links">
-                        <a href="mailto:example@mail.ru">example@mail.ru</a>
+                        <a href="mailto:hello.deqo@gmail.com?subject=Вопрос по &body=Здравствуйте! Возник вопрос по поводу">example@mail.ru</a>
                         <a href="tel:+7 (822) 156-90-15">+7 (822) 156-90-15</a>
+                        <div class="jscb">
+                            <p>наши соцсети <br> и чаты поддержки</p>
+                            <buttons-social footer="footer"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,23 +56,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.jscb{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .buttons_help{
+        .telegram{
+            width: 40px !important;
+            height: 40px !important;
+        }
+    }
+}
 section{
     margin: 0 auto;
-    // max-width: 1920px;
     width: 100%;
     padding: 50px 0 40px 0;
-    // margin: 0 auto;
     background-color: #f7f7f7;
-    // overflow-x: hidden;
 }
 footer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     height: 300px;
+    width: 100%;
+    gap: 100px;
     max-width: 1676px;
     margin: 0 auto;
-
 }
 form {
     display: flex;
@@ -73,7 +94,6 @@ form {
     flex-direction: column;
     justify-content: space-between;
     max-width: 480px;
-
     .text{
         display: flex;
         flex-direction: column;
@@ -82,20 +102,14 @@ form {
             font-weight: 400;
             font-size: 16px;
             line-height: 19px;
-
-            /* средний */
-
             color: #A9A1A1;
         }
     }
-
     h5{
+        font-family: 'Playfair Display', serif;
         font-weight: 600;
         font-size: 36px;
         line-height: 43px;
-
-        /* основной */
-
         color: #685F5F;
         margin-bottom: 35px;
     }
@@ -107,23 +121,24 @@ form {
 }
 .right{
     display: flex;
-    gap: 150px;    
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;    
     font-size: 15px;
     letter-spacing: -0.001em;
     .column{
         display: flex;
-        gap: 50px;
+        flex-direction: column;
+        gap: 20px;
         h5{
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 21px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            line-height: 27px;
+
             color: #685F5F;
         }
         font-size: 16px;
         line-height: 19px;
-
-        /* средний */
-
         color: #A9A1A1;
     }
     .links{
@@ -145,7 +160,6 @@ input[type=email] {
     border-bottom: 1px solid #A1A1A1;
     &::placeholder{
         color: #A9A1A1;
-        // padding-left: 20px;
     }
     
   }
@@ -156,8 +170,6 @@ button {
     line-height: 19px;
     text-align: center;
     cursor: pointer;
-    /* тёмный */
-
     color: #1A1A1A;
 }
 

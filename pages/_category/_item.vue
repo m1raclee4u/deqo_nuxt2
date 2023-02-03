@@ -2,7 +2,9 @@
   <div class="wrapper">
     <DimensionalGrid v-if="$store.state.dimensionalGrid != false" />
     <HeaderBlack/>
-    <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+    <Transition name="slide-fade">            
+            <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        </Transition>
     <section>
       <div class="itemPage">
         <div class="left">       
@@ -88,9 +90,9 @@
                     <label :class="{highlightedSizeClass: highlightedSize}" :id="size" :for="size">{{size}}</label>
                   </div>                  
                 </div>
-                <div class="sizesPopup">
+                <div @click="$store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)" class="sizesPopup">
                   <img src="../../assets/img/icons/sizesPopup.svg" alt="">
-                  <p @click="$store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)">размерная сетка</p>
+                  <p>размерная сетка</p>
                 </div>
             </div>
             <div class="color">

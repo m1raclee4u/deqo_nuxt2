@@ -2,13 +2,13 @@
     <aside class="aside">
         <h3>{{currentRouteName}}</h3>
         <ul>
-            <li><Nuxt-link to="/delivery">Доставка</Nuxt-link></li>
-            <li><Nuxt-link to="/refund">Обмен и возврат</Nuxt-link></li>
-            <li><Nuxt-link class="todo" to="#">Предзаказ</Nuxt-link></li>
-            <li><Nuxt-link class="todo" to="#">Бонусная программа</Nuxt-link></li>
-            <li><Nuxt-link class="todo" to="#">Оферта</Nuxt-link></li>
-            <li><Nuxt-link class="todo" to="#">Политика конфиденциальности</Nuxt-link></li>
-            <li><Nuxt-link class="todo" to="#">Пользовательское соглашение</Nuxt-link></li>
+            <li><button><Nuxt-link to="/delivery">Доставка</Nuxt-link></button></li>
+            <li><button><Nuxt-link to="/refund">Обмен и возврат</Nuxt-link></button></li>
+            <li><button><Nuxt-link class="todo" to="#">Предзаказ</Nuxt-link></button></li>
+            <li><button><Nuxt-link class="todo" to="#">Бонусная программа</Nuxt-link></button></li>
+            <li><button><Nuxt-link class="todo" to="#">Оферта</Nuxt-link></button></li>
+            <li><button><Nuxt-link class="todo" to="#">Политика конфиденциальности</Nuxt-link></button></li>
+            <li><button><Nuxt-link class="todo" to="#">Пользовательское соглашение</Nuxt-link></button></li>
         </ul>
     </aside>
 </template>
@@ -54,16 +54,33 @@ aside{
         ul {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        // gap: 20px;
             a{
                 text-decoration: none;
                 color: #A9A1A1;
+
+            }
+            button{
+                text-decoration: none;
+                text-align: left;
+                background: inherit;
+                color: #A9A1A1;
                 font-size: 20px;
+                padding: 14px 20px;
+                margin-left: -15px;
+                &:hover{
+                    padding: 14px 20px;
+                    background: #DBD7D2;
+                    border-radius: 30px;
+                }
             }
             li {    
+                
+
                 text-align: left;
                 list-style-type: none;
                 text-decoration: none;
+                
             }
         }
     }

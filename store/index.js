@@ -1,5 +1,6 @@
 export const state = () => ({
     products: [],
+    searchProducts: '',
     brandId: 1,
     categoryTags: ['oversized', 'slim', 'tall', 'petit'],   
     categories: [],
@@ -39,9 +40,6 @@ export const state = () => ({
       },
     ],
     sizes: ['os', 'xs', 's', 'm', 'l', 'xl', '2xl'],
-    // favorites: [
-      
-    // ],
     checkedCategories: [],
     isVisible: false,
     burgerMenuOpened: false,
@@ -97,5 +95,4 @@ export const actions = {
 export const getters = {
   products: s => s.products,
   categories: s => s.categories,
-  productsInCart: s => s.productsInCart
 };

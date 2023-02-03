@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import Header from '../General/Header.vue'
 import BurgerMenu from '../General/BurgerMenu.vue'
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 import 'swiper/swiper-bundle.css'
@@ -76,7 +75,7 @@ export default {
       },
     })
     },
-     components: { Header, BurgerMenu},
+     components: {BurgerMenu},
     name: 'IndexPage'
 }
     

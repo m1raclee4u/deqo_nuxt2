@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
-    <Header/>
-    <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+    <HeaderBlack/>
+    <Transition name="slide-fade">            
+        <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+    </Transition>
     <HeaderSlider photo_1="back"/>
     <ItemsSlider title="Bestsellers"/>
     <ItemsSlider title="Новинки"/>
@@ -17,7 +19,7 @@
 
 <script>
 import Collections from '~/components/General/Collections.vue'
-import Header from '~/components/General/Header.vue'
+import HeaderBlack from '~/components/General/HeaderBlack.vue'
 import Footer from '~/components/General/Footer.vue'
 import ItemsSlider from '~/components/General/ItemsSlider.vue'
 import HeaderSlider from '../components/MainPage/HeaderSlider.vue'
@@ -26,7 +28,7 @@ import BurgerMenu from '~/components/General/BurgerMenu.vue'
 
 export default {
   
-    components: {HeaderSlider, Collections, Footer, BurgerMenu, Header, ItemsSlider},
+    components: {HeaderSlider, Collections, Footer, BurgerMenu, HeaderBlack, ItemsSlider},
     name: 'IndexPage'
 }
 </script>

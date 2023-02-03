@@ -2,7 +2,7 @@
     <section>
         <div class="jcsb">
             <h2>{{title}}</h2>
-            <Nuxt-Link to="catalog">смотреть все</Nuxt-Link>
+            <Nuxt-Link class="linkToCatalog" to="catalog">смотреть все</Nuxt-Link>
         </div>
         <div class="bestsellers">
         <!-- Additional required wrapper -->
@@ -70,6 +70,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    
+    .linkToCatalog{
+        &:hover{
+            color: #5B5353;
+        }
+        
+    }
     a{
         text-decoration: none;
         color: #b8b8b8;
@@ -79,14 +86,14 @@ export default {
         height: auto;
     }       
     section{
-        // margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
         margin: 0 auto;
-        // padding: 100px 0px 0 0;
         max-width: 1676px;
         width: 100%;
         overflow: hidden;
         h2{
-            padding-bottom: 60px;
             font-weight: 600;
             font-size: 24px;
             line-height: 29px;

@@ -1,6 +1,8 @@
 <template>
     <div class="wrapper">
-        <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        <Transition name="slide-fade">                
+            <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+        </Transition>
         <HeaderBlack/>
         <Breadcrumbs/>
         <main class="main">   
@@ -27,9 +29,6 @@
                     <promocode/>
                     <CartForm @emitAllFieldsAreFilled="allFieldsAreFilled=true" @emitAllFieldsNotFilled="allFieldsAreFilled=false" v-if="$store.state.cart.products.length > 0"/>
                 </div>
-
-                
-
                 <InformationWindowCart :allFieldsAreFilled="allFieldsAreFilled"/>
             </div>
 
