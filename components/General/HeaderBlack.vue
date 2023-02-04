@@ -1,6 +1,7 @@
 <template>
     <div style="position: absolute" class="">
-        <header @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{notMainPage: $route.name != 'index' || whiteHeader === true, opened: headerOpened}">
+        <!-- @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{notMainPage: $route.name != 'index' || whiteHeader === true, opened: headerOpened}" -->
+        <header :class="{notMainPage: $route.name != 'index' || whiteHeader === true}">
         <div class="header">
             <div class="flex">
                 <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
