@@ -1,17 +1,16 @@
 <template>
     <button @click="buyClickHandler" v-if="!isProductAdded">Добавить в корзину 
     </button>    
-    <Nuxt-link to="/cart" v-else>
-        <button class="remove" >Перейти в корзину
-        </button>    
-    </Nuxt-link>
+    <button class="remove" @click="$router.push('/cart')" v-else>
+      Перейти в корзину
+    </button>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 
 export default {
-      props: {
+    props: {
         item: {
             type: Object,
             required: true
