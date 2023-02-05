@@ -15,6 +15,10 @@
   display: flex;
 }
 
+.gap10{
+  gap: 10px;
+}
+
 button{
   cursor: pointer;
 }

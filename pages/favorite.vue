@@ -33,6 +33,7 @@
                             :key="item.id"
                             >
                             </item>
+                            <ButtonCart :item="item"/>
                         </div>
                     </div>
                     <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
@@ -52,11 +53,12 @@ import Item from '~/components/General/Item.vue'
 import BurgerMenu from '~/components/General/BurgerMenu.vue'
 import Breadcrumbs from '~/components/General/Breadcrumbs.vue'
 import Footer from '~/components/General/Footer.vue'
+import ButtonCart from '~/components/Buttons/ButtonCart.vue'
 
 
 
 export default {
-    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, Footer},
+    components: { HeaderBlack, Item, AsideFilter, Filters, AsideCategories, BurgerMenu, Breadcrumbs, ButtonCart, Footer},
     data() {
 
         return {
@@ -127,7 +129,7 @@ export default {
         width: 100%;
         
         button{
-            margin: 40px auto 0 auto;
+            margin: 20px auto 0 auto;
             justify-content: center;
             align-items: center;
             padding: 20px 109px;

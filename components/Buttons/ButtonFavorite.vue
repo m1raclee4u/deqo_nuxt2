@@ -1,5 +1,5 @@
 <template>
-    <div class="buttonFavorite">
+    <div class="buttonFavorite" :class="{block: currentRoute}">
         <button :class="{big: currentRoute}" class="like" v-if="!isProductAdded"
         @click.prevent="buyClickHandler"
         >
@@ -56,14 +56,36 @@ export default {
         position: absolute;
         top: 14px;
         right: 14px;
+        height: 60px;
     }
     .added{
         background-image: url('../../assets/img/icons/heart_on.svg') !important;
 
     }
+    .block{
+        position: relative !important;
+        top: unset;
+        right: unset;
+        
+
+
+    }
     .big{
-        width: 40px !important;
-        height: 40px !important;
+        width: 60px !important;
+        height: 60px !important;
+        background-color: #685F5F !important;
+        position: relative;
+        border-radius: 4px;
+        background-image: url('../../assets/img/icons/heart_small.svg') !important;
+        background-size: 24px 22px !important;
+        transition: 0.5s;
+        &:hover{
+            background-size: 28px 26px !important;
+            
+
+        }
+
+
     }
     .like{
         background-image: url('../../assets/img/icons/heart.svg');

@@ -17,6 +17,9 @@
                     @updateCheckedColor="sortByCheckedColor" 
                 />
                 <aside-size/>
+                <button class="filter">
+                    Отсортировать по фильтрам
+                </button>
             </aside>
             <div class="items__main">   
                 <div v-if="this.checkedId != ''" class="aic">
@@ -164,11 +167,19 @@ export default {
     cursor: pointer;
     }
     button{
-        display: flex;
-        align-items: center;
-        font-size: 11px;
-        padding: 10px 9px;
-        font-weight: 600;
+        // font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        /* identical to box height */
+        cursor: pointer;
+        height: 60px;
+        width: 100%;
+
+        text-align: center;
+        background: #685F5F;
+        border: 2px solid #685F5F;
+        border-radius: 4px;
+        color: white;
     }
 
 
@@ -202,7 +213,6 @@ export default {
             align-items: center;
             padding: 20px 109px;
             gap: 10px;
-
             width: 410px;
             height: 64px;
 

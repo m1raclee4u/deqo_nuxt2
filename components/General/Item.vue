@@ -59,6 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .input_color_1{
     width: 16px;
     height: 16px;

@@ -64,7 +64,6 @@
 
             </div>
           </div> -->
-          <ButtonFavorite :item="item"/>
           <img
               class="card__img"
               :src="'https://frontend-test.idaproject.com' + item.photo"
@@ -105,8 +104,11 @@
               </div>
             </div>
             <div class="buttons">
-               <ButtonCart @highlightedSize="highlightedSizeMethod" @highlightedColor="highlightedColorMethod" :item="item"/>
-               <ButtonBuy/>
+                <div class="flex gap10">
+                  <ButtonCart @highlightedSize="highlightedSizeMethod" @highlightedColor="highlightedColorMethod" :item="item"/>
+                  <ButtonFavorite :item="item"/>
+                </div>
+                <ButtonBuy/>
             </div>         
             <div class="info">
               <div class="jcsb">
@@ -346,6 +348,7 @@ export default {
       color: #A9A1A1;
     }
     .buttons{
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 20px;

@@ -37,7 +37,7 @@ export default {
          async buyClickHandler () {        
             const delay = ms => new Promise(res => setTimeout(res, ms));
             
-            if (!this.itemComputed.hasOwnProperty('color') || !this.itemComputed.hasOwnProperty('size')){
+            if ( !this.itemComputed.hasOwnProperty('color') || !this.itemComputed.hasOwnProperty('size')){
                 let uncheckedRadio = window.document.querySelector('input[type=radio]:checked');
                 if (uncheckedRadio){
                     if (uncheckedRadio.name == 'size'){
