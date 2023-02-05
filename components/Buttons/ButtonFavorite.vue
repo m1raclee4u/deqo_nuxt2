@@ -21,6 +21,7 @@ export default {
         required: true
         }
     },
+    
     computed: {
         ...mapState({
         products: state => state.favorites.products
@@ -78,9 +79,11 @@ export default {
         border-radius: 4px;
         background-image: url('../../assets/img/icons/heart_small.svg') !important;
         background-size: 24px 22px !important;
-        transition: 0.5s;
+        transition: .1s;
         &:hover{
-            background-size: 28px 26px !important;
+        background-size: 27px 24px !important;
+
+            // transform: scale(1.2);
             
 
         }

@@ -2,10 +2,10 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  target: 'static',
-  router: {
-    base: '/<deqo_nuxt2>/'
-  },
+  // target: 'static',
+  // router: {
+  //   base: '/<deqo_nuxt2>/'
+  // },
   head: {
     title: 'deqo',
     htmlAttrs: {
