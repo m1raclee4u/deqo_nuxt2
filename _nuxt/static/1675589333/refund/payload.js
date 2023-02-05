@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/refund", {data:[{}],fetch:{},mutations:[]});
