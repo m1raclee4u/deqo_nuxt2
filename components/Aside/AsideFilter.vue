@@ -1,116 +1,101 @@
 <template>
-    <div class="filter">
-        <h3>Цена</h3>
-        <div class="customRow">
-            <p>От {{value[0]}}₽ до ₽ {{value[1]}}</p>            
-        </div>        
-        <el-slider
-        class="filterRange"
-        range
-        v-model="value"
-        :min="min"
-        :max="max"
-        >
-        </el-slider>
-        <button
-            @click="updateFiltered"
-            >Фильтр</button>
+  <div class="filter">
+    <h3>Цена</h3>
+    <div class="customRow">
+      <p>От {{ value[0] }}₽ до ₽ {{ value[1] }}</p>
     </div>
-        
+    <el-slider class="filterRange" range v-model="value" :min="min" :max="max">
+    </el-slider>
+    <button @click="updateFiltered">Фильтр</button>
+  </div>
 </template>
 
 <script>
 export default {
-    data(){
+  data() {
     return {
-        value: [0, 3500]
-        }
+      value: [0, 3500],
+    };
+  },
+  computed: {
+    // value:{
+    //     get: function (){
+    //         return [this.min, this.max]
+    //     },
+    //     set: function (newValue) {
+    //         var names = newValue
+    //         this.min = names[0]
+    //         this.max = names[1]
+    //         // newValue[0] = newValue[0]
+    //         // newValue[1] = newValue[1]
+    //     }
+    // },
+    max() {
+      return Math.max(...this.$store.getters["products"].map((o) => o.price));
     },
-    computed: {
-        // value:{
-        //     get: function (){
-        //         return [this.min, this.max]
-        //     },
-        //     set: function (newValue) {
-        //         var names = newValue
-        //         this.min = names[0]
-        //         this.max = names[1]
-        //         // newValue[0] = newValue[0]  
-        //         // newValue[1] = newValue[1]
-        //     }
-        // },
-        max(){
-            return Math.max(...this.$store.getters["products"].map(o => o.price))
-        },
-        min(){
-            return Math.min(...this.$store.getters["products"].map(o => o.price))
-        }
+    min() {
+      return Math.min(...this.$store.getters["products"].map((o) => o.price));
     },
-    updated(){
-        this.max;
-        this.min;
+  },
+  methods: {
+    updateFiltered() {
+      this.$emit("updateFiltered", this.value);
     },
-    methods: {
-        updateFiltered() {
-            this.$emit('updateFiltered', this.value);
-        }
-    }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-    .filterRange{
-        width: 95%;
-        margin: 0 auto;
-    }
-    .el-slider__runway{
-        color: white !important; 
-    }
-    button{
-            font-size: 11px;
-            font-weight: bold;
-            width: 100px;
-            height: 35px;
-            text-transform: uppercase;
-    }
-    .customRow{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 25px;
-        flex-wrap: nowrap;
-        
-    }
-    .filter{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        h3{
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 24px;
-            /* identical to box height */
+.filterRange {
+  width: 95%;
+  margin: 0 auto;
+}
+.el-slider__runway {
+  color: white !important;
+}
+button {
+  font-size: 11px;
+  font-weight: bold;
+  width: 100px;
+  height: 35px;
+  text-transform: uppercase;
+}
+.customRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  flex-wrap: nowrap;
+}
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
 
+    /* основной */
 
-            /* основной */
+    color: #685f5f;
+    margin-bottom: 20px;
+  }
+  P {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
 
-            color: #685F5F;
-            margin-bottom: 20px;
-        }
-        P{
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
+    /* средний */
 
-            /* средний */
-
-            color: #A9A1A1;
-            span{
-                font-weight: 600;
-            }
-        }
-        input[type=range] {
-            width: 100%;
-        }
+    color: #a9a1a1;
+    span {
+      font-weight: 600;
     }
+  }
+  input[type="range"] {
+    width: 100%;
+  }
+}
 </style>
