@@ -18,7 +18,7 @@
                     <img v-if="searchShown === false" @click="searchShown = !searchShown" class="search" src="../../assets/img/icons/search.svg" alt="">
                     <div v-if="searchShown === true" class="searchInputWrapper">
                         <i @click="$router.push('/catalog')"></i>
-                        <input @keyup.enter="$router.push('/catalog')" type="text" class="searchInput" name="" id="" placeholder="Я ищу">
+                        <input @keyup.enter="$router.push('/catalog')" type="search" class="searchInput" name="" id="" placeholder="Я ищу">
                     </div>
 
                 </div>
