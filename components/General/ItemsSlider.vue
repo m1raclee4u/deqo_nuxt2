@@ -10,7 +10,7 @@
         <div
           v-for="item in this.products.slice(0, 8)"
           :key="item.id"
-          class="swiper-slide"
+          class="swiper-slide item-slide"
         >
           <item :item="item" :key="item.id"> </item>
         </div>
@@ -66,6 +66,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.swiper-wrapper{
+}
+.item-slide{
+    width: 387px;
+    background-color: #b8b8b8;
+}
 .linkToCatalog {
   &:hover {
     color: #5b5353;

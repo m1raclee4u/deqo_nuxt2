@@ -101,8 +101,7 @@ export default {
   position: relative;
   max-width: 405px;
   width: 100%;
-  height: 587px;
-  padding-bottom: 60px;
+//   padding-bottom: 60px;
   img {
     width: 100%;
     height: auto;
@@ -146,7 +145,7 @@ export default {
 }
 @media (max-width: 1280px) {
   .ItemCart {
-    padding-bottom: 60px;
+    // padding-bottom: 60px;
     img {
       max-width: 100%;
       height: auto;
