@@ -3,154 +3,98 @@
     <DimensionalGrid v-if="$store.state.dimensionalGrid != false" />
     <HeaderBlack/>
     <Transition name="slide-fade">            
-            <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
-        </Transition>
+      <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+    </Transition>
     <section>
       <div class="itemPage">
-        <div class="left">       
-          <!-- <div class="container">
-            <div class="slider__flex">
-              <div class="slider__col">
-
-                <div class="slider__prev">Prev</div> 
-
-                <div class="slider__thumbs">
-                  <div class="swiper-container"> 
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide">
-                        <div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
-                      </div>
-                    </div>
+          <div class="left">       
+            <img
+                class="card__img"
+                :src="'https://frontend-test.idaproject.com' + item.photo"
+                :alt="item.name"
+                />
+              <p>Брюки с комфортным поясом на кулиске не создают лишний объем благодаря зауженному книзу силуэту. Модель сшита из плотного трикотажа экстра-пенье без начеса, для которого отобрали самые длинные и прочные волокна австралийского хлопка. Материал отлично регулирует температуру тела, мало мнется и долго служит. Произведено в России.</p>
+          </div>
+          <div class="right">
+              <h4>{{item.name}}</h4>
+              <div class="tag__price">
+                <!--TODO dynamic -->
+                <p>Bestsellers</p> 
+                <div class="flex prices">
+                  <p style="text-decoration: line-through;" class="price old">4,299 ₽</p>
+                  <p class="price">{{item.price}} ₽</p>
+                </div>
+              </div>
+              <div class="size">
+                  <p>Размер</p>
+                  <div class="sizes flex">
+                    <div class="form_radio_btn" v-for="size in this.sizes" :key="size.id">
+                      <input name="size" type="radio" :value="size" v-model="sizeChecked" @change="sizeCheck" :id="size">
+                      <label :class="{highlightedSizeClass: highlightedSize}" :id="size" :for="size">{{size}}</label>
+                    </div>                  
                   </div>
-                </div>
-
-                <div class="slider__next">Next</div> 
-
-              </div>
-
-              <div class="slider__images">
-                <div class="swiper-container"> 
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <div class="slider__image"><img src="https://picsum.photos/1920/1080" alt=""/></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="slider__image"><img src="https://picsum.photos/1920/1081" alt=""/></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="slider__image"><img src="https://picsum.photos/1920/1082" alt=""/></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="slider__image"><img src="https://picsum.photos/1920/1083" alt=""/></div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="slider__image"><img src="https://picsum.photos/1920/1084" alt=""/></div>
-                    </div>
+                  <div @click="$store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)" class="sizesPopup">
+                    <img src="../../assets/img/icons/sizesPopup.svg" alt="">
+                    <p>размерная сетка</p>
                   </div>
+              </div>
+              <div class="color">
+                <p>Цвет <span v-if="colorChecked != ''">: {{colorChecked}}</span></p>
+                <div class="flex colors">
+                  <div class="form_radio_btn_color" v-for="color in this.colors" :key="color.id">
+                    <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
+                    <label :class="{highlightedColorClass: highlightedColor}" :id="color.id" :for="color.id"></label>
+                  </div>                
                 </div>
               </div>
-
-            </div>
-          </div> -->
-          <img
-              class="card__img"
-              :src="'https://frontend-test.idaproject.com' + item.photo"
-              :alt="item.name"
-              />
-            <p>Брюки с комфортным поясом на кулиске не создают лишний объем благодаря зауженному книзу силуэту. Модель сшита из плотного трикотажа экстра-пенье без начеса, для которого отобрали самые длинные и прочные волокна австралийского хлопка. Материал отлично регулирует температуру тела, мало мнется и долго служит. Произведено в России.</p>
-        </div>
-        <div class="right">
-            <h4>{{item.name}}</h4>
-            <div class="tag__price">
-              <!--TODO dynamic -->
-              <p>Bestsellers</p> 
-              <div class="flex prices">
-                <p style="text-decoration: line-through;" class="price old">4,299 ₽</p>
-                <p class="price">{{item.price}} ₽</p>
-              </div>
-            </div>
-            <div class="size">
-                <p>Размер</p>
-                <div class="sizes flex">
-                  <div class="form_radio_btn" v-for="size in this.sizes" :key="size.id">
-                    <input name="size" type="radio" :value="size" v-model="sizeChecked" @change="sizeCheck" :id="size">
-                    <label :class="{highlightedSizeClass: highlightedSize}" :id="size" :for="size">{{size}}</label>
-                  </div>                  
+              <div class="buttons">
+                  <div class="flex gap10">
+                    <ButtonCart @highlightedSize="highlightedSizeMethod" @highlightedColor="highlightedColorMethod" :item="item"/>
+                    <ButtonFavorite :item="item"/>
+                  </div>
+                  <ButtonBuy/>
+              </div>         
+              <div class="info">
+                <div class="jcsb">
+                  <p>Состав</p>
+                  <p><span>Хлопок - {{'97'}}%</span>, <span>Эластан - {{'3'}}%</span></p>
                 </div>
-                <div @click="$store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)" class="sizesPopup">
-                  <img src="../../assets/img/icons/sizesPopup.svg" alt="">
-                  <p>размерная сетка</p>
+                <div class="jcsb">
+                  <p>Артикул</p>
+                  <span>{{'ART00001'}}</span>
                 </div>
-            </div>
-            <div class="color">
-              <p>Цвет <span v-if="colorChecked != ''">: {{colorChecked}}</span></p>
-              <div class="flex colors">
-                <div class="form_radio_btn_color" v-for="color in this.colors" :key="color.id">
-                  <input name="color" type="radio" :value="color" v-model="colorChecked" @change="colorCheck" :id="color.id">
-                  <label :class="{highlightedColorClass: highlightedColor}" :id="color.id" :for="color.id"></label>
-                </div>                
-              </div>
-            </div>
-            <div class="buttons">
-                <div class="flex gap10">
-                  <ButtonCart @highlightedSize="highlightedSizeMethod" @highlightedColor="highlightedColorMethod" :item="item"/>
-                  <ButtonFavorite :item="item"/>
+                <div class="jcsb">
+                  <p style="line-height: 29px; width: 330px;">На модели размер: S <br>
+                  Параметры модели: 176 | 90 | 61 | 90</p>
+                  <i :class="{downActive: checkOpenedModel}" @click="checkedOpenedMethod" class="down"></i>
                 </div>
-                <ButtonBuy/>
-            </div>         
-            <div class="info">
-              <div class="jcsb">
-                <p>Состав</p>
-                <p><span>Хлопок - {{'97'}}%</span>, <span>Эластан - {{'3'}}%</span></p>
+                <div v-if="checkOpenedModel === true" class="jcsb">
+                  <ul>
+                    <li>Рост 176 см</li>
+                    <li>Tall size - размерная сетка для высоких</li>
+                    <li>Объём груди 90 см</li>
+                    <li>Объём талии 61 см</li>
+                    <li>Объём бёдер 90 см</li>
+                  </ul>
+                  <i></i>
+                </div>
+                <div class="jcsb">
+                  <p style="line-height: 29px; width: 330px;">Рекомендации по уходу</p>
+                  <i :class="{downActive: checkedOpenedRecomendations}" @click="checkedOpenedMethodRecomendations" class="down"></i>
+                </div>
+                <div v-if="checkedOpenedRecomendations === true" class="jcsb">
+                  <ul>
+                    <li>Деликатная стирка до 30 °C</li>
+                    <li>Не отбеливать</li>
+                    <li>Температура утюга до 150 °C</li>
+                    <li>Барабанная сушка запрещена</li>
+                    <li>Сухая чистка (химчистка)</li>
+                  </ul>
+                  <i></i>
+                </div>
               </div>
-              <div class="jcsb">
-                <p>Артикул</p>
-                <span>{{'ART00001'}}</span>
-              </div>
-              <div class="jcsb">
-                <p style="line-height: 29px; width: 330px;">На модели размер: S <br>
-                Параметры модели: 176 | 90 | 61 | 90</p>
-                <i :class="{downActive: checkOpenedModel}" @click="checkedOpenedMethod" class="down"></i>
-              </div>
-              <div v-if="checkOpenedModel === true" class="jcsb">
-                <ul>
-                  <li>Рост 176 см</li>
-                  <li>Tall size - размерная сетка для высоких</li>
-                  <li>Объём груди 90 см</li>
-                  <li>Объём талии 61 см</li>
-                  <li>Объём бёдер 90 см</li>
-                </ul>
-                <i></i>
-              </div>
-              <div class="jcsb">
-                <p style="line-height: 29px; width: 330px;">Рекомендации по уходу</p>
-                <i :class="{downActive: checkedOpenedRecomendations}" @click="checkedOpenedMethodRecomendations" class="down"></i>
-              </div>
-              <div v-if="checkedOpenedRecomendations === true" class="jcsb">
-                <ul>
-                  <li>Деликатная стирка до 30 °C</li>
-                  <li>Не отбеливать</li>
-                  <li>Температура утюга до 150 °C</li>
-                  <li>Барабанная сушка запрещена</li>
-                  <li>Сухая чистка (химчистка)</li>
-                </ul>
-                <i></i>
-              </div>
-            </div>
-        </div>
-    </div>
+          </div>
+      </div>
     </section>    
     <ItemsSlider :title="title"/>
     <ItemsSlider :title="title_recomended"/>

@@ -49,7 +49,6 @@
                 </div>
                 <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button>
             </div>
-            
         </main>
         <Footer/>
     </div>
@@ -209,6 +208,7 @@ export default {
         
         button{
             margin: 40px auto 0 auto;
+            display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px 109px;
@@ -231,7 +231,7 @@ export default {
     .items{
         display: flex;
         flex-wrap: wrap;
-        gap: 14px;
+        gap: 40px;
         // gap: 17.6px;
     }
     .item:nth-child(3n+3) {
@@ -241,12 +241,13 @@ export default {
         display: flex;
         justify-content: space-between;
         gap: 60px;
-        padding: 40px 60px;
         min-height: 50vh;
-
+        max-width: 1676px;
+        width: 100%;
+        margin: 0 auto;
     }
     aside{
-        width: 280px;
+        width: 320px;
         display: flex;
         flex-direction: column;
         gap: 45px;

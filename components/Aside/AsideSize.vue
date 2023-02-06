@@ -87,7 +87,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 25px;
-        width: 280px;      
+        width: 320px;      
             h3{
                 font-weight: 600;
                 font-size: 20px;

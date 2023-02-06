@@ -59,7 +59,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+    .filterRange{
+        width: 95%;
+        margin: 0 auto;
+    }
     .el-slider__runway{
         color: white !important; 
     }

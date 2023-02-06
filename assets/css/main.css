@@ -108,6 +108,7 @@ button{
   opacity: 0;
 }
 
+
 @media (max-width:1400px) {
   .p60{
     padding: 0 30px;

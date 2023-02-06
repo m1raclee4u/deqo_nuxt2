@@ -95,7 +95,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 25px;
-        width: 280px;      
+        width: 320px;      
             span{
                  word-wrap: break-word;
             }
