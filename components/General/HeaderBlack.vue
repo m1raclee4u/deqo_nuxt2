@@ -1,7 +1,7 @@
 <template>
     <div style="position: absolute" class="">
         <!-- @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{notMainPage: $route.name != 'index' || whiteHeader === true, opened: headerOpened}" -->
-        <header :class="{notMainPage: $route.name != 'index' || whiteHeader === true}">
+        <header :class="{notMainPage: $route.name != 'index' || whiteHeader === true || searchShown === true}">
         <div class="header">
             <div class="flex">
                 <button class="burger__menu" @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)">
@@ -14,7 +14,14 @@
                 <img src="../../assets/img/icons/logo.svg" alt="">
             </Nuxt-link>
            <div class="buttons">
-                <img class="todo search" src="../../assets/img/icons/search.svg" alt="">
+                <div class="searchButtons">
+                    <img v-if="searchShown === false" @click="searchShown = !searchShown" class="search" src="../../assets/img/icons/search.svg" alt="">
+                    <div v-if="searchShown === true" class="searchInputWrapper">
+                        <i @click="$router.push('/catalog')"></i>
+                        <input @keyup.enter="$router.push('/catalog')" type="text" class="searchInput" name="" id="" placeholder="Я ищу">
+                    </div>
+
+                </div>
                 <Nuxt-link to="/favorite" class="favorite"></Nuxt-link>
                 <Nuxt-link to="/cart" class="cart">
                     <p class="cartCounter" v-if="productsQuantity > 0">{{productsQuantity}}</p>
@@ -37,6 +44,7 @@ export default {
         return {
             headerOpened: false,
             whiteHeader: false,
+            searchShown: false,
         }
     },
     beforeMount () {
@@ -82,6 +90,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .searchButtons{
+        display: flex;
+        align-items: center;
+        transition: 1s;
+        .search{
+            transition: 1s;
+        }
+    }
+    .searchInputWrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        height: 34px;
+        max-width: 240px;
+
+        box-sizing: border-box;
+        padding: 0px 6px;
+
+        top: 58px;
+        left: 6px;
+        gap: 10px;
+
+        border: 1px solid #A9A1A1;
+        border-radius: 4px;        
+        transition: 1s;
+
+        i{
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            background-image: url('../../assets/img/icons/loopInput.svg');
+        }
+    }
+    .searchInput{
+        background-color: inherit;
+        height: 100%;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        transition: 1s;
+
+        &::placeholder{
+            color: #DBD7D2;
+        }
+    }
     .cartCounter{
         position: absolute;
         top: 0;

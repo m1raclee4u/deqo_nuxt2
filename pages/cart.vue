@@ -226,7 +226,7 @@ export default {
         max-width: 1400px;
         margin: 0 auto;
         width: 100%;
-        min-height: 50vh;
+        min-height: 55vh;
         .cart{
             display: flex;
             gap: 40px;

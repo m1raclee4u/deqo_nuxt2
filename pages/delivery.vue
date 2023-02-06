@@ -219,7 +219,7 @@ export default {
         max-width: 1400px;
         margin: 0 auto;
         width: 100%;
-        min-height: 50vh;
+        min-height: 55vh;
         .favoriteBlank{
             width: 100%;
             text-align: center;

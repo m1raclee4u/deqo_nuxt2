@@ -241,7 +241,7 @@ export default {
         display: flex;
         justify-content: space-between;
         gap: 60px;
-        min-height: 50vh;
+        min-height: 55vh;
         max-width: 1676px;
         width: 100%;
         margin: 0 auto;
