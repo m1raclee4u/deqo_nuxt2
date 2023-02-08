@@ -45,7 +45,9 @@ export default {
     async buyClickHandler() {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-      if (
+      if (this.$route.name === "favorite"){
+        console.log('123');
+      } else if (
         !this.itemComputed.hasOwnProperty("color") ||
         !this.itemComputed.hasOwnProperty("size")
       ) {
