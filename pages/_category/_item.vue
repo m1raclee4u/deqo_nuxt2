@@ -101,7 +101,7 @@
                 @highlightedColor="highlightedColorMethod"
                 :item="item"
               />
-              <ButtonFavorite :item="item" />
+              <ButtonFavorite :item="itemForFavorite" inSlider="inSlug"/>
             </div>
             <ButtonBuy />
           </div>
@@ -264,6 +264,7 @@ export default {
       let copiedItem = JSON.parse(JSON.stringify(filteredItem));
       return {
         item: copiedItem,
+        itemForFavorite: filteredItem,
       };
     } else {
       redirect("/");

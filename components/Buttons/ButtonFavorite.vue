@@ -1,13 +1,16 @@
 <template>
-  <div class="buttonFavorite" :class="{ block: currentRoute }">
+  <div
+    class="buttonFavorite"
+    :class="{ block: currentRoute && inSlider === 'inSlug' }"
+  >
     <button
-      :class="{ big: currentRoute }"
+      :class="{ big: currentRoute && inSlider === 'inSlug' && !isProductAdded}"
       class="like"
       v-if="!isProductAdded"
       @click.prevent="buyClickHandler"
     ></button>
     <button
-      :class="{ big: currentRoute }"
+      :class="{ big: currentRoute && inSlider === 'inSlug' && !isProductAdded, big_added: isProductAdded && currentRoute && inSlider === 'inSlug' }"
       class="like added"
       v-else
       @click.prevent="addedClickHandler"
@@ -24,6 +27,7 @@ export default {
       type: Object,
       required: true,
     },
+    inSlider: {},
   },
 
   computed: {
@@ -69,6 +73,19 @@ export default {
   top: unset;
   right: unset;
 }
+.big_added{
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #A9A1A1 !important;
+  position: relative;
+  border-radius: 4px;
+  background-image: url("../../assets/img/icons/heart_small_white.svg") !important;
+  background-size: 24px 22px !important;
+  transition: 0.2s;
+  &:hover {
+    background-size: 28px 25px !important;
+  }
+}
 .big {
   width: 60px !important;
   height: 60px !important;
@@ -77,9 +94,9 @@ export default {
   border-radius: 4px;
   background-image: url("../../assets/img/icons/heart_small.svg") !important;
   background-size: 24px 22px !important;
-  transition: 0.1s;
+  transition: 0.2s;
   &:hover {
-    background-size: 27px 24px !important;
+    background-size: 28px 25px !important;
 
     // transform: scale(1.2);
   }

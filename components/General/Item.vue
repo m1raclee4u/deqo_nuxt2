@@ -1,6 +1,6 @@
 <template>
   <div class="ItemCart">
-    <ButtonFavorite :item="item" />
+    <ButtonFavorite :item="item" inSlider="inSlider" />
     <Nuxt-Link :to="`/${item.category}/${item.name}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
       <img
@@ -48,6 +48,9 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+    inSlider: {
+
     },
   },
   data() {

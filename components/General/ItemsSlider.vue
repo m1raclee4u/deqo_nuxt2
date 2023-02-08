@@ -12,7 +12,7 @@
           :key="item.id"
           class="swiper-slide item-slide"
         >
-          <item :item="item" :key="item.id"> </item>
+          <item :item="item" inSlider="inSlider" :key="item.id"> </item>
         </div>
       </div>
     </div>
