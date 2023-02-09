@@ -45,6 +45,7 @@ export const state = () => ({
   burgerMenuOpened: false,
   dimensionalGrid: false,
   login: false,
+  selectParametrs: false,
 })
 
 export const mutations = {
@@ -62,6 +63,9 @@ export const mutations = {
   },
   SET_LOGIN_OPENED(state, opened) {
     state.login = opened
+  },
+  SET_SELECT_PARAMETERS_OPENED(state, opened) {
+    state.selectParametrs = opened
   },
 }
 

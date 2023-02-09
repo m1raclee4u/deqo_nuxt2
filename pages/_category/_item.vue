@@ -70,7 +70,7 @@
           </div>
           <div class="color">
             <p>
-              Цвет <span v-if="colorChecked != ''">: {{ colorChecked }}</span>
+              Цвет <span v-if="colorChecked != ''">: {{ colorChecked.name }}</span>
             </p>
             <div class="flex colors">
               <div
@@ -99,9 +99,11 @@
               <ButtonCart
                 @highlightedSize="highlightedSizeMethod"
                 @highlightedColor="highlightedColorMethod"
+                :colorChecked="colorChecked"
+                :sizeChecked="sizeChecked"
                 :item="item"
               />
-              <ButtonFavorite :item="itemForFavorite" inSlider="inSlug"/>
+              <ButtonFavorite :item="itemForFavorite" inSlider="inSlug" />
             </div>
             <ButtonBuy />
           </div>
@@ -241,11 +243,11 @@ export default {
       this.checkedOpenedRecomendations = !this.checkedOpenedRecomendations;
     },
     sizeCheck() {
-      this.$set(this.item, "size", this.sizeChecked);
+      // this.$set(this.item, "size", this.sizeChecked);
     },
     colorCheck() {
-      this.$set(this.item, "color", this.colorChecked.id);
-      this.colorChecked = this.colorChecked.name;
+      // this.$set(this.item, "color", this.colorChecked.id);
+      // this.colorChecked = this.colorChecked.ш;
     },
     highlightedSizeMethod() {
       this.highlightedSize = !this.highlightedSize;

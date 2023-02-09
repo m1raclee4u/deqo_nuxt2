@@ -1,5 +1,10 @@
 <template>
   <div class="ItemCart">
+    <selectAdditionalParameter
+      :item="item"
+      @onClosed="resetItem"
+      v-if="$store.state.selectParametrs === true && $route.name === 'favorite'"
+    />
     <ButtonFavorite :item="item" inSlider="inSlider" />
     <Nuxt-Link :to="`/${item.category}/${item.name}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
@@ -33,11 +38,23 @@
         </div>
       </div>
     </div>
+    <button
+      @click="
+        $store.commit(
+          'SET_SELECT_PARAMETERS_OPENED',
+          !$store.state.selectParametrs
+        )
+      "
+    >
+      Добавить в корзину
+    </button>
+    <!-- <p>Item {{ item }}</p> -->
   </div>
 </template>
 
 <script>
 import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
+import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -49,20 +66,46 @@ export default {
       type: Object,
       required: true,
     },
-    inSlider: {
-
-    },
+    inSlider: {},
   },
   data() {
     return {
-      // favorites: [],
+
     };
+  },  
+  methods:{
+    resetItem(){
+      console.log('123');
+      // this.itemComputed.color = ''
+      // this.itemComputed.size = ''
+    }
   },
-  components: { ButtonFavorite },
+  components: { ButtonFavorite, selectAdditionalParameter },
 };
 </script>
 
 <style lang="scss" scoped>
+button {
+  margin: 20px auto 0 auto;
+  justify-content: center;
+  align-items: center;
+  // padding: 20px 109px;
+  gap: 10px;
+
+  width: 100%;
+  height: 64px;
+
+  /* основной */
+
+  background: #685f5f;
+  border-radius: 4px;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: white;
+}
 .input_color_1 {
   width: 16px;
   height: 16px;
@@ -99,12 +142,11 @@ export default {
     color: #685f5f;
   }
 }
-
 .ItemCart {
   position: relative;
   max-width: 405px;
   width: 100%;
-//   padding-bottom: 60px;
+  //   padding-bottom: 60px;
   img {
     width: 100%;
     height: auto;

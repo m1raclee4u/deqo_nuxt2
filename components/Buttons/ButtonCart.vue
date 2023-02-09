@@ -16,6 +16,8 @@ export default {
       type: Object,
       required: true,
     },
+    sizeChecked: {},
+    colorChecked: {},
   },
   computed: {
     itemComputed() {
@@ -44,27 +46,17 @@ export default {
     }),
     async buyClickHandler() {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-      if (this.$route.name === "favorite"){
-        console.log('123');
-      } else if (
-        !this.itemComputed.hasOwnProperty("color") ||
-        !this.itemComputed.hasOwnProperty("size")
-      ) {
-        let uncheckedRadio = window.document.querySelector(
-          "input[type=radio]:checked"
-        );
-        if (uncheckedRadio) {
-          if (uncheckedRadio.name == "size") {
-            this.$emit("highlightedColor");
-            await delay(1000);
-            this.$emit("highlightedColor");
-          } else if (uncheckedRadio.name == "color") {
-            this.$emit("highlightedSize");
-            await delay(1000);
-            this.$emit("highlightedSize");
-          }
-        } else {
+      if (this.sizeChecked === "" || this.colorChecked === "") {
+        if (this.colorChecked === "") {
+          this.$emit("highlightedColor");
+          await delay(1000);
+          this.$emit("highlightedColor");
+        } else if (this.sizeChecked === "") {
+          this.$emit("highlightedSize");
+          await delay(1000);
+          this.$emit("highlightedSize");
+        } else if (this.sizeChecked === "" && this.colorChecked === "") {
+          console.log("все");
           this.$emit("highlightedColor");
           this.$emit("highlightedSize");
           await delay(1000);
@@ -72,6 +64,8 @@ export default {
           this.$emit("highlightedSize");
         }
       } else {
+        this.$set(this.itemComputed, "color", this.colorChecked.id);
+        this.$set(this.itemComputed, "size", this.sizeChecked);
         this.$set(this.itemComputed, "quantity", 1);
         this.$set(
           this.itemComputed,
@@ -80,7 +74,17 @@ export default {
             this.itemComputed.color +
             this.itemComputed.size
         );
+        console.log(this.itemComputed);
         this.addProduct(this.itemComputed);
+        if (
+          this.$route.name === "favorite" &&
+          this.$store.state.selectParametrs != false
+        ) {
+          this.$store.commit(
+            "SET_SELECT_PARAMETERS_OPENED",
+            !this.$store.state.selectParametrs
+          );
+        }
       }
     },
   },

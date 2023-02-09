@@ -70,7 +70,7 @@ export default {
 }
 .item-slide{
     width: 387px;
-    background-color: #b8b8b8;
+    // background-color: #b8b8b8;
 }
 .linkToCatalog {
   &:hover {

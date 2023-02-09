@@ -56,10 +56,9 @@
               class="col item"
             >
               <item :item="item" :key="item.id"> </item>
-              <ButtonCart :item="item" />
+              <!-- {{ item }} -->
             </div>
           </div>
-          <!-- <button @click="loadMore" v-if="currentPage * maxPerPage < this.products.length">Загрузить больше</button> -->
         </div>
       </div>
     </main>
@@ -153,28 +152,6 @@ export default {
 }
 .items__main {
   width: 100%;
-
-  button {
-    margin: 20px auto 0 auto;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 109px;
-    gap: 10px;
-
-    width: 410px;
-    height: 64px;
-
-    /* основной */
-
-    background: #685f5f;
-    border-radius: 4px;
-
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: white;
-  }
 }
 .items {
   display: flex;
