@@ -69,7 +69,7 @@
         :sizeChecked="sizeChecked"
         :item="itemComputedPopUp"
       />
-      <p>{{ itemComputedPopUp }}</p>
+      <!-- <p>{{ itemComputedPopUp }}</p> -->
     </div>
   </div>
 </template>
