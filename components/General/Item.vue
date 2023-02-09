@@ -39,6 +39,7 @@
       </div>
     </div>
     <button
+      v-if="$route.name === 'favorite'"
       @click="
         $store.commit(
           'SET_SELECT_PARAMETERS_OPENED',
@@ -69,16 +70,14 @@ export default {
     inSlider: {},
   },
   data() {
-    return {
-
-    };
-  },  
-  methods:{
-    resetItem(){
-      console.log('123');
+    return {};
+  },
+  methods: {
+    resetItem() {
+      console.log("123");
       // this.itemComputed.color = ''
       // this.itemComputed.size = ''
-    }
+    },
   },
   components: { ButtonFavorite, selectAdditionalParameter },
 };
