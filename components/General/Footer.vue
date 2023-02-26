@@ -6,7 +6,7 @@
           <h5>Получайте скидки</h5>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            eiusmod tempor incididunt
           </p>
         </div>
         <div class="form">
@@ -19,53 +19,45 @@
             />
             <button type="submit">Отправить</button>
           </form>
-          <p>DEQO 2023</p>
         </div>
       </div>
-      <div class="right">
-        <div class="column">
-          <h5>О нас</h5>
-          <div class="links">
-            <Nuxt-Link class="todo" to=""
-              >Концепция и ценности бренда</Nuxt-Link
-            >
-            <Nuxt-Link class="todo" to="">Сотрудничество</Nuxt-Link>
-            <Nuxt-Link class="todo" to="">Работа в DEQO</Nuxt-Link>
-          </div>
+      <div class="column">
+        <h5>О нас</h5>
+        <div class="links">
+          <Nuxt-Link class="todo" to="">Концепция и ценности бренда</Nuxt-Link>
+          <Nuxt-Link class="todo" to="">Сотрудничество</Nuxt-Link>
+          <Nuxt-Link class="todo" to="">Работа в DEQO</Nuxt-Link>
         </div>
-        <div class="column">
-          <h5>Покупателям</h5>
-          <div class="links">
-            <Nuxt-Link to="/delivery">Оплата и доставка</Nuxt-Link>
-            <Nuxt-Link to="/refund">Обмен и возврат</Nuxt-Link>
-            <Nuxt-Link class="todo" to="">Оферта</Nuxt-Link>
-            <Nuxt-Link class="todo" to=""
-              >Политика конфиденциальности</Nuxt-Link
-            >
-            <Nuxt-Link class="todo" to=""
-              >Пользовательское соглашение</Nuxt-Link
-            >
-          </div>
+      </div>
+      <div class="column">
+        <h5>Покупателям</h5>
+        <div class="links">
+          <Nuxt-Link to="/delivery">Оплата и доставка</Nuxt-Link>
+          <Nuxt-Link to="/refund">Обмен и возврат</Nuxt-Link>
+          <Nuxt-Link class="todo" to="">Оферта</Nuxt-Link>
+          <Nuxt-Link class="todo" to="">Политика конфиденциальности</Nuxt-Link>
+          <Nuxt-Link class="todo" to="">Пользовательское соглашение</Nuxt-Link>
         </div>
-        <div class="column">
-          <h5>Контакты</h5>
-          <div class="links">
-            <a
-              href="mailto:hello.deqo@gmail.com?subject=Вопрос по &body=Здравствуйте! Возник вопрос по поводу"
-              >example@mail.ru</a
-            >
-            <a href="tel:+7 (822) 156-90-15">+7 (822) 156-90-15</a>
-            <div class="jscb">
-              <p>
+      </div>
+      <div class="column">
+        <h5>Контакты</h5>
+        <div class="links">
+          <a
+            href="mailto:hello.deqo@gmail.com?subject=Вопрос по &body=Здравствуйте! Возник вопрос по поводу"
+            >example@mail.ru</a
+          >
+          <a href="tel:+7 (822) 156-90-15">+7 (822) 156-90-15</a>
+          <div class="jscb">
+            <!-- <p>
                 наши соцсети <br />
                 и чаты поддержки
-              </p>
-              <buttons-social footer="footer" />
-            </div>
+              </p> -->
+            <buttons-social footer="footer" />
           </div>
         </div>
       </div>
     </footer>
+    <p class="copyright">DEQO 2023</p>
   </section>
 </template>
 
@@ -88,7 +80,9 @@ export default {};
 section {
   margin: 0 auto;
   width: 100%;
-  padding: 50px 0 40px 0;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  // padding: 50px 0 40px 0;
   background-color: #f7f7f7;
 }
 footer {
@@ -105,6 +99,34 @@ form {
   display: flex;
   gap: 40px;
   margin-bottom: 40px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 338px;
+  h5 {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #685f5f;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    a {
+      text-decoration: none;
+      color: #848484;
+      &:hover {
+        color: #5b5353;
+      }
+    }
+  }
+  font-size: 16px;
+  line-height: 19px;
+  color: #a9a1a1;
 }
 .left {
   height: 90%;
@@ -144,33 +166,6 @@ form {
   gap: 40px;
   font-size: 15px;
   letter-spacing: -0.001em;
-  .column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    h5 {
-      font-family: "Playfair Display", serif;
-      font-size: 20px;
-      line-height: 27px;
-
-      color: #685f5f;
-    }
-    font-size: 16px;
-    line-height: 19px;
-    color: #a9a1a1;
-  }
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    a {
-      text-decoration: none;
-      color: #848484;
-      &:hover {
-        color: #5b5353;
-      }
-    }
-  }
 }
 input[type="email"] {
   background-color: inherit;
@@ -193,12 +188,40 @@ button {
   color: #1a1a1a;
 }
 
-@media (max-width: 1200px) {
-  .right {
-    .column {
-      flex-direction: column;
-      gap: 30px;
+@media (max-width: 1500px) {
+  .column {
+    width: 100%;
+  }
+  .left {
+    max-width: 228px;
+    .text{
+      h5{
+        font-size: 20px;
+      }
     }
+  }
+  .column {
+    gap: 18px;
+    .links {
+      gap: 20px;
+    }
+  }
+  form {
+    flex-direction: column;
+    align-items: end;
+    gap: 20px;
+    input[type="email"] {
+      min-width: unset;
+    }
+  }
+  .copyright{
+    text-align: right;
+  }
+}
+@media (max-width: 1024px) {
+  footer{
+    flex-wrap: wrap;
+    height: 100%;
   }
 }
 </style>

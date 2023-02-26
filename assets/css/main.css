@@ -109,9 +109,16 @@ button{
 }
 
 
-@media (max-width:1400px) {
+@media (max-width:1900px) {
   .p60{
     padding: 0 30px;
+  }
+  section{
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+  .wrapper{
+    /* padding: 0 32px; */
   }
 }
 

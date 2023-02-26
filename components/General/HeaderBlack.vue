@@ -273,4 +273,13 @@ button {
     cursor: pointer;
   }
 }
+
+
+
+@media (max-width:1900px) {
+  header{
+    padding: 0 32px;
+  }
+ 
+}
 </style>

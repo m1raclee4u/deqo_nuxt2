@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     resetItem() {
-      console.log("123");
+      // console.log("123");
       // this.itemComputed.color = ''
       // this.itemComputed.size = ''
     },

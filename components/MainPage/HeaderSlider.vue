@@ -189,6 +189,14 @@ footer {
     text-decoration: none;
   }
 }
+
+@media (max-width:1900px) {
+  section{
+    // margin: 0 -32px !important;
+    // padding: 0 32px !important;
+  } 
+
+}
 </style>
 
 

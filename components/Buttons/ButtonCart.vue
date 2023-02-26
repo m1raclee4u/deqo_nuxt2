@@ -56,7 +56,7 @@ export default {
           await delay(1000);
           this.$emit("highlightedSize");
         } else if (this.sizeChecked === "" && this.colorChecked === "") {
-          console.log("все");
+          // console.log("все");
           this.$emit("highlightedColor");
           this.$emit("highlightedSize");
           await delay(1000);
@@ -74,7 +74,7 @@ export default {
             this.itemComputed.color +
             this.itemComputed.size
         );
-        console.log(this.itemComputed);
+        // console.log(this.itemComputed);
         this.addProduct(this.itemComputed);
         if (
           this.$route.name === "favorite" &&

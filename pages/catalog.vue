@@ -4,60 +4,54 @@
       <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
     </Transition>
     <HeaderBlack />
-    <main class="main">
-      <aside class="aside">
-        <aside-categories
-          @updateChecked="sortByChecked"
-          @checked="getChecked"
-        />
-        <aside-filter @updateFiltered="sortByFiltered" />
-        <aside-color @updateCheckedColor="sortByCheckedColor" />
-        <aside-size />
-        <button class="filter">Отсортировать по фильтрам</button>
-      </aside>
-      <div class="items__main">
-        <div v-if="this.checkedId != ''" class="aic">
-          <p>Найдено {{ foundResults }} подходящих товаров</p>
-          <div
-            v-for="category in $store.state.categories.filter(
-              (el) => el.checked == true
-            )"
-            :key="category.id"
-          >
-            <button>
-              <i class="delete"></i>
-              {{ category.name }}
-            </button>
+    <section>
+      <main class="main">
+        <aside class="aside">
+          <aside-categories
+            @updateChecked="sortByChecked"
+            @checked="getChecked"
+          />
+          <aside-filter @updateFiltered="sortByFiltered" />
+          <aside-color @updateCheckedColor="sortByCheckedColor" />
+          <aside-size />
+          <button class="filter">Отсортировать по фильтрам</button>
+        </aside>
+        <div class="items__main">
+          <div v-if="this.checkedId != ''" class="aic">
+            <p>Найдено {{ foundResults }} подходящих товаров</p>
+            <div
+              v-for="category in $store.state.categories.filter(
+                (el) => el.checked == true
+              )"
+              :key="category.id"
+            >
+              <button>
+                <i class="delete"></i>
+                {{ category.name }}
+              </button>
+            </div>
           </div>
-        </div>
-        <div
-          class="
-            items
-            row
-            row-cols-1
-            row-cols-sm-1
-            row-cols-md-2
-            row-cols-lg-3
-            row-cols-xl-3
-            g-3
-          "
-        >
           <div
-            v-for="item in this.paginatedProducts"
-            :key="item.id"
-            class="col item"
+            class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3"
           >
-            <item :item="item" :key="item.id"> </item>
+            <div
+              v-for="item in this.paginatedProducts"
+              :key="item.id"
+              class="col item"
+            >
+              <item :item="item" :key="item.id"> </item>
+            </div>
           </div>
+          <button
+            @click="loadMore"
+            v-if="currentPage * maxPerPage < this.products.length"
+          >
+            Загрузить больше
+          </button>
         </div>
-        <button
-          @click="loadMore"
-          v-if="currentPage * maxPerPage < this.products.length"
-        >
-          Загрузить больше
-        </button>
-      </div>
-    </main>
+      </main>
+    </section>
+
     <Footer />
   </div>
 </template>

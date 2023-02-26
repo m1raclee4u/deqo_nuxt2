@@ -191,4 +191,10 @@ a {
   padding: 60px;
   z-index: 2020;
 }
+
+@media (max-width:1900px) {
+  .burger_menu{
+    margin: 0 -32px;
+  }
+}
 </style>

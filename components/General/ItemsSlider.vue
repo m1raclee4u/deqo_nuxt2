@@ -69,7 +69,7 @@ export default {
 .swiper-wrapper{
 }
 .item-slide{
-    width: 387px;
+    width: 387px !important;
     // background-color: #b8b8b8;
 }
 .linkToCatalog {
