@@ -208,7 +208,7 @@ button {
   }
   form {
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     gap: 20px;
     input[type="email"] {
       min-width: unset;

@@ -6,6 +6,7 @@ export default {
   // router: {
   //   base: '/<deqo_nuxt2>/'
   // },
+  // ssr: false,
   head: {
     title: 'deqo',
     htmlAttrs: {
@@ -25,11 +26,11 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-  // CSS file in the project
-  '~/assets/css/main.css',
-  '~/assets/css/fonts.css',
-  'element-ui/lib/theme-chalk/index.css',
-  '~/assets/css/app.css',
+    // CSS file in the project
+    '~/assets/css/main.css',
+    '~/assets/css/fonts.css',
+    'element-ui/lib/theme-chalk/index.css',
+    '~/assets/css/app.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -44,7 +45,12 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-
+  axios: {
+    baseURL: process.env.BASE_URL
+  },
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
@@ -52,7 +58,7 @@ export default {
       ...(isDev && {
         mode: 'debug'
       }),
-      localStorage: ['favorites','cart'] //  If not entered, “localStorage” is the default value
+      localStorage: ['favorites', 'cart'] //  If not entered, “localStorage” is the default value
     }]
   ],
 

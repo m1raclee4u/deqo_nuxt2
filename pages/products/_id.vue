@@ -8,11 +8,7 @@
     <section>
       <div class="itemPage">
         <div class="left">
-          <img
-            class="card__img"
-            :src="'https://frontend-test.idaproject.com' + item.photo"
-            :alt="item.name"
-          />
+         <productPhotos :images="item.images"/>
           <p>
             Брюки с комфортным поясом на кулиске не создают лишний объем
             благодаря зауженному книзу силуэту. Модель сшита из плотного
@@ -72,27 +68,7 @@
             <p>
               Цвет <span v-if="colorChecked != ''">: {{ colorChecked.name }}</span>
             </p>
-            <div class="flex colors">
-              <div
-                class="form_radio_btn_color"
-                v-for="color in this.colors"
-                :key="color.id"
-              >
-                <input
-                  name="color"
-                  type="radio"
-                  :value="color"
-                  v-model="colorChecked"
-                  @change="colorCheck"
-                  :id="color.id"
-                />
-                <label
-                  :class="{ highlightedColorClass: highlightedColor }"
-                  :id="color.id"
-                  :for="color.id"
-                ></label>
-              </div>
-            </div>
+            <productColors :colors="item.colors"/>
           </div>
           <div class="buttons">
             <div class="flex gap10">
@@ -172,6 +148,8 @@
 </template>
 
 <script>
+import productColors from "~/components/product/productColors.vue";
+import productPhotos from "~/components/product/productPhotos.vue";
 import FAQ from "~/components/General/FAQ.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
 import Footer from "~/components/General/Footer.vue";
@@ -256,21 +234,11 @@ export default {
       this.highlightedColor = !this.highlightedColor;
     },
   },
-  async asyncData({ params, redirect }) {
-    const items = await fetch(
-      "https://frontend-test.idaproject.com/api/product"
-    ).then((res) => res.json());
-
-    const filteredItem = items.find((el) => el.name === params.item);
-    if (filteredItem) {
-      let copiedItem = JSON.parse(JSON.stringify(filteredItem));
-      return {
-        item: copiedItem,
-        itemForFavorite: filteredItem,
-      };
-    } else {
-      redirect("/");
-    }
+  async asyncData({ $axios, route }) {
+    const item = await $axios.$get(
+      `/products/${route.params.id}/card-data`
+    );
+    return {item}
   },
 
   components: {
@@ -283,6 +251,8 @@ export default {
     DimensionalGrid,
     ButtonFavorite,
     FAQ,
+    productColors,
+    productPhotos,
   },
 };
 </script>

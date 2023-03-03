@@ -37,7 +37,7 @@ export default {
 }
 .buttons_help {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 20px;
 }
 .telegram {

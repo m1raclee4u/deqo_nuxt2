@@ -75,22 +75,23 @@ export const actions = {
   async fetchProducts({ commit }) {
     let products = [];
     await this.$axios
-      .get('https://frontend-test.idaproject.com/api/product?category=1')
-      .then(response => (products = response.data));
-    await this.$axios
-      .get('https://frontend-test.idaproject.com/api/product?category=2')
-      .then(response => (products = products.concat(response.data)));
-    await this.$axios
-      .get('https://frontend-test.idaproject.com/api/product?category=3')
-      .then(response => (products = products.concat(response.data)));
+      .get('http://localhost:8000/api/products?filter%5Bbrand_id%5D=1')
+      .then(response => products = response.data.products.data);
+
+    // await this.$axios
+    //   .get('https://frontend-test.idaproject.com/api/product?category=2')
+    //   .then(response => (products = products.concat(response.data)));
+    // await this.$axios
+    //   .get('https://frontend-test.idaproject.com/api/product?category=3')
+    //   .then(response => (products = products.concat(response.data)));
     commit("SET_PRODUCTS", products);
   },
 
   async fetchCategories({ commit }) {
     let categories;
     await this.$axios
-      .get("https://frontend-test.idaproject.com/api/product-category")
-      .then(response => (categories = response.data));
+      .get("http://127.0.0.1:8000/api/categories?brand_id=1")
+      .then(response => categories = response.data.categories);
     commit("SET_CATEGORIES", categories);
   }
 

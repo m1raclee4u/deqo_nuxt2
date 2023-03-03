@@ -6,7 +6,7 @@
       v-if="$store.state.selectParametrs === true && $route.name === 'favorite'"
     />
     <ButtonFavorite :item="item" inSlider="inSlider" />
-    <Nuxt-Link :to="`/${item.category}/${item.name}`">
+    <Nuxt-Link :to="`/products/${item.name}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
       <img
         class="card__img"
