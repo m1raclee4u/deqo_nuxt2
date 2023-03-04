@@ -48,20 +48,20 @@ export default {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
       if (this.sizeChecked === "" || this.colorChecked === "") {
         if (this.colorChecked === "") {
-          this.$emit("highlightedColor");
+          this.$emit("highlightedColorListener");
           await delay(1000);
-          this.$emit("highlightedColor");
+          this.$emit("highlightedColorListener");
         } else if (this.sizeChecked === "") {
-          this.$emit("highlightedSize");
+          this.$emit("highlightedSizeListener");
           await delay(1000);
-          this.$emit("highlightedSize");
+          this.$emit("highlightedSizeListener");
         } else if (this.sizeChecked === "" && this.colorChecked === "") {
           // console.log("все");
-          this.$emit("highlightedColor");
-          this.$emit("highlightedSize");
+          this.$emit("highlightedColorListener");
+          this.$emit("highlightedSizeListener");
           await delay(1000);
-          this.$emit("highlightedColor");
-          this.$emit("highlightedSize");
+          this.$emit("highlightedColorListener");
+          this.$emit("highlightedSizeListener");
         }
       } else {
         this.$set(this.itemComputed, "color", this.colorChecked.id);

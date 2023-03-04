@@ -38,7 +38,7 @@ export default {
       return this.products.find((p) => p.id === this.item.id);
     },
     currentRoute() {
-      if (this.$route.name === "category-item") return true;
+      if (this.$route.name === "products-id") return true;
       else return false;
     },
   },
