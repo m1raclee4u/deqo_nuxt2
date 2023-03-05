@@ -1,5 +1,5 @@
 <template>
-  <div class="faq">
+  <section>
     <h4 class="title">Частые вопросы</h4>
     <div class="questions">
       <div class="question first">
@@ -159,8 +159,8 @@
         </div>
       </div>
     </div>
-  </div>
-</template> 
+  </section>
+</template>
 
 <script>
 export default {
@@ -210,7 +210,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.faq {
+section {
   display: flex;
   flex-direction: column;
   gap: 60px;
