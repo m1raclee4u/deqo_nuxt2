@@ -9,13 +9,14 @@
 <template>
   <div class="productColors">
     <div class="colors">
-      <div class="color"
+      <NuxtLink class="color"
            v-for="color in colors"
            :key="color.id"
            :style="{backgroundColor: color.value}"
-           :class="{ highlightedColorClass: highlightedColor }"
+           @click="$router"
+                :to="`/products/${color.slug}`"
       >
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -29,8 +30,8 @@
 
     .color {
       border-radius: 50%;
-      width: 18px;
-      height: 18px;
+      width: 30px;
+      height: 30px;
     }
   }
 

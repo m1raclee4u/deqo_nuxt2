@@ -46,10 +46,10 @@ export default {
   buildModules: [
   ],
   axios: {
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.baseURL
   },
   publicRuntimeConfig: {
-    baseUrl: process.env.BASE_URL
+    baseURL: process.env.baseURL
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

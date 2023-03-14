@@ -69,8 +69,5 @@ export const actions = {
 export const getters = {
   getProducts: (state) => {
     return [...state.products]
-  },
-  getProducts: (state) => {
-    return [...state.products]
-  },
+  }
 }

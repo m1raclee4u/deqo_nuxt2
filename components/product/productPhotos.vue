@@ -46,7 +46,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide leftSlider" v-for="image in images" :key="image.id">
           <div class="image">
-            <img :src='IH.getUrl(image.path)' alt="">
+            <img :src='IH.getUrl($axios.defaults.baseURL + `/` + image.path)' alt="">
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="image in images" :key="image.id">
           <div class="image">
-            <img :src='IH.getUrl(image.path, 820)' alt="">
+            <img :src='IH.getUrl($axios.defaults.baseURL + `/` + image.path, 820)' alt="">
           </div>
         </div>
       </div>

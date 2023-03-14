@@ -6,7 +6,7 @@
     },
     methods:{
       checkSize(){
-
+        this.$emit()
       }
     }
   }
@@ -19,8 +19,7 @@
            v-for="size in sizes"
            :key="size.id"
            @click="checkSize()"
-           :class="{ highlightedSizeClass: highlightedSizeClass }
-"
+           :class="{ highlightedSizeClass: highlightedSizeClass }"
       >
         {{size.name}}
       </div>

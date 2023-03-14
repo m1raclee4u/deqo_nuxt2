@@ -54,7 +54,7 @@
     },
     async asyncData({$axios, route}) {
       const item = await $axios.$get(
-        `/products/${route.params.id}/card-data`
+        `/site/product?slug=${route.params.slug}`
       );
       return {item}
     },
@@ -107,7 +107,7 @@
               <p style="text-decoration: line-through" class="price old">
                 4,299 ₽
               </p>
-              <p class="price">{{ item.price }} ₽</p>
+              <p class="price">{{ item.price.price }} ₽</p>
             </div>
           </div>
           <div class="size">
@@ -138,7 +138,7 @@
                 :sizeChecked="sizeChecked"
                 :item="item"
               />
-              <ButtonFavorite :item="itemForFavorite" inSlider="inSlug"/>
+<!--              <ButtonFavorite :item="itemForFavorite" inSlider="inSlug"/>-->
             </div>
             <ButtonBuy/>
           </div>
