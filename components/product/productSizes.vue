@@ -49,7 +49,13 @@
       border-radius: 4px;
       user-select: none;
       transition: 0.3s all;
+      &:hover{
+      color: white;
+      background-color: #A9A1A1;
+
     }
+    }
+    
   }
 
   .highlightedSizeClass {

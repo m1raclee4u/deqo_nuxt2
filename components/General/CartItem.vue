@@ -10,7 +10,7 @@
       </Nuxt-Link>
       <div class="name">
         <Nuxt-Link :to="`/${item.category}/${item.name}`"
-          ><p>{{ item.name }}</p></Nuxt-Link
+          ><p>{{ item.title }}</p></Nuxt-Link
         >
         <span>{{ "предзаказ" }}</span>
       </div>
@@ -36,7 +36,7 @@
     </div>
     <div class="right">
       <div class="price">
-        <p>{{ item.price * item.quantity }}&nbsp;₽</p>
+        <p>{{ item.price.price * item.quantity }}&nbsp;₽</p>
       </div>
       <div class="delete" @click="deleteClickHandler"></div>
     </div>

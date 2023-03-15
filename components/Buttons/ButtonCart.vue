@@ -46,47 +46,21 @@ export default {
     }),
     async buyClickHandler() {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-      if (this.sizeChecked === "" || this.colorChecked === "") {
-        if (this.colorChecked === "") {
-          this.$emit("highlightedColorListener");
-          await delay(1000);
-          this.$emit("highlightedColorListener");
-        } else if (this.sizeChecked === "") {
-          this.$emit("highlightedSizeListener");
-          await delay(1000);
-          this.$emit("highlightedSizeListener");
-        } else if (this.sizeChecked === "" && this.colorChecked === "") {
-          // console.log("все");
-          this.$emit("highlightedColorListener");
-          this.$emit("highlightedSizeListener");
-          await delay(1000);
-          this.$emit("highlightedColorListener");
-          this.$emit("highlightedSizeListener");
-        }
-      } else {
-        this.$set(this.itemComputed, "color", this.colorChecked.id);
-        this.$set(this.itemComputed, "size", this.sizeChecked);
+        this.$set(this.itemComputed, "color", this.colorChecked);
+        // this.$set(this.itemComputed, "size", this.sizeChecked);
         this.$set(this.itemComputed, "quantity", 1);
-        this.$set(
-          this.itemComputed,
-          "arcticle",
-          this.itemComputed.name +
-            this.itemComputed.color +
-            this.itemComputed.size
-        );
-        // console.log(this.itemComputed);
+        console.log(this.itemComputed);
         this.addProduct(this.itemComputed);
-        if (
-          this.$route.name === "favorite" &&
-          this.$store.state.selectParametrs != false
-        ) {
-          this.$store.commit(
-            "SET_SELECT_PARAMETERS_OPENED",
-            !this.$store.state.selectParametrs
-          );
-        }
+        // if (
+        //   this.$route.name === "favorite" &&
+        //   this.$store.state.selectParametrs != false
+        // ) {
+        //   this.$store.commit(
+        //     "SET_SELECT_PARAMETERS_OPENED",
+        //     !this.$store.state.selectParametrs
+        //   );
+        // }
       }
-    },
   },
 };
 </script>
