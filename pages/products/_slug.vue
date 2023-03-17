@@ -14,7 +14,6 @@ import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
-import ProductSizes from "~/components/product/productSizes";
 
 Swiper.use([Navigation, Pagination, Autoplay]);
 
@@ -27,7 +26,6 @@ export default {
       checkedOpenedRecomendations: false,
       highlightedSizeData: false,
       highlightedColorData: false,
-      colorChecked: "",
       sizeChecked: "",
     };
   },
@@ -40,10 +38,6 @@ export default {
     },
     sizeCheck() {
       // this.$set(this.item, "size", this.sizeChecked);
-    },
-    colorCheck() {
-      // this.$set(this.item, "color", this.colorChecked.id);
-      // this.colorChecked = this.colorChecked.ш;
     },
     highlightedSizeMethod() {
       this.highlightedSizeData = !this.highlightedSizeData;
@@ -58,18 +52,20 @@ export default {
     );
     return { item }
   },
-  mounted() {
-    for (const color in this.item.colors) {
+  computed: {
+    colorChecked(){
+      for (const color in this.item.colors) {
       if (Object.hasOwnProperty.call(this.item.colors, color)) {
         const element = this.item.colors[color];
         if (element.id === this.item.color_id) {
-          this.colorChecked = element.name
+          return  element
         }
       }
     }
+    }
+    
   },
   components: {
-    ProductSizes,
     Footer,
     BurgerMenu,
     HeaderBlack,
@@ -108,9 +104,9 @@ export default {
             <p>Bestsellers</p>
             <div class="flex prices">
               <p style="text-decoration: line-through" class="price old">
-                4,299 ₽
+                {{item.old_price}} ₽
               </p>
-              <p class="price">{{ item.price.price }} ₽</p>
+              <p class="price">{{ item.price }} ₽</p>
             </div>
           </div>
           <div class="size">
@@ -125,15 +121,16 @@ export default {
           </div>
           <div class="color">
             <p>
-              Цвет <span>: {{ colorChecked }}</span>
+              Цвет <span>: {{ colorChecked.name }}</span>
             </p>
-            <productColors :colors="item.colors" :highlightedColor="highlightedColorData" />
+            <productColors :colors="item.colors" :category="item.category" :highlightedColor="highlightedColorData" />
           </div>
           <div class="buttons">
             <div class="flex gap10">
               <ButtonCart 
+                :colorChecked="colorChecked"
                 :item="item" />
-              <ButtonFavorite :item="itemForFavorite"/>
+              <ButtonFavorite :item="item"/>
             </div>
             <ButtonBuy />
           </div>
@@ -151,7 +148,7 @@ export default {
             </div>
             <div class="jcsb">
               <p style="line-height: 29px; width: 330px">
-                На модели размер: S <br />
+                На модели размер: <span class="modelSize"> {{ item.current_size.name }} </span> <br />
                 Параметры модели:  {{item.photoModel.height}} | {{item.photoModel.chest}} | {{item.photoModel.waist}} | {{item.photoModel.hips}}
               </p>
               <i :class="{ downActive: checkOpenedModel }" @click="checkedOpenedMethod" class="down"></i>
@@ -195,21 +192,25 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+.modelSize{
+  text-transform: uppercase;
+}
 .downActive {
-  background-image: url("../../assets/img/icons/buttonDown_active.svg") !important;
+  background-image: url("assets/img/icons/buttonDown_active.svg") !important;
 }
 
 .down {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  background-image: url("../../assets/img/icons/buttonDown.svg");
+  background-image: url("assets/img/icons/buttonDown.svg");
   background-position: center;
   background-repeat: no-repeat;
   transition: 0.9s ease all;
 
   &:hover {
-    background-image: url("../../assets/img/icons/buttonDown_active.svg");
+    background-image: url("assets/img/icons/buttonDown_active.svg");
   }
 }
 
@@ -217,7 +218,7 @@ export default {
   // border: 2px solid #BD270F !important;
   // background-color: #BC716E !important;
   opacity: 0.5;
-  background-image: url("../../assets/img/icons/colorNotChecked.svg");
+  background-image: url("assets/img/icons/colorNotChecked.svg");
   background-position: center;
   background-size: 10px 10px;
   background-repeat: no-repeat;

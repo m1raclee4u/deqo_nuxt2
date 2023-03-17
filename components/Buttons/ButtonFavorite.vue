@@ -1,16 +1,16 @@
 <template>
   <div
     class="buttonFavorite"
-    :class="{ block: currentRoute && inSlider === 'inSlug' }"
+    :class="{ relative: inSlider != 'inSlider' }"
   >
     <button
-      :class="{ big: currentRoute && inSlider === 'inSlug' && !isProductAdded}"
+      :class="{ big: inSlider != 'inSlider' && !isProductAdded}"
       class="like"
       v-if="!isProductAdded"
       @click.prevent="buyClickHandler"
     ></button>
     <button
-      :class="{ big: currentRoute && inSlider === 'inSlug' && !isProductAdded, big_added: isProductAdded && currentRoute && inSlider === 'inSlug' }"
+      :class="{ big: inSlider  != 'inSlider' && !isProductAdded, big_added: isProductAdded && inSlider != 'inSlider' }"
       class="like added"
       v-else
       @click.prevent="addedClickHandler"
@@ -35,11 +35,7 @@ export default {
       products: (state) => state.favorites.products,
     }),
     isProductAdded() {
-      return this.products.find((p) => p.id === this.item.id);
-    },
-    currentRoute() {
-      if (this.$route.name === "products-id") return true;
-      else return false;
+      return this.products.find((p) => p.title === this.item.title);
     },
   },
   methods: {
@@ -51,7 +47,7 @@ export default {
       this.addProduct(this.item);
     },
     addedClickHandler() {
-      this.removeProduct(this.item.id);
+      this.removeProduct(this.item);
     },
   },
 };
@@ -68,7 +64,7 @@ export default {
 .added {
   background-image: url("../../assets/img/icons/heart_on.svg") !important;
 }
-.block {
+.relative {
   position: relative !important;
   top: unset;
   right: unset;

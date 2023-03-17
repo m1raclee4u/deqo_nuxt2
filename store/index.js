@@ -90,8 +90,8 @@ export const actions = {
   async fetchCategories({ commit }) {
     let categories;
     await this.$axios
-      .get("http://127.0.0.1:8000/api/categories?brand_id=1")
-      .then(response => categories = response.data.categories);
+      .get("http://127.0.0.1:8000/api/site/categories")
+      .then(response => categories = response.data);
     commit("SET_CATEGORIES", categories);
   }
 

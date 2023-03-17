@@ -20,24 +20,21 @@ export default {
     colorChecked: {},
   },
   computed: {
-    itemComputed() {
-      return JSON.parse(JSON.stringify(this.item));
-    },
     ...mapState({
       products: (state) => state.cart.products,
     }),
     isProductAdded() {
       let added = this.products.find((p) => {
         if (
-          p.id === this.itemComputed.id &&
-          p.color === this.itemComputed.color &&
-          p.size === this.itemComputed.size
+          p.title === this.item.title
         ) {
           return true;
+        } else {
+          return false;
         }
       });
 
-      return added;
+      // return added;
     },
   },
   methods: {
@@ -46,11 +43,11 @@ export default {
     }),
     async buyClickHandler() {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-        this.$set(this.itemComputed, "color", this.colorChecked);
-        // this.$set(this.itemComputed, "size", this.sizeChecked);
-        this.$set(this.itemComputed, "quantity", 1);
-        console.log(this.itemComputed);
-        this.addProduct(this.itemComputed);
+        this.$set(this.item, "color", this.colorChecked);
+        // this.$set(this.item, "size", this.sizeChecked);
+        this.$set(this.item, "quantity", 1);
+        console.log(this.item);
+        this.addProduct(this.item);
         // if (
         //   this.$route.name === "favorite" &&
         //   this.$store.state.selectParametrs != false

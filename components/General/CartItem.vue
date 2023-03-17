@@ -9,14 +9,14 @@
         />
       </Nuxt-Link>
       <div class="name">
-        <Nuxt-Link :to="`/${item.category}/${item.name}`"
+        <Nuxt-Link  @click="$router" :to="`/products/${item.color.slug}`"
           ><p>{{ item.title }}</p></Nuxt-Link
         >
         <span>{{ "предзаказ" }}</span>
       </div>
     </div>
     <div class="center">
-      <div class="color" :id="item.color"></div>
+      <div class="color" :style="{backgroundColor: this.item.color.value}"></div>
       <div class="size" :id="item.size">{{ item.size }}</div>
       <div class="quantity">
         <div @click="itemQuantity--" class="buttons">

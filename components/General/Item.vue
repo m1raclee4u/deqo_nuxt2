@@ -30,8 +30,9 @@
         <div
           class="input_color_1"
           :id="color.id"
-          v-for="color in $store.state.colors"
+          v-for="color in item.colors"
           :key="color.id"
+          :style="{backgroundColor: color.value}"
           disabled
         >
           <!-- <label  class="colorItem"></label> -->

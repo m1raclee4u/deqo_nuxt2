@@ -2,11 +2,11 @@
   export default {
     props: {
       sizes: {},
-      highlightedSizeClass: Boolean,
     },
     methods:{
-      checkSize(){
-        this.$emit()
+      checkSize(size){
+        console.log(size);
+        // this.$emit('checkedColor', size)
       }
     }
   }
@@ -18,8 +18,7 @@
       <div class="size"
            v-for="size in sizes"
            :key="size.id"
-           @click="checkSize()"
-           :class="{ highlightedSizeClass: highlightedSizeClass }"
+           @click="checkSize(size)"
       >
         {{size.name}}
       </div>

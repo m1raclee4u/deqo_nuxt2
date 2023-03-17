@@ -9,15 +9,15 @@ export const state = () => ({
 export const mutations = {
   ADD_PRODUCT(state, product) {
     // if cart doesn't have product add it
-    if (!state.products.find(p => product.id === p.id)) {
+    if (!state.products.find(p => product.title === p.title)) {
       state.products = [...state.products, product]
     }
   },
-  SET_PRODUCT(state, { productId, data }) {
-    state.products = [...state.products.filter(prod => prod.id !== productId), data]
-  },
-  REMOVE_PRODUCT(state, productId) {
-    state.products = Array.from(state.products.filter(prod => prod.id !== productId))
+  // SET_PRODUCT(state, { productId, data }) {
+  //   state.products = [...state.products.filter(prod => prod.title !== productId), data]
+  // },
+  REMOVE_PRODUCT(state, product) {
+    state.products = Array.from(state.products.filter(prod => prod.title !== product.title))
   }
 
 }

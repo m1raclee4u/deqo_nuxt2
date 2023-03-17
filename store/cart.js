@@ -9,36 +9,36 @@ export const state = () => ({
 export const mutations = {
   ADD_PRODUCT(state, product) {
     let arr = state.products
-    if (!arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } })) {
+    if (!arr.find((p) => { if (p.title === product.title) { return true } })) {
       state.products = [...state.products, product]
     }
   },
-  SET_PRODUCT(state, { productId, data }) {
-    state.products = [...state.products.filter(prod => prod.id !== productId), data]
-  },
+  // SET_PRODUCT(state, { productId, data }) {
+  //   state.products = [...state.products.filter(prod => prod.id !== productId), data]
+  // },
   INCREMENT_PRODUCT(state, product) {
     let arr = state.products
-    if (arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } })) {
-      arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } }).quantity++
+    if (arr.find((p) => { if (p.title === product.title) { return true } })) {
+      arr.find((p) => { if (p.title === product.title) { return true } }).quantity++
     }
   },
   SET_QUANTITY(state, { product, quantity }) {
     let arr = state.products
-    if (arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } })) {
-      arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } }).quantity = quantity
+    if (arr.find((p) => { if (p.title === product.title) { return true } })) {
+      arr.find((p) => { if (p.title === product.title) { return true } }).quantity = quantity
     }
   },
   DECREMENT_PRODUCT(state, product) {
     let arr = state.products
-    if (arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } }).quantity === 1) {
-      arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } })), 1)
+    if (arr.find((p) => { if (p.title === product.title) { return true } }).quantity === 1) {
+      arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.title === product.title) { return true } })), 1)
     } else {
-      arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } }).quantity--
+      arr.find((p) => { if (p.title === product.title) { return true } }).quantity--
     }
   },
   REMOVE_PRODUCT(state, product) {
     let arr = state.products
-    arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.id === product.id && p.size === product.size && p.color === product.color) { return true } })), 1)
+    arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.title === product.title) { return true } })), 1)
   },
 
 }
