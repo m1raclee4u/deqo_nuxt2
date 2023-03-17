@@ -6,13 +6,9 @@
       v-if="$store.state.selectParametrs === true && $route.name === 'favorite'"
     />
     <ButtonFavorite :item="item" inSlider="inSlider" />
-    <Nuxt-Link :to="`/site/product?slug=${$route.params.slug}`">
+    <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
-      <img
-        class="card__img"
-        :src="'https://frontend-test.idaproject.com' + item.photo"
-        :alt="item.name"
-      />
+      <img class="card__img" :src='IH.getUrl($axios.defaults.baseURL + `/` + item.image, 400)' alt="item.name">
       <div class="tag">
         <p>ХИТ</p>
       </div>
@@ -20,7 +16,7 @@
       <!-- {{item}} -->
     </Nuxt-Link>
     <div class="top">
-      <p>{{ item.name }}</p>
+      <p>{{ item.title }}</p>
       <p class="quantity">осталось {{ 3 }} шт.</p>
     </div>
     <div class="ItemCart__price">
@@ -32,7 +28,7 @@
           :id="color.id"
           v-for="color in item.colors"
           :key="color.id"
-          :style="{backgroundColor: color.value}"
+          :style="{backgroundColor: color.value, border: color.name === 'Белый' ? `1px solid lightgrey` : `none`}"
           disabled
         >
           <!-- <label  class="colorItem"></label> -->
@@ -57,6 +53,8 @@
 <script>
 import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
 import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
+import ImageHelper from "~/plugins/imageHelper";
+
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -71,7 +69,9 @@ export default {
     inSlider: {},
   },
   data() {
-    return {};
+    return {
+      IH: new ImageHelper()
+    };
   },
   methods: {
     resetItem() {

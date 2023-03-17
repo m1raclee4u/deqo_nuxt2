@@ -51,33 +51,31 @@
           </div>
         </main>
       </section>
-  
+
       <Footer />
     </div>
   </template>
-  
+
   <script>
   import AsideCategories from "~/components/Aside/AsideCategories.vue";
   import AsideFilter from "~/components/Aside/AsideFilter.vue";
-  import Filters from "~/components/General/Filters.vue";
   import HeaderBlack from "~/components/General/HeaderBlack.vue";
   import Item from "~/components/General/Item.vue";
   import BurgerMenu from "~/components/General/BurgerMenu.vue";
   import Footer from "~/components/General/Footer.vue";
   import AsideSize from "~/components/Aside/AsideSize.vue";
-  
+
   export default {
     components: {
       HeaderBlack,
       Item,
       AsideFilter,
-      Filters,
       AsideCategories,
       BurgerMenu,
       Footer,
       AsideSize,
     },
-  
+
     props: ["category"],
     data() {
       return {
@@ -142,7 +140,7 @@
     },
   };
   </script>
-  
+
   <style lang="scss" scoped>
   .Breadcrumbs {
     width: 100%;
@@ -165,14 +163,14 @@
     cursor: pointer;
     height: 60px;
     width: 100%;
-  
+
     text-align: center;
     background: #685f5f;
     border: 2px solid #685f5f;
     border-radius: 4px;
     color: white;
   }
-  
+
   .aic {
     position: relative;
     width: 100%;
@@ -186,16 +184,16 @@
       font-weight: 400;
       font-size: 16px;
       line-height: 19px;
-  
+
       /* средний */
-  
+
       color: #a9a1a1;
       // width: 195px;
     }
   }
   .items__main {
     width: 100%;
-  
+
     button {
       margin: 40px auto 0 auto;
       display: flex;
@@ -205,16 +203,16 @@
       gap: 10px;
       width: 410px;
       height: 64px;
-  
+
       /* основной */
-  
+
       background: #685f5f;
       border-radius: 4px;
-  
+
       font-weight: 400;
       font-size: 18px;
       line-height: 22px;
-  
+
       color: white;
     }
   }

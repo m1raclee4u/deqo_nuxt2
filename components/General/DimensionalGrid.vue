@@ -492,7 +492,7 @@ export default {
             gap: 10px;
             .title{
                 display: flex;
-                align-items: start;
+                align-items: flex-start;
                 gap: 20px;
                 h5{
                     text-transform: uppercase;

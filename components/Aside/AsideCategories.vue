@@ -37,6 +37,7 @@ export default {
   },
   methods: {
     addChecked() {
+      this.$store.filters.dispatch("updateCategories")
       this.$emit("updateChecked", this.checkedId);
     },
   },

@@ -101,7 +101,9 @@ export default {
           <h4>{{ item.title }}</h4>
           <div class="tag__price">
             <!--TODO dynamic -->
-            <p>Bestsellers</p>
+            <p v-if="item.badge_bestseller">Bestsellers</p>
+            <p v-else-if="item.badge_coming_soon">Скоро в продаже</p>
+            <p v-else-if="item.badge_absent">Нет в наличии</p>
             <div class="flex prices">
               <p style="text-decoration: line-through" class="price old">
                 {{item.old_price}} ₽
@@ -406,7 +408,7 @@ export default {
   // gap: 150px;
   // padding-top: 110px;
   gap: 44px;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
 
   .left {

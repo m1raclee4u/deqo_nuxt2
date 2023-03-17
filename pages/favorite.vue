@@ -69,7 +69,6 @@
 <script>
 import AsideCategories from "~/components/Aside/AsideCategories.vue";
 import AsideFilter from "~/components/Aside/AsideFilter.vue";
-import Filters from "~/components/General/Filters.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
 import Item from "~/components/General/Item.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
@@ -82,7 +81,6 @@ export default {
     HeaderBlack,
     Item,
     AsideFilter,
-    Filters,
     AsideCategories,
     BurgerMenu,
     Breadcrumbs,
