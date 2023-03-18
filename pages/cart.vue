@@ -61,7 +61,6 @@ export default {
   components: {
     HeaderBlack,
     AsideFilter,
-    Filters,
     AsideCategories,
     BurgerMenu,
     Breadcrumbs,

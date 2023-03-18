@@ -32,7 +32,7 @@ export const mutations = {
 export const actions = {
     async addCategories({ commit }, data) {
         await sleep(300)
-        await commit('ADD_PRODUCT', data)
+        await commit('ADD_CATEGORIES', data)
     },
     async removeProduct({ commit }, productId) {
         await sleep(300)

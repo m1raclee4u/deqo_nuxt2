@@ -17,7 +17,7 @@
     </div>
     <div class="center">
       <div class="color" :style="{backgroundColor: this.item.color.value}"></div>
-      <div class="size" :id="item.size">{{ item.size }}</div>
+      <div class="size" :id="item.size">{{ item.size.name }}</div>
       <div class="quantity">
         <div @click="itemQuantity--" class="buttons">
           <img src="../../assets/img/icons/quantity/minus.svg" alt="" />
@@ -36,7 +36,7 @@
     </div>
     <div class="right">
       <div class="price">
-        <p>{{ item.price.price * item.quantity }}&nbsp;₽</p>
+        <p>{{ item.price * item.quantity }}&nbsp;₽</p>
       </div>
       <div class="delete" @click="deleteClickHandler"></div>
     </div>

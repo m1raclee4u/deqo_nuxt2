@@ -166,7 +166,6 @@ export default {
     HeaderBlack,
     Item,
     AsideFilter,
-    Filters,
     AsideCategories,
     AsideInfoPages,
     AsideHelp,

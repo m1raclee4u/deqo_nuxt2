@@ -24,12 +24,14 @@ export default {
       title_recomended: "Может подойти",
       checkOpenedModel: false,
       checkedOpenedRecomendations: false,
-      highlightedSizeData: false,
-      highlightedColorData: false,
+      highlightedSize: false,
       sizeChecked: "",
     };
   },
   methods: {
+    sizeCheckedCallback(size){
+      this.sizeChecked = size
+    },
     checkedOpenedMethod() {
       this.checkOpenedModel = !this.checkOpenedModel;
     },
@@ -39,11 +41,8 @@ export default {
     sizeCheck() {
       // this.$set(this.item, "size", this.sizeChecked);
     },
-    highlightedSizeMethod() {
-      this.highlightedSizeData = !this.highlightedSizeData;
-    },
-    highlightedColorMethod() {
-      this.highlightedColorData = !this.highlightedColorData;
+    highlightedSizeToggle(isHighlight) {
+      this.highlightedSize = isHighlight;
     },
   },
   async asyncData({ $axios, route }) {
@@ -113,7 +112,7 @@ export default {
           </div>
           <div class="size">
             <p>Размер</p>
-            <productSizes :sizes="item.sizes" :highlightedSize="highlightedSizeData" />
+            <productSizes :sizes="item.sizes" @checkedSizeHandler="sizeCheckedCallback" :highlightedSize="highlightedSize" />
             <div @click="
               $store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)
             " class="sizesPopup">
@@ -125,12 +124,14 @@ export default {
             <p>
               Цвет <span>: {{ colorChecked.name }}</span>
             </p>
-            <productColors :colors="item.colors" :category="item.category" :highlightedColor="highlightedColorData" />
+            <productColors :colors="item.colors" :category="item.category" />
           </div>
           <div class="buttons">
             <div class="flex gap10">
               <ButtonCart 
+                :sizeChecked="sizeChecked"
                 :colorChecked="colorChecked"
+                @sizeValidationHighlightHandler="highlightedSizeToggle"
                 :item="item" />
               <ButtonFavorite :item="item"/>
             </div>

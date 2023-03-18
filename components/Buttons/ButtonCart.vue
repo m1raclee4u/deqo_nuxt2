@@ -43,11 +43,18 @@ export default {
     }),
     async buyClickHandler() {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-        this.$set(this.item, "color", this.colorChecked);
-        // this.$set(this.item, "size", this.sizeChecked);
-        this.$set(this.item, "quantity", 1);
-        console.log(this.item);
-        this.addProduct(this.item);
+        
+        if (this.sizeChecked === '') {
+          this.$emit('sizeValidationHighlightHandler', true)
+          await delay(500)
+          this.$emit('sizeValidationHighlightHandler', false)
+        } else {
+          this.$set(this.item, "color", this.colorChecked);
+          this.$set(this.item, "size", this.sizeChecked);
+          this.$set(this.item, "quantity", 1);
+          console.log(this.item);
+          this.addProduct(this.item);
+        }
         // if (
         //   this.$route.name === "favorite" &&
         //   this.$store.state.selectParametrs != false
