@@ -104,7 +104,7 @@ export default {
             <p v-else-if="item.badge_coming_soon">Скоро в продаже</p>
             <p v-else-if="item.badge_absent">Нет в наличии</p>
             <div class="flex prices">
-              <p style="text-decoration: line-through" class="price old">
+              <p v-if="item?.old_price" style="text-decoration: line-through" class="price old">
                 {{item.old_price}} ₽
               </p>
               <p class="price">{{ item.price }} ₽</p>
@@ -132,7 +132,10 @@ export default {
                 :sizeChecked="sizeChecked"
                 :colorChecked="colorChecked"
                 @sizeValidationHighlightHandler="highlightedSizeToggle"
-                :item="item" />
+                :item="item"
+                :disabled="item.badge_absent"
+                :style="{opacity: item.badge_absent ? 0.5 : 1, 'pointer-events': item.badge_absent ? 'none' : 'inherit'}"
+                 />
               <ButtonFavorite :item="item"/>
             </div>
             <ButtonBuy />

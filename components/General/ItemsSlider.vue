@@ -9,7 +9,7 @@
       <div class="swiper-wrapper">
         <div
           v-for="item in this.products.slice(0, 8)"
-          :key="item.id"
+          :key="item.article_number + '_' + item.title"
           class="swiper-slide item-slide"
         >
           <item :item="item" inSlider="inSlider" :key="item.id"> </item>
@@ -33,44 +33,58 @@ export default {
       type: String,
     },
   },
+  data() {
+    return{
+      slider: null,
+    }
+  },
   components: { Item },
   computed: {
     products() {
-      return this.$store.getters["products"];
+      return this.$store.getters["catalog/getProducts"];
     },
     productsInCart() {
       return this.$store.getters["productsInCart"];
     },
   },
-  beforeMount() {
-    if (this.$store.getters["products"].length === 0) {
-      this.$store.dispatch("fetchProducts");
-    }
-    if (this.$store.getters["categories"].length === 0) {
-      this.$store.dispatch("fetchCategories");
-    }
-  },
+  // async asyncData({store}) {
+  //   if (store.getters["catalog/getProducts"].length === 0) {
+  //     await store.dispatch("catalog/fetchProducts");
+  //   }
+  //   if (store.getters["catalog/getCategories"].length === 0) {
+  //     await store.dispatch("catalog/fetchCategories");
+  //   }
+  // },
   mounted() {
-    new Swiper(".bestsellers", {
+    if (this.$store.getters["catalog/getProducts"].length === 0) {
+      this.$store.dispatch("catalog/fetchProducts");
+    }
+    if (this.$store.getters["catalog/getCategories"].length === 0) {
+      this.$store.dispatch("catalog/fetchCategories");
+    }
+    setTimeout(() => {
+      this.slider = new Swiper(".bestsellers", {
       slidesPerView: 4,
       spaceBetween: 40,
     });
+    }, 500);
+    
   },
-  updated() {
-    new Swiper(".bestsellers", {
-      slidesPerView: 4,
-      spaceBetween: 40,
-    });
-  },
+  // updated() {
+  //   new Swiper(".bestsellers", {
+  //     slidesPerView: 4,
+  //     spaceBetween: 40,
+  //   });
+  // },
 };
 </script>
 
 <style lang="scss" scoped>
-.swiper-wrapper{
+.swiper-wrapper {
 }
-.item-slide{
-    width: 387px !important;
-    // background-color: #b8b8b8;
+.item-slide {
+  width: 387px !important;
+  // background-color: #b8b8b8;
 }
 .linkToCatalog {
   &:hover {

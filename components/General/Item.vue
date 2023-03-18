@@ -8,7 +8,7 @@
     <ButtonFavorite :item="item" inSlider="inSlider" />
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
-      <img class="card__img" :src='IH.getUrl($axios.defaults.baseURL + `/` + item.image, 400)' alt="item.name">
+      <img width="400" height="500" class="card__img" :src='IH.getUrl($axios.defaults.baseURL + `/` + item.image, 400)' alt="item.name">
       <div class="tag">
         <p>ХИТ</p>
       </div>
@@ -144,15 +144,15 @@ button {
 }
 .ItemCart {
   position: relative;
-  max-width: 405px;
-  width: 100%;
+  width: 400px;
+    height: 100%;
   //   padding-bottom: 60px;
   img {
-    width: 100%;
-    height: auto;
-    background-color: black;
-    margin-top: 100px;
+     width: 400px;
+    height: 500px;
     margin-bottom: 25px;
+    background-color: #ebebeb;
+
   }
   p {
     font-family: "RF Dewi";

@@ -20,7 +20,7 @@
           <div v-if="this.checkedId != ''" class="aic">
             <p>Найдено {{ foundResults }} подходящих товаров</p>
             <div
-              v-for="category in $store.state.categories.filter(
+              v-for="category in $store.state.catalog.categories.filter(
                 (el) => el.checked == true
               )"
               :key="category.id"
@@ -32,14 +32,14 @@
             </div>
           </div>
           <div
-            class="items row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-3"
+            class="items"
           >
             <div
               v-for="item in this.paginatedProducts"
-              :key="item.id"
+              :key="item.article_number + '_' + item.title"
               class="col item"
             >
-              <item :item="item" :key="item.id"> </item>
+              <item :item="item"> </item>
             </div>
           </div>
           <button
@@ -113,15 +113,15 @@ export default {
       if (this.checkedId.length !== 0) {
         for (let i = 0; i < this.checkedId.length; i++) {
           const checked = this.checkedId[i];
-          for (let j = 0; j < this.$store.getters["products"].length; j++) {
-            const find = this.$store.getters["products"][j];
+          for (let j = 0; j < this.$store.getters["catalog/getProducts"].length; j++) {
+            const find = this.$store.getters["catalog/getProducts"][j];
             if (find.category == checked) {
               checkedArray.push(find);
             }
           }
         }
         return checkedArray;
-      } else return this.$store.getters["products"];
+      } else return this.$store.getters["catalog/getProducts"];
     },
     productsInCart() {
       return this.$store.getters["productsInCart"];
@@ -143,11 +143,11 @@ export default {
     },
   },
   mounted() {
-    if (this.$store.getters["products"].length === 0) {
-      this.$store.dispatch("fetchProducts");
+    if (this.$store.getters["catalog/getProducts"].length === 0) {
+      this.$store.dispatch("catalog/fetchProducts");
     }
-    if (this.$store.getters["categories"].length === 0) {
-      this.$store.dispatch("fetchCategories");
+    if (this.$store.getters["catalog/getCategories"].length === 0) {
+      this.$store.dispatch("catalog/fetchCategories");
     }
   },
 };

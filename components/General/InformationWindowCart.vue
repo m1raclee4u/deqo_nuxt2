@@ -41,17 +41,19 @@ export default {
   props: {
     allFieldsAreFilled: "",
   },
+  mounted() {
+  },
   computed: {
     ...mapGetters("cart", ["getProducts"]),
     fullprice() {
-      let fullPrice = 0;
+      let priceStart = 0
       for (const item in this.getProducts) {
         if (Object.hasOwnProperty.call(this.getProducts, item)) {
           const element = this.getProducts[item];
-          fullPrice += element.quantity * element.price;
+          priceStart += element.quantity * element.price;
         }
       }
-      return fullPrice;
+      return priceStart
     },
   },
 };

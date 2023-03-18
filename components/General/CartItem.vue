@@ -3,20 +3,30 @@
     <div class="left">
       <Nuxt-Link :to="`/${item.category}/${item.name}`">
         <img
-          class="cart__img"
-          :src="'https://frontend-test.idaproject.com' + item.photo"
-          :alt="item.name"
+          :src="
+            IH.getUrl($axios.defaults.baseURL + `/` + item.images[0].path, 100)
+          "
+          alt=""
         />
       </Nuxt-Link>
       <div class="name">
-        <Nuxt-Link  @click="$router" :to="`/products/${item.color.slug}`"
+        <Nuxt-Link @click="$router" :to="`/products/${item.color.slug}`"
           ><p>{{ item.title }}</p></Nuxt-Link
         >
-        <span>{{ "предзаказ" }}</span>
+        <span v-if="item.badge_bestseller">Bestsellers</span>
+        <span v-else-if="item.badge_coming_soon">Предзаказ</span>
+        <span v-else-if="item.badge_absent">Нет в наличии</span>
       </div>
     </div>
     <div class="center">
-      <div class="color" :style="{backgroundColor: this.item.color.value}"></div>
+      <div
+        class="color"
+        :style="{
+          backgroundColor: this.item.color.value,
+          border:
+            this.item.color.name === 'Белый' ? `1px solid lightgrey` : `none`,
+        }"
+      ></div>
       <div class="size" :id="item.size">{{ item.size.name }}</div>
       <div class="quantity">
         <div @click="itemQuantity--" class="buttons">
@@ -45,11 +55,13 @@
 
 <script>
 import { mapActions } from "vuex";
+import ImageHelper from "~/plugins/imageHelper";
 
 export default {
   data() {
     return {
       itemQuantity: 0,
+      IH: new ImageHelper(),
     };
   },
   props: {
