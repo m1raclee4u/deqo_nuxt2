@@ -9,7 +9,7 @@ export const state = () => ({
 export const mutations = {
   ADD_PRODUCT(state, product) {
     let arr = state.products
-    if (!arr.find((p) => { if (p.title === product.title) { return true } })) {
+    if (!arr.find((p) => { if (p.key === product.key) { return true } })) {
       state.products = [...state.products, product]
     }
   },
@@ -18,27 +18,27 @@ export const mutations = {
   // },
   INCREMENT_PRODUCT(state, product) {
     let arr = state.products
-    if (arr.find((p) => { if (p.title === product.title) { return true } })) {
-      arr.find((p) => { if (p.title === product.title) { return true } }).quantity++
+    if (arr.find((p) => { if (p.key === product.key) { return true } })) {
+      arr.find((p) => { if (p.key === product.key) { return true } }).quantity++
     }
   },
   SET_QUANTITY(state, { product, quantity }) {
     let arr = state.products
-    if (arr.find((p) => { if (p.title === product.title) { return true } })) {
-      arr.find((p) => { if (p.title === product.title) { return true } }).quantity = quantity
+    if (arr.find((p) => { if (p.key === product.key) { return true } })) {
+      arr.find((p) => { if (p.key === product.key) { return true } }).quantity = quantity
     }
   },
   DECREMENT_PRODUCT(state, product) {
     let arr = state.products
-    if (arr.find((p) => { if (p.title === product.title) { return true } }).quantity === 1) {
-      arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.title === product.title) { return true } })), 1)
+    if (arr.find((p) => { if (p.key === product.key) { return true } }).quantity === 1) {
+      arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.key === product.key) { return true } })), 1)
     } else {
-      arr.find((p) => { if (p.title === product.title) { return true } }).quantity--
+      arr.find((p) => { if (p.key === product.key) { return true } }).quantity--
     }
   },
   REMOVE_PRODUCT(state, product) {
     let arr = state.products
-    arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.title === product.title) { return true } })), 1)
+    arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.key === product.key) { return true } })), 1)
   },
 
 }

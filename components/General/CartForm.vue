@@ -1,6 +1,5 @@
 <template>
   <div class="deliveryForm">
-    <h4>Оформление заказа</h4>
     <form action="POST" class="form">
       <div class="input">
         <label for="email">Email</label>
@@ -42,55 +41,31 @@
         />
       </div>
       <div class="input">
+        <label for="address">Адрес</label>
+        <cart-form-addres-select />
+        <!-- <input autocomplete="tex" id="address" @input="checkFilled" v-model="cartAddress" class="button" type="text" /> -->
+      </div>
+
+      <!-- <div class="input">
         <label for="address-level2">Населенный пункт</label>
-        <input
-          autocomplete="address-level2"
-          @input="checkFilled"
-          v-model="cartForm.cartCity"
-          class="button"
-          type="email"
-          name=""
-          id="address-level2"
-          placeholder="Населенный пункт"
-        />
+        <input autocomplete="address-level2" @input="checkFilled" v-model="cartForm.cartCity" class="button" type="email"
+          name="" id="address-level2" placeholder="Населенный пункт" />
       </div>
       <div class="input">
         <label for="street-address">Улица</label>
-        <input
-          autocomplete="street-address"
-          @input="checkFilled"
-          v-model="cartForm.cartStreet"
-          class="button"
-          type="email"
-          name=""
-          id="street-address"
-          placeholder="Улица"
-        />
+        <input autocomplete="street-address" @input="checkFilled" v-model="cartForm.cartStreet" class="button"
+          type="email" name="" id="street-address" placeholder="Улица" />
       </div>
       <div class="input">
         <label for="homeNumber">Дом</label>
         <div class="group">
-          <input
-            @input="checkFilled"
-            v-model="cartForm.cartHome"
-            class="button"
-            type="email"
-            name=""
-            id="homeNumber"
-            placeholder="Дом"
-          />
-          <input
-            @input="checkFilled"
-            v-model="cartForm.cartFlat"
-            class="button"
-            type="email"
-            name=""
-            id="flatNubmer"
-            placeholder="Квартира"
-          />
+          <input @input="checkFilled" v-model="cartForm.cartHome" class="button" type="email" name="" id="homeNumber"
+            placeholder="Дом" />
+          <input @input="checkFilled" v-model="cartForm.cartFlat" class="button" type="email" name="" id="flatNubmer"
+            placeholder="Квартира" />
         </div>
-      </div>
-      <div class="input">
+      </div> -->
+      <div id="delivery" class="input">
         <label for="deliveryType">Способ доставки</label>
         <div class="group" id="deliveryType">
           <div class="flex">
@@ -107,7 +82,7 @@
           </div>
         </div>
       </div>
-      <div class="input">
+      <div class="input payment">
         <label for="paymentMethod">Способ платежа</label>
         <div class="group">
           <div class="flex" id="paymentMethod">
@@ -119,7 +94,7 @@
       <div class="input">
         <label for="comment">Коментарий</label>
         <textarea
-          style="resize: none; max-width: 710px; min-height: 140px"
+          style="resize: none; min-height: 140px"
           class="button"
           name="comment"
           id="comment"
@@ -132,18 +107,23 @@
 </template>
 
 <script>
+import CartFormAddresSelect from "~/components/General/CartFormAddresSelect.vue";
+
 export default {
+  components: { CartFormAddresSelect },
   data() {
     return {
       cartForm: {
         cartEmail: "",
         cartName: "",
         cartTel: "",
-        cartCity: "",
-        cartStreet: "",
-        cartHome: "",
-        cartFlat: "",
+        // cartCity: "",
+        // cartStreet: "",
+        // cartHome: "",
+        // cartFlat: "",
       },
+      daDataResponse: {},
+      daDataQuery: "",
     };
   },
   methods: {
@@ -157,8 +137,21 @@ export default {
       }
       if (emptyInputs === 0) this.$emit("emitAllFieldsAreFilled");
       else if (emptyInputs != 0) this.$emit("emitAllFieldsNotFilled");
-
-      // console.log(emptyInputs);
+    },
+  },
+  computed: {
+    cartAddress: {
+      get() {
+        return this.daDataQuery;
+      },
+      set(value) {
+        this.daDataQuery = value;
+        this.$axios.get("/site/geo", {
+          params: {
+            query: value,
+          },
+        });
+      },
     },
   },
 };
@@ -175,18 +168,21 @@ label {
 
   color: #685f5f;
 }
+
 .button {
   text-align: left;
   padding: 18px 20px;
   border: 1px solid #685f5f;
   border-radius: 4px;
 }
+
 .deliveryForm {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 60px;
   width: 100%;
+
   h4 {
     font-weight: 600;
     font-size: 28px;
@@ -194,29 +190,99 @@ label {
     color: #4a4444;
   }
 }
+
 .form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
+
 .input {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 980px;
+
+  textarea {
+    max-width: 710px;
+  }
+
   input {
     max-width: 710px;
   }
+
   .group {
     max-width: 710px;
     width: 100%;
     display: flex;
     gap: 60px;
+
     .flex {
       display: flex;
       gap: 20px;
     }
   }
+}
+
+@media (max-width: 1024px) {
+  .deliveryForm {
+    max-width: 592px;
+    margin: 0 auto;
+
+    #delivery {
+      align-items: flex-start;
+    }
+
+    .input {
+      #deliveryType {
+        flex-direction: column;
+      }
+
+      .group {
+        gap: 32px;
+        max-width: 370px;
+      }
+
+      textarea {
+        max-width: 370px;
+      }
+    }
+  }
+
+  input {
+    max-width: 370px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    label {
+      font-size: 16px;
+    }
+
+    input {
+      font-size: 16px;
+    }
+  }
+
+  .payment {
+    gap: 20px;
+  }
+
+  #delivery {
+    gap: 20px;
+  }
+
+  #deliveryType {
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 640px) {
 }
 </style>

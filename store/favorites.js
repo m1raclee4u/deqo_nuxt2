@@ -13,9 +13,6 @@ export const mutations = {
       state.products = [...state.products, product]
     }
   },
-  // SET_PRODUCT(state, { productId, data }) {
-  //   state.products = [...state.products.filter(prod => prod.title !== productId), data]
-  // },
   REMOVE_PRODUCT(state, product) {
     state.products = Array.from(state.products.filter(prod => prod.title !== product.title))
   }

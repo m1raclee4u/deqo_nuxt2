@@ -34,6 +34,14 @@ export default {
     ItemsSlider,
   },
   name: "IndexPage",
+   async asyncData({store}) {
+    if (store.getters["catalog/getProducts"].length === 0) {
+      await store.dispatch("catalog/fetchProducts");
+    }
+    if (store.getters["catalog/getCategories"].length === 0) {
+      await store.dispatch("catalog/fetchCategories");
+    }
+  },
 };
 </script>
 

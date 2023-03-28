@@ -40,6 +40,7 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     allFieldsAreFilled: "",
+    products: Array,
   },
   mounted() {
   },
@@ -47,9 +48,9 @@ export default {
     ...mapGetters("cart", ["getProducts"]),
     fullprice() {
       let priceStart = 0
-      for (const item in this.getProducts) {
-        if (Object.hasOwnProperty.call(this.getProducts, item)) {
-          const element = this.getProducts[item];
+      for (const item in this.products) {
+        if (Object.hasOwnProperty.call(this.products, item)) {
+          const element = this.products[item];
           priceStart += element.quantity * element.price;
         }
       }
@@ -86,6 +87,8 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 300px;
+    max-width: 380px;
     width: 100%;
     padding: 20px;
     background-color: #a9a1a1;
@@ -134,5 +137,11 @@ export default {
       cursor: unset;
     }
   }
+}
+
+@media (max-width: 1024px) {
+    .windowCart{
+      margin: 0 auto;
+    }
 }
 </style>

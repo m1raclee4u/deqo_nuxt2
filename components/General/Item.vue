@@ -8,7 +8,7 @@
     <ButtonFavorite :item="item" inSlider="inSlider" />
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
-      <img width="400" height="500" class="card__img" :src='IH.getUrl($axios.defaults.baseURL + `/` + item.image, 400)' alt="item.name">
+      <img width="387" height="587" class="card__img" :src='IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)' alt="item.name">
       <div class="tag">
         <p>ХИТ</p>
       </div>
@@ -72,13 +72,6 @@ export default {
     return {
       IH: new ImageHelper()
     };
-  },
-  methods: {
-    resetItem() {
-      // console.log("123");
-      // this.itemComputed.color = ''
-      // this.itemComputed.size = ''
-    },
   },
   components: { ButtonFavorite, selectAdditionalParameter },
 };
@@ -144,12 +137,12 @@ button {
 }
 .ItemCart {
   position: relative;
-  width: 400px;
+  width: 387px;
     height: 100%;
   //   padding-bottom: 60px;
   img {
-     width: 400px;
-    height: 500px;
+     width: 387px;
+    height: 587px;
     margin-bottom: 25px;
     background-color: #ebebeb;
 
@@ -190,13 +183,7 @@ button {
 }
 @media (max-width: 1280px) {
   .ItemCart {
-    // padding-bottom: 60px;
-    img {
-      max-width: 100%;
-      height: auto;
-      background-color: black;
-      margin-bottom: 25px;
-    }
+    // padding-bottom: 60px;   
     p {
       margin-bottom: 20px;
       font-size: 13px;

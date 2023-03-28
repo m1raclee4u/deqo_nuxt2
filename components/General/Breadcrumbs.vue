@@ -38,6 +38,7 @@ export default {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+
   a {
     text-decoration: none;
     font-weight: 400;
@@ -45,12 +46,26 @@ export default {
     line-height: 19px;
     color: #cdcaca;
   }
+
   p {
     text-decoration: none;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     color: #cdcaca;
+  }
+}
+
+@media (max-width:1472px) {
+  .breadcrumbs {
+    max-width: 960px;
+
+    padding: 0 30px;
+  }
+}
+@media (max-width: 640px) {
+  .breadcrumbs{
+    padding: 0 10px;
   }
 }
 </style>

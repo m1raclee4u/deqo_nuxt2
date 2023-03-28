@@ -23,6 +23,15 @@ export default {
     ...mapState({
       products: (state) => state.cart.products,
     }),
+    computedItem(){
+      return {
+        product_id: this.item.product_id,
+        color_id: this.item.color_id,
+        size_id: this.sizeChecked.id,
+        quantity: 1,
+        key: `${this.item.product_id}_${this.item.color_id}_${this.sizeChecked.id}`
+      }
+    },
     isProductAdded() {
       let added = this.products.find((p) => {
         if (
@@ -49,11 +58,10 @@ export default {
           await delay(500)
           this.$emit('sizeValidationHighlightHandler', false)
         } else {
-          this.$set(this.item, "color", this.colorChecked);
-          this.$set(this.item, "size", this.sizeChecked);
-          this.$set(this.item, "quantity", 1);
-          console.log(this.item);
-          this.addProduct(this.item);
+          // this.$set(this.item, "color_id", this.colorChecked);
+          // this.$set(this.item, "size_id", this.sizeChecked);
+          // this.$set(this.item, "quantity", 1);
+          this.addProduct(this.computedItem);
         }
         // if (
         //   this.$route.name === "favorite" &&

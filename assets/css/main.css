@@ -108,6 +108,10 @@ button{
   opacity: 0;
 }
 
+.swiper-button-prev, .swiper-button-next{
+z-index: 1 !important;
+}
+
 
 @media (max-width:1900px) {
   .p60{

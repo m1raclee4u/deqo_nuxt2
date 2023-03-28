@@ -4,17 +4,17 @@
       <h2>{{ title }}</h2>
       <Nuxt-Link class="linkToCatalog" to="catalog">смотреть все</Nuxt-Link>
     </div>
-    <div class="bestsellers">
+    <div class="mainSlider">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
-        <div
-          v-for="item in this.products.slice(0, 8)"
-          :key="item.article_number + '_' + item.title"
-          class="swiper-slide item-slide"
-        >
+        <div v-for="item in this.products.slice(0, 12)" :key="item.slug"
+          class="swiper-slide item-slide">
           <item :item="item" inSlider="inSlider" :key="item.id"> </item>
         </div>
+
       </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </section>
 </template>
@@ -34,7 +34,7 @@ export default {
     },
   },
   data() {
-    return{
+    return {
       slider: null,
     }
   },
@@ -47,58 +47,56 @@ export default {
       return this.$store.getters["productsInCart"];
     },
   },
-  // async asyncData({store}) {
-  //   if (store.getters["catalog/getProducts"].length === 0) {
-  //     await store.dispatch("catalog/fetchProducts");
-  //   }
-  //   if (store.getters["catalog/getCategories"].length === 0) {
-  //     await store.dispatch("catalog/fetchCategories");
-  //   }
-  // },
+
   mounted() {
-    if (this.$store.getters["catalog/getProducts"].length === 0) {
-      this.$store.dispatch("catalog/fetchProducts");
-    }
-    if (this.$store.getters["catalog/getCategories"].length === 0) {
-      this.$store.dispatch("catalog/fetchCategories");
-    }
-    setTimeout(() => {
-      this.slider = new Swiper(".bestsellers", {
-      slidesPerView: 4,
+    new Swiper(".mainSlider", {
+      slidesPerView: 'auto',
       spaceBetween: 40,
-    });
-    }, 500);
-    
+      loop: true,
+      centeredSlides: false,
+      centeredSlidesBounds: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    })
   },
-  // updated() {
-  //   new Swiper(".bestsellers", {
-  //     slidesPerView: 4,
-  //     spaceBetween: 40,
-  //   });
-  // },
 };
 </script>
 
 <style lang="scss" scoped>
-.swiper-wrapper {
+
+.mainSlider{
+  position: relative;
 }
+.swiper-wrapper {}
+
 .item-slide {
   width: 387px !important;
   // background-color: #b8b8b8;
 }
+
 .linkToCatalog {
   &:hover {
     color: #5b5353;
   }
 }
+
 a {
   text-decoration: none;
   color: #b8b8b8;
 }
+
 img {
   max-width: 100%;
   height: auto;
 }
+
+.mainSlider{
+    // max-width: 834px;
+    overflow: hidden;
+  }
+
 section {
   display: flex;
   flex-direction: column;
@@ -107,11 +105,16 @@ section {
   max-width: 1676px;
   width: 100%;
   overflow: hidden;
+
   h2 {
     font-weight: 600;
     font-size: 24px;
     line-height: 29px;
     color: #685f5f;
   }
+}
+@media (max-width: 1280px) {
+  
+  
 }
 </style>

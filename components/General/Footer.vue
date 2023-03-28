@@ -201,6 +201,7 @@ button {
     }
   }
   .column {
+    max-width: 228px;
     gap: 18px;
     .links {
       gap: 20px;
@@ -222,6 +223,14 @@ button {
   footer{
     flex-wrap: wrap;
     height: 100%;
+    gap: 70px;
+  }
+}
+@media (max-width: 640px){
+  footer{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <form method="post">
+  <div class="form">
     <input type="text" name="promocode" id="" placeholder="Введите промокод" />
     <button>Отправить</button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -10,6 +10,9 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.form{
+  margin-top: 70px;
+}
 input[type="text"] {
   background-color: inherit;
   min-width: 300px;

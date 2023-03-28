@@ -5,6 +5,7 @@
     </Transition>
     <HeaderBlack />
     <Breadcrumbs />
+
     <main class="main">
       <div class="title">
         <h3 v-if="$store.state.cart.products.length > 0">Оформление заказа</h3>
@@ -14,29 +15,25 @@
         </p>
       </div>
       <div v-if="$store.state.cart.products.length > 0" class="cart">
-        <div class="leftGroup">
-          <div class="cartItems">
-            <div
-              v-for="item in getProducts"
-              :key="item.article"
-              class="cartItem"
-            >
-              <cart-item
-                :item="item"
-                :key="item.id"
-                @emitDeleteItem="addedClickHandler"
-              >
-              </cart-item>
+        <div class="cartWrapper">
+          <div class="cartGroup">
+            <div class="cartItems">
+              <div v-for="product in this.products" :key="product.key" class="cartItem">
+                <cart-item :item="product" @deleteClickHandler="deleteClickMethod(product)">
+                </cart-item>
+                <hr>
+              </div>
             </div>
+            <p>Предполагаемая дата доставки 26.02. — 28.02.2023. <Nuxt-link to="#">Подробнее об условиях
+                доставки</Nuxt-link></p>
+            <promocode />
           </div>
-          <promocode />
-          <CartForm
-            @emitAllFieldsAreFilled="allFieldsAreFilled = true"
-            @emitAllFieldsNotFilled="allFieldsAreFilled = false"
-            v-if="$store.state.cart.products.length > 0"
-          />
+          <InformationWindowCart v-if="!showMobileCartWindow" :products="products" :allFieldsAreFilled="allFieldsAreFilled" />
         </div>
-        <InformationWindowCart :allFieldsAreFilled="allFieldsAreFilled" />
+        <CartForm @emitAllFieldsAreFilled="allFieldsAreFilled = true" @emitAllFieldsNotFilled="allFieldsAreFilled = false"
+          v-if="$store.state.cart.products.length > 0" />
+        <InformationWindowCart v-if="showMobileCartWindow" :products="products" :allFieldsAreFilled="allFieldsAreFilled" />
+
       </div>
     </main>
     <Footer />
@@ -82,18 +79,32 @@ export default {
       currentPage: 1,
       maxPerPage: 9,
       showReadMore: true,
+      products: [],
+      showMobileCartWindow: false
     };
   },
   computed: {
-    // local(){
-    //     localStorage.length
-    //     return  0
-    // },
     ...mapGetters("cart", ["getProducts"]),
     isProductAdded() {
       return this.products.find((p) => p.id === this.item.id);
     },
   },
+  async mounted() {
+    if (this.getProducts.length != 0) {
+      this.products = await this.$axios.$get('/site/cart-products-list', {
+        params: {
+          products: this.getProducts
+        }
+        // localStorage.getItem('cart')
+      })
+    }
+    const mediaQueryCart = window.matchMedia("(max-width:1024px)");
+    this.showMobileCartWindow = mediaQueryCart.matches;
+    const listener = e => this.showMobileCartWindow = e.matches;
+    mediaQueryCart.addListener(listener);
+    this.$once('hook:beforeDestroy', () => mediaQueryCart.removeListener(listener));
+  },
+
   methods: {
     sortByChecked(checkedId) {
       this.checkedId = checkedId;
@@ -108,8 +119,10 @@ export default {
       addProduct: "cart/addProduct",
       removeProduct: "cart/removeProduct",
     }),
-    addedClickHandler() {
-      this.removeProduct(this.item);
+    deleteClickMethod(product) {
+      let index = this.products.findIndex(p => p.key === product.key);
+      this.products.splice(index, 1)
+
     },
   },
 };
@@ -120,38 +133,58 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 60px;
+  width: 100%;
 }
+
 .cartItems {
   transition: 0.5ms ease all;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  .cartItem {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  // gap: 20px;
+  hr {
+    padding: 0;
+    height: 0;
+    border: none;
+    border-top: 1px solid #a9a1a1;
+  }
 }
+
 .wrapper {
   gap: 50px;
 }
+
 .title {
   width: 100%;
+
   h3 {
     font-size: 28px;
     line-height: 33px;
     color: #4a4444;
   }
+
   p {
     margin-top: 20px;
     text-align: center;
     font-size: 20px;
     line-height: 24px;
-
     color: #685f5f;
+
     a {
       font-size: 20px;
       line-height: 24px;
-
       color: #685f5f;
     }
   }
 }
+
 .delete {
   display: block;
   flex-shrink: 0;
@@ -162,6 +195,7 @@ export default {
   background-size: cover;
   cursor: pointer;
 }
+
 button {
   display: flex;
   align-items: center;
@@ -178,18 +212,16 @@ button {
   margin-bottom: 40px;
   min-height: 32px;
   gap: 20px;
+
   p {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-
-    /* средний */
-
     color: #a9a1a1;
-    // width: 195px;
   }
 }
+
 .items__main {
   width: 100%;
 
@@ -199,31 +231,27 @@ button {
     align-items: center;
     padding: 20px 109px;
     gap: 10px;
-
     width: 410px;
     height: 64px;
-
-    /* основной */
-
     background: #685f5f;
     border-radius: 4px;
-
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-
     color: white;
   }
 }
+
 .items {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  // gap: 17.6px;
 }
+
 .item:nth-child(3n + 3) {
   margin-right: 0;
 }
+
 main {
   display: flex;
   flex-direction: column;
@@ -234,39 +262,101 @@ main {
   margin: 0 auto;
   width: 100%;
   min-height: 55vh;
+
   .cart {
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
-    justify-content: space-between;
+
+    .cartWrapper {
+      display: flex;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .cartGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 980px;
+      width: 100%;
+    }
   }
 }
+
 aside {
   width: 280px;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   gap: 45px;
+
   h3 {
     font-size: 28px;
     line-height: 33px;
-    /* identical to box height */
-
     color: #4a4444;
   }
+
   ul {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     a {
       text-decoration: none;
       color: #a9a1a1;
       font-size: 20px;
     }
+
     li {
       text-align: right;
       list-style-type: none;
       text-decoration: none;
     }
+  }
+}
+
+
+@media (max-width:1472px) {
+  main {
+    max-width: 960px;
+
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 1165px) {}
+
+@media (max-width: 1024px) {
+  .cartWrapper {
+    gap: 32px;
+  }
+
+  main {
+    max-width: 592px;
+    padding: 0 24px;
+  }
+
+  .cartGroup {
+    max-width: unset !important;
+  }
+
+  .cartWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 0 10px;
+    max-width: 432px;
+  }
+}
+@media (max-width: 480px) {
+  main{
+    max-width: 320px;
   }
 }
 </style>
