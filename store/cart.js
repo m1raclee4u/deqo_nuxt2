@@ -3,6 +3,15 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 
 export const state = () => ({
   products: [],
+  form: {
+    email: '',
+    name: '',
+    phone: '',
+    address: '',
+    deliveryType: '',
+    paymentMethod: '',
+    comment: ''
+  },
   version: '0.0.1'
 
 })
@@ -13,9 +22,6 @@ export const mutations = {
       state.products = [...state.products, product]
     }
   },
-  // SET_PRODUCT(state, { productId, data }) {
-  //   state.products = [...state.products.filter(prod => prod.id !== productId), data]
-  // },
   INCREMENT_PRODUCT(state, product) {
     let arr = state.products
     if (arr.find((p) => { if (p.key === product.key) { return true } })) {
@@ -40,6 +46,9 @@ export const mutations = {
     let arr = state.products
     arr = arr.splice(arr.indexOf(arr.find((p) => { if (p.key === product.key) { return true } })), 1)
   },
+  SET_FORM(state, form) {
+
+  }
 
 }
 export const actions = {
@@ -63,6 +72,22 @@ export const actions = {
     await sleep(300)
     await commit('SET_QUANTITY', { product: data, quantity: quantity })
   },
+  async setForm({ commit }, data) {
+    await sleep(300)
+    await commit('SET_FORM', data)
+  },
+  async postCart() {
+    await sleep(300)
+    await this.$axios
+      .post('/site/cart-info', {
+        params: {
+          cartInfo: {
+            cart: state.products,
+            form: state.form
+          }
+        }
+      })
+  }
 
 }
 

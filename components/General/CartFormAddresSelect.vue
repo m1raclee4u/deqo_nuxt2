@@ -1,40 +1,33 @@
 <script>
+import _ from "lodash";
 export default {
   data() {
     return {
-      selectedGeo: "",
       query: "",
       geos: [],
-      CancelToken: this.$axios.CancelToken,
     };
   },
   methods: {
+    debounceInput: _.debounce(function (e) {
+      this.query = e.target.value;
+      this.emitAddress(e.target.value);
+      this.getGeo();
+    }, 500),
+    setAddress(value) {
+      this.query = value;
+      this.emitAddress(value)
+    },
+    emitAddress(value) {
+      this.$emit("getAddress", value);
+      console.log('child emit' + ' ' + value);
+    },
     async getGeo() {
-      let source = this.CancelToken.source();
-      if (this.query != 0) {
-        this.geos = await this.$axios.$get(
-          "/site/geo",
-          {
-            params: {
-              query: this.query,
-            },
+      if (this.query.length > 0) {
+        this.geos = await this.$axios.$get("/site/geo", {
+          params: {
+            query: this.query,
           },
-          {
-            cancelToken: source.token,
-          }
-        );
-        this.geos = await this.$axios.$get(
-          "/site/geo",
-          {
-            params: {
-              query: this.query,
-            },
-          },
-          {
-            cancelToken: source.token,
-          }
-        );
-        source.cancel("Operation canceled by the user.");
+        });
       }
     },
   },
@@ -48,12 +41,20 @@ export default {
       type="texttext"
       name="input"
       id=""
-      @input="getGeo"
+      @input="debounceInput"
       class="button"
       v-model="query"
     />
-    <div v-if="!geos.find((p) => p === this.query)" class="selects">
-      <div @click="query = geo" v-for="geo in geos" :key="geo" class="select">
+    <div
+      v-if="!geos.find((p) => p === this.query) && this.query.length > 0"
+      class="selects"
+    >
+      <div
+        @click="setAddress(geo)"
+        v-for="geo in geos"
+        :key="geo"
+        class="select"
+      >
         {{ geo }}
       </div>
     </div>
@@ -62,6 +63,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.button {
+  text-align: left;
+  padding: 18px 20px;
+  border: 1px solid #685f5f;
+  border-radius: 4px;
+}
 .inputAddress {
   position: relative;
   width: 100%;

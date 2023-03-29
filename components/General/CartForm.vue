@@ -1,6 +1,47 @@
+<script>
+import CartFormAddresSelect from "~/components/General/CartFormAddresSelect.vue";
+
+export default {
+  components: { CartFormAddresSelect },
+  data() {
+    return {
+      cartForm: {
+        cartEmail: "",
+        cartName: "",
+        cartTel: "",
+        cartAddress: "",
+        deliveryType: "delivery",
+        paymentMethod: "creditCard",
+        comment: "",
+      },
+    };
+  },
+  methods: {
+    checkFilled() {
+    let counter = 0;
+     for (const item in this.cartForm) {
+      if (Object.hasOwnProperty.call(this.cartForm, item)) {
+        const element = this.cartForm[item];
+        if (element === '') {
+          counter++
+          console.log(counter);
+        }
+      }
+     }
+      // if (emptyInputs === 0) this.$emit("emitAllFieldsAreFilled");
+      // else if (emptyInputs != 0) this.$emit("emitAllFieldsNotFilled");
+    },
+    setAddress(value) {
+      this.cartForm.cartAddress = value;
+    },
+  },
+};
+</script>
+
+
 <template>
   <div class="deliveryForm">
-    <form action="POST" class="form">
+    <div class="form">
       <div class="input">
         <label for="email">Email</label>
         <input
@@ -41,8 +82,9 @@
         />
       </div>
       <div class="input">
+        {{ cartForm }}
         <label for="address">Адрес</label>
-        <cart-form-addres-select />
+        <cart-form-addres-select @getAddress="setAddress" />
         <!-- <input autocomplete="tex" id="address" @input="checkFilled" v-model="cartAddress" class="button" type="text" /> -->
       </div>
 
@@ -69,15 +111,34 @@
         <label for="deliveryType">Способ доставки</label>
         <div class="group" id="deliveryType">
           <div class="flex">
-            <input type="radio" name="delivery" id="delivery" checked />
+            <input
+              type="radio"
+              name="delivery"
+              v-model="cartForm.deliveryType"
+              value="delivery"
+              id="delivery"
+              checked
+            />
             <label for="delivery">Доставка</label>
           </div>
           <div class="flex">
-            <input type="radio" name="delivery" id="pickUpPoint" />
+            <input
+              type="radio"
+              name="delivery"
+              v-model="cartForm.deliveryType"
+              value="pickUpPoint"
+              id="pickUpPoint"
+            />
             <label for="pickUpPoint">Пункты выдачи</label>
           </div>
           <div class="flex">
-            <input type="radio" name="delivery" id="parcelAutomat" />
+            <input
+              type="radio"
+              name="delivery"
+              v-model="cartForm.deliveryType"
+              value="parcelAutomat"
+              id="parcelAutomat"
+            />
             <label for="parcelAutomat">Постамат</label>
           </div>
         </div>
@@ -94,6 +155,8 @@
       <div class="input">
         <label for="comment">Коментарий</label>
         <textarea
+          @input="checkFilled"
+          v-model="cartForm.comment"
           style="resize: none; min-height: 140px"
           class="button"
           name="comment"
@@ -102,60 +165,9 @@
           rows="10"
         ></textarea>
       </div>
-    </form>
+    </div>
   </div>
 </template>
-
-<script>
-import CartFormAddresSelect from "~/components/General/CartFormAddresSelect.vue";
-
-export default {
-  components: { CartFormAddresSelect },
-  data() {
-    return {
-      cartForm: {
-        cartEmail: "",
-        cartName: "",
-        cartTel: "",
-        // cartCity: "",
-        // cartStreet: "",
-        // cartHome: "",
-        // cartFlat: "",
-      },
-      daDataResponse: {},
-      daDataQuery: "",
-    };
-  },
-  methods: {
-    checkFilled() {
-      let emptyInputs = 0;
-      for (const item in this.cartForm) {
-        if (Object.hasOwnProperty.call(this.cartForm, item)) {
-          const element = this.cartForm[item];
-          if (element === "") emptyInputs++;
-        }
-      }
-      if (emptyInputs === 0) this.$emit("emitAllFieldsAreFilled");
-      else if (emptyInputs != 0) this.$emit("emitAllFieldsNotFilled");
-    },
-  },
-  computed: {
-    cartAddress: {
-      get() {
-        return this.daDataQuery;
-      },
-      set(value) {
-        this.daDataQuery = value;
-        this.$axios.get("/site/geo", {
-          params: {
-            query: value,
-          },
-        });
-      },
-    },
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 label {
