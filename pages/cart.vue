@@ -28,11 +28,11 @@
                 доставки</Nuxt-link></p>
             <promocode />
           </div>
-          <InformationWindowCart v-if="!showMobileCartWindow" :products="products" :allFieldsAreFilled="allFieldsAreFilled" />
+          <InformationWindowCart v-if="!showMobileCartWindow" :products="products" @onButtonClickBuyHandler="onButtonClickBuyMethod" :allFieldsAreFilled="allFieldsAreFilled" />
         </div>
-        <CartForm @emitAllFieldsAreFilled="allFieldsAreFilled = true" @emitAllFieldsNotFilled="allFieldsAreFilled = false"
+        <CartForm @emitAllFieldsAreFilled="allFieldsAreFilled = true" @emitAllFieldsNotFilled="allFieldsAreFilled = false" @cartFormGetter="cartFormSetter"
           v-if="$store.state.cart.products.length > 0" />
-        <InformationWindowCart v-if="showMobileCartWindow" :products="products" :allFieldsAreFilled="allFieldsAreFilled" />
+        <InformationWindowCart v-if="showMobileCartWindow" :products="products" @onButtonClickBuyHandler="onButtonClickBuyMethod" :allFieldsAreFilled="allFieldsAreFilled" />
 
       </div>
     </main>
@@ -80,7 +80,9 @@ export default {
       maxPerPage: 9,
       showReadMore: true,
       products: [],
-      showMobileCartWindow: false
+      showMobileCartWindow: false,
+      cartForm: {},
+      cart: {}
     };
   },
   computed: {
@@ -106,6 +108,12 @@ export default {
   },
 
   methods: {
+    cartFormSetter(value) {
+      this.cartForm  = value;
+    },
+    onButtonClickBuyMethod(){
+      console.log(this.cartForm, this.getProducts);
+    },
     sortByChecked(checkedId) {
       this.checkedId = checkedId;
     },

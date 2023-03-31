@@ -23,7 +23,7 @@
         <b>{{ fullprice }} ₽</b>
       </p>
     </div>
-    <button v-if="allFieldsAreFilled === true">Оплатить</button>
+    <button @click="onButtonClickBuy" v-if="allFieldsAreFilled === true">Оплатить</button>
     <button v-else disabled>Заполните все поля</button>
     <p class="offer">
       Нажимая на кнопку «оплатить», я принимаю условия
@@ -57,6 +57,11 @@ export default {
       return priceStart
     },
   },
+  methods: {
+    onButtonClickBuy() {
+      this.$emit('onButtonClickBuyHandler')
+    }
+  }
 };
 </script>
 

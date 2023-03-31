@@ -12,27 +12,29 @@ export default {
         cartAddress: "",
         deliveryType: "delivery",
         paymentMethod: "creditCard",
-        comment: "",
+        comment: "  ",
       },
     };
   },
+
   methods: {
     checkFilled() {
-    let counter = 0;
-     for (const item in this.cartForm) {
-      if (Object.hasOwnProperty.call(this.cartForm, item)) {
-        const element = this.cartForm[item];
-        if (element === '') {
-          counter++
-          console.log(counter);
+      let emptyInputs = 0;
+      for (const [key, value] of Object.entries(this.cartForm)){
+        if (value === '' && key != 'comment') {
+          console.log(key + ' ' + value + ' ' + emptyInputs);
+          emptyInputs++
         }
       }
-     }
-      // if (emptyInputs === 0) this.$emit("emitAllFieldsAreFilled");
-      // else if (emptyInputs != 0) this.$emit("emitAllFieldsNotFilled");
+      if (emptyInputs === 0) {
+        this.$emit("emitAllFieldsAreFilled");
+        this.$emit('cartFormGetter', this.cartForm)
+      }
+      else if (emptyInputs > 0) this.$emit("emitAllFieldsNotFilled");
     },
     setAddress(value) {
       this.cartForm.cartAddress = value;
+      this.checkFilled()
     },
   },
 };
@@ -82,28 +84,35 @@ export default {
         />
       </div>
       <div class="input">
-        {{ cartForm }}
         <label for="address">Адрес</label>
         <cart-form-addres-select @getAddress="setAddress" />
-        <!-- <input autocomplete="tex" id="address" @input="checkFilled" v-model="cartAddress" class="button" type="text" /> -->
+        <!-- <input autocomplete="tex" id="address"  v-model="cartAddress" class="button" type="text" /> -->
       </div>
 
       <!-- <div class="input">
         <label for="address-level2">Населенный пункт</label>
-        <input autocomplete="address-level2" @input="checkFilled" v-model="cartForm.cartCity" class="button" type="email"
+        @input="checkFilled"
+        input autocomplete="address-level2"  
+        v-model="cartForm.cartCity" class="button" type="email"
           name="" id="address-level2" placeholder="Населенный пункт" />
       </div>
       <div class="input">
         <label for="street-address">Улица</label>
-        <input autocomplete="street-address" @input="checkFilled" v-model="cartForm.cartStreet" class="button"
+        @input="checkFilled"
+        input autocomplete="street-address"  
+        v-model="cartForm.cartStreet" class="button"
           type="email" name="" id="street-address" placeholder="Улица" />
       </div>
       <div class="input">
         <label for="homeNumber">Дом</label>
         <div class="group">
-          <input @input="checkFilled" v-model="cartForm.cartHome" class="button" type="email" name="" id="homeNumber"
+          @input="checkFilled"
+          input  
+          v-model="cartForm.cartHome" class="button" type="email" name="" id="homeNumber"
             placeholder="Дом" />
-          <input @input="checkFilled" v-model="cartForm.cartFlat" class="button" type="email" name="" id="flatNubmer"
+          @input="checkFilled"
+          input  
+          v-model="cartForm.cartFlat" class="button" type="email" name="" id="flatNubmer"
             placeholder="Квартира" />
         </div>
       </div> -->
@@ -114,6 +123,7 @@ export default {
             <input
               type="radio"
               name="delivery"
+              @input="checkFilled"
               v-model="cartForm.deliveryType"
               value="delivery"
               id="delivery"
@@ -125,6 +135,7 @@ export default {
             <input
               type="radio"
               name="delivery"
+              @input="checkFilled"
               v-model="cartForm.deliveryType"
               value="pickUpPoint"
               id="pickUpPoint"
@@ -135,6 +146,7 @@ export default {
             <input
               type="radio"
               name="delivery"
+              @input="checkFilled"
               v-model="cartForm.deliveryType"
               value="parcelAutomat"
               id="parcelAutomat"

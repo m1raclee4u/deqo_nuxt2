@@ -10,7 +10,7 @@ export default {
   methods: {
     debounceInput: _.debounce(function (e) {
       this.query = e.target.value;
-      this.emitAddress(e.target.value);
+    //   this.emitAddress(e.target.value);
       this.getGeo();
     }, 500),
     setAddress(value) {
