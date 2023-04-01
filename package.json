@@ -8,7 +8,8 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "build:modern": "nuxt build --modern=server",
-    "start:modern": "nuxt start --modern=server"
+    "start:modern": "nuxt start --modern=server",
+    "prod": "nuxt build --modern=server start --modern=server"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
