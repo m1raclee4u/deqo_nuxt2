@@ -8,32 +8,56 @@
 
     <main class="main">
       <div class="title">
-        <h3 v-if="$store.state.cart.products.length > 0">Оформление заказа</h3>
-        <p v-if="$store.state.cart.products.length < 1">
+        <transition name="component-fade" mode="out-in">
+        <h3 v-if="$store.state.cart.products.length > 0" key="exist">Оформление заказа</h3>        
+        <p v-if="$store.state.cart.products.length < 1" key="doesntExist">
           Ваша корзина пока пуста,<br />
           а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
         </p>
+        </transition>
       </div>
       <div v-if="$store.state.cart.products.length > 0" class="cart">
         <div class="cartWrapper">
-          <div class="cartGroup">
-            <div class="cartItems">
-              <div v-for="product in this.products" :key="product.key" class="cartItem">
-                <cart-item :item="product" @deleteClickHandler="deleteClickMethod(product)">
+          <div class="cartItems">
+            <transition-group class="cartItems" name="list" tag="p">
+              <div
+                v-for="product in this.products"
+                :key="product.key"
+                class="cartItem"
+              >
+                <cart-item
+                  :item="product"
+                  @deleteClickHandler="deleteClickMethod(product)"
+                >
                 </cart-item>
-                <hr>
+                <hr />
               </div>
-            </div>
-            <p>Предполагаемая дата доставки 26.02. — 28.02.2023. <Nuxt-link to="#">Подробнее об условиях
-                доставки</Nuxt-link></p>
+            </transition-group>
+            <p>
+              Предполагаемая дата доставки 26.02. — 28.02.2023.
+              <Nuxt-link to="#">Подробнее об условиях доставки</Nuxt-link>
+            </p>
             <promocode />
           </div>
-          <InformationWindowCart v-if="!showMobileCartWindow" :products="products" @onButtonClickBuyHandler="onButtonClickBuyMethod" :allFieldsAreFilled="allFieldsAreFilled" />
+          <InformationWindowCart
+            v-if="!showMobileCartWindow"
+            :products="products"
+            @onButtonClickBuyHandler="onButtonClickBuyMethod"
+            :allFieldsAreFilled="allFieldsAreFilled"
+          />
         </div>
-        <CartForm @emitAllFieldsAreFilled="allFieldsAreFilled = true" @emitAllFieldsNotFilled="allFieldsAreFilled = false" @cartFormGetter="cartFormSetter"
-          v-if="$store.state.cart.products.length > 0" />
-        <InformationWindowCart v-if="showMobileCartWindow" :products="products" @onButtonClickBuyHandler="onButtonClickBuyMethod" :allFieldsAreFilled="allFieldsAreFilled" />
-
+        <CartForm
+          @emitAllFieldsAreFilled="allFieldsAreFilled = true"
+          @emitAllFieldsNotFilled="allFieldsAreFilled = false"
+          @cartFormGetter="cartFormSetter"
+          v-if="$store.state.cart.products.length > 0"
+        />
+        <InformationWindowCart
+          v-if="showMobileCartWindow"
+          :products="products"
+          @onButtonClickBuyHandler="onButtonClickBuyMethod"
+          :allFieldsAreFilled="allFieldsAreFilled"
+        />
       </div>
     </main>
     <Footer />
@@ -42,7 +66,7 @@
 
 <script>
 import AsideCategories from "~/components/Aside/AsideCategories.vue";
-import AsideFilter from "~/components/Aside/AsideFilter.vue";
+import AsidePrice from "~/components/Aside/AsidePrice.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
 import CartItem from "~/components/General/CartItem.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
@@ -57,7 +81,7 @@ import Promocode from "~/components/General/promocode.vue";
 export default {
   components: {
     HeaderBlack,
-    AsideFilter,
+    AsidePrice,
     AsideCategories,
     BurgerMenu,
     Breadcrumbs,
@@ -82,7 +106,7 @@ export default {
       products: [],
       showMobileCartWindow: false,
       cartForm: {},
-      cart: {}
+      cart: {},
     };
   },
   computed: {
@@ -93,25 +117,27 @@ export default {
   },
   async mounted() {
     if (this.getProducts.length != 0) {
-      this.products = await this.$axios.$get('/site/cart-products-list', {
+      this.products = await this.$axios.$get("/site/cart-products-list", {
         params: {
-          products: this.getProducts
-        }
+          products: this.getProducts,
+        },
         // localStorage.getItem('cart')
-      })
+      });
     }
     const mediaQueryCart = window.matchMedia("(max-width:1024px)");
     this.showMobileCartWindow = mediaQueryCart.matches;
-    const listener = e => this.showMobileCartWindow = e.matches;
+    const listener = (e) => (this.showMobileCartWindow = e.matches);
     mediaQueryCart.addListener(listener);
-    this.$once('hook:beforeDestroy', () => mediaQueryCart.removeListener(listener));
+    this.$once("hook:beforeDestroy", () =>
+      mediaQueryCart.removeListener(listener)
+    );
   },
 
   methods: {
     cartFormSetter(value) {
-      this.cartForm  = value;
+      this.cartForm = value;
     },
-    onButtonClickBuyMethod(){
+    onButtonClickBuyMethod() {
       console.log(this.cartForm, this.getProducts);
     },
     sortByChecked(checkedId) {
@@ -128,9 +154,8 @@ export default {
       removeProduct: "cart/removeProduct",
     }),
     deleteClickMethod(product) {
-      let index = this.products.findIndex(p => p.key === product.key);
-      this.products.splice(index, 1)
-
+      let index = this.products.findIndex((p) => p.key === product.key);
+      this.products.splice(index, 1);
     },
   },
 };
@@ -324,8 +349,7 @@ aside {
   }
 }
 
-
-@media (max-width:1472px) {
+@media (max-width: 1472px) {
   main {
     max-width: 960px;
 
@@ -333,7 +357,8 @@ aside {
   }
 }
 
-@media (max-width: 1165px) {}
+@media (max-width: 1165px) {
+}
 
 @media (max-width: 1024px) {
   .cartWrapper {
@@ -353,7 +378,6 @@ aside {
     flex-direction: column;
     align-items: center;
   }
-
 }
 
 @media (max-width: 640px) {
@@ -363,7 +387,7 @@ aside {
   }
 }
 @media (max-width: 480px) {
-  main{
+  main {
     max-width: 320px;
   }
 }

@@ -4,18 +4,18 @@
     <div class="checkboxes">
       <div
         class="form_radio_btn_categories"
-        v-for="category in this.categories"
-        :key="category.id"
+        v-for="category in $store.state.catalog.categories"
+        :key="category.slug"
       >
         <input
-          :id="category.id"
+          :id="category.slug"
           name="category"
           type="checkbox"
-          :value="category.id"
-          v-model="checkedId"
-          @change="addChecked"
+          :value="category.slug"
+          v-model="filterCategories"
+          @change="addCategory"
         />
-        <label :for="category.id"></label>
+        <label :for="category.slug"></label>
         <p>{{ category.name }}</p>
       </div>
       <!-- <span></span>             -->
@@ -27,24 +27,13 @@
 export default {
   data() {
     return {
-      checkedId: [],
-    };
-  },
-  computed: {
-    categories() {
-      return this.$store.getters["catalog/getCategories"];
-    },
+      filterCategories: [],
+      }
   },
   methods: {
-    addChecked() {
-      this.$store.filters.dispatch("updateCategories")
-      this.$emit("updateChecked", this.checkedId);
+    addCategory() {
+      this.$emit('filterCategories', this.filterCategories)
     },
-  },
-  mounted() {
-    if (this.$store.getters["catalog/getCategories"].length === 0) {
-      this.$store.dispatch("catalog/fetchCategories");
-    }
   },
 };
 </script>

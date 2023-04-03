@@ -2,16 +2,18 @@
   <section>
     <div class="jcsb">
       <h2>{{ title }}</h2>
-      <Nuxt-Link class="linkToCatalog" to="catalog">смотреть все</Nuxt-Link>
+      <Nuxt-Link class="linkToCatalog" to="/catalog">смотреть все</Nuxt-Link>
     </div>
     <div class="mainSlider">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
-        <div v-for="item in this.products.slice(0, 12)" :key="item.slug"
-          class="swiper-slide item-slide">
+        <div
+          v-for="item in this.products.slice(0, 12)"
+          :key="item.slug"
+          class="swiper-slide item-slide"
+        >
           <item :item="item" inSlider="inSlider" :key="item.id"> </item>
         </div>
-
       </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
@@ -36,7 +38,7 @@ export default {
   data() {
     return {
       slider: null,
-    }
+    };
   },
   components: { Item },
   computed: {
@@ -49,27 +51,27 @@ export default {
   },
 
   mounted() {
-    new Swiper(".mainSlider", {
-      slidesPerView: 'auto',
-      spaceBetween: 40,
-      loop: true,
-      centeredSlides: false,
-      centeredSlidesBounds: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    })
+    setTimeout(() => {
+      new Swiper(".mainSlider", {
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        loop: false,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    }, 1000);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-.mainSlider{
+.mainSlider {
   position: relative;
 }
-.swiper-wrapper {}
+.swiper-wrapper {
+}
 
 .item-slide {
   width: 387px !important;
@@ -92,10 +94,10 @@ img {
   height: auto;
 }
 
-.mainSlider{
-    // max-width: 834px;
-    overflow: hidden;
-  }
+.mainSlider {
+  // max-width: 834px;
+  overflow: hidden;
+}
 
 section {
   display: flex;
@@ -114,7 +116,5 @@ section {
   }
 }
 @media (max-width: 1280px) {
-  
-  
 }
 </style>

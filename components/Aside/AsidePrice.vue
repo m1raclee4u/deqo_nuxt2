@@ -2,44 +2,51 @@
   <div class="filter">
     <h3>Цена</h3>
     <div class="customRow">
-      <p>От {{ value[0] }}₽ до ₽ {{ value[1] }}</p>
+      <p>От {{ value[0] }} ₽ до {{ value[1] }} ₽</p>
     </div>
-    <el-slider class="filterRange" range v-model="value" :min="min" :max="max">
+    <el-slider
+      class="filterRange"
+      range
+      range-start-label="min"
+      range-end-label="max"
+      show-stops
+      :show-tooltip="false"
+      :step="100"
+      @change="addPrice"
+      v-model="value"
+      :min="min"
+      :max="max"
+    >
     </el-slider>
-    <button @click="updateFiltered">Фильтр</button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    products: Array,
+  },
   data() {
     return {
-      value: [0, 3500],
+      value: [0, 100],
     };
   },
   computed: {
-    // value:{
-    //     get: function (){
-    //         return [this.min, this.max]
-    //     },
-    //     set: function (newValue) {
-    //         var names = newValue
-    //         this.min = names[0]
-    //         this.max = names[1]
-    //         // newValue[0] = newValue[0]
-    //         // newValue[1] = newValue[1]
-    //     }
-    // },
     max() {
-      return Math.max(...this.$store.getters["products"].map((o) => o.price));
+      return Math.max(...this.products.map((o) => o.price));
     },
     min() {
-      return Math.min(...this.$store.getters["products"].map((o) => o.price));
+      return Math.min(...this.products.map((o) => o.price));
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.addPrice()
+    }, 1000);
+  },
   methods: {
-    updateFiltered() {
-      this.$emit("updateFiltered", this.value);
+    addPrice() {
+      this.$emit("filterPrice", this.value);
     },
   },
 };
@@ -64,7 +71,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 25px;
   flex-wrap: nowrap;
 }
 .filter {

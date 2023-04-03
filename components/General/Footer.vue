@@ -217,6 +217,7 @@ button {
   }
   .copyright{
     text-align: right;
+    color: #685F5F;
   }
 }
 @media (max-width: 1024px) {

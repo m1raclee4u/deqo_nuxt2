@@ -18,25 +18,29 @@ export default {
   },
   computed: {
     itemQuantity() {
-      return this.item.quantity
-    }
+      return this.item.quantity;
+    },
   },
   mounted() {
     const mediaQueryCart = window.matchMedia("(max-width:640px)");
     const mediaQueryCart480 = window.matchMedia("(max-width:480px)");
     this.showMobilePrice640 = mediaQueryCart.matches;
     this.showMobileName480 = mediaQueryCart480.matches;
-   
-    const listener = e => this.showMobilePrice640 = e.matches;
-    const listenerName = e => this.showMobileName480 = e.matches;
+
+    const listener = (e) => (this.showMobilePrice640 = e.matches);
+    const listenerName = (e) => (this.showMobileName480 = e.matches);
     mediaQueryCart.addListener(listener);
-    mediaQueryCart480.addListener(listenerName);    
-    this.$once('hook:beforeDestroy', () => mediaQueryCart.removeListener(listener));
-    this.$once('hook:beforeDestroy', () => mediaQueryCart480.removeListener(listenerName));
+    mediaQueryCart480.addListener(listenerName);
+    this.$once("hook:beforeDestroy", () =>
+      mediaQueryCart.removeListener(listener)
+    );
+    this.$once("hook:beforeDestroy", () =>
+      mediaQueryCart480.removeListener(listenerName)
+    );
   },
   updated() {
     if (this.showMobileName480 === true) {
-      this.showMobilePrice640 = false
+      this.showMobilePrice640 = false;
     }
   },
   watch: {
@@ -57,7 +61,7 @@ export default {
       removeProduct: "cart/removeProduct",
     }),
     deleteClickHandler() {
-      this.$emit('deleteClickHandler');
+      this.$emit("deleteClickHandler");
       this.removeProduct(this.item);
     },
   },
@@ -69,9 +73,11 @@ export default {
     <div class="item">
       <div class="top">
         <Nuxt-Link :to="`products/${item.slug}`">
-          <img class="image" :src="
-            IH.getUrl($axios.defaults.baseURL + `/` + item.image, 100)
-          " alt="" />
+          <img
+            class="image"
+            :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 100)"
+            alt=""
+          />
         </Nuxt-Link>
         <div v-if="showMobileName480" class="name">
           <p>{{ item.title }}</p>
@@ -90,17 +96,30 @@ export default {
           </div>
           <div class="infoGroup">
             <div class="infoGroup__left">
-              <div class="color" :style="{
-                backgroundColor: this.item.color.value,
-                border:
-                  this.item.color.name === 'Белый' ? `1px solid lightgrey` : `none`,
-              }"></div>
+              <div
+                class="color"
+                :style="{
+                  backgroundColor: this.item.color.value,
+                  border:
+                    this.item.color.name === 'Белый'
+                      ? `1px solid lightgrey`
+                      : `none`,
+                }"
+              ></div>
               <div class="size" :id="item.size">{{ item.size.name }}</div>
               <div class="quantity">
                 <div @click="item.quantity--" class="buttons">
-                  <img :src="require('/assets/img/icons/quantity/minus.svg')" alt="" />
+                  <img
+                    :src="require('/assets/img/icons/quantity/minus.svg')"
+                    alt=""
+                  />
                 </div>
-                <input class="quantity_number" type="number" name="quantity" v-model="item.quantity" />
+                <input
+                  class="quantity_number"
+                  type="number"
+                  name="quantity"
+                  v-model="item.quantity"
+                />
                 <!-- <p>{{item.quantity}}</p> -->
                 <div @click="item.quantity++" class="buttons">
                   <img src="../../assets/img/icons/quantity/plus.svg" alt="" />
@@ -154,7 +173,7 @@ export default {
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-    color: #A9A1A1;
+    color: #a9a1a1;
     text-decoration: line-through;
   }
 }
@@ -169,7 +188,7 @@ export default {
   position: relative;
   gap: 20px;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
 
   .infoWrapper {
@@ -186,6 +205,10 @@ export default {
     align-items: center;
     width: 100%;
     gap: 40px;
+    .name {
+      width: 100%;
+      max-width: 200px;
+    }
 
     .infoGroup {
       display: flex;
@@ -198,10 +221,10 @@ export default {
         justify-content: center;
         width: 100%;
         gap: 40px;
+        max-width: 640px;
       }
     }
   }
-
 
   .name {
     a {
@@ -253,7 +276,7 @@ export default {
       width: 28px;
       height: 28px;
       text-align: center;
-      background-color: #F0EFEF;
+      background-color: #f0efef;
       border-radius: 4px;
 
       font-size: 22px;
@@ -261,7 +284,7 @@ export default {
 
       /* основной */
 
-      color: #685F5F;
+      color: #685f5f;
     }
 
     svg {
@@ -298,8 +321,6 @@ export default {
     align-items: center;
     gap: 40px;
     cursor: pointer;
-
-
   }
 
   .center {
@@ -308,29 +329,20 @@ export default {
     gap: 20px;
   }
 
-
-
   .right {
     display: flex;
     align-items: center;
     gap: 30px;
-
-
-
-
   }
-
-
 }
 
-@media (max-width:1472px) {
+@media (max-width: 1472px) {
   main {
     padding: 0 32px;
   }
 
   .infoWrapper {
     align-items: stretch !important;
-
   }
 
   .cartWrapper {
@@ -345,6 +357,7 @@ export default {
 
   .info {
     flex-direction: column;
+    align-items: flex-start !important;
 
     .name {
       width: 100%;
@@ -365,7 +378,8 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+}
 
 @media (max-width: 640px) {
   .info {
@@ -375,42 +389,43 @@ export default {
       .infoGroup__left {
         width: unset;
         justify-content: space-between !important;
-
       }
     }
   }
-
 }
 
 @media (max-width: 480px) {
-
-  .price{
-    p{
+  .price {
+    p {
       font-size: 18px;
     }
-    span{
+    span {
       font-size: 16px;
     }
   }
   .item {
     flex-direction: column;
-    .quantity{
+    align-items: flex-start !important;
+    .name{
+      max-width: 150px;
+    }
+    .quantity {
       gap: 10px;
     }
-    .image{
+    .image {
       width: 78px;
     }
   }
   .info {
-    .infoGroup{
-      .infoGroup__left{
+    .infoGroup {
+      .infoGroup__left {
         width: unset !important;
         gap: 10px !important;
-        .color{
+        .color {
           width: 28px;
           height: 28px;
         }
-        .size{
+        .size {
           width: 28px;
           height: 28px;
           font-size: 14px;

@@ -8,13 +8,19 @@
       <main class="main">
         <aside class="aside">
           <aside-categories
-            @updateChecked="sortByChecked"
-            @checked="getChecked"
+            :categories="categories"
+            @filterCategories="setCategories"
           />
-          <aside-filter @updateFiltered="sortByFiltered" />
-          <aside-color @updateCheckedColor="sortByCheckedColor" />
-          <aside-size />
-          <button class="filter">Отсортировать по фильтрам</button>
+          <aside-price :products="products" @filterPrice="setPrice" />
+          <aside-color :colors="colors" @filterColors="setColors" />
+          <aside-size :sizes="sizes" @filterSizes="setSizes" />
+          <button
+            @click="$router.push({ path: `catalog/filter/`, query: {categories: `${filters.categories}`, price: `${filters.prices}`, sizes: `${filters.sizes}`, colors: `${filters.colors}`} })"
+            class="filter"
+          >
+            Отсортировать по фильтрам
+          </button>
+          {{ filters }}
         </aside>
         <div class="items__main">
           <div v-if="this.checkedId != ''" class="aic">
@@ -31,12 +37,10 @@
               </button>
             </div>
           </div>
-          <div
-            class="items"
-          >
+          <div class="items">
             <div
               v-for="item in this.paginatedProducts"
-              :key="item.article_number + '_' + item.title"
+              :key="item.slug"
               class="col item"
             >
               <item :item="item"> </item>
@@ -58,18 +62,19 @@
 
 <script>
 import AsideCategories from "~/components/Aside/AsideCategories.vue";
-import AsideFilter from "~/components/Aside/AsideFilter.vue";
+import AsidePrice from "~/components/Aside/AsidePrice.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
 import Item from "~/components/General/Item.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Footer from "~/components/General/Footer.vue";
 import AsideSize from "~/components/Aside/AsideSize.vue";
+import productColors from "~/components/product/productColors.vue";
 
 export default {
   components: {
     HeaderBlack,
     Item,
-    AsideFilter,
+    AsidePrice,
     AsideCategories,
     BurgerMenu,
     Footer,
@@ -88,9 +93,30 @@ export default {
       currentPage: 1,
       maxPerPage: 9,
       showReadMore: true,
+      categories: [],
+      colors: [],
+      sizes: [],
+      filters: {
+        categories: [],
+        prices: [],
+        colors: [],
+        sizes: [],
+      },
     };
   },
   methods: {
+    setCategories(array) {
+      this.filters.categories = array;
+    },
+    setPrice(array) {
+      this.filters.prices = array;
+    },
+    setColors(array) {
+      this.filters.colors = array;
+    },
+    setSizes(array) {
+      this.filters.sizes = array;
+    },
     sortByChecked(checkedId) {
       this.checkedId = checkedId;
     },
@@ -113,7 +139,11 @@ export default {
       if (this.checkedId.length !== 0) {
         for (let i = 0; i < this.checkedId.length; i++) {
           const checked = this.checkedId[i];
-          for (let j = 0; j < this.$store.getters["catalog/getProducts"].length; j++) {
+          for (
+            let j = 0;
+            j < this.$store.getters["catalog/getProducts"].length;
+            j++
+          ) {
             const find = this.$store.getters["catalog/getProducts"][j];
             if (find.category == checked) {
               checkedArray.push(find);
@@ -142,13 +172,19 @@ export default {
       return this.products.slice(0, this.currentPage * this.maxPerPage);
     },
   },
-  mounted() {
+  async mounted() {
     if (this.$store.getters["catalog/getProducts"].length === 0) {
-      this.$store.dispatch("catalog/fetchProducts");
+      await this.$store.dispatch("catalog/fetchProducts");
     }
     if (this.$store.getters["catalog/getCategories"].length === 0) {
-      this.$store.dispatch("catalog/fetchCategories");
+      await this.$store.dispatch("catalog/fetchCategories");
     }
+    this.colors = await this.$axios.$get("/colors", {
+      // localStorage.getItem('cart')
+    });
+    this.sizes = await this.$axios.$get("/sizes", {
+      // localStorage.getItem('cart')
+    });
   },
 };
 </script>

@@ -1,16 +1,23 @@
 <template>
-  <div class="colors">
-    <h3>Размер</h3>
-    <div class="sizes flex">
+ <div class="sizes">
+    <h3>
+      Размер
+    </h3>
+    <div class="flex sizes_row">
       <div
         class="form_radio_btn"
-        v-for="size in $store.state.sizes"
+        v-for="size in sizes.sizes"
         :key="size.id"
       >
-        <input name="size" type="checkbox" :value="size" :id="size" />
-        <label :id="size" :for="size">{{ size }}</label>
-
-        <!-- <p class="p_size"></p> -->
+        <input
+          name="size"
+          type="checkbox"
+          :value="size.id"
+          v-model="checkedSizes"
+          @change="addSize"
+          :id="size.name"
+        />        
+        <label :id="size.name" :for="size.name">{{size.name}}</label>
       </div>
     </div>
   </div>
@@ -18,25 +25,29 @@
 
 <script>
 export default {
+  props: {
+    sizes: {},
+  },
   data() {
     return {
-      checkedColor: [],
+      checkedSizes: [],
     };
   },
   methods: {
-    addCheckedColor() {
-      this.$emit("updateCheckedColor", this.checkedColor);
+    addSize() {
+      this.$emit("filterSizes", this.checkedSizes);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.sizes {
+.sizes_row {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
 }
+
 .custom-radio {
   position: absolute;
   z-index: -1;
@@ -87,7 +98,7 @@ export default {
 .custom-radio:disabled + label {
   background-color: #e9ecef;
 }
-.colors {
+.sizes {
   display: flex;
   flex-direction: column;
   gap: 25px;

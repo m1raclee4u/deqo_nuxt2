@@ -23,27 +23,25 @@ export default {
     ...mapState({
       products: (state) => state.cart.products,
     }),
-    computedItem(){
+    computedItem() {
       return {
         product_id: this.item.product_id,
         color_id: this.item.color_id,
         size_id: this.sizeChecked.id,
         quantity: 1,
-        key: `${this.item.product_id}_${this.item.color_id}_${this.sizeChecked.id}`
-      }
+        key: `${this.item.product_id}_${this.item.color_id}_${this.sizeChecked.id}`,
+      };
     },
     isProductAdded() {
       let added = this.products.find((p) => {
-        if (
-          p.title === this.item.title
-        ) {
+        if (p.key === this.computedItem.key) {
+          console.log("true", p.key, this.computedItem.key);
           return true;
         } else {
           return false;
         }
       });
-
-      // return added;
+      return added;
     },
   },
   methods: {
@@ -52,27 +50,15 @@ export default {
     }),
     async buyClickHandler() {
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-        
-        if (this.sizeChecked === '') {
-          this.$emit('sizeValidationHighlightHandler', true)
-          await delay(500)
-          this.$emit('sizeValidationHighlightHandler', false)
-        } else {
-          // this.$set(this.item, "color_id", this.colorChecked);
-          // this.$set(this.item, "size_id", this.sizeChecked);
-          // this.$set(this.item, "quantity", 1);
-          this.addProduct(this.computedItem);
-        }
-        // if (
-        //   this.$route.name === "favorite" &&
-        //   this.$store.state.selectParametrs != false
-        // ) {
-        //   this.$store.commit(
-        //     "SET_SELECT_PARAMETERS_OPENED",
-        //     !this.$store.state.selectParametrs
-        //   );
-        // }
+
+      if (this.sizeChecked === "") {
+        this.$emit("sizeValidationHighlightHandler", true);
+        await delay(1000);
+        this.$emit("sizeValidationHighlightHandler", false);
+      } else {
+        this.addProduct(this.computedItem);
       }
+    },
   },
 };
 </script>

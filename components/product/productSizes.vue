@@ -12,7 +12,7 @@ export default {
   methods: {
     checkSize(size) {
       this.checkedSize = size;
-      this.$emit('checkedSizeHandler', size)
+      this.$emit("checkedSizeHandler", size);
     },
   },
 };
@@ -26,9 +26,15 @@ export default {
         v-for="size in sizes"
         :key="size.id"
         @click="checkSize(size)"
-        :class="{ checkedSize: checkedSize === size, highlightedSizeClass: highlightedSize }"
+        :class="{
+          checkedSize: checkedSize === size,
+          highlightedSizeClass: highlightedSize,
+        }"
       >
         {{ size.name }}
+      </div>
+      <div v-if="highlightedSize === true" class="sizeNotChecked">
+        Вы не выбрали цвет
       </div>
     </div>
   </div>
@@ -36,7 +42,7 @@ export default {
 
 
 <style lang="scss" scoped>
-.highlightedSizeClass{
+.highlightedSizeClass {
   box-sizing: border-box;
   border: 2px solid #bd270f !important;
   color: #bd270f !important;
@@ -49,6 +55,15 @@ export default {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+  .sizeNotChecked{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    border: 1px solid #bd270f;
+    border-radius: 4px;
+  }
 
   .size {
     text-transform: uppercase;

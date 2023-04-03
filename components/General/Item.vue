@@ -8,7 +8,13 @@
     <ButtonFavorite :item="item" inSlider="inSlider" />
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
-      <img width="387" height="587" class="card__img" :src='IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)' alt="item.name">
+      <img
+        width="387"
+        height="487"
+        class="card__img"
+        :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)"
+        alt="item.name"
+      />
       <div class="tag">
         <p>ХИТ</p>
       </div>
@@ -28,7 +34,10 @@
           :id="color.id"
           v-for="color in item.colors"
           :key="color.id"
-          :style="{backgroundColor: color.value, border: color.name === 'Белый' ? `1px solid lightgrey` : `none`}"
+          :style="{
+            backgroundColor: color.value,
+            border: color.name === 'Белый' ? `1px solid lightgrey` : `none`,
+          }"
           disabled
         >
           <!-- <label  class="colorItem"></label> -->
@@ -55,7 +64,6 @@ import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
 import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
 import ImageHelper from "~/plugins/imageHelper";
 
-
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
 
@@ -70,7 +78,7 @@ export default {
   },
   data() {
     return {
-      IH: new ImageHelper()
+      IH: new ImageHelper(),
     };
   },
   components: { ButtonFavorite, selectAdditionalParameter },
@@ -138,14 +146,13 @@ button {
 .ItemCart {
   position: relative;
   width: 387px;
-    height: 100%;
+  height: 100%;
   //   padding-bottom: 60px;
   img {
-     width: 387px;
-    height: 587px;
+    width: 387px;
+    height: 487px;
     margin-bottom: 25px;
     background-color: #ebebeb;
-
   }
   p {
     font-family: "RF Dewi";
@@ -183,7 +190,7 @@ button {
 }
 @media (max-width: 1280px) {
   .ItemCart {
-    // padding-bottom: 60px;   
+    // padding-bottom: 60px;
     p {
       margin-bottom: 20px;
       font-size: 13px;

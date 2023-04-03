@@ -314,7 +314,7 @@ section {
   background-repeat: no-repeat;
   transition: 0.9s ease all;
   &:hover {
-    background-image: url("../../assets/img/icons/buttonDown_active.svg");
+    transform: rotate(90);
   }
 }
 

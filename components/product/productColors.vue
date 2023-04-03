@@ -19,7 +19,7 @@ export default {
           :class="{ borderForWhite: color.name === 'Белый', checked: color.checked }" class="icon"
           :style="{ backgroundColor: color.value }">
         </NuxtLink>
-      </div>
+      </div>      
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
   display: flex;
   align-items: center;
   gap: 18px;
+  position: relative;
 
   .color {
     display: flex;

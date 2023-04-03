@@ -1,23 +1,32 @@
 <template>
   <div class="colors">
     <h3>
-      Цвет <span v-if="checkedColor != ''">{{ aCheckedColors }}</span>
+      Цвет <span v-if="checkedColor != ''"></span>
     </h3>
     <div class="flex colors_row">
       <div
         class="form_radio_btn_color"
-        v-for="color in $store.state.colors"
+        v-for="color in colors.colors"
         :key="color.id"
       >
         <input
           name="color"
           type="checkbox"
-          :value="color"
+          :value="color.id"
           v-model="checkedColor"
-          @change="addCheckedColor"
-          :id="color.id"
+          @change="addColor"
+          :id="color.name"
         />
-        <label :id="color.id" :for="color.id"></label>
+        <label
+          :class="{
+            borderForWhite: color.name === 'Белый',
+            checked: color.checked,
+          }"
+          class="icon"
+          :style="{ backgroundColor: color.value }"
+          :id="color.name"
+          :for="color.name"
+        ></label>
       </div>
     </div>
   </div>
@@ -25,30 +34,26 @@
 
 <script>
 export default {
+  props: {
+    colors: {}
+  },
   data() {
     return {
       checkedColor: [],
-      aCheckedColors: [],
     };
   },
   methods: {
-    addCheckedColor() {
-      this.aCheckedColors = [];
-      for (const item in this.checkedColor) {
-        if (Object.hasOwnProperty.call(this.checkedColor, item)) {
-          const element = this.checkedColor[item];
-
-          this.aCheckedColors.push(String(element.name));
-        }
-      }
-      this.aCheckedColors = String(this.aCheckedColors);
-      this.$emit("updateCheckedColor", this.checkedColor);
+    addColor() {      
+      this.$emit("filterColors", this.checkedColor);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.borderForWhite {
+  box-shadow: inset 0 0 0 1px lightgrey;
+}
 .colors_row {
   display: flex;
   flex-wrap: wrap;
