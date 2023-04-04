@@ -6,15 +6,14 @@
     <div class="flex sizes_row">
       <div
         class="form_radio_btn"
-        v-for="size in sizes.sizes"
+        v-for="size in $store.state.catalog.sizes"
         :key="size.id"
       >
         <input
           name="size"
           type="checkbox"
-          :value="size.id"
+          :value="size"
           v-model="checkedSizes"
-          @change="addSize"
           :id="size.name"
         />        
         <label :id="size.name" :for="size.name">{{size.name}}</label>
@@ -25,17 +24,18 @@
 
 <script>
 export default {
-  props: {
-    sizes: {},
-  },
   data() {
     return {
-      checkedSizes: [],
+      checkedSizes: this.$store.state.filters.filters.sizes,
     };
   },
-  methods: {
-    addSize() {
-      this.$emit("filterSizes", this.checkedSizes);
+  watch: {
+    checkedSizes(value) {
+      if (value.length > 0) {
+        this.$store.dispatch("filters/setSizes", this.checkedSizes);
+      } else {
+        this.$store.dispatch("filters/setSizes", this.checkedSizes);
+      }
     },
   },
 };

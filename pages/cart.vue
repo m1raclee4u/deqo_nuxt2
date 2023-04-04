@@ -137,9 +137,6 @@ export default {
     cartFormSetter(value) {
       this.cartForm = value;
     },
-    onButtonClickBuyMethod() {
-      console.log(this.cartForm, this.getProducts);
-    },
     sortByChecked(checkedId) {
       this.checkedId = checkedId;
     },

@@ -1,20 +1,17 @@
 <template>
   <div class="colors">
-    <h3>
-      Цвет <span v-if="checkedColor != ''"></span>
-    </h3>
+    <h3>Цвет</h3>
     <div class="flex colors_row">
       <div
         class="form_radio_btn_color"
-        v-for="color in colors.colors"
+        v-for="color in $store.state.catalog.colors"
         :key="color.id"
       >
         <input
           name="color"
           type="checkbox"
-          :value="color.id"
-          v-model="checkedColor"
-          @change="addColor"
+          :value="color"
+          v-model="checkedColors"
           :id="color.name"
         />
         <label
@@ -34,17 +31,18 @@
 
 <script>
 export default {
-  props: {
-    colors: {}
-  },
   data() {
     return {
-      checkedColor: [],
+      checkedColors: this.$store.state.filters.filters.colors,
     };
   },
-  methods: {
-    addColor() {      
-      this.$emit("filterColors", this.checkedColor);
+  watch: {
+    checkedColors(value) {
+      if (value.length > 0) {
+        this.$store.dispatch("filters/setColors", this.checkedColors);
+      } else {
+        this.$store.dispatch("filters/setColors", this.checkedColors);
+      }
     },
   },
 };

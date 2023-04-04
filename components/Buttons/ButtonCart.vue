@@ -35,7 +35,6 @@ export default {
     isProductAdded() {
       let added = this.products.find((p) => {
         if (p.key === this.computedItem.key) {
-          console.log("true", p.key, this.computedItem.key);
           return true;
         } else {
           return false;

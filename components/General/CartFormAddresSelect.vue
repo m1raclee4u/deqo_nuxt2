@@ -19,7 +19,6 @@ export default {
     },
     emitAddress(value) {
       this.$emit("getAddress", value);
-      console.log('child emit' + ' ' + value);
     },
     async getGeo() {
       if (this.query.length > 0) {

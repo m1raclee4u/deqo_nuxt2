@@ -1,65 +1,3 @@
-<template>
-  <div class="wrapper">
-    <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
-    </Transition>
-    <HeaderBlack />
-    <section>
-      <main class="main">
-        <aside class="aside">
-          <aside-categories
-            :categories="categories"
-            @filterCategories="setCategories"
-          />
-          <aside-price :products="products" @filterPrice="setPrice" />
-          <aside-color :colors="colors" @filterColors="setColors" />
-          <aside-size :sizes="sizes" @filterSizes="setSizes" />
-          <button
-            @click="$router.push({ path: `catalog/filter/`, query: {categories: `${filters.categories}`, price: `${filters.prices}`, sizes: `${filters.sizes}`, colors: `${filters.colors}`} })"
-            class="filter"
-          >
-            Отсортировать по фильтрам
-          </button>
-          {{ filters }}
-        </aside>
-        <div class="items__main">
-          <div v-if="this.checkedId != ''" class="aic">
-            <p>Найдено {{ foundResults }} подходящих товаров</p>
-            <div
-              v-for="category in $store.state.catalog.categories.filter(
-                (el) => el.checked == true
-              )"
-              :key="category.id"
-            >
-              <button>
-                <i class="delete"></i>
-                {{ category.name }}
-              </button>
-            </div>
-          </div>
-          <div class="items">
-            <div
-              v-for="item in this.paginatedProducts"
-              :key="item.slug"
-              class="col item"
-            >
-              <item :item="item"> </item>
-            </div>
-          </div>
-          <button
-            @click="loadMore"
-            v-if="currentPage * maxPerPage < this.products.length"
-          >
-            Загрузить больше
-          </button>
-        </div>
-      </main>
-    </section>
-
-    <Footer />
-  </div>
-</template>
-
 <script>
 import AsideCategories from "~/components/Aside/AsideCategories.vue";
 import AsidePrice from "~/components/Aside/AsidePrice.vue";
@@ -68,7 +6,6 @@ import Item from "~/components/General/Item.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Footer from "~/components/General/Footer.vue";
 import AsideSize from "~/components/Aside/AsideSize.vue";
-import productColors from "~/components/product/productColors.vue";
 
 export default {
   components: {
@@ -86,9 +23,6 @@ export default {
     return {
       showFilter: false,
       filterLabel: "цене",
-      productsInCartId: [],
-      checkedId: "",
-      checkedColor: "",
       checkedFiltered: "",
       currentPage: 1,
       maxPerPage: 9,
@@ -135,26 +69,7 @@ export default {
   },
   computed: {
     products() {
-      let checkedArray = [];
-      if (this.checkedId.length !== 0) {
-        for (let i = 0; i < this.checkedId.length; i++) {
-          const checked = this.checkedId[i];
-          for (
-            let j = 0;
-            j < this.$store.getters["catalog/getProducts"].length;
-            j++
-          ) {
-            const find = this.$store.getters["catalog/getProducts"][j];
-            if (find.category == checked) {
-              checkedArray.push(find);
-            }
-          }
-        }
-        return checkedArray;
-      } else return this.$store.getters["catalog/getProducts"];
-    },
-    productsInCart() {
-      return this.$store.getters["productsInCart"];
+      return this.$store.getters["catalog/getProducts"];
     },
     foundResults() {
       return this.products.length;
@@ -179,17 +94,106 @@ export default {
     if (this.$store.getters["catalog/getCategories"].length === 0) {
       await this.$store.dispatch("catalog/fetchCategories");
     }
-    this.colors = await this.$axios.$get("/colors", {
-      // localStorage.getItem('cart')
-    });
-    this.sizes = await this.$axios.$get("/sizes", {
-      // localStorage.getItem('cart')
-    });
+    if (this.$store.getters["catalog/getColors"].length === 0) {
+      await this.$store.dispatch("catalog/fetchColors");
+    }
+    if (this.$store.getters["catalog/getSizes"].length === 0) {
+      await this.$store.dispatch("catalog/fetchSizes");
+    }
+  },
+  destroyed() {
+    this.$store.dispatch("filters/clearFilters");
   },
 };
 </script>
 
+<template>
+  <div class="wrapper">
+    <Transition name="slide-fade">
+      <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
+    </Transition>
+    <HeaderBlack />
+    <section>
+      <main class="main">
+        <aside class="aside">
+          <aside-categories
+            :categories="categories"
+            @filterCategories="setCategories"
+          />
+          <aside-price :products="products" @filterPrice="setPrice" />
+          <aside-color :colors="colors" @filterColors="setColors" />
+          <aside-size :sizes="sizes" @filterSizes="setSizes" />
+          <div class="buttonsFilters">
+            <button
+              @click="
+                $router.push({
+                  path: `catalog/filter/`,
+                  query: {
+                    categories: `${$store.state.filters.filters.categories.map(
+                      (o) => o['slug']
+                    )}`,
+                    price: `${$store.state.filters.filters.prices.map(
+                      (o) => o['value']
+                    )}`,
+                    sizes: `${$store.state.filters.filters.sizes.map(
+                      (o) => o['name']
+                    )}`,
+                    colors: `${$store.state.filters.filters.colors.map(
+                      (o) => o['slug']
+                    )}`,
+                  },
+                })
+              "
+              class="filter"
+            >
+              Отсортировать по фильтрам
+            </button>
+            <button
+              class="clearButtonFilters"
+              @click="
+                $store.dispatch('filters/clearFilters');
+                $router.push('/catalog');
+              "
+            >
+              Сбросить фильтры
+            </button>
+          </div>
+        </aside>
+        <div class="items__main">
+          <div class="items">
+            <div
+              v-for="item in this.paginatedProducts"
+              :key="item.slug"
+              class="col item"
+            >
+              <item :item="item"> </item>
+            </div>
+          </div>
+          <button
+            @click="loadMore"
+            v-if="currentPage * maxPerPage < this.products.length"
+          >
+            Загрузить больше
+          </button>
+        </div>
+      </main>
+    </section>
+
+    <Footer />
+  </div>
+</template>
+
 <style lang="scss" scoped>
+.buttonsFilters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  .clearButtonFilters {
+    background-color: #fff;
+    color: #685f5f;
+    border: 1px solid #685f5f;
+  }
+}
 .Breadcrumbs {
   width: 100%;
 }
@@ -240,6 +244,7 @@ button {
   }
 }
 .items__main {
+  max-width: 1296px;
   width: 100%;
 
   button {
@@ -283,7 +288,8 @@ main {
   margin: 0 auto;
 }
 aside {
-  width: 320px;
+  max-width: 320px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 45px;

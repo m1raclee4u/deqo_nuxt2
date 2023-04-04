@@ -22,7 +22,6 @@ export default {
       let emptyInputs = 0;
       for (const [key, value] of Object.entries(this.cartForm)){
         if (value === '' && key != 'comment') {
-          console.log(key + ' ' + value + ' ' + emptyInputs);
           emptyInputs++
         }
       }

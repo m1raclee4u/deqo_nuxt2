@@ -11,14 +11,12 @@
           :id="category.slug"
           name="category"
           type="checkbox"
-          :value="category.slug"
+          :value="category"
           v-model="filterCategories"
-          @change="addCategory"
         />
         <label :for="category.slug"></label>
         <p>{{ category.name }}</p>
       </div>
-      <!-- <span></span>             -->
     </div>
   </div>
 </template>
@@ -27,14 +25,18 @@
 export default {
   data() {
     return {
-      filterCategories: [],
+      filterCategories: this.$store.state.filters.filters.categories,
+    };
+  },
+  watch: {
+    filterCategories(value) {
+      if (value.length > 0) {
+        this.$store.dispatch("filters/setCategories", this.filterCategories);
+      } else {
+        this.$store.dispatch("filters/setCategories", this.filterCategories);
       }
-  },
-  methods: {
-    addCategory() {
-      this.$emit('filterCategories', this.filterCategories)
     },
-  },
+  }, 
 };
 </script>
 
