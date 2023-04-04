@@ -240,7 +240,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.tagsSwiper{
+.tagsSwiper {
   width: 100%;
   max-width: 100% !important;
 }
