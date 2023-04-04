@@ -122,7 +122,7 @@ export default {
                 />
                 <!-- <p>{{item.quantity}}</p> -->
                 <div @click="item.quantity++" class="buttons">
-                  <img src="../../assets/img/icons/quantity/plus.svg" alt="" />
+                  <img src="@/assets/img/icons/quantity/plus.svg" alt="" />
                 </div>
               </div>
             </div>
@@ -244,7 +244,7 @@ export default {
     height: 20px;
     cursor: pointer;
     // background-color: black;
-    background-image: url("../../assets/img/icons/deleteCartItem.svg");
+    background-image: url("@/assets/img/icons/deleteCartItem.svg");
     background-repeat: no-repeat;
   }
 

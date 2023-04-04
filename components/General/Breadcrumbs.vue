@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumbs">
     <Nuxt-Link :to="`/`">Главная</Nuxt-Link>
-    <img src="../../assets/img/icons/breadcrumbsIcon.svg" alt="" />
+    <img src="@/assets/img/icons/breadcrumbsIcon.svg" alt="" />
     <Nuxt-Link :to="`#`">{{ currentRouteName }}</Nuxt-Link>
   </div>
 </template>

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Item from "~/components/General/Item.vue";
+import Item from "~/components/Item/Item.vue";
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";

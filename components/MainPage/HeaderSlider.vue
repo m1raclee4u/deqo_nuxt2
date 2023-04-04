@@ -8,21 +8,21 @@
         <div class="swiper-slide">
           <img
             class="slide"
-            :src="require('../../assets/img/back.jpg')"
+            :src="require('@/assets/img/back.jpg')"
             alt=""
           />
         </div>
         <div class="swiper-slide">
-          <img class="slide" src="../../assets/img/back2.jpg" alt="" />
+          <img class="slide" src="@/assets/img/back2.jpg" alt="" />
         </div>
         <div class="swiper-slide">
-          <img class="slide" src="../../assets/img/back3.jpg" alt="" />
+          <img class="slide" src="@/assets/img/back3.jpg" alt="" />
         </div>
       </div>
     </div>
     <div class="wrapper p60">
       <div class="flex">
-        <img src="../../assets/img/icons/slogan.svg" alt="" />
+        <img src="@/assets/img/icons/slogan.svg" alt="" />
         <!-- <main>
           <div class="assortment">
             <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>

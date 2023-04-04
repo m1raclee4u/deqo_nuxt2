@@ -62,7 +62,7 @@ export default {
   height: 60px;
 }
 .added {
-  background-image: url("../../assets/img/icons/heart_on.svg") !important;
+  background-image: url("@/assets/img/icons/heart_on.svg") !important;
 }
 .relative {
   position: relative !important;
@@ -75,7 +75,7 @@ export default {
   background-color: #A9A1A1 !important;
   position: relative;
   border-radius: 4px;
-  background-image: url("../../assets/img/icons/heart_small_white.svg") !important;
+  background-image: url("@/assets/img/icons/heart_small_white.svg") !important;
   background-size: 24px 22px !important;
   transition: 0.2s;
   &:hover {
@@ -88,7 +88,7 @@ export default {
   background-color: #685f5f !important;
   position: relative;
   border-radius: 4px;
-  background-image: url("../../assets/img/icons/heart_small.svg") !important;
+  background-image: url("@/assets/img/icons/heart_small.svg") !important;
   background-size: 24px 22px !important;
   transition: 0.2s;
   &:hover {
@@ -98,7 +98,7 @@ export default {
   }
 }
 .like {
-  background-image: url("../../assets/img/icons/heart.svg");
+  background-image: url("@/assets/img/icons/heart.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-color: unset;
@@ -109,7 +109,7 @@ export default {
   // border-radius: 50%;
 
   &:hover {
-    background-image: url("../../assets/img/icons/heart_on.svg");
+    background-image: url("@/assets/img/icons/heart_on.svg");
   }
 }
 </style>

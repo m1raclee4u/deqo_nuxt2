@@ -10,7 +10,7 @@
           <header>
             <div class="left">
               <img
-                src="../../assets/img/icons/burgerMenu/icon-t-shirt.svg"
+                src="@/assets/img/icons/burgerMenu/icon-t-shirt.svg"
                 alt=""
               />
               <h5 class="title">{{ category.name }}</h5>

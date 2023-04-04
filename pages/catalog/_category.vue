@@ -1,11 +1,12 @@
 <script>
-import AsideCategories from "~/components/Aside/AsideCategories.vue";
-import AsidePrice from "~/components/Aside/AsidePrice.vue";
+import AsideCategories from "~/components/Filter/AsideCategories.vue";
+import AsidePrice from "~/components/Filter/AsidePrice.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
-import Item from "~/components/General/Item.vue";
+import Item from "~/components/Item/Item.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Footer from "~/components/General/Footer.vue";
-import AsideSize from "~/components/Aside/AsideSize.vue";
+import AsideSize from "~/components/Filter/AsideSize.vue";
+import AsideColor from "~/components/Filter/AsideColor.vue";
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -17,6 +18,7 @@ export default {
     HeaderBlack,
     Item,
     AsidePrice,
+    AsideColor,
     AsideCategories,
     BurgerMenu,
     Footer,
@@ -44,6 +46,22 @@ export default {
     };
   },
   methods: {
+    deleteTagClickHandler(tag) {
+      this.$store.dispatch("filters/deleteTag", tag);
+      console.log(this.$store.state.filters.filters);
+      let counter = 0;
+      for (const filter in this.$store.state.filters.filters) {
+        if (this.$store.state.filters.filters[filter].length > 0) {
+          counter++;
+          console.log(this.$store.state.filters.filters[filter]);
+        }
+      }
+    },
+    redirectToCatalog() {
+      this.$router.push({
+        path: `/catalog`,
+      });
+    },
     setCategories(array) {
       this.filters.categories = array;
     },
@@ -159,8 +177,7 @@ export default {
                       (o) => o['slug']
                     )}`,
                   },
-                });
-                getProducts();
+                })
               "
               class="filter"
             >
@@ -170,7 +187,7 @@ export default {
               class="clearButtonFilters"
               @click="
                 $store.dispatch('filters/clearFilters');
-                $router.push('/catalog');
+                redirectToCatalog()
               "
             >
               Сбросить фильтры
@@ -186,29 +203,7 @@ export default {
                   <div class="swiper-slide" v-for="tag in tags" :key="tag.name">
                     <div class="tag">
                       <p>{{ tag.name }}</p>
-                      <i
-                        @click="
-                          $store.dispatch('filters/deleteTag', tag);
-                          $router.push({
-                            path: `/catalog/filter/`,
-                            query: {
-                              categories: `${$store.state.filters.filters.categories.map(
-                                (o) => o['slug']
-                              )}`,
-                              price: `${$store.state.filters.filters.prices.map(
-                                (o) => o['value']
-                              )}`,
-                              sizes: `${$store.state.filters.filters.sizes.map(
-                                (o) => o['name']
-                              )}`,
-                              colors: `${$store.state.filters.filters.colors.map(
-                                (o) => o['slug']
-                              )}`,
-                            },
-                          });
-                        "
-                        class="delete"
-                      ></i>
+                      <i @click="deleteTagClickHandler(tag)" class="delete"></i>
                     </div>
                   </div>
                 </div>

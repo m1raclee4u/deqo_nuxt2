@@ -47,9 +47,9 @@ export default {
   cursor: pointer;
   background-color: inherit;
   background-size: cover;
-  background-image: url("../../assets/img/icons/aside-help/telegram.svg");
+  background-image: url("@/assets/img/icons/aside-help/telegram.svg");
   &:hover {
-    background-image: url("../../assets/img/icons/aside-help/telegram_on.svg");
+    background-image: url("@/assets/img/icons/aside-help/telegram_on.svg");
   }
 }
 .vk {
@@ -59,9 +59,9 @@ export default {
   cursor: pointer;
   background-color: inherit;
   background-size: cover;
-  background-image: url("../../assets/img/icons/aside-help/vk.svg");
+  background-image: url("@/assets/img/icons/aside-help/vk.svg");
   &:hover {
-    background-image: url("../../assets/img/icons/aside-help/vk_on.svg");
+    background-image: url("@/assets/img/icons/aside-help/vk_on.svg");
   }
 }
 </style>

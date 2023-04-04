@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from "vuex";
-import Login from "~/components/General/Login.vue";
+import Login from "~/components/Profile/Login.vue";
 
 export default {
   data() {
@@ -8,16 +8,15 @@ export default {
       headerOpened: false,
       whiteHeader: false,
       searchShown: false,
-      showMobileMenu: false
-
+      showMobileMenu: false,
     };
   },
   mounted() {
     const mediaQuery = window.matchMedia("(max-width:640px)");
     this.showMobileMenu = mediaQuery.matches;
-    const listener = e => this.showMobileMenu = e.matches;
+    const listener = (e) => (this.showMobileMenu = e.matches);
     mediaQuery.addListener(listener);
-    this.$once('hook:beforeDestroy', () => mediaQuery.removeListener(listener));
+    this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
   },
   beforeMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -48,53 +47,79 @@ export default {
 <template>
   <div style="position: absolute" class="">
     <!-- @mouseover="headerOpened = true" @mouseleave="headerOpened = false" :class="{notMainPage: $route.name != 'index' || whiteHeader === true, opened: headerOpened}" -->
-    <header :class="{
-      notMainPage:
-        $route.name != 'index' ||
-        whiteHeader === true ||
-        searchShown === true,
-    }">
+    <header
+      :class="{
+        notMainPage:
+          $route.name != 'index' ||
+          whiteHeader === true ||
+          searchShown === true,
+      }"
+    >
       <div class="header">
         <div class="flex">
-          <button class="burger__menu" @click="
-            $store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)
-          ">
-            <img src="../../assets/img/icons/menu.svg" alt="" />
+          <button
+            class="burger__menu"
+            @click="
+              $store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)
+            "
+          >
+            <img src="@/assets/img/icons/menu.svg" alt="" />
             <p v-if="!showMobileMenu">каталог</p>
           </button>
         </div>
-        <Nuxt-link v-if="!showMobileMenu" id="logo" to="/" :class="{ openedLogo: headerOpened }">
-          <img src="../../assets/img/icons/logo.svg" alt="" />
+        <Nuxt-link
+          v-if="!showMobileMenu"
+          id="logo"
+          to="/"
+          :class="{ openedLogo: headerOpened }"
+        >
+          <img src="@/assets/img/icons/logo.svg" alt="" />
         </Nuxt-link>
         <div class="buttons">
           <div class="searchButtons">
-            <img v-if="searchShown === false" @click="searchShown = !searchShown" class="search"
-              src="../../assets/img/icons/search.svg" alt="" />
+            <img
+              v-if="searchShown === false"
+              @click="searchShown = !searchShown"
+              class="search"
+              src="@/assets/img/icons/search.svg"
+              alt=""
+            />
             <div v-if="searchShown === true" class="searchInputWrapper">
               <i @click="$router.push('/catalog')"></i>
-              <input @keyup.enter="$router.push('/catalog')" type="search" class="searchInput" name="" id=""
-                placeholder="Я ищу" />
+              <input
+                @keyup.enter="$router.push('/catalog')"
+                type="search"
+                class="searchInput"
+                name=""
+                id=""
+                placeholder="Я ищу"
+              />
             </div>
           </div>
-          <Nuxt-link v-if="!showMobileMenu" to="/favorite" class="favorite"></Nuxt-link>
+          <Nuxt-link
+            v-if="!showMobileMenu"
+            to="/favorite"
+            class="favorite"
+          ></Nuxt-link>
           <Nuxt-link v-if="!showMobileMenu" to="/cart" class="cart">
             <span class="cartCounter" v-if="getProducts.length > 0">
               {{ getProducts.length }}
             </span>
           </Nuxt-link>
-          <div v-if="!showMobileMenu" @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)" class="account">
-          </div>
+          <div
+            v-if="!showMobileMenu"
+            @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"
+            class="account"
+          ></div>
         </div>
       </div>
       <div v-if="showMobileMenu" class="mobileMenu buttons">
         <div class="mobile_button">
-          <Nuxt-link to="/" class="home">
-          </Nuxt-link>
+          <Nuxt-link to="/" class="home"> </Nuxt-link>
           <p>главная</p>
         </div>
         <div class="mobile_button">
-          <Nuxt-link to="/favorite" class="favorite">
-          </Nuxt-link>
+          <Nuxt-link to="/favorite" class="favorite"> </Nuxt-link>
           <p>вишлист</p>
         </div>
         <div class="mobile_button">
@@ -106,8 +131,10 @@ export default {
           <p>корзина</p>
         </div>
         <div class="mobile_button">
-          <div @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)" class="account">
-          </div>
+          <div
+            @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"
+            class="account"
+          ></div>
           <p>аккаунт</p>
         </div>
       </div>
@@ -143,7 +170,7 @@ export default {
     justify-content: center;
 
     p {
-      font-family: 'Roboto';
+      font-family: "Roboto";
       font-style: normal;
       font-weight: 500;
       font-size: 10px;
@@ -155,7 +182,7 @@ export default {
 
       /* основной */
 
-      color: #685F5F;
+      color: #685f5f;
     }
   }
 }
@@ -176,17 +203,17 @@ export default {
   width: 24px;
   height: 24px;
   background-size: 24px 24px;
-  background-image: url("../../assets/img/icons/home.svg");
+  background-image: url("@/assets/img/icons/home.svg");
 }
 
 .favorite {
   width: 24px;
   height: 24px;
   background-size: 24px 24px;
-  background-image: url("../../assets/img/icons/heart.svg");
+  background-image: url("@/assets/img/icons/heart.svg");
 
   &:hover {
-    background-image: url("../../assets/img/icons/heart_on.svg");
+    background-image: url("@/assets/img/icons/heart_on.svg");
   }
 }
 
@@ -195,10 +222,10 @@ export default {
   width: 24px;
   height: 24px;
   background-size: 24px 24px;
-  background-image: url("../../assets/img/icons/cart.svg");
+  background-image: url("@/assets/img/icons/cart.svg");
 
   &:hover {
-    background-image: url("../../assets/img/icons/cart_on.svg");
+    background-image: url("@/assets/img/icons/cart_on.svg");
   }
 }
 
@@ -207,13 +234,12 @@ export default {
   width: 24px;
   height: 24px;
   background-size: 24px 24px;
-  background-image: url("../../assets/img/icons/account.svg");
+  background-image: url("@/assets/img/icons/account.svg");
 
   &:hover {
-    background-image: url("../../assets/img/icons/account_on.svg");
+    background-image: url("@/assets/img/icons/account_on.svg");
   }
 }
-
 
 .searchInputWrapper {
   display: flex;
@@ -239,7 +265,7 @@ export default {
     cursor: pointer;
     width: 18px;
     height: 18px;
-    background-image: url("../../assets/img/icons/loopInput.svg");
+    background-image: url("@/assets/img/icons/loopInput.svg");
   }
 }
 
@@ -313,18 +339,22 @@ header {
   height: 58px;
   position: fixed;
   top: 0;
-  transition: 1s all ease;
+  transition: 0.5s all;
 }
 
 .opened {
   height: 100px !important;
   background: white;
-  border-bottom: 1px solid #bababa;
+  -webkit-box-shadow: 0px 1px 0px 0px #bababa;
+  -moz-box-shadow: 0px 1px 0px 0px #bababa;
+  box-shadow: 0px 1px 0px 0px #bababa;
 }
 
 .notMainPage {
   background: white;
-  border-bottom: 1px solid #bababa;
+  -webkit-box-shadow: 0px 1px 0px 0px #bababa;
+  -moz-box-shadow: 0px 1px 0px 0px #bababa;
+  box-shadow: 0px 1px 0px 0px #bababa;
 }
 
 .header {
@@ -333,6 +363,8 @@ header {
   height: 100%;
   display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
+
   align-items: center;
 }
 
@@ -346,7 +378,6 @@ button {
   align-items: center;
   gap: 30px;
 
-
   img {
     width: 24px;
     height: 24px;
@@ -354,9 +385,7 @@ button {
   }
 }
 
-
-
-@media (max-width:1900px) {
+@media (max-width: 1900px) {
   header {
     padding: 0 32px;
   }
@@ -365,10 +394,9 @@ button {
   header {
     padding: 0 24px;
   }
-  
 }
 @media (max-width: 640px) {
-  header{
+  header {
     padding: 0 10px;
   }
 }

@@ -303,13 +303,13 @@ section {
 }
 
 .downActive {
-  background-image: url("../../assets/img/icons/buttonDown_active.svg") !important;
+  background-image: url("@/assets/img/icons/buttonDown_active.svg") !important;
 }
 .down {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  background-image: url("../../assets/img/icons/buttonDown.svg");
+  background-image: url("@/assets/img/icons/buttonDown.svg");
   background-position: center;
   background-repeat: no-repeat;
   transition: 0.9s ease all;

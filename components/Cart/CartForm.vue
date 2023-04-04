@@ -1,5 +1,5 @@
 <script>
-import CartFormAddresSelect from "~/components/General/CartFormAddresSelect.vue";
+import CartFormAddresSelect from "~/components/Cart/CartFormAddresSelect.vue";
 
 export default {
   components: { CartFormAddresSelect },

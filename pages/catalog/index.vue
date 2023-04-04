@@ -1,16 +1,18 @@
 <script>
-import AsideCategories from "~/components/Aside/AsideCategories.vue";
-import AsidePrice from "~/components/Aside/AsidePrice.vue";
+import AsideCategories from "~/components/Filter/AsideCategories.vue";
+import AsidePrice from "~/components/Filter/AsidePrice.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
-import Item from "~/components/General/Item.vue";
+import Item from "~/components/Item/Item.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Footer from "~/components/General/Footer.vue";
-import AsideSize from "~/components/Aside/AsideSize.vue";
+import AsideSize from "~/components/Filter/AsideSize.vue";
+import AsideColor from "~/components/Filter/AsideColor.vue";
 
 export default {
   components: {
     HeaderBlack,
     Item,
+    AsideColor,
     AsidePrice,
     AsideCategories,
     BurgerMenu,
@@ -127,7 +129,7 @@ export default {
             <button
               @click="
                 $router.push({
-                  path: `catalog/filter/`,
+                  path: `catalog/filter`,
                   query: {
                     categories: `${$store.state.filters.filters.categories.map(
                       (o) => o['slug']
@@ -152,7 +154,7 @@ export default {
               class="clearButtonFilters"
               @click="
                 $store.dispatch('filters/clearFilters');
-                $router.push('/catalog');
+                $router.push('catalog');
               "
             >
               Сбросить фильтры

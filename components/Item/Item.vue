@@ -7,7 +7,7 @@
     />
     <ButtonFavorite :item="item" inSlider="inSlider" />
     <Nuxt-Link :to="`/products/${item.slug}`">
-      <!-- <img :src="require('../../assets/img/item/' + item.img)" alt="" > -->
+      <!-- <img :src="require('@/assets/img/item/' + item.img)" alt="" > -->
       <img
         width="387"
         height="487"
@@ -15,7 +15,7 @@
         :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)"
         alt="item.name"
       />
-      <div class="tag">
+      <div v-if="item.badge_bestseller" class="tag">
         <p>ХИТ</p>
       </div>
 

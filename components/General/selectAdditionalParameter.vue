@@ -155,7 +155,7 @@ export default {
   // border: 2px solid #BD270F !important;
   // background-color: #BC716E !important;
   opacity: 0.5;
-  background-image: url("../../assets/img/icons/colorNotChecked.svg");
+  background-image: url("@/assets/img/icons/colorNotChecked.svg");
   background-position: center;
   background-size: 10px 10px;
   background-repeat: no-repeat;

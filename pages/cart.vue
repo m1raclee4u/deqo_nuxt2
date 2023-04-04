@@ -65,14 +65,12 @@
 </template>
 
 <script>
-import AsideCategories from "~/components/Aside/AsideCategories.vue";
-import AsidePrice from "~/components/Aside/AsidePrice.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
-import CartItem from "~/components/General/CartItem.vue";
+import CartItem from "~/components/Cart/CartItem.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
 import Footer from "~/components/General/Footer.vue";
-import CartForm from "~/components/General/CartForm.vue";
+import CartForm from "~/components/Cart/CartForm.vue";
 
 import { mapActions, mapGetters } from "vuex";
 import InformationWindowCart from "~/components/General/InformationWindowCart.vue";
@@ -81,8 +79,6 @@ import Promocode from "~/components/General/promocode.vue";
 export default {
   components: {
     HeaderBlack,
-    AsidePrice,
-    AsideCategories,
     BurgerMenu,
     Breadcrumbs,
     CartItem,

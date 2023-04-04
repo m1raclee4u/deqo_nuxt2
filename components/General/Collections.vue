@@ -3,7 +3,7 @@
     <div class="collections p60">
       <div class="collection_left">
         <img
-          src="../../assets/img/collections/bc0e3668564533.5b6171f3d0b17.jpg"
+          src="@/assets/img/collections/bc0e3668564533.5b6171f3d0b17.jpg"
           alt=""
         />
         <div class="text">
@@ -19,7 +19,7 @@
       </div>
       <div class="collection_right">
         <img
-          src="../../assets/img/collections/bc0e3668564533.5b6171f3d0b17.jpg"
+          src="@/assets/img/collections/bc0e3668564533.5b6171f3d0b17.jpg"
           alt=""
         />
         <div class="text">

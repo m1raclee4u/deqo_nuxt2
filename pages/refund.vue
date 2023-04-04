@@ -77,11 +77,8 @@
 
 <script>
 import AsideInfoPages from "~/components/Aside/AsideInfoPages.vue";
-import AsideHelp from "~/components/Aside/AsideHelp.vue";
-import AsideCategories from "~/components/Aside/AsideCategories.vue";
-import AsidePrice from "~/components/Aside/AsidePrice.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
-import Item from "~/components/General/Item.vue";
+import Item from "~/components/Item/Item.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
 import Footer from "~/components/General/Footer.vue";
@@ -90,10 +87,7 @@ export default {
   components: {
     HeaderBlack,
     Item,
-    AsidePrice,
-    AsideCategories,
     AsideInfoPages,
-    AsideHelp,
     BurgerMenu,
     Breadcrumbs,
     Footer,

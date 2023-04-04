@@ -7,9 +7,9 @@
         <div class="dimensionalGrid">
             <header>
                 <div class="title">
-                    <img src="../../assets/img/icons/popup/iconPopup.svg" alt="" style="height: 18px">
+                    <img src="@/assets/img/icons/popup/iconPopup.svg" alt="" style="height: 18px">
                     <h5>размерная сетка</h5>
-                    <img src="../../assets/img/icons/popup/iconPopup.svg" alt="" style="height: 18px">
+                    <img src="@/assets/img/icons/popup/iconPopup.svg" alt="" style="height: 18px">
                 </div>
                 <p>общая таблица размеров показывает нашу стандартную размерную линейку</p>
             </header>
@@ -428,40 +428,40 @@ export default {
                 width: 30px;
                 height: 30px;
                 cursor: pointer;
-                background-image: url('../../assets/img/icons/popup/t-shirt.svg');
+                background-image: url('@/assets/img/icons/popup/t-shirt.svg');
                 &:hover{
-                    background-image: url('../../assets/img/icons/popup/t-shirt_on.svg');
+                    background-image: url('@/assets/img/icons/popup/t-shirt_on.svg');
                 }
                 }
                 .hoodie{
                     width: 30px;
                     height: 30px;
                     cursor: pointer;
-                    background-image: url('../../assets/img/icons/popup/hoodie.svg');
+                    background-image: url('@/assets/img/icons/popup/hoodie.svg');
                     &:hover{
-                        background-image: url('../../assets/img/icons/popup/hoodie_on.svg');
+                        background-image: url('@/assets/img/icons/popup/hoodie_on.svg');
                     }
                 }
                 .pants{
                     width: 30px;
                     height: 30px;
                     cursor: pointer;
-                    background-image: url('../../assets/img/icons/popup/pants.svg');
+                    background-image: url('@/assets/img/icons/popup/pants.svg');
                     &:hover{
-                        background-image: url('../../assets/img/icons/popup/pants_on.svg');
+                        background-image: url('@/assets/img/icons/popup/pants_on.svg');
                     }
                 }            
                 .downActive{
-                    background-image: url('../../assets/img/icons/popup/down_on.svg') !important;
+                    background-image: url('@/assets/img/icons/popup/down_on.svg') !important;
                 }
                 .down{
                     width: 26px;
                     height: 26px;
                     cursor: pointer;
-                    background-image: url('../../assets/img/icons/popup/down.svg');
+                    background-image: url('@/assets/img/icons/popup/down.svg');
                     transition: 0.5s ease all;
                     &:hover{
-                        background-image: url('../../assets/img/icons/popup/down_on.svg');
+                        background-image: url('@/assets/img/icons/popup/down_on.svg');
                     }
 
                 }
@@ -593,33 +593,33 @@ export default {
     }
     .form_radio_btn_size_popup.t-shirt input[type=radio]:checked + label {
         color: white;
-        background-image: url('../../assets/img/icons/popup/t-shirt_on.svg');
+        background-image: url('@/assets/img/icons/popup/t-shirt_on.svg');
         // background-color: #685F5F;
     }
     .form_radio_btn_size_popup.hoodie input[type=radio]:checked + label {
         color: white;
-        background-image: url('../../assets/img/icons/popup/hoodie_on.svg');
+        background-image: url('@/assets/img/icons/popup/hoodie_on.svg');
         // background-color: #685F5F;
     }
     .form_radio_btn_size_popup.pants input[type=radio]:checked + label {
         color: white;
-        background-image: url('../../assets/img/icons/popup/pants_on.svg');
+        background-image: url('@/assets/img/icons/popup/pants_on.svg');
         // background-color: #685F5F;
     }
     /* Hover */
     .form_radio_btn_size_popup.t-shirt label:hover {
         color: white;
-        background-image: url('../../assets/img/icons/popup/t-shirt_on.svg');
+        background-image: url('@/assets/img/icons/popup/t-shirt_on.svg');
         // background-color: #685F5F;
     }
     .form_radio_btn_size_popup.hoodie label:hover {
         color: white;
-        background-image: url('../../assets/img/icons/popup/hoodie_on.svg');
+        background-image: url('@/assets/img/icons/popup/hoodie_on.svg');
         // background-color: #685F5F;
     }
     .form_radio_btn_size_popup.pants label:hover {
         color: white;
-        background-image: url('../../assets/img/icons/popup/pants_on.svg');
+        background-image: url('@/assets/img/icons/popup/pants_on.svg');
         // background-color: #685F5F;
     }
     /* Disabled */

@@ -6,7 +6,7 @@ import FAQ from "~/components/General/FAQ.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
 import Footer from "~/components/General/Footer.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
-import ItemsSlider from "~/components/General/ItemsSlider.vue";
+import ItemsSlider from "~/components/Item/ItemsSlider.vue";
 import DimensionalGrid from "~/components/General/DimensionalGrid.vue";
 import ButtonBuy from "~/components/Buttons/ButtonBuy.vue";
 import ButtonCart from "~/components/Buttons/ButtonCart.vue";
@@ -116,7 +116,7 @@ export default {
             <div @click="
               $store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)
             " class="sizesPopup">
-              <img src="../../assets/img/icons/sizesPopup.svg" alt="" />
+              <img src="@/assets/img/icons/sizesPopup.svg" alt="" />
               <p>размерная сетка</p>
             </div>
           </div>

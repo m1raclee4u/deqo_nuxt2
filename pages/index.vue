@@ -20,8 +20,8 @@
 import Collections from "~/components/General/Collections.vue";
 import HeaderBlack from "~/components/General/HeaderBlack.vue";
 import Footer from "~/components/General/Footer.vue";
-import ItemsSlider from "~/components/General/ItemsSlider.vue";
-import HeaderSlider from "../components/MainPage/HeaderSlider.vue";
+import ItemsSlider from "~/components/Item/ItemsSlider.vue";
+import HeaderSlider from "~/components/MainPage/HeaderSlider.vue";
 import BurgerMenu from "~/components/General/BurgerMenu.vue";
 
 export default {
