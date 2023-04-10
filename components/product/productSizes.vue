@@ -34,7 +34,7 @@ export default {
         {{ size.name }}
       </div>
       <div v-if="highlightedSize === true" class="sizeNotChecked">
-        Вы не выбрали цвет
+        Вы не выбрали размер
       </div>
     </div>
   </div>

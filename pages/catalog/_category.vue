@@ -34,6 +34,7 @@ export default {
       currentPage: 1,
       maxPerPage: 9,
       showReadMore: true,
+      // products: [],
       categories: [],
       colors: [],
       sizes: [],
@@ -48,12 +49,10 @@ export default {
   methods: {
     deleteTagClickHandler(tag) {
       this.$store.dispatch("filters/deleteTag", tag);
-      console.log(this.$store.state.filters.filters);
       let counter = 0;
       for (const filter in this.$store.state.filters.filters) {
         if (this.$store.state.filters.filters[filter].length > 0) {
           counter++;
-          console.log(this.$store.state.filters.filters[filter]);
         }
       }
     },
@@ -74,9 +73,6 @@ export default {
     setSizes(array) {
       this.filters.sizes = array;
     },
-    sortByChecked(checkedId) {
-      this.checkedId = checkedId;
-    },
     sortByCheckedColor(checkedColor) {
       this.checkedColor = checkedColor;
     },
@@ -86,35 +82,17 @@ export default {
     getChecked(data) {
       this.checkedFiltered = data;
     },
-    loadMore() {
-      this.currentPage += 1;
-    },
   },
   computed: {
     tags() {
       return this.$store.state.filters.tags;
     },
-    products() {
-      return this.$store.getters["catalog/getProducts"];
-    },
-    productsInCart() {
-      return this.$store.getters["productsInCart"];
-    },
-    foundResults() {
-      return this.products.length;
-    },
-    totalResults() {
-      return Object.keys(this.orders).length;
-    },
-    pageCount() {
-      return Math.ceil(this.totalResults / this.maxPerPage);
-    },
-    pageOffest() {
-      return this.maxPerPage * this.currentPage;
-    },
-    paginatedProducts() {
-      return this.products.slice(0, this.currentPage * this.maxPerPage);
-    },
+  },
+  async asyncData({ $axios, route }) {
+    const products = await $axios.$get(`/site/catalog-list/`, {
+      params: route.query,
+    });
+    return { products };
   },
   async mounted() {
     if (this.$store.getters["catalog/getCategories"].length === 0) {
@@ -187,7 +165,7 @@ export default {
               class="clearButtonFilters"
               @click="
                 $store.dispatch('filters/clearFilters');
-                redirectToCatalog()
+                redirectToCatalog();
               "
             >
               Сбросить фильтры
@@ -196,8 +174,8 @@ export default {
         </aside>
         <div class="items__main">
           <div class="aic">
-            <p>Найдено {{ foundResults }} подходящих товаров</p>
-            <div class="tags">
+            <!-- <p>Найдено {{ foundResults }} подходящих товаров</p> -->
+            <!-- <div class="tags">
               <div class="tagsSwiper">
                 <div class="swiper-wrapper tagsWrapper">
                   <div class="swiper-slide" v-for="tag in tags" :key="tag.name">
@@ -208,24 +186,24 @@ export default {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="items">
             <div
-              v-for="item in this.products"
+              v-for="item in this.products.data"
               :key="item.slug"
               class="col item"
             >
               <item :item="item"> </item>
             </div>
           </div>
-          <button
+          <!-- <button
             @click="loadMore"
-            v-if="currentPage * maxPerPage < this.products.length"
+            v-if="currentPage * maxPerPage < this.products.data.length"
           >
             Загрузить больше
-          </button>
-          {{ $route.query }}
+          </button> -->
+          <!-- {{ $route.query }} -->
         </div>
       </main>
     </section>

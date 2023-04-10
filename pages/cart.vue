@@ -9,17 +9,36 @@
     <main class="main">
       <div class="title">
         <transition name="component-fade" mode="out-in">
-        <h3 v-if="$store.state.cart.products.length > 0" key="exist">Оформление заказа</h3>        
-        <p v-if="$store.state.cart.products.length < 1" key="doesntExist">
-          Ваша корзина пока пуста,<br />
-          а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
-        </p>
+          <client-only>
+            <h3 v-if="$store.state.cart.products.length > 0" key="exist">
+              Оформление заказа
+            </h3>
+            <p v-if="$store.state.cart.products.length < 1" key="doesntExist">
+              Ваша корзина пока пуста,<br />
+              а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
+            </p>
+          </client-only>
         </transition>
       </div>
-      <div v-if="$store.state.cart.products.length > 0" class="cart">
-        <div class="cartWrapper">
-          <div class="cartItems">
-            <transition-group class="cartItems" name="list" tag="p">
+      <client-only>
+        <div v-if="$store.state.cart.products.length > 0" class="cart">
+          <div class="cartWrapper">
+            <div class="cartItems">
+              <transition-group class="cartItems" name="list" tag="p">
+                <div
+                  v-for="product in this.products"
+                  :key="product.key"
+                  class="cartItem"
+                >
+                  <cart-item
+                    :item="product"
+                    @deleteClickHandler="deleteClickMethod(product)"
+                  >
+                  </cart-item>
+                  <hr />
+                </div>
+              </transition-group>
+              <!-- <transition-group class="cartItems" name="list" tag="p">
               <div
                 v-for="product in this.products"
                 :key="product.key"
@@ -32,33 +51,34 @@
                 </cart-item>
                 <hr />
               </div>
-            </transition-group>
-            <p>
-              Предполагаемая дата доставки 26.02. — 28.02.2023.
-              <Nuxt-link to="#">Подробнее об условиях доставки</Nuxt-link>
-            </p>
-            <promocode />
+            </transition-group> -->
+              <p>
+                Предполагаемая дата доставки 26.02. — 28.02.2023.
+                <Nuxt-link to="#">Подробнее об условиях доставки</Nuxt-link>
+              </p>
+              <promocode />
+            </div>
+            <InformationWindowCart
+              v-if="!showMobileCartWindow"
+              :products="products"
+              @onButtonClickBuyHandler="onButtonClickBuyMethod"
+              :allFieldsAreFilled="allFieldsAreFilled"
+            />
           </div>
+          <CartForm
+            @emitAllFieldsAreFilled="allFieldsAreFilled = true"
+            @emitAllFieldsNotFilled="allFieldsAreFilled = false"
+            @cartFormGetter="cartFormSetter"
+            v-if="$store.state.cart.products.length > 0"
+          />
           <InformationWindowCart
-            v-if="!showMobileCartWindow"
+            v-if="showMobileCartWindow"
             :products="products"
             @onButtonClickBuyHandler="onButtonClickBuyMethod"
             :allFieldsAreFilled="allFieldsAreFilled"
           />
         </div>
-        <CartForm
-          @emitAllFieldsAreFilled="allFieldsAreFilled = true"
-          @emitAllFieldsNotFilled="allFieldsAreFilled = false"
-          @cartFormGetter="cartFormSetter"
-          v-if="$store.state.cart.products.length > 0"
-        />
-        <InformationWindowCart
-          v-if="showMobileCartWindow"
-          :products="products"
-          @onButtonClickBuyHandler="onButtonClickBuyMethod"
-          :allFieldsAreFilled="allFieldsAreFilled"
-        />
-      </div>
+      </client-only>
     </main>
     <Footer />
   </div>
@@ -130,6 +150,9 @@ export default {
   },
 
   methods: {
+    onButtonClickBuyMethod() {
+      console.log(this.cart);
+    },
     cartFormSetter(value) {
       this.cartForm = value;
     },

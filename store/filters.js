@@ -4,7 +4,7 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 export const state = () => ({
     filters: {
         categories: [],
-        prices: [],
+        prices: [0, 100],
         colors: [],
         sizes: [],
     },
@@ -50,7 +50,7 @@ export const mutations = {
             for (let index = 0; index < fetchFilters[filter].length; index++) {
                 const elementFetchFilters = fetchFilters[filter][index];
                 for (const filterData in data) {
-                    if (data[filterData] !== null) {
+                    if (data[filterData] !== null || filterData === 'price') {
                         let arrayFilterData = data[filterData].split(',')
                         for (let indexData = 0; indexData < arrayFilterData.length; indexData++) {
                             const elementData = arrayFilterData[indexData];

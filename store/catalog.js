@@ -47,31 +47,19 @@ export const mutations = {
 
 export const actions = {
     async fetchProducts({ commit }) {
-        let products;
-        await this.$axios
-            .get("site/catalog-list")
-            .then(response => products = response.data);
-        commit("SET_PRODUCTS", products);
+        let products = await this.$axios.$get("site/catalog-list")
+        commit("SET_PRODUCTS", products.data);
     },
     async fetchCategories({ commit }) {
-        let categories;
-        await this.$axios
-            .get("site/categories")
-            .then(response => categories = response.data);
+        let categories = await this.$axios.$get("site/categories")
         commit("SET_CATEGORIES", categories);
     },
     async fetchColors({ commit }) {
-        let colors;
-        await this.$axios
-            .get("/colors")
-            .then(response => colors = response.data);
+        let colors = await this.$axios.$get("/colors")
         commit("SET_COLORS", colors.colors);
     },
     async fetchSizes({ commit }) {
-        let sizes;
-        await this.$axios
-            .get("/sizes")
-            .then(response => sizes = response.data);
+        let sizes = await this.$axios.$get("/sizes")
         commit("SET_SIZES", sizes.sizes);
     }
 

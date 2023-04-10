@@ -38,10 +38,8 @@ export const mutations = {
 export const actions = {
 
   async fetchProducts({ commit }) {
-    let products = [];
-    await this.$axios
-      .get('http://localhost:8000/api/products?filter%5Bbrand_id%5D=1')
-      .then(response => products = response.data.products.data);
+    let products = await this.$axios
+      .$get('http://localhost:8000/api/products?filter%5Bbrand_id%5D=1');
 
     // await this.$axios
     //   .get('https://frontend-test.idaproject.com/api/product?category=2')

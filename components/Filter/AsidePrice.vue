@@ -7,15 +7,14 @@
     <el-slider
       class="filterRange"
       range
-      range-start-label="min"
-      range-end-label="max"
+      range-start-label="0"
+      range-end-label="10000"
       show-stops
       :show-tooltip="false"
       :step="100"
-      @change="addPrice"
       v-model="value"
-      :min="min"
-      :max="max"
+      :min="0"
+      :max="10000"
     >
     </el-slider>
   </div>
@@ -23,32 +22,19 @@
 
 <script>
 export default {
-  props: {
-    products: Array,
-  },
   data() {
-    return {
-      value: [0, 100],
+    return {      
+      value: [0, 10000]
     };
   },
   computed: {
-    max() {
-      return Math.max(...this.products.map((o) => o.price));
-    },
-    min() {
-      return Math.min(...this.products.map((o) => o.price));
-    },
-  },
-  mounted() {
-    setTimeout(() => {
-      this.addPrice()
-    }, 1000);
-  },
-  methods: {
-    addPrice() {
-      this.$emit("filterPrice", this.value);
-    },
-  },
+    
+  },   
+  watch: {
+    value(e){
+      this.$store.dispatch("filters/setPrices", this.value);
+    }
+  }
 };
 </script>
 

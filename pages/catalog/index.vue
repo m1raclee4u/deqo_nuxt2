@@ -134,9 +134,7 @@ export default {
                     categories: `${$store.state.filters.filters.categories.map(
                       (o) => o['slug']
                     )}`,
-                    price: `${$store.state.filters.filters.prices.map(
-                      (o) => o['value']
-                    )}`,
+                    price: `${$store.state.filters.filters.prices}`,
                     sizes: `${$store.state.filters.filters.sizes.map(
                       (o) => o['name']
                     )}`,
