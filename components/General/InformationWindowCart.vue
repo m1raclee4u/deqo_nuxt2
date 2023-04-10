@@ -1,37 +1,39 @@
 <template>
-  <div v-if="$store.state.cart.products.length > 0" class="windowCart">
-    <div class="informationPreSale">
-      <h5>Обращаем внимание</h5>
-      <p>
-        В заказе есть товар доступный для предзаказа. При оплате его стоимость
-        будет входить в текущий чек, а дата доставки отличаться. <br /><br />
-        Срок производства модели 15 — 29 декабря. В эти дни свяжемся с вами,
-        уточним адрес и условия доставки.
+  <client-only>
+    <div v-if="$store.state.cart.products.length > 0" class="windowCart">
+      <div class="informationPreSale">
+        <h5>Обращаем внимание</h5>
+        <p>
+          В заказе есть товар доступный для предзаказа. При оплате его стоимость
+          будет входить в текущий чек, а дата доставки отличаться. <br /><br />
+          Срок производства модели 15 — 29 декабря. В эти дни свяжемся с вами,
+          уточним адрес и условия доставки.
+        </p>
+      </div>
+      <div class="line">
+        <p>Скидка</p>
+        <p>{{ "1000" }} ₽</p>
+      </div>
+      <div class="line">
+        <p>Доставка</p>
+        <p>{{ "1000" }} ₽</p>
+      </div>
+      <div class="line">
+        <p><b>Итого</b></p>
+        <p>
+          <b>{{ fullprice }} ₽</b>
+        </p>
+      </div>
+      <button @click="onButtonClickBuy" v-if="allFieldsAreFilled === true">Оплатить</button>
+      <button v-else disabled>Заполните все поля</button>
+      <p class="offer">
+        Нажимая на кнопку «оплатить», я принимаю условия
+        <Nuxt-link to="">публичной оферты</Nuxt-link>,
+        <Nuxt-link to="">политики конфиденциальности</Nuxt-link> и
+        <Nuxt-link to="">публичной оферты (предзаказ)</Nuxt-link>
       </p>
     </div>
-    <div class="line">
-      <p>Скидка</p>
-      <p>{{ "1000" }} ₽</p>
-    </div>
-    <div class="line">
-      <p>Доставка</p>
-      <p>{{ "1000" }} ₽</p>
-    </div>
-    <div class="line">
-      <p><b>Итого</b></p>
-      <p>
-        <b>{{ fullprice }} ₽</b>
-      </p>
-    </div>
-    <button @click="onButtonClickBuy" v-if="allFieldsAreFilled === true">Оплатить</button>
-    <button v-else disabled>Заполните все поля</button>
-    <p class="offer">
-      Нажимая на кнопку «оплатить», я принимаю условия
-      <Nuxt-link to="">публичной оферты</Nuxt-link>,
-      <Nuxt-link to="">политики конфиденциальности</Nuxt-link> и
-      <Nuxt-link to="">публичной оферты (предзаказ)</Nuxt-link>
-    </p>
-  </div>
+  </client-only>
 </template>
 
 <script>

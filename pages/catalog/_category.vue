@@ -189,13 +189,15 @@ export default {
             </div> -->
           </div>
           <div class="items">
-            <div
-              v-for="item in this.products.data"
-              :key="item.slug"
-              class="col item"
-            >
-              <item :item="item"> </item>
-            </div>
+            <client-only>
+              <div
+                v-for="item in this.products.data"
+                :key="item.slug"
+                class="col item"
+              >
+                <item :item="item"> </item>
+              </div>
+            </client-only>
           </div>
           <!-- <button
             @click="loadMore"

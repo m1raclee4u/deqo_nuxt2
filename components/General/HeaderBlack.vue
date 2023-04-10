@@ -101,11 +101,13 @@ export default {
             to="/favorite"
             class="favorite"
           ></Nuxt-link>
+          <client-only>
           <Nuxt-link v-if="!showMobileMenu" to="/cart" class="cart">
             <span class="cartCounter" v-if="getProducts.length > 0">
               {{ getProducts.length }}
             </span>
           </Nuxt-link>
+          </client-only>
           <div
             v-if="!showMobileMenu"
             @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"
