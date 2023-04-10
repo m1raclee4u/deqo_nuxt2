@@ -19,8 +19,6 @@ export default {
     Footer,
     AsideSize,
   },
-
-  props: ["category"],
   data() {
     return {
       showFilter: false,
@@ -70,24 +68,15 @@ export default {
     },
   },
   computed: {
-    products() {
-      return this.$store.getters["catalog/getProducts"];
+    tags() {
+      return this.$store.state.filters.tags;
     },
-    foundResults() {
-      return this.products.length;
-    },
-    totalResults() {
-      return Object.keys(this.orders).length;
-    },
-    pageCount() {
-      return Math.ceil(this.totalResults / this.maxPerPage);
-    },
-    pageOffest() {
-      return this.maxPerPage * this.currentPage;
-    },
-    paginatedProducts() {
-      return this.products.slice(0, this.currentPage * this.maxPerPage);
-    },
+  },
+  async asyncData({ $axios, route }) {
+    const products = await $axios.$get(`/site/catalog-list/`, {
+      params: route.query,
+    });
+    return { products };
   },
   async mounted() {
     if (this.$store.getters["catalog/getProducts"].length === 0) {
@@ -161,20 +150,22 @@ export default {
         </aside>
         <div class="items__main">
           <div class="items">
-            <div
-              v-for="item in this.paginatedProducts"
-              :key="item.slug"
-              class="col item"
-            >
-              <item :item="item"> </item>
-            </div>
+            <client-only class="items">
+              <div
+                v-for="item in this.products.data"
+                :key="item.slug"
+                class="col item"
+              >
+                <item :item="item"> </item>
+              </div>
+            </client-only>
           </div>
-          <button
+          <!-- <button
             @click="loadMore"
             v-if="currentPage * maxPerPage < this.products.length"
           >
             Загрузить больше
-          </button>
+          </button> -->
         </div>
       </main>
     </section>

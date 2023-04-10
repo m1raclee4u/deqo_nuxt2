@@ -24,8 +24,6 @@ export default {
     Footer,
     AsideSize,
   },
-
-  props: ["category"],
   data() {
     return {
       showFilter: false,
@@ -34,7 +32,6 @@ export default {
       currentPage: 1,
       maxPerPage: 9,
       showReadMore: true,
-      // products: [],
       categories: [],
       colors: [],
       sizes: [],
@@ -189,7 +186,7 @@ export default {
             </div> -->
           </div>
           <div class="items">
-            <client-only>
+            <client-only class="items">
               <div
                 v-for="item in this.products.data"
                 :key="item.slug"
