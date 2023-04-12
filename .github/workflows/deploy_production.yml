@@ -22,6 +22,7 @@ jobs:
           cd /var/www/www-root/data/www/deqo.ru
           git pull origin master
           npm install --only=prod
-          pm2 restart node1
+          pm2 restart admin-prod
+          pm2 restart nuxt-prod
 
 
