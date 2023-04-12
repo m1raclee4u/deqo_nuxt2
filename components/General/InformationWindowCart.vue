@@ -1,5 +1,5 @@
 <template>
-  <client-only>
+  
     <div v-if="$store.state.cart.products.length > 0" class="windowCart">
       <div class="informationPreSale">
         <h5>Обращаем внимание</h5>
@@ -33,7 +33,7 @@
         <Nuxt-link to="">публичной оферты (предзаказ)</Nuxt-link>
       </p>
     </div>
-  </client-only>
+  
 </template>
 
 <script>

@@ -171,7 +171,7 @@ export default {
         </aside>
         <div class="items__main">
           <div class="aic">
-            <!-- <p>Найдено {{ foundResults }} подходящих товаров</p> -->
+            <p>Найдено {{ products.data.length }} подходящих товаров</p>
             <!-- <div class="tags">
               <div class="tagsSwiper">
                 <div class="swiper-wrapper tagsWrapper">
@@ -186,7 +186,6 @@ export default {
             </div> -->
           </div>
           <div class="items">
-            <client-only class="items">
               <div
                 v-for="item in this.products.data"
                 :key="item.slug"
@@ -194,7 +193,7 @@ export default {
               >
                 <item :item="item"> </item>
               </div>
-            </client-only>
+            
           </div>
           <!-- <button
             @click="loadMore"

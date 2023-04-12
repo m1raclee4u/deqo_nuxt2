@@ -9,7 +9,7 @@
     <main class="main">
       <div class="title">
         <transition name="component-fade" mode="out-in">
-          <client-only>
+          
             <h3 v-if="$store.state.cart.products.length > 0" key="exist">
               Оформление заказа
             </h3>
@@ -17,10 +17,10 @@
               Ваша корзина пока пуста,<br />
               а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
             </p>
-          </client-only>
+          
         </transition>
       </div>
-      <client-only>
+      
         <div v-if="$store.state.cart.products.length > 0" class="cart">
           <div class="cartWrapper">
             <div class="cartItems">
@@ -78,7 +78,7 @@
             :allFieldsAreFilled="allFieldsAreFilled"
           />
         </div>
-      </client-only>
+      
     </main>
     <Footer />
   </div>

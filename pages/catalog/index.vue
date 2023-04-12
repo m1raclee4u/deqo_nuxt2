@@ -150,7 +150,6 @@ export default {
         </aside>
         <div class="items__main">
           <div class="items">
-            <client-only class="items">
               <div
                 v-for="item in this.products.data"
                 :key="item.slug"
@@ -158,7 +157,7 @@ export default {
               >
                 <item :item="item"> </item>
               </div>
-            </client-only>
+            
           </div>
           <!-- <button
             @click="loadMore"

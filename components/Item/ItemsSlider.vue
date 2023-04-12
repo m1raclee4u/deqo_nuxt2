@@ -7,7 +7,7 @@
     <div class="mainSlider">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
-        <client-only>
+        
           <div
             v-for="item in this.products.slice(0, 12)"
             :key="item.slug"
@@ -15,7 +15,7 @@
           >
             <item :item="item" inSlider="inSlider" :key="item.id"> </item>
           </div>
-        </client-only>
+        
       </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>

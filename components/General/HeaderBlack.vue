@@ -103,11 +103,11 @@ export default {
           ></Nuxt-link>
 
           <Nuxt-link v-if="!showMobileMenu" to="/cart" class="cart">
-            <client-only>
+            
               <span class="cartCounter" v-if="getProducts.length > 0">
                 {{ getProducts.length }}
               </span>
-            </client-only>
+            
           </Nuxt-link>
           <div
             v-if="!showMobileMenu"
@@ -127,11 +127,11 @@ export default {
         </div>
         <div class="mobile_button">
           <Nuxt-link to="/cart" class="cart">
-            <client-only>
+            
               <span class="cartCounter" v-if="getProducts.length > 0">
                 {{ getProducts.length }}
               </span>
-            </client-only>
+            
           </Nuxt-link>
           <p>корзина</p>
         </div>

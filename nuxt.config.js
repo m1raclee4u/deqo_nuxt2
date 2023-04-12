@@ -6,7 +6,7 @@ export default {
   // router: {
   //   base: '/<deqo_nuxt2>/'
   // },
-  // ssr: false,
+  ssr: false,
   head: {
     title: 'deqo',
     htmlAttrs: {
