@@ -82,40 +82,28 @@ export default {
           placeholder="+7"
         />
       </div>
-      <div class="input">
-        <label for="address">Адрес</label>
-        <cart-form-addres-select @getAddress="setAddress" />
+      <!-- <div class="input"> -->
+        <!-- <label for="address">Адрес</label> -->
+        <!-- <cart-form-addres-select @getAddress="setAddress" /> -->
         <!-- <input autocomplete="tex" id="address"  v-model="cartAddress" class="button" type="text" /> -->
-      </div>
+      <!-- </div> -->
 
-      <!-- <div class="input">
-        <label for="address-level2">Населенный пункт</label>
-        @input="checkFilled"
-        input autocomplete="address-level2"  
-        v-model="cartForm.cartCity" class="button" type="email"
-          name="" id="address-level2" placeholder="Населенный пункт" />
-      </div>
-      <div class="input">
-        <label for="street-address">Улица</label>
-        @input="checkFilled"
-        input autocomplete="street-address"  
-        v-model="cartForm.cartStreet" class="button"
-          type="email" name="" id="street-address" placeholder="Улица" />
-      </div>
-      <div class="input">
-        <label for="homeNumber">Дом</label>
-        <div class="group">
-          @input="checkFilled"
-          input  
-          v-model="cartForm.cartHome" class="button" type="email" name="" id="homeNumber"
-            placeholder="Дом" />
-          @input="checkFilled"
-          input  
-          v-model="cartForm.cartFlat" class="button" type="email" name="" id="flatNubmer"
-            placeholder="Квартира" />
-        </div>
-      </div> -->
-      <div id="delivery" class="input">
+      <div id="forpvz" class="input" style="width: 100%; height: 600px"></div>
+      <div id="linkForWidjet">
+        <p>
+          Выбран пункт выдачи заказов:
+          <input type="text" name="chosenPost" value="" />
+        </p>
+        <p>Адрес пункта: <input type="text" name="addresPost" value="" /></p>
+        <p>
+          Стоимость доставки: <input type="text" name="pricePost" value="" />
+        </p>
+        <p>
+          Примерные сроки доставки:
+          <input type="text" name="timePost" value="" />
+        </p>
+      </div>      
+      <!-- <div id="delivery" class="input">
         <label for="deliveryType">Способ доставки</label>
         <div class="group" id="deliveryType">
           <div class="flex">
@@ -162,7 +150,7 @@ export default {
             <label for="creditCard">Банковская карта</label>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="input">
         <label for="comment">Коментарий</label>
         <textarea

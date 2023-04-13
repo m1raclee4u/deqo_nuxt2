@@ -9,36 +9,34 @@
     <main class="main">
       <div class="title">
         <transition name="component-fade" mode="out-in">
-          
-            <h3 v-if="$store.state.cart.products.length > 0" key="exist">
-              Оформление заказа
-            </h3>
-            <p v-if="$store.state.cart.products.length < 1" key="doesntExist">
-              Ваша корзина пока пуста,<br />
-              а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
-            </p>
-          
+          <h3 v-if="$store.state.cart.products.length > 0" key="exist">
+            Оформление заказа
+          </h3>
+          <p v-if="$store.state.cart.products.length < 1" key="doesntExist">
+            Ваша корзина пока пуста,<br />
+            а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
+          </p>
         </transition>
       </div>
-      
-        <div v-if="$store.state.cart.products.length > 0" class="cart">
-          <div class="cartWrapper">
-            <div class="cartItems">
-              <transition-group class="cartItems" name="list" tag="p">
-                <div
-                  v-for="product in this.products"
-                  :key="product.key"
-                  class="cartItem"
+
+      <div v-if="$store.state.cart.products.length > 0" class="cart">
+        <div class="cartWrapper">
+          <div class="cartItems">
+            <transition-group class="cartItems" name="list" tag="p">
+              <div
+                v-for="product in this.products"
+                :key="product.key"
+                class="cartItem"
+              >
+                <cart-item
+                  :item="product"
+                  @deleteClickHandler="deleteClickMethod(product)"
                 >
-                  <cart-item
-                    :item="product"
-                    @deleteClickHandler="deleteClickMethod(product)"
-                  >
-                  </cart-item>
-                  <hr />
-                </div>
-              </transition-group>
-              <!-- <transition-group class="cartItems" name="list" tag="p">
+                </cart-item>
+                <hr />
+              </div>
+            </transition-group>
+            <!-- <transition-group class="cartItems" name="list" tag="p">
               <div
                 v-for="product in this.products"
                 :key="product.key"
@@ -52,33 +50,32 @@
                 <hr />
               </div>
             </transition-group> -->
-              <p>
-                Предполагаемая дата доставки 26.02. — 28.02.2023.
-                <Nuxt-link to="#">Подробнее об условиях доставки</Nuxt-link>
-              </p>
-              <promocode />
-            </div>
-            <InformationWindowCart
-              v-if="!showMobileCartWindow"
-              :products="products"
-              @onButtonClickBuyHandler="onButtonClickBuyMethod"
-              :allFieldsAreFilled="allFieldsAreFilled"
-            />
+            <p>
+              Предполагаемая дата доставки 26.02. — 28.02.2023.
+              <Nuxt-link to="#">Подробнее об условиях доставки</Nuxt-link>
+            </p>
+            <promocode />
           </div>
-          <CartForm
-            @emitAllFieldsAreFilled="allFieldsAreFilled = true"
-            @emitAllFieldsNotFilled="allFieldsAreFilled = false"
-            @cartFormGetter="cartFormSetter"
-            v-if="$store.state.cart.products.length > 0"
-          />
           <InformationWindowCart
-            v-if="showMobileCartWindow"
+            v-if="!showMobileCartWindow"
             :products="products"
             @onButtonClickBuyHandler="onButtonClickBuyMethod"
             :allFieldsAreFilled="allFieldsAreFilled"
           />
         </div>
-      
+        <CartForm
+          @emitAllFieldsAreFilled="allFieldsAreFilled = true"
+          @emitAllFieldsNotFilled="allFieldsAreFilled = false"
+          @cartFormGetter="cartFormSetter"
+          v-if="$store.state.cart.products.length > 0"
+        />
+        <InformationWindowCart
+          v-if="showMobileCartWindow"
+          :products="products"
+          @onButtonClickBuyHandler="onButtonClickBuyMethod"
+          :allFieldsAreFilled="allFieldsAreFilled"
+        />
+      </div>
     </main>
     <Footer />
   </div>
@@ -97,6 +94,18 @@ import InformationWindowCart from "~/components/General/InformationWindowCart.vu
 import Promocode from "~/components/General/promocode.vue";
 
 export default {
+  head: {
+    script: [
+      {
+        src: "/widjet/widjet.js",
+        body: true,
+        id: "ISDEKscript",
+        type: "text/javascript",
+        charset: "utf-8",
+      },
+    ],
+  },
+
   components: {
     HeaderBlack,
     BurgerMenu,
@@ -147,6 +156,83 @@ export default {
     this.$once("hook:beforeDestroy", () =>
       mediaQueryCart.removeListener(listener)
     );
+    setTimeout(() => {
+      var widjet = new ISDEKWidjet({
+        showWarns: true,
+        showErrors: true,
+        showLogs: true,
+        hideMessages: false,
+        path: "https://widget.cdek.ru/widget/scripts/",
+        servicepath: "https://widget.cdek.ru/widget/scripts/service.php", //ссылка на файл service.php на вашем сайте
+        templatepath: "https://widget.cdek.ru/widget/scripts/template.php",
+        apikey: "64b67c7d-c834-4e72-9d4f-979769db83e8",
+        choose: true,
+        popup: true,
+        country: "Россия",
+        defaultCity: "Воронеж",
+        cityFrom: "Воронеж",
+        link: "forpvz",
+        hidedress: true,
+        hidecash: true,
+        hidedelt: false,
+        detailAddress: true,
+        region: true,
+        goods: [
+          {
+            length: 10,
+            width: 10,
+            height: 10,
+            weight: 1,
+          },
+        ],
+        onReady: onReady,
+        onChoose: onChoose,
+        onChooseProfile: onChooseProfile,
+        onCalculate: onCalculate,
+      });
+
+      function onReady() {
+        alert("Виджет загружен");
+      }
+
+      function onChoose(wat) {
+        alert(
+          "Выбран пункт выдачи заказа " +
+            wat.id +
+            "\n" +
+            "цена " +
+            wat.price +
+            "\n" +
+            "срок " +
+            wat.term +
+            " дн.\n" +
+            "город " +
+            wat.cityName +
+            ", код города " +
+            wat.city
+        );
+      }
+
+      function onChooseProfile(wat) {
+        alert(
+          "Выбрана доставка курьером в город " +
+            wat.cityName +
+            ", код города " +
+            wat.city +
+            "\n" +
+            "цена " +
+            wat.price +
+            "\n" +
+            "срок " +
+            wat.term +
+            " дн."
+        );
+      }
+
+      function onCalculate(wat) {
+        alert("Расчет стоимости доставки произведен");
+      }
+    }, 1000);
   },
 
   methods: {
@@ -319,6 +405,7 @@ main {
 
     .cartWrapper {
       display: flex;
+      justify-content: space-between;
       gap: 40px;
       width: 100%;
     }
