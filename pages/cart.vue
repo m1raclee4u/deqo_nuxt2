@@ -67,6 +67,8 @@
           @emitAllFieldsAreFilled="allFieldsAreFilled = true"
           @emitAllFieldsNotFilled="allFieldsAreFilled = false"
           @cartFormGetter="cartFormSetter"
+          @initCdekPickUpPointHandler="initCdekPickUpPoint"
+          @initCdekParcelAutomatHandler="initCdekParcelAutomat"
           v-if="$store.state.cart.products.length > 0"
         />
         <InformationWindowCart
@@ -130,7 +132,7 @@ export default {
       showReadMore: true,
       products: [],
       showMobileCartWindow: false,
-      cartForm: {},
+      cartForm: [],
       cart: {},
     };
   },
@@ -156,7 +158,10 @@ export default {
     this.$once("hook:beforeDestroy", () =>
       mediaQueryCart.removeListener(listener)
     );
-    setTimeout(() => {
+  },
+
+  methods: {
+    initCdekPickUpPoint() {
       var widjet = new ISDEKWidjet({
         showWarns: true,
         showErrors: true,
@@ -165,18 +170,17 @@ export default {
         path: "https://widget.cdek.ru/widget/scripts/",
         servicepath: "https://widget.cdek.ru/widget/scripts/service.php", //ссылка на файл service.php на вашем сайте
         templatepath: "https://widget.cdek.ru/widget/scripts/template.php",
-        apikey: "64b67c7d-c834-4e72-9d4f-979769db83e8",
+        apikey: "5c153b70-2781-4c93-a8ee-7bb22e44e497",
         choose: true,
-        popup: true,
+        // popup: true,
         country: "Россия",
         defaultCity: "Воронеж",
         cityFrom: "Воронеж",
         link: "forpvz",
-        hidedress: true,
-        hidecash: true,
-        hidedelt: false,
-        detailAddress: true,
-        region: true,
+        hidedress: false,
+        hidecash: false,
+        hidedelt: true,
+        region: false,
         goods: [
           {
             length: 10,
@@ -192,10 +196,13 @@ export default {
       });
 
       function onReady() {
-        alert("Виджет загружен");
+        // alert("Виджет загружен");
       }
 
       function onChoose(wat) {
+        this.cartForm.cdek = wat;
+        console.log(this.cartForm);
+
         alert(
           "Выбран пункт выдачи заказа " +
             wat.id +
@@ -214,6 +221,7 @@ export default {
       }
 
       function onChooseProfile(wat) {
+        console.log(wat);
         alert(
           "Выбрана доставка курьером в город " +
             wat.cityName +
@@ -232,10 +240,87 @@ export default {
       function onCalculate(wat) {
         alert("Расчет стоимости доставки произведен");
       }
-    }, 1000);
-  },
+    },
+    initCdekParcelAutomat() {
+      var widjet = new ISDEKWidjet({
+        showWarns: true,
+        showErrors: true,
+        showLogs: true,
+        hideMessages: false,
+        path: "https://widget.cdek.ru/widget/scripts/",
+        servicepath: "https://widget.cdek.ru/widget/scripts/service.php", //ссылка на файл service.php на вашем сайте
+        templatepath: "https://widget.cdek.ru/widget/scripts/template.php",
+        apikey: "5c153b70-2781-4c93-a8ee-7bb22e44e497",
+        choose: true,
+        // popup: true,
+        country: "Россия",
+        defaultCity: "Воронеж",
+        cityFrom: "Воронеж",
+        link: "forpvz",
+        hidedress: true,
+        hidecash: false,
+        hidedelt: true,
+        region: false,
+        goods: [
+          {
+            length: 10,
+            width: 10,
+            height: 10,
+            weight: 1,
+          },
+        ],
+        onReady: onReady,
+        onChoose: onChoose,
+        onChooseProfile: onChooseProfile,
+        onCalculate: onCalculate,
+      });
 
-  methods: {
+      function onReady() {
+        // alert("Виджет загружен");
+      }
+
+      function onChoose(wat) {
+        this.cartForm.cdek = wat;
+        console.log(this.cartForm);
+
+        alert(
+          "Выбран пункт выдачи заказа " +
+            wat.id +
+            "\n" +
+            "цена " +
+            wat.price +
+            "\n" +
+            "срок " +
+            wat.term +
+            " дн.\n" +
+            "город " +
+            wat.cityName +
+            ", код города " +
+            wat.city
+        );
+      }
+
+      function onChooseProfile(wat) {
+        console.log(wat);
+        alert(
+          "Выбрана доставка курьером в город " +
+            wat.cityName +
+            ", код города " +
+            wat.city +
+            "\n" +
+            "цена " +
+            wat.price +
+            "\n" +
+            "срок " +
+            wat.term +
+            " дн."
+        );
+      }
+
+      function onCalculate(wat) {
+        alert("Расчет стоимости доставки произведен");
+      }
+    },
     onButtonClickBuyMethod() {
       console.log(this.cart);
     },

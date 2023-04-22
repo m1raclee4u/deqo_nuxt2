@@ -18,24 +18,33 @@ export default {
   },
 
   methods: {
+    initCDEK(value) {
+      console.log(`initCdek${value}Handler`);
+      this.$emit(`initCdek${value}Handler`)
+    },
     checkFilled() {
       let emptyInputs = 0;
-      for (const [key, value] of Object.entries(this.cartForm)){
-        if (value === '' && key != 'comment') {
-          emptyInputs++
+      for (const [key, value] of Object.entries(this.cartForm)) {
+        if (value === "" && key != "comment") {
+          emptyInputs++;
         }
       }
       if (emptyInputs === 0) {
         this.$emit("emitAllFieldsAreFilled");
-        this.$emit('cartFormGetter', this.cartForm)
-      }
-      else if (emptyInputs > 0) this.$emit("emitAllFieldsNotFilled");
+        this.$emit("cartFormGetter", this.cartForm);
+      } else if (emptyInputs > 0) this.$emit("emitAllFieldsNotFilled");
     },
     setAddress(value) {
       this.cartForm.cartAddress = value;
-      this.checkFilled()
+      this.checkFilled();
     },
   },
+  watch: {
+    'cartForm.deliveryType'(value){
+      if (value !== 'delivery')
+      this.initCDEK(value)
+    }
+  }
 };
 </script>
 
@@ -82,28 +91,7 @@ export default {
           placeholder="+7"
         />
       </div>
-      <!-- <div class="input"> -->
-        <!-- <label for="address">Адрес</label> -->
-        <!-- <cart-form-addres-select @getAddress="setAddress" /> -->
-        <!-- <input autocomplete="tex" id="address"  v-model="cartAddress" class="button" type="text" /> -->
-      <!-- </div> -->
-
-      <div id="forpvz" class="input" style="width: 100%; height: 600px"></div>
-      <div id="linkForWidjet">
-        <p>
-          Выбран пункт выдачи заказов:
-          <input type="text" name="chosenPost" value="" />
-        </p>
-        <p>Адрес пункта: <input type="text" name="addresPost" value="" /></p>
-        <p>
-          Стоимость доставки: <input type="text" name="pricePost" value="" />
-        </p>
-        <p>
-          Примерные сроки доставки:
-          <input type="text" name="timePost" value="" />
-        </p>
-      </div>      
-      <!-- <div id="delivery" class="input">
+      <div id="delivery" class="input">
         <label for="deliveryType">Способ доставки</label>
         <div class="group" id="deliveryType">
           <div class="flex">
@@ -124,10 +112,10 @@ export default {
               name="delivery"
               @input="checkFilled"
               v-model="cartForm.deliveryType"
-              value="pickUpPoint"
-              id="pickUpPoint"
+              value="PickUpPoint"
+              id="PickUpPoint"
             />
-            <label for="pickUpPoint">Пункты выдачи</label>
+            <label for="PickUpPoint">Пункты выдачи</label>
           </div>
           <div class="flex">
             <input
@@ -135,14 +123,22 @@ export default {
               name="delivery"
               @input="checkFilled"
               v-model="cartForm.deliveryType"
-              value="parcelAutomat"
-              id="parcelAutomat"
+              value="ParcelAutomat"
+              id="ParcelAutomat"
             />
-            <label for="parcelAutomat">Постамат</label>
+            <label for="ParcelAutomat">Постамат</label>
           </div>
         </div>
       </div>
-      <div class="input payment">
+      <div v-if="cartForm.deliveryType === 'delivery'" class="input">
+        <label for="address">Адрес</label>
+        <cart-form-addres-select @getAddress="setAddress" />
+      </div>
+      <div v-if="cartForm.deliveryType !== 'delivery'" class="input">
+        <div id="forpvz" style="width: 100%; height: 650px"></div>
+      </div>
+      
+      <!-- <div class="input payment">
         <label for="paymentMethod">Способ платежа</label>
         <div class="group">
           <div class="flex" id="paymentMethod">
@@ -214,6 +210,7 @@ label {
   justify-content: space-between;
   align-items: center;
   max-width: 980px;
+  position: relative;
 
   textarea {
     max-width: 710px;
