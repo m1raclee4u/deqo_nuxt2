@@ -19,8 +19,7 @@ export default {
 
   methods: {
     initCDEK(value) {
-      console.log(`initCdek${value}Handler`);
-      this.$emit(`initCdek${value}Handler`)
+      this.$emit('initCdekHandler', value)
     },
     checkFilled() {
       let emptyInputs = 0;
@@ -112,10 +111,10 @@ export default {
               name="delivery"
               @input="checkFilled"
               v-model="cartForm.deliveryType"
-              value="PickUpPoint"
-              id="PickUpPoint"
+              value="pvz"
+              id="pvz"
             />
-            <label for="PickUpPoint">Пункты выдачи</label>
+            <label for="pvz">Пункты выдачи</label>
           </div>
           <div class="flex">
             <input
@@ -123,10 +122,10 @@ export default {
               name="delivery"
               @input="checkFilled"
               v-model="cartForm.deliveryType"
-              value="ParcelAutomat"
-              id="ParcelAutomat"
+              value="postamat"
+              id="postamat"
             />
-            <label for="ParcelAutomat">Постамат</label>
+            <label for="postamat">Постамат</label>
           </div>
         </div>
       </div>
