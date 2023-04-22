@@ -83,6 +83,7 @@ export default {
   width: 100%;
   border: 1px solid lightgrey;
   border-radius: 4px;
+  z-index: 10;
 }
 .select {
   cursor: pointer;
