@@ -36,7 +36,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/v-mask.js'
+    '@/plugins/v-mask.js',
+    { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,6 +51,9 @@ export default {
   },
   publicRuntimeConfig: {
     baseURL: process.env.baseURL
+  },
+  env: {
+    apiKey: process.env.yaAPIKey
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
