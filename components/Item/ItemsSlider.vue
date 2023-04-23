@@ -7,7 +7,7 @@
     <div class="mainSlider">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
-        
+
           <div
             v-for="item in this.products.slice(0, 12)"
             :key="item.slug"
@@ -15,7 +15,7 @@
           >
             <item :item="item" inSlider="inSlider" :key="item.id"> </item>
           </div>
-        
+
       </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
@@ -53,6 +53,7 @@ export default {
   },
 
   mounted() {
+
     setTimeout(() => {
       new Swiper(".mainSlider", {
         slidesPerView: "auto",

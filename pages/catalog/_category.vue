@@ -86,7 +86,7 @@ export default {
     },
   },
   async asyncData({ $axios, route }) {
-    const products = await $axios.$get(`/site/catalog-list/`, {
+    const products = await $axios.$get(`/site/catalog-list`, {
       params: route.query,
     });
     return { products };
@@ -193,7 +193,7 @@ export default {
               >
                 <item :item="item"> </item>
               </div>
-            
+
           </div>
           <!-- <button
             @click="loadMore"

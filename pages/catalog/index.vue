@@ -73,23 +73,23 @@ export default {
     },
   },
   async asyncData({ $axios, route }) {
-    const products = await $axios.$get(`/site/catalog-list/`, {
+    const products = await $axios.$get(`/site/catalog-list`, {
       params: route.query,
     });
     return { products };
   },
-  async mounted() {
+  mounted() {
     if (this.$store.getters["catalog/getProducts"].length === 0) {
-      await this.$store.dispatch("catalog/fetchProducts");
+      this.$store.dispatch("catalog/fetchProducts");
     }
     if (this.$store.getters["catalog/getCategories"].length === 0) {
-      await this.$store.dispatch("catalog/fetchCategories");
+      this.$store.dispatch("catalog/fetchCategories");
     }
     if (this.$store.getters["catalog/getColors"].length === 0) {
-      await this.$store.dispatch("catalog/fetchColors");
+      this.$store.dispatch("catalog/fetchColors");
     }
     if (this.$store.getters["catalog/getSizes"].length === 0) {
-      await this.$store.dispatch("catalog/fetchSizes");
+      this.$store.dispatch("catalog/fetchSizes");
     }
   },
   destroyed() {
@@ -157,7 +157,7 @@ export default {
               >
                 <item :item="item"> </item>
               </div>
-            
+
           </div>
           <!-- <button
             @click="loadMore"
