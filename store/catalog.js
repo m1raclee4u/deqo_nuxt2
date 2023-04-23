@@ -10,7 +10,7 @@ export const state = () => ({
 
 export const getters = {
     getProducts: (state) => {
-        return [...state.products]
+        return state.products
     },
     getFilters: (state) => {
         return {
@@ -20,13 +20,13 @@ export const getters = {
         }
     },
     getCategories: (state) => {
-        return [...state.categories]
+        return state.categories
     },
     getColors: (state) => {
-        return [...state.colors]
+        return state.colors
     },
     getSizes: (state) => {
-        return [...state.sizes]
+        return state.sizes
     },
 }
 
