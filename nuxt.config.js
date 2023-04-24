@@ -39,7 +39,7 @@ export default {
     '@/plugins/v-mask.js',
     { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
   ],
-
+  runtimeCompiler: true,
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
