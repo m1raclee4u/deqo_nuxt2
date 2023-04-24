@@ -321,7 +321,7 @@
           return data.ip;
         }
         const userLocation = async (ip) => {
-          const response = await fetch(`http://ipwho.is/${ip}`);
+          const response = await fetch(`https://ipwho.is/${ip}`);
           const data = await response.json();
           return data;
         }
