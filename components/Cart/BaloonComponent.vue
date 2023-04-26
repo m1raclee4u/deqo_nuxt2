@@ -1,45 +1,80 @@
 <template>
   <div class="balloon">
-    <h1 class="red">{{pvz.name}}</h1>
-    <h1 class="red">{{pvz.note}}</h1>
-    <p>{{pvz.work_time}}</p>
-    <img :src="pvz.office_image_list[pvz.office_image_list.length-1].url">
+    <h1 class="red">Название: {{ pvz.name }}</h1>
+    <p class="red">Описание: {{ pvz.note }}</p>
+    <p>Рабочие часы: {{ pvz.work_time }}</p>
+    <div class="office_image_slider">
+      <div class="swiper-wrapper">
+        <img
+          v-for="image in pvz.office_image_list"
+          :key="image.slug"
+          class="swiper-slide item-slide"
+          :src="image.url"
+        />
+      </div>
+      <div class="swiper-button-prev-ballonn"></div>
+      <div class="swiper-button-next-balloon"></div>
+    </div>
     <button id="btn" @click="handler">Выбрать</button>
   </div>
 </template>
 
 <script>
-    export default {
-      name: "balloon",
-      props: {
-          pvz: Object,
-      },
-      methods: {
-        bindListener() {
-          document.getElementById('btn').addEventListener('click', this.handler);
-        },
-        unbindListener() {
-          document.getElementById('btn').removeEventListener('click', this.handler);
-        },
-        handler() {
-          console.log('Whoo-Ha!');
-        },
-      },
-      mounted() {
-        // setTimeout()
-      }
-    }
+import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
+import "swiper/swiper-bundle.css";
 
+Swiper.use([Navigation, Pagination, Autoplay]);
+
+export default {
+  name: "balloon",
+  props: {
+    pvz: Object,
+  },
+  methods: {
+    bindListener() {
+      document.getElementById("btn").addEventListener("click", this.handler);
+    },
+    unbindListener() {
+      document.getElementById("btn").removeEventListener("click", this.handler);
+    },
+    handler() {
+      console.log("Whoo-Ha!");
+    },
+  },
+  mounted() {
+    new Swiper(".office_image_slider", {
+      slidesPerView: 1,
+      spaceBetween: 40,
+      loop: false,
+      navigation: {
+        nextEl: ".swiper-button-next-ballonn",
+        prevEl: ".swiper-button-prev-ballonn",
+      },
+    });
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.balloon{
+.balloon {
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
-  height: 50%;
-  img{
+  height: 100%;
+  img {
+    object-fit: cover;
     width: 100%;
     height: auto;
+    max-height: 150px;
+  }
+  button {
+    height: 50px;
+    background-color: #018440;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
   }
 }
 </style>
