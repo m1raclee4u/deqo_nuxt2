@@ -3,7 +3,7 @@
     <h1 class="red">Название: {{ pvz.name }}</h1>
     <p class="red">Описание: {{ pvz.note }}</p>
     <p>Рабочие часы: {{ pvz.work_time }}</p>
-    <div class="office_image_slider">
+    <div v-if="pvz?.office_image_list" class="office_image_slider">
       <div class="swiper-wrapper">
         <img
           v-for="image in pvz.office_image_list"
@@ -15,7 +15,7 @@
       <div class="swiper-button-prev-ballonn"></div>
       <div class="swiper-button-next-balloon"></div>
     </div>
-    <button id="btn" @click="handler">Выбрать</button>
+    <button id="btn">Выбрать</button>
   </div>
 </template>
 
@@ -31,15 +31,16 @@ export default {
     pvz: Object,
   },
   methods: {
-    bindListener() {
-      document.getElementById("btn").addEventListener("click", this.handler);
-    },
-    unbindListener() {
-      document.getElementById("btn").removeEventListener("click", this.handler);
-    },
-    handler() {
-      console.log("Whoo-Ha!");
-    },
+    // bindListener() {
+    //   document.getElementById("btn").addEventListener("click", this.handler);
+    // },
+    // unbindListener() {
+    //   document.getElementById("btn").removeEventListener("click", this.handler);
+    // },
+    // handler() {
+    //   console.log(this.pvz);
+    //   console.log(this.$emit('123', this.pvz))
+    // },
   },
   mounted() {
     new Swiper(".office_image_slider", {

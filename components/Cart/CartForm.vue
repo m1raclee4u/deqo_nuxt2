@@ -1,11 +1,13 @@
 <script>
   import CartFormAddresSelect from "~/components/Cart/CartFormAddresSelect.vue";
   import WidgetCDEKYandex from "~/components/Cart/WidgetCDEKYandex";
+  import PopUpRecipientsCity from "~/components/Cart/PopUpRecipientsCity";
 
   export default {
-    components: {WidgetCDEKYandex, CartFormAddresSelect},
+    components: {PopUpRecipientsCity, WidgetCDEKYandex, CartFormAddresSelect},
     data() {
       return {
+        showPopUpRecipientsCity: false,
         cartForm: {
           cartEmail: "",
           cartName: "",
@@ -42,6 +44,7 @@
 
 <template>
   <div class="deliveryForm">
+    <pop-up-recipients-city v-if="showPopUpRecipientsCity === true" @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = false"/>
     <div class="form">
       <div class="input">
         <label for="email">Email</label>
@@ -103,7 +106,7 @@
               name="delivery"
               @input="checkFilled"
               v-model="cartForm.deliveryType"
-              value="pvz"
+              value="PVZ"
               id="pvz"
             />
             <label for="pvz">Пункты выдачи</label>
@@ -114,7 +117,7 @@
               name="delivery"
               @input="checkFilled"
               v-model="cartForm.deliveryType"
-              value="postamat"
+              value="POSTAMAT"
               id="postamat"
             />
             <label for="postamat">Постамат</label>
@@ -125,7 +128,7 @@
         <label>Адрес</label>
         <cart-form-addres-select @getAddress="setAddress"/>
       </div>
-      <widget-c-d-e-k-yandex :deliveryType="cartForm.deliveryType" v-show="cartForm.deliveryType !== 'delivery'"/>
+      <widget-c-d-e-k-yandex @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = true" :deliveryType="cartForm.deliveryType" v-show="cartForm.deliveryType !== 'delivery'"/>
       <div class="input">
         <label for="comment">Коментарий</label>
         <textarea
