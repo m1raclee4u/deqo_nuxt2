@@ -4,6 +4,7 @@
 
     <div class="containerPopUp">
       <div class="wrapperPopUp">
+        <i class="close" @click="$emit('showPopUpRecipientsCityHandler')"></i>
         <p>Ваш город</p>
         <h5>{{'Воронеж'}}</h5>
         <button @click="$emit('showPopUpRecipientsCityHandler')" class="submit">Все верно</button>
@@ -39,8 +40,8 @@
   }
 
   .wrapperPopUp {
-    gap: 15px;
-    max-width: 600px;
+    position: relative;
+    gap: 20px;
     margin: 0 auto;
     height: 100%;
     padding: 40px;
@@ -48,6 +49,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .close{
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      background-image: url('@/assets/img/icons/deleteCartItem.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: absolute;
+      top: 25px;
+      right: 25px;
+    }
     p{
       font-size: 25px;
     }
@@ -55,10 +67,13 @@
       font-size: 30px;
     }
     .submit{
+      max-width: 600px;
       width: 80%;
-      border-radius: 4px;
-      height: 50px;
+      border-radius: 10px;
+      height: 70px;
       color: white;
+      font-size: 20px;
+      font-weight: 400;
       background-color: green;
     }
     .change{
@@ -70,9 +85,9 @@
 
   .containerPopUp {
     position: absolute;
-    max-width: 600px;
+    max-width: 900px;
     width: 100%;
-    height: 300px;
+    height: 450px;
     background-color: white;
     border-radius: 4px;
     z-index: 90;

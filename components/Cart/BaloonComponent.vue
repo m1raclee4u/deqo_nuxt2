@@ -1,7 +1,7 @@
 <template>
-  <div class="balloon">
-    <h1 class="red">Название: {{ pvz.name }}</h1>
-    <p class="red">Описание: {{ pvz.note }}</p>
+  <div :data-id="pvz.code" class="pvz">
+    <h1 class=pvz__name>Название: {{ pvz.name }}</h1>
+    <p class="pvz__address">Адрес: {{ pvz.location.address }}</p>
     <p>Рабочие часы: {{ pvz.work_time }}</p>
     <div v-if="pvz?.office_image_list" class="office_image_slider">
       <div class="swiper-wrapper">
@@ -57,11 +57,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.balloon {
+.pvz {
   max-width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
   height: 100%;
   img {
