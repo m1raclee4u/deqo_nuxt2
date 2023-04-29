@@ -90,7 +90,7 @@ import Footer from "~/components/General/Footer.vue";
 import CartForm from "~/components/Cart/CartForm.vue";
 
 import { mapActions, mapGetters } from "vuex";
-import InformationWindowCart from "~/components/General/InformationWindowCart.vue";
+import InformationWindowCart from "~/components/Cart/InformationWindowCart.vue";
 import Promocode from "~/components/General/promocode.vue";
 
 export default {

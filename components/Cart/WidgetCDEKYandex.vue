@@ -37,9 +37,10 @@
     name: "WidgetCDEKYandex",
     data() {
       return {
+        checkedPVZ: null,
         markerIcon: {
           layout: 'default#imageWithContent',
-          imageHref: 'https://sun6-23.userapi.com/s/v1/ig1/AIyk6IlsyuYDUpfgDIXzYRjO75w-N3p7AzkBHd4oMDhtrJPThE0FFOQwdHNMeR856Sf6Qzs3.jpg?size=1335x1338&quality=96&crop=2,0,1335,1338&ava=1',
+          imageHref: 'https://static.tildacdn.com/tild6135-3439-4363-b961-363966303963/Component_71_5.png',
           imageSize: [40, 40],
           imageOffset: [0, 0],
           contentOffset: [0, 15],
@@ -102,8 +103,15 @@
         document.getElementById('btn').removeEventListener('click', this.handler);
       },
       handler() {
-        console.log(this.pvz);
-        console.log(this.$emit('123', this.pvz))
+        const balloon = event.target.parentNode;
+        this.checkedPVZCode = balloon.getAttribute('data-id')
+        this.yandexMaps.balloon.close()
+        const checkedPVZ = null
+        for (const pvz in this.pvzs){
+          this.checkedPVZ = this.pvzs.find(el => el.code === this.checkedPVZCode)
+        }
+        this.$emit('checkedPVZHandler', this.checkedPVZ)
+        console.log(this.checkedPVZ)
       },
     },
   }

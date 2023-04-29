@@ -7,6 +7,7 @@
     components: {PopUpRecipientsCity, WidgetCDEKYandex, CartFormAddresSelect},
     data() {
       return {
+        checkedPVZ: null,
         showPopUpRecipientsCity: false,
         cartForm: {
           cartEmail: "",
@@ -20,6 +21,9 @@
       };
     },
     methods: {
+      checkedPVZSetter(value) {
+        this.checkedPVZ = value
+      },
       checkFilled() {
         let emptyInputs = 0;
         for (const [key, value] of Object.entries(this.cartForm)) {
@@ -37,6 +41,13 @@
         this.checkFilled();
       },
     },
+    watch: {
+      'cartForm.deliveryType'(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          this.checkedPVZ = null
+        }
+      }
+    }
   }
 
 </script>
@@ -44,10 +55,11 @@
 
 <template>
   <div class="deliveryForm">
-    <pop-up-recipients-city v-if="showPopUpRecipientsCity === true" @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = false"/>
+    <pop-up-recipients-city v-if="showPopUpRecipientsCity === true"
+                            @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = false"/>
     <div class="form">
       <div class="input">
-        <label for="email">Email</label>
+        <label for="email">Email *</label>
         <input
           autocomplete="email"
           @input="checkFilled"
@@ -60,7 +72,7 @@
         />
       </div>
       <div class="input">
-        <label for="name">Ф.И.О.</label>
+        <label for="name">Ф.И.О. *</label>
         <input
           autocomplete="name"
           @input="checkFilled"
@@ -73,7 +85,7 @@
         />
       </div>
       <div class="input">
-        <label for="tel">Телефон</label>
+        <label for="tel">Телефон *</label>
         <input
           autocomplete="tel"
           id="tel"
@@ -81,9 +93,23 @@
           v-model="cartForm.cartTel"
           class="button"
           type="text"
-          v-mask="'+7 (###) ### ## ##'"
+          v-mask="'+7 (###) ###-##-##'"
           placeholder="+7"
         />
+      </div>
+      <div v-if="cartForm.deliveryType === 'delivery'" class="input">
+        <label>Адрес *</label>
+        <cart-form-addres-select @getAddress="setAddress"/>
+      </div>
+      <div v-if="cartForm.deliveryType === 'PVZ'" class="input">
+        <label>Пункт СДЭК *</label>
+        <div class="button"><p v-if="checkedPVZ">{{checkedPVZ.code + ', ' + checkedPVZ.location.address}}</p>
+          <p v-else>Не выбрано</p></div>
+      </div>
+      <div v-if="cartForm.deliveryType === 'POSTAMAT'" class="input">
+        <label>Постамат СДЭК *</label>
+        <div class="button"><p v-if="checkedPVZ">{{checkedPVZ.code + ', ' + checkedPVZ.location.address}}</p>
+          <p v-else>Не выбрано</p></div>
       </div>
       <div id="delivery" class="input">
         <label for="deliveryType">Способ доставки</label>
@@ -124,11 +150,10 @@
           </div>
         </div>
       </div>
-      <div v-if="cartForm.deliveryType === 'delivery'" class="input">
-        <label>Адрес</label>
-        <cart-form-addres-select @getAddress="setAddress"/>
-      </div>
-      <widget-c-d-e-k-yandex @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = true" :deliveryType="cartForm.deliveryType" v-show="cartForm.deliveryType !== 'delivery'"/>
+
+      <widget-c-d-e-k-yandex @checkedPVZHandler="checkedPVZSetter"
+                             @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = true"
+                             :deliveryType="cartForm.deliveryType" v-show="cartForm.deliveryType !== 'delivery'"/>
       <div class="input">
         <label for="comment">Коментарий</label>
         <textarea
@@ -195,6 +220,10 @@
     position: relative;
 
     textarea {
+      max-width: 710px;
+    }
+
+    .button {
       max-width: 710px;
     }
 
