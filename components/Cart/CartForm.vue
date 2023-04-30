@@ -22,7 +22,8 @@
     },
     methods: {
       checkedPVZSetter(value) {
-        this.checkedPVZ = value
+        this.checkedPVZ = value;
+        this.cartForm.cartAddress = value.location.address;
       },
       checkFilled() {
         let emptyInputs = 0;
@@ -151,7 +152,7 @@
         </div>
       </div>
 
-      <widget-c-d-e-k-yandex @checkedPVZHandler="checkedPVZSetter"
+      <widget-c-d-e-k-yandex class="widget" @checkedPVZHandler="checkedPVZSetter"
                              @showPopUpRecipientsCityHandler="showPopUpRecipientsCity = true"
                              :deliveryType="cartForm.deliveryType" v-show="cartForm.deliveryType !== 'delivery'"/>
       <div class="input">
@@ -172,6 +173,10 @@
 </template>
 
 <style lang="scss" scoped>
+.widget{
+  max-width: 980px;
+  padding: 0 !important;
+}
   label {
     font-weight: 400;
     font-size: 20px;

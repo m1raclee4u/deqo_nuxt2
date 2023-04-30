@@ -1,11 +1,10 @@
 <template>
   <div class="wrapper">
     <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
+      <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
     </Transition>
-    <HeaderBlack />
-    <Breadcrumbs />
-
+    <HeaderBlack/>
+    <Breadcrumbs/>
     <main class="main">
       <div class="title">
         <transition name="component-fade" mode="out-in">
@@ -13,8 +12,9 @@
             Оформление заказа
           </h3>
           <p v-if="$store.state.cart.products.length < 1" key="doesntExist">
-            Ваша корзина пока пуста,<br />
-            а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
+            Ваша корзина пока пуста,<br/>
+            а наш каталог полон
+            <Nuxt-link to="/catalog">новинок</Nuxt-link>
           </p>
         </transition>
       </div>
@@ -33,7 +33,7 @@
                   @deleteClickHandler="deleteClickMethod(product)"
                 >
                 </cart-item>
-                <hr />
+                <hr/>
               </div>
             </transition-group>
             <!-- <transition-group class="cartItems" name="list" tag="p">
@@ -54,7 +54,7 @@
               Предполагаемая дата доставки 26.02. — 28.02.2023.
               <Nuxt-link to="#">Подробнее об условиях доставки</Nuxt-link>
             </p>
-            <promocode />
+            <promocode/>
           </div>
           <InformationWindowCart
             v-if="!showMobileCartWindow"
@@ -77,7 +77,7 @@
         />
       </div>
     </main>
-    <Footer />
+    <Footer/>
   </div>
 </template>
 
@@ -89,7 +89,7 @@ import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
 import Footer from "~/components/General/Footer.vue";
 import CartForm from "~/components/Cart/CartForm.vue";
 
-import { mapActions, mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import InformationWindowCart from "~/components/Cart/InformationWindowCart.vue";
 import Promocode from "~/components/General/promocode.vue";
 
@@ -159,89 +159,31 @@ export default {
   },
 
   methods: {
-    // initCdek(value) {
-    //   var widjet = new ISDEKWidjet({
-    //     showWarns: true,
-    //     showErrors: true,
-    //     showLogs: true,
-    //     hideMessages: false,
-    //     path: "https://widget.cdek.ru/widget/scripts/",
-    //     servicepath: "https://widget.cdek.ru/widget/scripts/service.php", //ссылка на файл service.php на вашем сайте
-    //     templatepath: "https://widget.cdek.ru/widget/scripts/template.php",
-    //     apikey: "5c153b70-2781-4c93-a8ee-7bb22e44e497",
-    //     choose: true,
-    //     // popup: true,
-    //     country: "Россия",
-    //     defaultCity: "auto",
-    //     cityFrom: "Воронеж",
-    //     link: "forpvz",
-    //     hidedress: true,
-    //     hidecash: true,
-    //     hidedelt: true,
-    //     region: false,
-    //     detailAddress: true,
-    //     mode: value,
-    //     goods: [
-    //       {
-    //         length: 10,
-    //         width: 10,
-    //         height: 10,
-    //         weight: 1,
-    //       },
-    //     ],
-    //     onReady: onReady,
-    //     onChoose: onChoose,
-    //     onChooseProfile: onChooseProfile,
-    //     onCalculate: onCalculate,
-    //   });
-    //
-    //   function onReady() {
-    //     alert("Виджет загружен");
-    //   }
-    //
-    //   function onChoose(wat) {
-    //     console.log(wat);
-    //
-    //     alert(
-    //       "Выбран пункт выдачи заказа " +
-    //         wat.id +
-    //         "\n" +
-    //         "цена " +
-    //         wat.price +
-    //         "\n" +
-    //         "срок " +
-    //         wat.term +
-    //         " дн.\n" +
-    //         "город " +
-    //         wat.cityName +
-    //         ", код города " +
-    //         wat.city
-    //     );
-    //   }
-    //
-    //   function onChooseProfile(wat) {
-    //     console.log(wat);
-    //     alert(
-    //       "Выбрана доставка курьером в город " +
-    //         wat.cityName +
-    //         ", код города " +
-    //         wat.city +
-    //         "\n" +
-    //         "цена " +
-    //         wat.price +
-    //         "\n" +
-    //         "срок " +
-    //         wat.term +
-    //         " дн."
-    //     );
-    //   }
-    //
-    //   function onCalculate(wat) {
-    //     alert("Расчет стоимости доставки произведен");
-    //   }
-    // },
+    async createOrder() {
+      const params = {
+        email: this.cartForm.cartEmail,
+        name: this.cartForm.cartName,
+        phone: this.cartForm.cartTel,
+        address: this.cartForm.cartAddress,
+        cart: this.$store.state.cart.products,
+        comment: this.cartForm.comment,
+        delivery_type: this.cartForm.deliveryType,
+      }
+      console.log(params)
+      const order = await this.$axios.post('/orders', {
+          email: this.cartForm.cartEmail,
+          name: String(this.cartForm.cartName),
+          phone: String(this.cartForm.cartTel),
+          address: this.cartForm.cartAddress,
+          cart: JSON.stringify(this.getProducts),
+          comment: this.cartForm.comment,
+          delivery_type: this.cartForm.deliveryType,
+      })
+      window.open(order.data.order.payment_link)
+      console.log(order)
+    },
     onButtonClickBuyMethod() {
-      console.log(this.cart);
+      this.createOrder()
     },
     cartFormSetter(value) {
       this.cartForm = value;
@@ -493,6 +435,7 @@ aside {
     max-width: 432px;
   }
 }
+
 @media (max-width: 480px) {
   main {
     max-width: 320px;

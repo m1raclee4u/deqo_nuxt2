@@ -1,5 +1,4 @@
 <template>
-  
     <div v-if="$store.state.cart.products.length > 0" class="windowCart">
       <div class="informationPreSale">
         <h5>Обращаем внимание</h5>
@@ -24,8 +23,8 @@
           <b>{{ fullprice }} ₽</b>
         </p>
       </div>
-      <button @click="onButtonClickBuy" v-if="allFieldsAreFilled === true">Оплатить</button>
-      <button v-else disabled>Заполните все поля</button>
+      <button @click="onButtonClickBuy">Оплатить</button>
+<!--      <button v-else disabled>Заполните все поля</button>-->
       <p class="offer">
         Нажимая на кнопку «оплатить», я принимаю условия
         <Nuxt-link to="">публичной оферты</Nuxt-link>,
@@ -33,7 +32,7 @@
         <Nuxt-link to="">публичной оферты (предзаказ)</Nuxt-link>
       </p>
     </div>
-  
+
 </template>
 
 <script>
