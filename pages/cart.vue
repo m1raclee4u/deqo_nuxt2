@@ -1,9 +1,5 @@
 <template>
   <div class="wrapper">
-    <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
-    </Transition>
-    <HeaderBlack/>
     <Breadcrumbs/>
     <main class="main">
       <div class="title">
@@ -160,16 +156,6 @@ export default {
 
   methods: {
     async createOrder() {
-      const params = {
-        email: this.cartForm.cartEmail,
-        name: this.cartForm.cartName,
-        phone: this.cartForm.cartTel,
-        address: this.cartForm.cartAddress,
-        cart: this.$store.state.cart.products,
-        comment: this.cartForm.comment,
-        delivery_type: this.cartForm.deliveryType,
-      }
-      console.log(params)
       const order = await this.$axios.post('/orders', {
           email: this.cartForm.cartEmail,
           name: String(this.cartForm.cartName),

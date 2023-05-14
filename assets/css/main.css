@@ -87,6 +87,7 @@ button{
   flex-direction: column;
   gap: 100px;
   margin-top: 110px;
+  margin-bottom: 110px;
 }
 
 
@@ -152,11 +153,16 @@ z-index: 1 !important;
   }
 }
 
+  section{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
 .el-input__inner,
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none !important;
-        margin: 0 !important; 
+        margin: 0 !important;
     }
 
     .todo{

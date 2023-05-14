@@ -3,7 +3,6 @@
     <Transition name="slide-fade">
       <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
     </Transition>
-    <HeaderBlack />
     <Breadcrumbs />
     <main class="main">
       <p
@@ -62,7 +61,6 @@
         </div>
       </div>
     </main>
-    <Footer />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="categories">
-    <h3>Категория</h3>
+    <h3>Категории</h3>
     <div class="checkboxes">
       <div
         class="form_radio_btn_categories"
@@ -36,7 +36,7 @@ export default {
         this.$store.dispatch("filters/setCategories", this.filterCategories);
       }
     },
-  }, 
+  },
 };
 </script>
 

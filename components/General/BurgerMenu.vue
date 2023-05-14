@@ -79,7 +79,7 @@
 export default {
   computed: {
     categories() {
-      return this.$store.getters["categories"];
+      return this.$store.getters["catalog/getCategories"];
     },
   },
   methods: {
@@ -88,8 +88,8 @@ export default {
     },
   },
   mounted() {
-    if (this.$store.getters["categories"].length === 0) {
-      this.$store.dispatch("fetchCategories");
+    if (this.$store.getters["catalog/getCategories"].length === 0) {
+      this.$store.dispatch("catalog/getCategories");
     }
   },
 };

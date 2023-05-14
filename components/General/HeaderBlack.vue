@@ -8,13 +8,13 @@ export default {
       headerOpened: false,
       whiteHeader: false,
       searchShown: false,
-      showMobileMenu: false,
+      isMobileMenuShown: false,
     };
   },
   mounted() {
     const mediaQuery = window.matchMedia("(max-width:640px)");
-    this.showMobileMenu = mediaQuery.matches;
-    const listener = (e) => (this.showMobileMenu = e.matches);
+    this.isMobileMenuShown = mediaQuery.matches;
+    const listener = (e) => (this.isMobileMenuShown = e.matches);
     mediaQuery.addListener(listener);
     this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
   },
@@ -64,11 +64,11 @@ export default {
             "
           >
             <img src="@/assets/img/icons/menu.svg" alt="" />
-            <p v-if="!showMobileMenu">каталог</p>
+            <p v-if="!isMobileMenuShown">каталог</p>
           </button>
         </div>
         <Nuxt-link
-          v-if="!showMobileMenu"
+          v-if="!isMobileMenuShown"
           id="logo"
           to="/"
           :class="{ openedLogo: headerOpened }"
@@ -97,26 +97,26 @@ export default {
             </div>
           </div>
           <Nuxt-link
-            v-if="!showMobileMenu"
+            v-if="!isMobileMenuShown"
             to="/favorite"
             class="favorite"
           ></Nuxt-link>
 
-          <Nuxt-link v-if="!showMobileMenu" to="/cart" class="cart">
-            
+          <Nuxt-link v-if="!isMobileMenuShown" to="/cart" class="cart">
+
               <span class="cartCounter" v-if="getProducts.length > 0">
                 {{ getProducts.length }}
               </span>
-            
+
           </Nuxt-link>
           <div
-            v-if="!showMobileMenu"
+            v-if="!isMobileMenuShown"
             @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"
             class="account"
           ></div>
         </div>
       </div>
-      <div v-if="showMobileMenu" class="mobileMenu buttons">
+      <div v-if="isMobileMenuShown" class="mobileMenu buttons">
         <div class="mobile_button">
           <Nuxt-link to="/" class="home"> </Nuxt-link>
           <p>главная</p>
@@ -127,11 +127,11 @@ export default {
         </div>
         <div class="mobile_button">
           <Nuxt-link to="/cart" class="cart">
-            
+
               <span class="cartCounter" v-if="getProducts.length > 0">
                 {{ getProducts.length }}
               </span>
-            
+
           </Nuxt-link>
           <p>корзина</p>
         </div>

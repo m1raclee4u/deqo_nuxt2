@@ -27,6 +27,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // CSS file in the project
+    '~/assets/css/variable.scss',
     '~/assets/css/main.css',
     '~/assets/css/fonts.css',
     'element-ui/lib/theme-chalk/index.css',
@@ -65,7 +66,6 @@ export default {
       localStorage: ['favorites', 'cart'] //  If not entered, “localStorage” is the default value
     }]
   ],
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

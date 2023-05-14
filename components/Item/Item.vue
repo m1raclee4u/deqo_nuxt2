@@ -1,49 +1,55 @@
 <template>
   <div class="ItemCart">
-    <selectAdditionalParameter
-      :item="item"
-      @onClosed="resetItem"
-      v-if="$store.state.selectParametrs === true && $route.name === 'favorite'"
-    />
-    <ButtonFavorite :item="item" inSlider="inSlider" />
+    <!--    <selectAdditionalParameter-->
+    <!--      :item="item"-->
+    <!--      @onClosed="resetItem"-->
+    <!--      v-if="$store.state.selectParametrs === true && $route.name === 'favorite'"-->
+    <!--    />-->
+    <ButtonFavorite :item="item" inSlider="inSlider"/>
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('@/assets/img/item/' + item.img)" alt="" > -->
-      <img
-        width="387"
-        height="487"
-        class="card__img"
-        :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)"
-        alt="item.name"
-      />
+      <picture>
+        <img
+          width="387"
+          height="487"
+          class="card__img"
+          :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)"
+          alt="item.name"
+        />
+      </picture>
+
       <div v-if="item.badge_bestseller" class="tag">
         <p>ХИТ</p>
       </div>
 
       <!-- {{item}} -->
     </Nuxt-Link>
-    <div class="top">
-      <p>{{ item.title }}</p>
-      <p class="quantity">осталось {{ 3 }} шт.</p>
-    </div>
-    <div class="ItemCart__price">
-      <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
-      <p>{{ item.price }} ₽</p>
-      <div class="flex colors">
-        <div
-          class="input_color_1"
-          :id="color.id"
-          v-for="color in item.colors"
-          :key="color.id"
-          :style="{
+    <div class="item__info">
+      <div class="top">
+        <p class="title">{{ item.title }}</p>
+        <p class="quantity">осталось {{ 3 }} шт.</p>
+      </div>
+      <div class="ItemCart__price">
+        <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
+        <p>{{ item.price }} ₽</p>
+        <div class="flex colors">
+          <div
+            class="input_color_1"
+            :id="color.id"
+            v-for="color in item.colors"
+            :key="color.id"
+            :style="{
             backgroundColor: color.value,
             border: color.name === 'Белый' ? `1px solid lightgrey` : `none`,
           }"
-          disabled
-        >
-          <!-- <label  class="colorItem"></label> -->
+            disabled
+          >
+            <!-- <label  class="colorItem"></label> -->
+          </div>
         </div>
       </div>
     </div>
+
     <button
       v-if="$route.name === 'favorite'"
       @click="
@@ -60,141 +66,150 @@
 </template>
 
 <script>
-import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
-import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
-import ImageHelper from "~/plugins/imageHelper";
+  import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
+  import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
+  import ImageHelper from "~/plugins/imageHelper";
 
-import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
-import "swiper/swiper-bundle.css";
+  import Swiper, {Navigation, Pagination, Autoplay} from "swiper";
+  import "swiper/swiper-bundle.css";
 
-Swiper.use([Navigation, Pagination, Autoplay]);
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true,
+  Swiper.use([Navigation, Pagination, Autoplay]);
+  export default {
+    props: {
+      item: {
+        type: Object,
+        required: true,
+      },
+      inSlider: {},
     },
-    inSlider: {},
-  },
-  data() {
-    return {
-      IH: new ImageHelper(),
-    };
-  },
-  components: { ButtonFavorite, selectAdditionalParameter },
-};
+    data() {
+      return {
+        IH: new ImageHelper(),
+      };
+    },
+    components: {ButtonFavorite, selectAdditionalParameter},
+  };
 </script>
 
 <style lang="scss" scoped>
-button {
-  margin: 20px auto 0 auto;
-  justify-content: center;
-  align-items: center;
-  // padding: 20px 109px;
-  gap: 10px;
+  button {
+    margin: 20px auto 0 auto;
+    justify-content: center;
+    align-items: center;
+    // padding: 20px 109px;
+    gap: 10px;
 
-  width: 100%;
-  height: 64px;
+    width: 100%;
+    height: 64px;
 
-  /* основной */
+    /* основной */
 
-  background: #685f5f;
-  border-radius: 4px;
+    background: #685f5f;
+    border-radius: 4px;
 
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-
-  color: white;
-}
-.input_color_1 {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-}
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  font-weight: 400;
-
-  .quantity {
-    font-size: 14px;
-    line-height: 17px;
-    color: #a9a1a1;
     font-weight: 400;
-  }
-}
-.tag {
-  position: absolute;
-  width: 58px;
-  height: 58px;
-  left: 14px;
-  top: 14px;
-  border-radius: 50%;
-  border: 1px solid #685f5f;
-  text-align: center;
-  line-height: 100%;
-  p {
-    position: absolute;
-    top: 17px;
-    left: 13px;
-    color: #685f5f;
-  }
-}
-.ItemCart {
-  position: relative;
-  width: 387px;
-  height: 100%;
-  //   padding-bottom: 60px;
-  img {
-    width: 387px;
-    height: 487px;
-    margin-bottom: 25px;
-    background-color: #ebebeb;
-  }
-  p {
-    font-family: "RF Dewi";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 18px;
+    line-height: 22px;
 
-    /* основной */
-
-    color: #685f5f;
+    color: white;
   }
-}
-.colors {
-  gap: 10px;
-}
-.ItemCart__price {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  p {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
 
-    /* основной */
+  .input_color_1 {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
 
-    color: #685f5f;
-  }
-  .old {
-    color: grey;
-    text-decoration: line-through;
-  }
-}
-@media (max-width: 1280px) {
-  .ItemCart {
-    // padding-bottom: 60px;
-    p {
-      margin-bottom: 20px;
-      font-size: 13px;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-weight: 400;
+    gap: 10px;
+
+
+    .quantity {
+      font-size: 14px;
+      line-height: 19px;
+      color: #a9a1a1;
+      font-weight: 400;
+      width: 100%;
+      max-width: 100px;
     }
   }
-}
+
+  .tag {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    left: 14px;
+    top: 14px;
+    border-radius: 50%;
+    border: 1px solid #685f5f;
+    text-align: center;
+    line-height: 100%;
+
+    p {
+      position: absolute;
+      top: 17px;
+      left: 13px;
+      color: #685f5f;
+    }
+  }
+
+  .ItemCart {
+    grid-column: span 1;
+    max-width: 420px;
+    position: relative;
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      background-color: #ebebeb;
+    }
+
+    p {
+      font-family: "RF Dewi";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 19px;
+      /* основной */
+
+      color: #685f5f;
+    }
+  }
+
+  .colors {
+    gap: 10px;
+  }
+
+  .ItemCart__price {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    p {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 23px;
+
+      /* основной */
+
+      color: #685f5f;
+    }
+
+    .old {
+      color: grey;
+      text-decoration: line-through;
+    }
+  }
+
 </style>

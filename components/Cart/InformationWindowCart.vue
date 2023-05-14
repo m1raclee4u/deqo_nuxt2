@@ -1,6 +1,6 @@
 <template>
     <div v-if="$store.state.cart.products.length > 0" class="windowCart">
-      <div class="informationPreSale">
+      <div v-if="presail" class="informationPreSale">
         <h5>Обращаем внимание</h5>
         <p>
           В заказе есть товар доступный для предзаказа. При оплате его стоимость
@@ -11,7 +11,7 @@
       </div>
       <div class="line">
         <p>Скидка</p>
-        <p>{{ "1000" }} ₽</p>
+        <p>{{ discount }} ₽</p>
       </div>
       <div class="line">
         <p>Доставка</p>
@@ -47,15 +47,39 @@ export default {
   },
   computed: {
     ...mapGetters("cart", ["getProducts"]),
-    fullprice() {
-      let priceStart = 0
+    presail() {
+      let total = 0
       for (const item in this.products) {
         if (Object.hasOwnProperty.call(this.products, item)) {
           const element = this.products[item];
-          priceStart += element.quantity * element.price;
+          // if (element.)
         }
       }
-      return priceStart
+      return total
+    },
+    discount() {
+      let total = 0
+      for (const item in this.products) {
+        if (Object.hasOwnProperty.call(this.products, item)) {
+          const element = this.products[item];
+          if (element?.old_price){
+            total += element.quantity * element.old_price
+          } else {
+            total += element.quantity * element.price;
+          }
+        }
+      }
+      return total - this.fullprice
+    },
+    fullprice() {
+      let total = 0
+      for (const item in this.products) {
+        if (Object.hasOwnProperty.call(this.products, item)) {
+          const element = this.products[item];
+          total += element.quantity * element.price;
+        }
+      }
+      return total
     },
   },
   methods: {

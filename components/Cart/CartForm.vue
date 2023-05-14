@@ -16,7 +16,7 @@
           cartAddress: "",
           deliveryType: "delivery",
           paymentMethod: "creditCard",
-          comment: "  ",
+          comment: "",
         },
       };
     },
@@ -34,6 +34,7 @@
         }
         if (emptyInputs === 0) {
           this.$emit("emitAllFieldsAreFilled");
+          console.log(this.cartForm)
           this.$emit("cartFormGetter", this.cartForm);
         } else if (emptyInputs > 0) this.$emit("emitAllFieldsNotFilled");
       },
@@ -46,6 +47,7 @@
       'cartForm.deliveryType'(newValue, oldValue) {
         if (newValue !== oldValue) {
           this.checkedPVZ = null
+          this.checkFilled()
         }
       }
     }

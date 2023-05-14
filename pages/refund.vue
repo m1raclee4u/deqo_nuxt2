@@ -1,9 +1,5 @@
 <template>
   <div class="wrapper">
-    <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
-    </Transition>
-    <HeaderBlack />
     <Breadcrumbs />
     <main class="main">
       <div class="catalog">
@@ -71,7 +67,6 @@
         <AsideHelp />
       </div>
     </main>
-    <Footer />
   </div>
 </template>
 

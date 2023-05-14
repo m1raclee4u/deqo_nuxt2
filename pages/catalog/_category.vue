@@ -119,10 +119,6 @@ export default {
 
 <template>
   <div class="wrapper">
-    <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
-    </Transition>
-    <HeaderBlack />
     <section>
       <main class="main">
         <aside class="aside">
@@ -205,8 +201,6 @@ export default {
         </div>
       </main>
     </section>
-
-    <Footer />
   </div>
 </template>
 
@@ -332,6 +326,7 @@ button {
 .items {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 40px;
   // gap: 17.6px;
 }
@@ -353,5 +348,11 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 45px;
+}
+
+@media (max-width: 1270px) {
+ aside{
+   display: none;
+ }
 }
 </style>
