@@ -1,9 +1,12 @@
 <template>
-  <button @click="buyClickHandler" v-if="!isProductAdded">
+  <button @click="buyClickHandler" v-if="!isProductAdded && !isAvailable">
     Добавить в корзину
   </button>
-  <button class="remove" @click="$router.push('/cart')" v-else>
+  <button class="remove" @click="$router.push('/cart')" v-else-if="!isAvailable">
     Перейти в корзину
+  </button>
+  <button v-else-if="isAvailable">
+
   </button>
 </template>
 
@@ -23,6 +26,13 @@ export default {
     ...mapState({
       products: (state) => state.cart.products,
     }),
+    isAvailable() {
+      if (this.item.badge_coming_soon) {
+        return false
+      } else if (this.item.badge_absent) {
+        return false
+      }
+    },
     computedItem() {
       return {
         product_id: this.item.product_id,

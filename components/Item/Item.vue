@@ -159,19 +159,29 @@
   }
 
   .ItemCart {
-    grid-column: span 1;
     max-width: 420px;
+    height: 100%;
     position: relative;
-
-    a {
-      display: block;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     img {
+      max-width: 420px;
       width: 100%;
+      //min-height: 600px;
       height: auto;
+      max-height: 539px;
       margin-bottom: 10px;
       background-color: #ebebeb;
+    }
+
+    a {
+      //display: flex;
+      //justify-content: center;
+      //align-items: center;
+      height: 100%;
+      //background: url("https://ru.louisvuitton.com/static_lvfront/product-card-gradients/gradient_default.svg") 0 0/cover no-repeat;
     }
 
     p {
