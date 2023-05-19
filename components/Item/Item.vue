@@ -27,7 +27,7 @@
     <div class="item__info">
       <div class="top">
         <p class="title">{{ item.title }}</p>
-        <p class="quantity">осталось {{ 3 }} шт.</p>
+<!--        <p class="quantity">осталось {{ 3 }} шт.</p>-->
       </div>
       <div class="ItemCart__price">
         <!-- <p class="old">{{item.priceOld}} ₽ </p> -->

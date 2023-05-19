@@ -1,12 +1,14 @@
 <template>
   <div class="sort-input">
     <p>Сортировть по</p>
-    <select>
-      <!--      <option disabled value="">Сортировать</option>-->
-      <option>новизне</option>
-      <option>цене (по возрастанию)</option>
-      <option>цене (по убыванию)</option>
-    </select>
+    <el-select v-model="value" placeholder="Select">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
   </div>
 
 </template>
@@ -16,18 +18,33 @@
     name: "SortComponent",
     data() {
       return {
-        selected: 'По популярности'
+        options: [{
+          value: 'цене (по возрастанию)',
+          label: 'цене (по возрастанию) '
+        }, {
+          value: 'цене (по убыванию)',
+          label: 'цене (по убыванию) '
+        }, {
+          value: 'популярности',
+          label: 'популярности '
+        }
+        ],
+        value: 'цене (по возрастанию)'
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
   .sort-input {
     display: flex;
     align-items: center;
-    p{
-      width: 100%;
+    height: 40px;
+
+    p {
+      /*width: 100%;*/
+      font-size: 16px;
     }
   }
 
