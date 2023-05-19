@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper">
     <HeaderSlider photo_1="back" />
-    <ItemsSlider title="Bestsellers" />
-    <ItemsSlider title="Новинки" />
+    <ItemsSlider :products="products" title="Bestsellers" />
+    <ItemsSlider :products="products" title="Новинки" />
     <HeaderSlider />
-    <ItemsSlider title="deqo + LaPizza" />
+    <ItemsSlider :products="products" title="deqo + LaPizza" />
     <HeaderSlider />
-    <ItemsSlider title="Новая категория" />
+    <ItemsSlider :products="products" title="Новая категория" />
     <!-- <Collections/> -->
   </div>
 </template>
@@ -20,6 +20,11 @@ export default {
   components: {
     HeaderSlider,
     ItemsSlider,
+  },
+  computed: {
+    products() {
+      return this.$store.getters["catalog/getProducts"];
+    },
   },
   name: "IndexPage",
    async asyncData({store}) {

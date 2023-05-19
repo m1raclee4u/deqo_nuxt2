@@ -9,7 +9,7 @@
       <div class="swiper-wrapper">
 
           <div
-            v-for="item in this.products.slice(0, 12)"
+            v-for="item in this.products"
             :key="item.slug"
             class="swiper-slide item-slide"
           >
@@ -36,6 +36,7 @@ export default {
     title: {
       type: String,
     },
+    products: Array,
   },
   data() {
     return {
@@ -44,9 +45,9 @@ export default {
   },
   components: { Item },
   computed: {
-    products() {
-      return this.$store.getters["catalog/getProducts"];
-    },
+    // products() {
+    //   return this.$store.getters["catalog/getProducts"];
+    // },
     productsInCart() {
       return this.$store.getters["productsInCart"];
     },

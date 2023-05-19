@@ -26,9 +26,16 @@
         checkedOpenedRecomendations: false,
         highlightedSize: false,
         sizeChecked: "",
+        stylist: null,
       };
     },
     methods: {
+      async getStylist() {
+        if (this.item?.product_content_id) {
+          this.stylist = await this.$axios.$get(`stylist/getStylist/${this.item.product_content_id}`)
+          console.log(this.stylist)
+        }
+      },
       sizeCheckedCallback(size) {
         this.sizeChecked = size
       },
@@ -44,6 +51,9 @@
       highlightedSizeToggle(isHighlight) {
         this.highlightedSize = isHighlight;
       },
+    },
+    mounted() {
+      this.getStylist()
     },
     async asyncData({$axios, route}) {
       const item = await $axios.$get(
@@ -188,8 +198,8 @@
         </div>
       </div>
     </section>
-    <ItemsSlider :title="title"/>
-    <ItemsSlider :title="title_recomended"/>
+    <ItemsSlider v-if="this.stylist?.fashion?.length > 0" :products="this.stylist?.fashion" :title="title"/>
+    <ItemsSlider v-if="this.stylist?.fashion?.length > 0" :products="this.stylist?.maybe" :title="title_recomended"/>
     <FAQ/>
   </div>
 </template>
