@@ -86,14 +86,7 @@ export default {
             />
             <div v-if="searchShown === true" class="searchInputWrapper">
               <i @click="$router.push('/catalog')"></i>
-              <input
-                @keyup.enter="$router.push('/catalog')"
-                type="search"
-                class="searchInput"
-                name=""
-                id=""
-                placeholder="Я ищу"
-              />
+              <el-table style="width: 100%"/>
             </div>
           </div>
           <Nuxt-link

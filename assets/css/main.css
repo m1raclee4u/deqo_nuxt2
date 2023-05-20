@@ -85,17 +85,17 @@ button{
 .wrapper{
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 60px;
   margin-top: 110px;
   margin-bottom: 110px;
 }
 
 /*select*/
 
-  .el-input__inner {
+  .el-input--suffix {
     border: none !important;
     color: black !important;
-    padding: 0 3px !important;
+    padding: 0 10px !important;
     font-weight: bold !important;
   }
   .el-input--suffix .el-input__inner {

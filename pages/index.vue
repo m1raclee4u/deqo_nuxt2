@@ -6,7 +6,7 @@
     <div class="collections">
       <div class="collection" v-for="collection in collections">
         <HeaderSlider :images="collection.slider_images"/>
-        <ItemsSlider :products="products" title="Bestsellers"/>
+        <ItemsSlider :products="products" :title="collection.collection_title"/>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
               },],
             slider_title: 'diego + La Pizza',
             slider_subtitle: 'dego + La Pizza',
-            collection_title: '',
+            collection_title: 'dego + La Pizza',
             collection_logo: '',
             link: '',
             button_text: '',
@@ -99,7 +99,7 @@
   }
   .collections{
     section{
-      padding: 100px 0;
+      padding: 60px 0;
     }
   }
 </style>
