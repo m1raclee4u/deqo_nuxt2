@@ -16,9 +16,9 @@
 
       </div>
     </div>
-    <div class="wrapper p60">
+    <div  class="wrapper p60">
       <div class="flex">
-        <img src="@/assets/img/icons/slogan.svg" alt=""/>
+        <img v-if="isMainSlider"  src="@/assets/img/icons/slogan.svg" alt=""/>
         <!-- <main>
           <div class="assortment">
             <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>

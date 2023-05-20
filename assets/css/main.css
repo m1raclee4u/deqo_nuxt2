@@ -92,6 +92,10 @@ button{
 
 /*select*/
 
+  .el-input__suffix {
+    right: 15px !important;
+  }
+
   .el-input--suffix {
     border: none !important;
     color: black !important;

@@ -7,7 +7,7 @@ export default {
     return {
       headerOpened: false,
       whiteHeader: false,
-      searchShown: false,
+      isFocused: false,
       isMobileMenuShown: false,
     };
   },
@@ -52,7 +52,7 @@ export default {
         notMainPage:
           $route.name != 'index' ||
           whiteHeader === true ||
-          searchShown === true,
+          isFocused === true,
       }"
     >
       <div class="header">
@@ -78,15 +78,15 @@ export default {
         <div class="buttons">
           <div class="searchButtons">
             <img
-              v-if="searchShown === false"
-              @click="searchShown = !searchShown"
+              v-if="isFocused === false"
+              @click="isFocused = !isFocused"
               class="search"
               src="@/assets/img/icons/search.svg"
               alt=""
             />
-            <div v-if="searchShown === true" class="searchInputWrapper">
+            <div v-show="isFocused" class="searchInputWrapper">
               <i @click="$router.push('/catalog')"></i>
-              <el-table style="width: 100%"/>
+              <input type="text"  @blur="isFocused = false">
             </div>
           </div>
           <Nuxt-link
@@ -258,6 +258,9 @@ export default {
   border: 1px solid #a9a1a1;
   border-radius: 4px;
   transition: 1s;
+  input {
+    transition: 1s;
+  }
 
   i {
     cursor: pointer;

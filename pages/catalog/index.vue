@@ -1,27 +1,21 @@
 <script>
-  import AsideCategories from "~/components/Filter/AsideCategories.vue";
-  import AsidePrice from "~/components/Filter/AsidePrice.vue";
   import HeaderBlack from "~/components/General/HeaderBlack.vue";
   import Item from "~/components/Item/Item.vue";
   import BurgerMenu from "~/components/General/BurgerMenu.vue";
   import Footer from "~/components/General/Footer.vue";
-  import AsideSize from "~/components/Filter/AsideSize.vue";
-  import AsideColor from "~/components/Filter/AsideColor.vue";
   import AsideMobileWrapper from "~/components/Filter/AsideMobileWrapper";
   import SortComponent from "~/components/Filter/SortComponent";
+  import AsideWrapper from "~/components/Filter/AsideWrapper";
 
   export default {
     components: {
       SortComponent,
+      AsideWrapper,
       AsideMobileWrapper,
       HeaderBlack,
       Item,
-      AsideColor,
-      AsidePrice,
-      AsideCategories,
       BurgerMenu,
       Footer,
-      AsideSize,
     },
     data() {
       return {
@@ -135,48 +129,7 @@
     <section>
       <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
-        <aside v-if="!isMobileMenuShown" class="aside">
-          <aside-categories
-            :categories="categories"
-            @filterCategories="setCategories"
-          />
-          <aside-price :products="products" @filterPrice="setPrice"/>
-          <aside-color :colors="colors" @filterColors="setColors"/>
-          <aside-size :sizes="sizes" @filterSizes="setSizes"/>
-          <div class="buttonsFilters">
-            <button
-              @click="
-                $router.push({
-                  path: `catalog/filter`,
-                  query: {
-                    categories: `${$store.state.filters.filters.categories.map(
-                      (o) => o['slug']
-                    )}`,
-                    price: `${$store.state.filters.filters.prices}`,
-                    sizes: `${$store.state.filters.filters.sizes.map(
-                      (o) => o['name']
-                    )}`,
-                    colors: `${$store.state.filters.filters.colors.map(
-                      (o) => o['slug']
-                    )}`,
-                  },
-                })
-              "
-              class="filter"
-            >
-              Отсортировать по фильтрам
-            </button>
-            <button
-              class="clearButtonFilters"
-              @click="
-                $store.dispatch('filters/clearFilters');
-                $router.push('catalog');
-              "
-            >
-              Сбросить фильтры
-            </button>
-          </div>
-        </aside>
+        <aside-wrapper v-if="!isMobileMenuShown"/>
         <div class="items__main">
           <header>
             <p v-if="this.products.meta.total > 0">{{this.products.meta.total + ' ' +

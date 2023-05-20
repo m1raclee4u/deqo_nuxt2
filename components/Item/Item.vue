@@ -159,7 +159,7 @@
   }
 
   .ItemCart {
-    max-width: 420px;
+    max-width: 387px;
     height: 100%;
     position: relative;
     display: flex;
