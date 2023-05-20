@@ -44,7 +44,7 @@
         <div class="links">
           <a
             href="mailto:hello.deqo@gmail.com?subject=Вопрос по &body=Здравствуйте! Возник вопрос по поводу"
-            >example@mail.ru</a
+          >example@mail.ru</a
           >
           <a href="tel:+7 (822) 156-90-15">+7 (822) 156-90-15</a>
           <div class="jscb">
@@ -52,7 +52,7 @@
                 наши соцсети <br />
                 и чаты поддержки
               </p> -->
-            <buttons-social footer="footer" />
+            <buttons-social footer="footer"/>
           </div>
         </div>
       </div>
@@ -66,10 +66,17 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.copyright {
+  color: #685F5F;
+  margin: 0 auto !important;
+  max-width: 1676px;
+}
+
 .jscb {
   display: flex;
   align-items: center;
   gap: 20px;
+
   .buttons_help {
     .telegram {
       width: 40px !important;
@@ -77,6 +84,7 @@ export default {};
     }
   }
 }
+
 section {
   margin: 0 auto;
   width: 100%;
@@ -85,6 +93,7 @@ section {
   // padding: 50px 0 40px 0;
   background-color: #f7f7f7;
 }
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -95,16 +104,19 @@ footer {
   max-width: 1676px;
   margin: 0 auto;
 }
+
 form {
   display: flex;
   gap: 40px;
   margin-bottom: 40px;
 }
+
 .column {
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 338px;
+
   h5 {
     font-family: "Playfair Display", serif;
     font-size: 20px;
@@ -112,32 +124,39 @@ form {
 
     color: #685f5f;
   }
+
   .links {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
     a {
       text-decoration: none;
       color: #848484;
+
       &:hover {
         color: #5b5353;
       }
     }
   }
+
   font-size: 16px;
   line-height: 19px;
   color: #a9a1a1;
 }
+
 .left {
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 480px;
+
   .text {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     p {
       font-weight: 400;
       font-size: 16px;
@@ -145,6 +164,7 @@ form {
       color: #a9a1a1;
     }
   }
+
   h5 {
     font-family: "Playfair Display", serif;
     font-weight: 600;
@@ -153,11 +173,17 @@ form {
     color: #685f5f;
     margin-bottom: 35px;
   }
+
   .form {
     p {
       font-size: 10px;
     }
   }
+}
+
+.copyright{
+  text-align: right;
+
 }
 .right {
   display: flex;
@@ -167,6 +193,7 @@ form {
   font-size: 15px;
   letter-spacing: -0.001em;
 }
+
 input[type="email"] {
   background-color: inherit;
   min-width: 300px;
@@ -174,10 +201,12 @@ input[type="email"] {
   border-radius: 4px;
   color: #a9a1a1;
   border-bottom: 1px solid #a1a1a1;
+
   &::placeholder {
     color: #a9a1a1;
   }
 }
+
 button {
   background-color: inherit;
   font-weight: 400;
@@ -194,8 +223,9 @@ button {
   }
   .left {
     max-width: 228px;
-    .text{
-      h5{
+
+    .text {
+      h5 {
         font-size: 20px;
       }
     }
@@ -203,6 +233,7 @@ button {
   .column {
     max-width: 228px;
     gap: 18px;
+
     .links {
       gap: 20px;
     }
@@ -211,24 +242,23 @@ button {
     flex-direction: column;
     align-items: flex-end;
     gap: 20px;
+
     input[type="email"] {
       min-width: unset;
     }
   }
-  .copyright{
-    text-align: right;
-    color: #685F5F;
-  }
 }
+
 @media (max-width: 1024px) {
-  footer{
+  footer {
     flex-wrap: wrap;
     height: 100%;
     gap: 70px;
   }
 }
-@media (max-width: 640px){
-  footer{
+
+@media (max-width: 640px) {
+  footer {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;

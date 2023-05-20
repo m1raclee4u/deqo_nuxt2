@@ -96,4 +96,10 @@ export default {
     background-color: lightgrey;
   }
 }
+
+@media (max-width: 1024px) {
+  .inputAddress{
+    max-width: 370px;
+  }
+}
 </style>
