@@ -1,6 +1,7 @@
 <template>
   <section>
     <!-- Slider main container -->
+
     <div v-if="images.length > 0" class="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
@@ -8,7 +9,8 @@
         <div v-for="image in images" class="swiper-slide">
           <img
             class="slide"
-            :src=image.image
+            :src="IH.getUrl($axios.defaults.baseURL + `/` + image.image, fm = 'webp', size=1920)"
+
             alt=""
           />
         </div>
@@ -49,10 +51,17 @@
   import BurgerMenu from "../General/BurgerMenu.vue";
   import Swiper, {Navigation, Pagination, Autoplay} from "swiper";
   import "swiper/swiper-bundle.css";
+  import IH from "~/plugins/imageHelper";
+  import ImageHelper from "~/plugins/imageHelper";
 
   Swiper.use([Navigation, Pagination, Autoplay]);
 
   export default {
+    data() {
+      return{
+        IH: new ImageHelper(),
+      }
+    },
     props: {
       images: Array,
       isMainSlider: Boolean,

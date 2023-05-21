@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <HeaderSlider :images="mainSlider_images" :isMainSlider="isMainSlider"/>
+    <HeaderSlider :images="mainSlider_images.slides" :isMainSlider="isMainSlider"/>
     <ItemsSlider :products="products" title="Bestsellers"/>
     <ItemsSlider :products="products" title="Новинки"/>
     <div class="collections">
@@ -21,16 +21,6 @@ export default {
   data() {
     return {
       isMainSlider: true,
-      mainSlider_images: [
-        {
-          id: 1,
-          image: '/back.jpg'
-        },
-        {
-          id: 2,
-          image: '/back.jpg'
-        },
-      ],
       collections: [
         {
           collection_id: 1,
@@ -76,14 +66,18 @@ export default {
     },
   },
   name: "IndexPage",
-  async asyncData({store}) {
+  async asyncData({store, $axios}) {
     if (store.getters["catalog/getProducts"].length === 0) {
       await store.dispatch("catalog/fetchProducts");
     }
     if (store.getters["catalog/getCategories"].length === 0) {
       await store.dispatch("catalog/fetchCategories");
     }
+    const mainSlider_images = await $axios.$get('/main-slides')
+    return {mainSlider_images}
+
   },
+
 };
 </script>
 
