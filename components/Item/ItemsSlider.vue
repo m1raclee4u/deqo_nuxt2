@@ -2,12 +2,14 @@
   <section>
     <div class="jcsb">
       <h2>{{ title }}</h2>
+      <!--      <div v-for="slide in this.splitArray" class="asd">-->
+<!--        {{slide}}-->
+<!--      </div>-->
       <Nuxt-Link class="linkToCatalog" to="/catalog">смотреть все</Nuxt-Link>
     </div>
     <div class="mainSlider">
       <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-
+      <div v-if="!isMobileSwiper" class="swiper-wrapper">
           <div
             v-for="item in this.products"
             :key="item.slug"
@@ -17,14 +19,25 @@
           </div>
 
       </div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div v-if="isMobileSwiper" class="swiper-wrapper">
+          <div
+            v-for="array in this.splitArray"
+            :key="array.id"
+            class="swiper-slide item-slide"
+          >
+            <div v-for="item in array" class="items">
+              <item :item="item" inSlider="inSlider" :key="item.id"> </item>
+            </div>
+          </div>
+
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import Item from "~/components/Item/Item.vue";
+import _ from 'lodash'
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -41,29 +54,50 @@ export default {
   data() {
     return {
       slider: null,
+      isMobileSwiper: false,
     };
   },
   components: { Item },
   computed: {
-    // products() {
-    //   return this.$store.getters["catalog/getProducts"];
-    // },
     productsInCart() {
       return this.$store.getters["productsInCart"];
     },
+    splitArray() {
+      return _.chunk(this.products, 4)
+    }
   },
 
+
   mounted() {
+    const mediaQuery = window.matchMedia("(max-width:768px)");
+    this.isMobileSwiper = mediaQuery.matches;
+    const listener = (e) => (this.isMobileSwiper = e.matches);
+    mediaQuery.addListener(listener);
+    this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
 
     setTimeout(() => {
       new Swiper(".mainSlider", {
-        slidesPerView: "auto",
-        spaceBetween: 40,
-        loop: false,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
+        slidesPerView: 4,
+        spaceBetween: 5,
+        loop: true,
+        breakpoints: {
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 2,
+            spaceBetween: 5
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 5,
+            loop: false
+          }
+        }
       });
     }, 1000);
   },
@@ -74,12 +108,10 @@ export default {
 .mainSlider {
   position: relative;
 }
-.swiper-wrapper {
-}
+
 
 .item-slide {
   width: 387px !important;
-  // background-color: #b8b8b8;
 }
 
 .linkToCatalog {
@@ -99,7 +131,6 @@ img {
 }
 
 .mainSlider {
-  // max-width: 834px;
   overflow: hidden;
 }
 
@@ -119,6 +150,12 @@ section {
     color: #685f5f;
   }
 }
-@media (max-width: 1280px) {
+@media screen and (max-width: 768px) {
+  .swiper-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 40px;
+  }
 }
 </style>

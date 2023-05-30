@@ -10,22 +10,25 @@ import AsideColor from "~/components/Filter/AsideColor.vue";
 
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
+import AsideWrapper from "~/components/Filter/AsideWrapper";
+import AsideMobileWrapper from "~/components/Filter/AsideMobileWrapper";
+import SortComponent from "~/components/Filter/SortComponent";
 
 Swiper.use([Navigation, Pagination, Autoplay]);
 
 export default {
   components: {
+    SortComponent,
+    AsideWrapper,
+    AsideMobileWrapper,
     HeaderBlack,
     Item,
-    AsidePrice,
-    AsideColor,
-    AsideCategories,
     BurgerMenu,
     Footer,
-    AsideSize,
   },
   data() {
     return {
+      isMobileMenuShown: false,
       showFilter: false,
       filterLabel: "цене",
       checkedFiltered: "",
@@ -58,6 +61,22 @@ export default {
         path: `/catalog`,
       });
     },
+    declension(quantity) {
+      const lastDigit = quantity % 10;
+
+      if (quantity >= 11 && quantity <= 20) {
+        return 'подходящих товаров'
+      } else {
+        if (lastDigit === 1) {
+          return "подходящий товар";
+        } else if (lastDigit >= 2 && lastDigit <= 4) {
+          return "подходящих товара";
+        } else {
+          return "подходящих товаров";
+        }
+      }
+
+    },
     setCategories(array) {
       this.filters.categories = array;
     },
@@ -84,14 +103,19 @@ export default {
     tags() {
       return this.$store.state.filters.tags;
     },
+    products() {
+      return this.$store.state.filters.products
+    }
   },
-  async asyncData({ $axios, route }) {
-    const products = await $axios.$get(`/site/catalog-list`, {
-      params: route.query,
-    });
-    return { products };
+  async asyncData({route, store }) {
+    await store.dispatch('filters/fetchProducts', route.query)
   },
   async mounted() {
+    const mediaQuery = window.matchMedia("(max-width:1279px)");
+    this.isMobileMenuShown = mediaQuery.matches;
+    const listener = (e) => (this.isMobileMenuShown = e.matches);
+    mediaQuery.addListener(listener);
+    this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
     if (this.$store.getters["catalog/getCategories"].length === 0) {
       await this.$store.dispatch("catalog/fetchCategories");
     }
@@ -120,84 +144,27 @@ export default {
 <template>
   <div class="wrapper">
     <section>
+      <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
-        <aside class="aside">
-          <aside-categories
-            :categories="categories"
-            @filterCategories="setCategories"
-          />
-          <aside-price :products="products" @filterPrice="setPrice" />
-          <aside-color :colors="colors" @filterColors="setColors" />
-          <aside-size :sizes="sizes" @filterSizes="setSizes" />
-          <div class="buttonsFilters">
-            <button
-              @click="
-                $router.push({
-                  path: ``,
-                  query: {
-                    categories: `${$store.state.filters.filters.categories.map(
-                      (o) => o['slug']
-                    )}`,
-                    price: `${$store.state.filters.filters.prices.map(
-                      (o) => o['value']
-                    )}`,
-                    sizes: `${$store.state.filters.filters.sizes.map(
-                      (o) => o['name']
-                    )}`,
-                    colors: `${$store.state.filters.filters.colors.map(
-                      (o) => o['slug']
-                    )}`,
-                  },
-                })
-              "
-              class="filter"
-            >
-              Отсортировать по фильтрам
-            </button>
-            <button
-              class="clearButtonFilters"
-              @click="
-                $store.dispatch('filters/clearFilters');
-                redirectToCatalog();
-              "
-            >
-              Сбросить фильтры
-            </button>
-          </div>
-        </aside>
+        <aside-wrapper :products="this.products" v-if="!isMobileMenuShown"/>
         <div class="items__main">
-          <div class="aic">
-            <p>Найдено {{ products.data.length }} подходящих товаров</p>
-            <!-- <div class="tags">
-              <div class="tagsSwiper">
-                <div class="swiper-wrapper tagsWrapper">
-                  <div class="swiper-slide" v-for="tag in tags" :key="tag.name">
-                    <div class="tag">
-                      <p>{{ tag.name }}</p>
-                      <i @click="deleteTagClickHandler(tag)" class="delete"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          </div>
-          <div class="items">
-              <div
-                v-for="item in this.products.data"
-                :key="item.slug"
-                class="col item"
-              >
-                <item :item="item"> </item>
-              </div>
-
-          </div>
-          <!-- <button
-            @click="loadMore"
-            v-if="currentPage * maxPerPage < this.products.data.length"
-          >
-            Загрузить больше
-          </button> -->
-          <!-- {{ $route.query }} -->
+          <header>
+            <p v-if="this.products.meta.total > 0">Найдено {{this.products.meta.total + ' ' +
+              declension(this.products.meta.total)}}
+            </p>
+            <p v-else>Найдено {{this.products.meta.total + ' ' +
+              declension(this.products.meta.total)}}</p>
+            <sort-component/>
+          </header>
+          <ul class="items">
+            <li
+              v-for="item in this.products.data"
+              :key="item.slug"
+              class="col item"
+            >
+              <item :item="item"></item>
+            </li>
+          </ul>
         </div>
       </main>
     </section>
@@ -205,154 +172,145 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.tagsSwiper {
-  width: 100%;
-  max-width: 100% !important;
-}
-.tagsWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.tags {
-  display: flex;
-  width: 100%;
-  max-width: 735px;
-  overflow: hidden;
-}
-.swiper-slide {
-  width: unset !important;
-}
-.tag {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 14px 12px 20px;
-  border-radius: 50px;
-  background-color: #fff;
-  border: 1px solid #dbd7d2;
-  p {
+
+  .Breadcrumbs {
     width: 100%;
-    font-size: 15px;
   }
+
   .delete {
     display: block;
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
+    width: 11px;
+    height: 11px;
+    margin-right: 9px;
     background: url("assets/img/icons/delete.svg");
     background-size: cover;
-    background-position-y: 1px;
     cursor: pointer;
   }
-}
-.buttonsFilters {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  .clearButtonFilters {
-    background-color: #fff;
-    color: #685f5f;
-    border: 1px solid #685f5f;
-  }
-}
-.Breadcrumbs {
-  width: 100%;
-}
-
-button {
-  // font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  /* identical to box height */
-  cursor: pointer;
-  height: 60px;
-  width: 100%;
-
-  text-align: center;
-  background: #685f5f;
-  border: 2px solid #685f5f;
-  border-radius: 4px;
-  color: white;
-}
-
-.aic {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-  min-height: 32px;
-  gap: 20px;
-  p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-
-    /* средний */
-
-    color: #a9a1a1;
-    // width: 195px;
-  }
-}
-.items__main {
-  width: 100%;
-  max-width: 1296px;
 
   button {
-    margin: 40px auto 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 109px;
-    gap: 10px;
-    width: 410px;
-    height: 64px;
+    // font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+    cursor: pointer;
+    height: 60px;
+    width: 100%;
 
-    /* основной */
-
+    text-align: center;
     background: #685f5f;
+    border: 2px solid #685f5f;
     border-radius: 4px;
-
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-
     color: white;
   }
-}
-.items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  // gap: 17.6px;
-}
-.item:nth-child(3n + 3) {
-  margin-right: 0;
-}
-main {
-  display: flex;
-  justify-content: space-between;
-  gap: 60px;
-  min-height: 55vh;
-  max-width: 1676px;
-  width: 100%;
-  margin: 0 auto;
-}
-aside {
-  max-width: 320px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 45px;
-}
 
-@media (max-width: 1270px) {
- aside{
-   display: none;
- }
-}
+  .aic {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    min-height: 32px;
+    gap: 20px;
+
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+
+      /* средний */
+
+      color: #a9a1a1;
+      // width: 195px;
+    }
+  }
+
+  .items__main {
+    max-width: 1296px;
+    width: 100%;
+    margin: 0 auto;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+
+      p {
+        font-family: 'RF Dewi';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #A9A1A1;
+      }
+
+      select {
+        border-radius: 4px;
+        border: 1px solid lightgrey;
+        padding: 4px 6px 6px;
+      }
+    }
+
+    button {
+      margin: 40px auto 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 109px;
+      gap: 10px;
+      width: 410px;
+      height: 64px;
+
+      /* основной */
+
+      background: #685f5f;
+      border-radius: 4px;
+
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+
+      color: white;
+    }
+  }
+
+  .items {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+
+    li {
+      list-style: none;
+
+    }
+  }
+
+  .item:nth-child(3n + 3) {
+    margin-right: 0;
+  }
+
+  main {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    min-height: 55vh;
+    max-width: 1676px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+
+  @media (max-width: 1024px) {
+    .items__main {
+      width: unset;
+    }
+    .items {
+      width: 100%;
+      margin: 0 auto;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>

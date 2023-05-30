@@ -54,18 +54,6 @@
         }
 
       },
-      setCategories(array) {
-        this.filters.categories = array;
-      },
-      setPrice(array) {
-        this.filters.prices = array;
-      },
-      setColors(array) {
-        this.filters.colors = array;
-      },
-      setSizes(array) {
-        this.filters.sizes = array;
-      },
       sortByChecked(checkedId) {
         this.checkedId = checkedId;
       },
@@ -85,17 +73,14 @@
     computed: {
       tags() {
         return this.$store.state.filters.tags;
+      },
+      products() {
+        return this.$store.state.filters.products
       }
-      ,
-    }
-    ,
-    async asyncData({$axios, route}) {
-      const products = await $axios.$get(`/site/catalog-list`, {
-        params: route.query,
-      });
-      return {products};
-    }
-    ,
+    },
+    async asyncData({route, store}) {
+      await store.dispatch('filters/fetchProducts', route.query)
+    },
     mounted() {
       const mediaQuery = window.matchMedia("(max-width:1279px)");
       this.isMobileMenuShown = mediaQuery.matches;
@@ -129,7 +114,7 @@
     <section>
       <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
-        <aside-wrapper v-if="!isMobileMenuShown"/>
+        <aside-wrapper :products="this.products" v-if="!isMobileMenuShown"/>
         <div class="items__main">
           <header>
             <p v-if="this.products.meta.total > 0">{{this.products.meta.total + ' ' +
@@ -145,14 +130,7 @@
             >
               <item :item="item"></item>
             </li>
-
           </ul>
-          <!-- <button
-            @click="loadMore"
-            v-if="currentPage * maxPerPage < this.products.length"
-          >
-            Загрузить больше
-          </button> -->
         </div>
       </main>
     </section>
@@ -160,17 +138,6 @@
 </template>
 
 <style lang="scss" scoped>
-  .buttonsFilters {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    .clearButtonFilters {
-      background-color: #fff;
-      color: #685f5f;
-      border: 1px solid #685f5f;
-    }
-  }
 
   .Breadcrumbs {
     width: 100%;
@@ -230,12 +197,13 @@
     width: 100%;
     margin: 0 auto;
 
-    header{
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 40px;
-      p{
+
+      p {
         font-family: 'RF Dewi';
         font-style: normal;
         font-weight: 400;
@@ -243,7 +211,8 @@
         line-height: 19px;
         color: #A9A1A1;
       }
-      select{
+
+      select {
         border-radius: 4px;
         border: 1px solid lightgrey;
         padding: 4px 6px 6px;
@@ -299,13 +268,6 @@
     margin: 0 auto;
   }
 
-  aside {
-    max-width: 320px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 45px;
-  }
 
   @media (max-width: 1024px) {
     .items__main {

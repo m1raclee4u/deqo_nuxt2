@@ -159,7 +159,6 @@
   }
 
   .ItemCart {
-    max-width: 387px;
     height: 100%;
     position: relative;
     display: flex;
@@ -167,11 +166,8 @@
     justify-content: space-between;
 
     img {
-      max-width: 420px;
       width: 100%;
-      //min-height: 600px;
       height: auto;
-      max-height: 539px;
       margin-bottom: 10px;
       background-color: #ebebeb;
     }
