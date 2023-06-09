@@ -88,12 +88,9 @@ function ipolWidjetController(setups) {
 		log: function (wat) {
 			if (this.check('log')) {
 				if (typeof (wat) === 'object') {
-					console.log(label + ": ");
 					for (var i in wat) {
-						console.log(i, wat[i]);
 					}
 				} else {
-					console.log(label + ": ", wat);
 				}
 			}
 		},
