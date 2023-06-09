@@ -4,7 +4,7 @@
     <button @click="isAsideFiltersShown = !isAsideFiltersShown"></button>
     <div class="asideFilters" v-if="isAsideFiltersShown">
       <div class="asideWrap">
-        <aside-wrapper/>
+        <aside-wrapper whichStoreUse="filters" pathRedirectFilter="/catalog/filters"/>
         <i @click="isAsideFiltersShown = !isAsideFiltersShown" class="close"></i>
       </div>
       <div @click="isAsideFiltersShown = !isAsideFiltersShown" class="aside_back">

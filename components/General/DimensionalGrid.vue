@@ -1,9 +1,9 @@
 <template>
     <div class="">
-        <div class="wrapperBack" @click="$store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)">
+        <div class="wrapperBack" @click="$store.commit('popups/SET_POPUP_OPENED', !$store.state.dimensionalGrid)">
     </div>
     <div class="popup">
-        
+
         <div class="dimensionalGrid">
             <header>
                 <div class="title">
@@ -22,7 +22,7 @@
                         <p>Обхват талии</p>
                         <p>Обхват бедер</p>
                     </div>
-                    
+
                     <div class="line" v-for="oneSize in sizes" :key="oneSize.size">
                         <p class="size">{{oneSize.size}}</p>
                         <p>{{oneSize.ruSize}}</p>
@@ -31,8 +31,8 @@
                         <p>{{oneSize.hip}}</p>
                     </div>
                 </div>
-                
-            </main>    
+
+            </main>
         </div>
         <div class="productType">
             <div class="sizesModule opened">
@@ -49,12 +49,12 @@
                     <div class="form_radio_btn_size_popup pants">
                         <input name="sizePopup" type="radio" value="pants" v-model="checked" id="sizePopup_3">
                         <label  for="sizePopup_3"></label>
-                    </div>                   
+                    </div>
                     <i :class="{downActive: checkedOpened}" @click="checkedOpenedMethod" class="down"></i>
                 </header>
                 <main class="gridClothes">
                     <div class="lines">
-                        <div class="line header">                            
+                        <div class="line header">
                             <p>INT</p>
                             <P>Обхват груди</P>
                             <p>Обхват талии</p>
@@ -72,7 +72,7 @@
                                     <p>{{oneSize.lenghtSleeve}}</p>
                                     <p>{{oneSize.hip}}</p>
                                 </div>
-                            </div>        
+                            </div>
                             <div v-if="checked === 'hoodie'" class="wrapperLine">
                                 <div class="line"  v-for="oneSize in sizesClothesHoodie" :key="oneSize.size">
                                 <p class="size">{{oneSize.size}}</p>
@@ -82,7 +82,7 @@
                                     <p>{{oneSize.lenghtSleeve}}</p>
                                     <p>{{oneSize.hip}}</p>
                                 </div>
-                            </div>        
+                            </div>
                             <div v-if="checked === 'pants'" class="wrapperLine">
                                 <div class="line"  v-for="oneSize in sizesClothesPants" :key="oneSize.size">
                                     <p class="size">{{oneSize.size}}</p>
@@ -92,9 +92,9 @@
                                     <p>{{oneSize.lenghtSleeve}}</p>
                                     <p>{{oneSize.hip}}</p>
                                 </div>
-                            </div>     
+                            </div>
                         </div>
-                        
+
                     </div>
                 </main>
             </div>
@@ -102,7 +102,7 @@
         <span>Все размеры указаны в сантиметрах.</span>
     </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -115,7 +115,7 @@ export default {
             } else if (this.checkedOpened === false || this.checked != '') {
                 this.checkedOpened = false
                 this.checked = ''
-            } 
+            }
         },
     },
     data() {
@@ -129,7 +129,7 @@ export default {
                     chest: 84,
                     waist: 64,
                     hip: 92,
-                    
+
                 },
                 {
                     size: 'xs',
@@ -137,7 +137,7 @@ export default {
                     chest: 84,
                     waist: 64,
                     hip: 92,
-                    
+
                 },
                 {
                     size: 's',
@@ -145,7 +145,7 @@ export default {
                     chest: 88,
                     waist: 68,
                     hip: 96,
-                    
+
                 },
                 {
                     size: 'm',
@@ -153,7 +153,7 @@ export default {
                     chest: 92,
                     waist: 72,
                     hip: 100,
-                    
+
                 },
                 {
                     size: 'l',
@@ -161,7 +161,7 @@ export default {
                     chest: 96,
                     waist: 76,
                     hip: 104,
-                    
+
                 },
                 {
                     size: 'xl',
@@ -169,7 +169,7 @@ export default {
                     chest: 100,
                     waist: 80,
                     hip: 108,
-                    
+
                 },
                 {
                     size: '2xl',
@@ -177,7 +177,7 @@ export default {
                     chest: 104,
                     waist: 84,
                     hip: 112,
-                    
+
                 },
             ],
             sizesClothesTShirt: [
@@ -187,7 +187,7 @@ export default {
                     waist: 80,
                     lenght: 49,
                     lenghtSleeve: 20,
-                    hip: 88                    
+                    hip: 88
                 },
                 {
                     size: 'xs',
@@ -195,7 +195,7 @@ export default {
                     waist: 84,
                     lenght: 52,
                     lenghtSleeve: 21,
-                    hip: 92                    
+                    hip: 92
                 },
                 {
                     size: 's',
@@ -245,7 +245,7 @@ export default {
                     waist: '-',
                     lenght: 49,
                     lenghtSleeve: 64,
-                    hip: 88                    
+                    hip: 88
                 },
                 {
                     size: 'xs',
@@ -253,7 +253,7 @@ export default {
                     waist: '-',
                     lenght: 52,
                     lenghtSleeve: 65,
-                    hip: 92                    
+                    hip: 92
                 },
                 {
                     size: 's',
@@ -303,7 +303,7 @@ export default {
                     waist: 62,
                     lenght: 52,
                     lenghtSleeve: '-',
-                    hip: 88                    
+                    hip: 88
                 },
                 {
                     size: 'xs',
@@ -311,7 +311,7 @@ export default {
                     waist: 64,
                     lenght: 52,
                     lenghtSleeve: '-',
-                    hip: 92                    
+                    hip: 92
                 },
                 {
                     size: 's',
@@ -380,7 +380,7 @@ export default {
         }
     }
     .popup{
-        overflow-y: scroll; 
+        overflow-y: scroll;
 
         position: fixed;
         top: 100px;
@@ -450,7 +450,7 @@ export default {
                     &:hover{
                         background-image: url('@/assets/img/icons/popup/pants_on.svg');
                     }
-                }            
+                }
                 .downActive{
                     background-image: url('@/assets/img/icons/popup/down_on.svg') !important;
                 }
@@ -472,9 +472,9 @@ export default {
 
                     color: #DBD7D2;
                 }
-            }            
+            }
         }
-        
+
     }
     .dimensionalGrid{
 
@@ -483,7 +483,7 @@ export default {
         align-items: center;
         padding: 60px 60px 0 60px;
         gap: 40px;
-        
+
         // max-height: 680px;
         header{
             display: flex;
@@ -509,22 +509,22 @@ export default {
                 color: #A9A1A1;
             }
         }
-        
+
     }
     main{
         /* W3C standard
         сейчас только для Firefox */
-        
+
         width: 100%;
         // overflow-y: scroll;
-        display: flex;        
+        display: flex;
         .lines{
             width: 100%;
             display: flex;
             flex-direction: column;
             .header{
                 display: flex;
-                align-items: center;                
+                align-items: center;
                 border-top: 2px solid #5B5353;
                 p{
                     color: #A9A1A1 !important;

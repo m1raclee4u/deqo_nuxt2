@@ -1,10 +1,5 @@
 <template>
   <div class="ItemCart">
-    <!--    <selectAdditionalParameter-->
-    <!--      :item="item"-->
-    <!--      @onClosed="resetItem"-->
-    <!--      v-if="$store.state.selectParametrs === true && $route.name === 'favorite'"-->
-    <!--    />-->
     <ButtonFavorite :item="item" inSlider="inSlider"/>
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('@/assets/img/item/' + item.img)" alt="" > -->
@@ -13,7 +8,7 @@
           width="387"
           height="487"
           class="card__img"
-          :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387)"
+          :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 387, fm = 'webp',)"
           alt="item.name"
         />
       </picture>
@@ -54,8 +49,8 @@
       v-if="$route.name === 'favorite'"
       @click="
         $store.commit(
-          'SET_SELECT_PARAMETERS_OPENED',
-          !$store.state.selectParametrs
+          'popups/SET_SELECT_PARAMETERS_OPENED',
+          !$store.state.popups.selectParametrs
         )
       "
     >

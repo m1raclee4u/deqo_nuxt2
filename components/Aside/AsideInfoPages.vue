@@ -2,19 +2,17 @@
   <aside class="aside">
     <h3>{{ currentRouteName }}</h3>
     <ul>
-      <li><button @click="$router.push('/delivery')">Доставка</button></li>
-      <li><button @click="$router.push('/refund')">Обмен и возврат</button></li>
-      <li><button class="todo">Предзаказ</button></li>
-      <li><button class="todo">Бонусная программа</button></li>
-      <li><button class="todo">Оферта</button></li>
-      <li><button class="todo">Политика конфиденциальности</button></li>
-      <li><button class="todo">Пользовательское соглашение</button></li>
+      <li v-for="link in links" :key="link.id"><button @click="$router.push(`${link?.slug}`)">{{link.name}}</button></li>
     </ul>
   </aside>
 </template>
 
 <script>
 export default {
+  props: {
+    links: Array,
+    orderId: String
+  },
   computed: {
     currentRouteName() {
       if (this.$route.name === "cart") {
@@ -27,6 +25,12 @@ export default {
         return "Доставка";
       } else if (this.$route.name === "refund") {
         return "Обмен и возврат";
+      } else if (this.$route.name.includes('edit')) {
+        return "Личные данные"
+      } else if (this.$route.name === 'profile') {
+        return "Мои заказы"
+      } else if (this.$route.name.includes('order')){
+        return `Заказ #${this?.orderId}`
       }
       // return this.$route.name;
     },

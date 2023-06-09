@@ -33,7 +33,6 @@
       async getStylist() {
         if (this.item?.product_content_id) {
           this.stylist = await this.$axios.$get(`stylist/getStylist/${this.item.product_content_id}`)
-          console.log(this.stylist)
         }
       },
       sizeCheckedCallback(size) {
@@ -93,7 +92,7 @@
 
 <template>
   <div class="wrapper">
-    <DimensionalGrid v-if="$store.state.dimensionalGrid != false"/>
+    <DimensionalGrid v-if="$store.state.popups.dimensionalGrid != false"/>
     <section>
       <div class="itemPage">
         <div class="left">
@@ -121,7 +120,7 @@
             <productSizes :sizes="item.sizes" @checkedSizeHandler="sizeCheckedCallback"
                           :highlightedSize="highlightedSize"/>
             <div @click="
-              $store.commit('SET_POPUP_OPENED', !$store.state.dimensionalGrid)
+              $store.commit('popups/SET_POPUP_OPENED', !$store.state.popups.dimensionalGrid)
             " class="sizesPopup">
               <img src="@/assets/img/icons/sizesPopup.svg" alt=""/>
               <p>размерная сетка</p>

@@ -150,6 +150,15 @@ z-index: 1 !important;
   transform: translateX(-30px);
 }
 
+  input.vue-pincode-input {
+    width: 100%;
+    max-width: unset;
+    border-radius: 10px;
+    font-size: 32px;
+    font-weight: 400;
+    height: 100%;
+  }
+
 
 @media (max-width:1900px) {
   .p60{
@@ -165,16 +174,15 @@ z-index: 1 !important;
 }
 
 @media (max-width:1200px) {
-  .p60{
+  .p60 {
     padding: 0 15px;
   }
-}
 
-  section{
+  section {
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
-
+}
 .el-input__inner,
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {

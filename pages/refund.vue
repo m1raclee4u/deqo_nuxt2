@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <Breadcrumbs />
+    <Breadcrumbs/>
     <main class="main">
       <div class="catalog">
-        <AsideInfoPages />
+        <AsideInfoPages :links="asideLinks"/>
         <div class="info">
           <div class="info_bullet">
             <p>
@@ -89,6 +89,43 @@ export default {
   },
   data() {
     return {
+      asideLinks:[
+        {
+          id: 1,
+          name: "Доставка",
+          slug: "/delivery"
+        },
+        {
+          id: 2,
+          name: "Предзаказ",
+          slug: ""
+        },
+        {
+          id: 3,
+          name: "Бонусная программа",
+          slug: ""
+        },
+        {
+          id: 4,
+          name: "Сотрудничество",
+          slug: ""
+        },
+        {
+          id: 5,
+          name: "Оферта",
+          slug: ""
+        },
+        {
+          id: 6,
+          name: "Политика конфиденциальности",
+          slug: ""
+        },
+        {
+          id: 7,
+          name: "Пользовательское соглашение",
+          slug: ""
+        },
+      ],
       showFilter: false,
       filterLabel: "цене",
       productsInCartId: [],
@@ -123,7 +160,7 @@ export default {
   width: 11px;
   height: 11px;
   margin-right: 9px;
-  background: url("../assets/img/icons/delete.svg");
+  background: url("@/assets/img/icons/delete.svg");
   background-size: cover;
   cursor: pointer;
 }

@@ -37,6 +37,13 @@ export default {
     isProductAdded() {
       return this.products.find((p) => p.title === this.item.title);
     },
+    computedItem() {
+      return {
+        product_id: this.item?.product_id || this.item?.id,
+        color_id: this.item.color_id,
+        quantity: 1,
+      };
+    },
   },
   methods: {
     ...mapActions({
@@ -104,7 +111,7 @@ export default {
   background-position: center center;
   background-color: unset;
   background-size: cover;
-  width: 30px;
+  width: 31px;
   height: 30px;
 
   // border-radius: 50%;

@@ -60,7 +60,7 @@ export default {
           <button
             class="burger__menu"
             @click="
-              $store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)
+              $store.commit('popups/SET_MENU_OPENED', !$store.state.popups.burgerMenuOpened)
             "
           >
             <img src="@/assets/img/icons/menu.svg" alt="" />
@@ -104,7 +104,7 @@ export default {
           </Nuxt-link>
           <div
             v-if="!isMobileMenuShown"
-            @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"
+            @click="$store.commit('popups/SET_LOGIN_OPENED', !$store.state.popups.login)"
             class="account"
           ></div>
         </div>
@@ -130,14 +130,14 @@ export default {
         </div>
         <div class="mobile_button">
           <div
-            @click="$store.commit('SET_LOGIN_OPENED', !$store.state.login)"
+            @click="$store.commit('popups/SET_LOGIN_OPENED', !$store.state.popups.login)"
             class="account"
           ></div>
           <p>аккаунт</p>
         </div>
       </div>
     </header>
-    <Login v-if="$store.state.login != false" />
+    <Login v-if="$store.state.popups.login != false" />
   </div>
 </template>
 

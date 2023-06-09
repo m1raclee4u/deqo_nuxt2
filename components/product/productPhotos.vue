@@ -51,7 +51,7 @@ export default {
         >
           <div class="image">
             <img
-              :src="IH.getUrl($axios.defaults.baseURL + `/` + image.path)"
+              :src="IH.getUrl($axios.defaults.baseURL + `/` + image.path, 150,fm = 'webp')"
               alt=""
             />
           </div>
@@ -63,7 +63,7 @@ export default {
         <div class="swiper-slide" v-for="image in images" :key="image.id">
           <div class="image">
             <img
-              :src="IH.getUrl($axios.defaults.baseURL + `/` + image.path, 820)"
+              :src="IH.getUrl($axios.defaults.baseURL + `/` + image.path, 820, fm = 'webp',)"
               alt=""
             />
           </div>
@@ -102,7 +102,7 @@ export default {
   }
 
   .leftSlider {
-    max-height: 180px;
+    /*max-height: 180px;*/
   }
 }
 </style>

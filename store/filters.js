@@ -63,7 +63,6 @@ export const mutations = {
               }
             }
           }
-
         }
       }
     }
@@ -113,9 +112,9 @@ export const actions = {
     await commit('DELETE_TAG', data)
     await commit('SET_TAGS', data)
   },
-  async fetchProducts({commit}, data) {
+  async fetchProducts({commit}, route) {
     const products = await this.$axios.$get(`/site/catalog-list`, {
-      params: data,
+      params: route.query,
     });
     await commit('SET_PRODUCTS', products)
   },

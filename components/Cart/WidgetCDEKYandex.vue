@@ -111,7 +111,6 @@
           this.checkedPVZ = this.pvzs.find(el => el.code === this.checkedPVZCode)
         }
         this.$emit('checkedPVZHandler', this.checkedPVZ)
-        console.log(this.checkedPVZ)
       },
     },
   }

@@ -38,8 +38,6 @@ export default {
     //   document.getElementById("btn").removeEventListener("click", this.handler);
     // },
     // handler() {
-    //   console.log(this.pvz);
-    //   console.log(this.$emit('123', this.pvz))
     // },
   },
   mounted() {

@@ -75,7 +75,7 @@ export default {
         <Nuxt-Link :to="`products/${item.slug}`">
           <img
             class="image"
-            :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 100)"
+            :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image,  100, fm = 'webp',)"
             alt=""
           />
         </Nuxt-Link>

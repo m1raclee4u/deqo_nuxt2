@@ -75,21 +75,19 @@
         return this.$store.state.filters.tags;
       },
       products() {
-        return this.$store.state.filters.products
+        return this.$store.state.collections.products
       }
     },
     async asyncData({route, store}) {
-      await store.dispatch('filters/fetchProducts', route.query)
+      await store.dispatch('collections/fetchProducts', route)
     },
-    mounted() {
+    async mounted() {
       const mediaQuery = window.matchMedia("(max-width:1279px)");
       this.isMobileMenuShown = mediaQuery.matches;
       const listener = (e) => (this.isMobileMenuShown = e.matches);
       mediaQuery.addListener(listener);
       this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
-      if (this.$store.getters["catalog/getProducts"].length === 0) {
-        this.$store.dispatch("catalog/fetchProducts");
-      }
+
       if (this.$store.getters["catalog/getCategories"].length === 0) {
         this.$store.dispatch("catalog/fetchCategories");
       }
@@ -99,14 +97,12 @@
       if (this.$store.getters["catalog/getSizes"].length === 0) {
         this.$store.dispatch("catalog/fetchSizes");
       }
-    }
-    ,
+      setTimeout(() => this.$store.dispatch("filters/setFilters", this.$route.query), 1000);
+    },
     destroyed() {
       this.$store.dispatch("filters/clearFilters");
-    }
-    ,
-  }
-  ;
+    },
+  };
 </script>
 
 <template>
@@ -114,18 +110,19 @@
     <section>
       <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
-        <aside-wrapper whichStoreUse="filters" pathRedirectFilter="/catalog/filters" :products="this.products" v-if="!isMobileMenuShown"/>
+        <aside-wrapper whichStoreUse="collections" :pathRedirectFilter="`/collections/${$route.params.slug}`"
+                       :products="this.products" v-if="!isMobileMenuShown"/>
         <div class="items__main">
           <header>
-            <p v-if="this.products.meta.total > 0">{{this.products.meta.total + ' ' +
-              declension(this.products.meta.total)}}
-            </p>
+            <!--            <p v-if="this.products.meta.total > 0">{{this.products.meta.total + ' ' +-->
+            <!--              declension(this.products.meta.total)}}-->
+            <!--            </p>-->
             <sort-component/>
           </header>
           <ul class="items">
             <li
-              v-for="item in this.products.data"
-              :key="item.slug"
+              v-for="item in this.products"
+              :key="item?.slug"
               class="col item"
             >
               <item :item="item"></item>
@@ -245,8 +242,8 @@
   .items {
     display: grid;
     grid-auto-flow: row;
-    row-gap: 30px;
-    column-gap: 10px;
+    gap: 10px;
+    row-gap: 20px;
     grid-template-columns: repeat(3, 1fr);
 
     li {

@@ -4,9 +4,9 @@
     <ItemsSlider :products="products" title="Bestsellers"/>
     <ItemsSlider :products="products" title="Новинки"/>
     <div class="collections">
-      <div class="collection" v-for="collection in collections">
-        <HeaderSlider :images="collection.slider_images"/>
-        <ItemsSlider :products="products" :title="collection.collection_title"/>
+      <div class="collection wrapper" v-for="collection in collections">
+        <HeaderSlider v-if="collection?.slides.length > 0" :images="collection?.slides"/>
+        <ItemsSlider :collection="collection" :products="collection.products" :title="collection.title"/>
       </div>
     </div>
   </div>
@@ -21,39 +21,6 @@ export default {
   data() {
     return {
       isMainSlider: true,
-      collections: [
-        {
-          collection_id: 1,
-          slider_images: [{
-            id: 1,
-            image: '/new_collection.webp'
-          },],
-          slider_title: 'diego + La Pizza',
-          slider_subtitle: 'dego + La Pizza',
-          collection_title: 'dego + La Pizza',
-          collection_logo: '',
-          link: '',
-          button_text: '',
-          slider_text_position: ''
-        },
-        {
-          collection_id: 2,
-          slider_images: [
-            {
-              id: 1,
-              image: '/new_2.webp'
-            },
-          ],
-          slider_title: 'diego + La Pizza',
-          slider_subtitle: 'dego + La Pizza',
-          collection_title: 'deqo & Louis Vuitton',
-          collection_logo: '',
-          link: '',
-          button_text: '',
-          slider_text_position: ''
-        },
-      ],
-
     }
   },
   components: {
@@ -64,6 +31,9 @@ export default {
     products() {
       return this.$store.getters["catalog/getProducts"];
     },
+    collections(){
+      return this.$store.getters["collections/getCollections"]
+    }
   },
   name: "IndexPage",
   async asyncData({store, $axios}) {
@@ -73,9 +43,11 @@ export default {
     if (store.getters["catalog/getCategories"].length === 0) {
       await store.dispatch("catalog/fetchCategories");
     }
+    if (store.getters["collections/getCollections"].length === 0) {
+      await store.dispatch("collections/fetchCollections");
+    }
     const mainSlider_images = await $axios.$get('/main-slides')
     return {mainSlider_images}
-
   },
 
 };
@@ -87,8 +59,9 @@ export default {
 }
 
 .collections {
-  section {
-    padding: 60px 0;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-bottom: 60px;
 }
 </style>

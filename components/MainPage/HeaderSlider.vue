@@ -2,25 +2,38 @@
   <section>
     <!-- Slider main container -->
 
-    <div v-if="images.length > 0" class="swiper">
+    <div class="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="image in images" class="swiper-slide">
-          <img
-            class="slide"
-            :src="IH.getUrl($axios.defaults.baseURL + `/` + image.image, fm = 'webp', size=1920)"
-
-            alt=""
-          />
+          <div class="info"
+               :class="{
+                topright: image?.position === 'topright',
+                topleft: image?.position === 'topleft',
+                bottomright: image?.position === 'bottomright',
+                bottomleft: image?.position === 'bottomleft',
+                }">
+            <h3>{{image?.title}}</h3>
+            <p>{{image?.sub_title}}</p>
+            <button @click="$router.push(`${image?.link}`)" v-if="image?.link" class="button">
+              {{image?.button_text}}
+            </button>
+          </div>
+          <picture>
+            <source :srcset="IH.getUrl($axios.defaults.baseURL + `/` + image.image, 1920, fm = 'webp')">
+            <img
+              class="slide"
+              :src="IH.getUrl($axios.defaults.baseURL + `/` + image.image, 1920, fm = 'jpg')"
+              alt=""
+            />
+          </picture>
         </div>
-
-
       </div>
     </div>
-    <div  class="wrapper p60">
+    <div class="wrapper p60">
       <div class="flex">
-        <img v-if="isMainSlider"  src="@/assets/img/icons/slogan.svg" alt=""/>
+        <img v-if="isMainSlider" src="@/assets/img/icons/slogan.svg" alt=""/>
         <!-- <main>
           <div class="assortment">
             <Nuxt-Link class="todo" to="/">Мужчинам</Nuxt-Link>
@@ -51,20 +64,24 @@
   import BurgerMenu from "../General/BurgerMenu.vue";
   import Swiper, {Navigation, Pagination, Autoplay} from "swiper";
   import "swiper/swiper-bundle.css";
-  import IH from "~/plugins/imageHelper";
   import ImageHelper from "~/plugins/imageHelper";
 
   Swiper.use([Navigation, Pagination, Autoplay]);
 
   export default {
     data() {
-      return{
+      return {
         IH: new ImageHelper(),
       }
     },
     props: {
       images: Array,
       isMainSlider: Boolean,
+    },
+    computed: {
+      positionInfo() {
+        return this.images.position
+      }
     },
     mounted() {
       new Swiper(".swiper", {
@@ -88,6 +105,64 @@
 </script>
 
 <style lang="scss" scoped>
+  .topright {
+    position: absolute;
+    top: 60px;
+    right: 45px;
+    text-align: right;
+  }
+
+  .topleft {
+    position: absolute;
+    top: 60px;
+    left: 45px;
+  }
+
+  .bottomright {
+    position: absolute;
+    bottom: 60px;
+    right: 45px;
+    text-align: right;
+  }
+
+  .bottomleft {
+    position: absolute;
+    bottom: 60px;
+    left: 45px;
+  }
+
+  .info {
+    position: absolute;
+    z-index: 10;
+    color: white;
+    width: 40%;
+
+    h3 {
+      font-size: 80px;
+      font-weight: 400;
+      margin-bottom: 20px !important;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 130%;
+      margin-bottom: 20px !important;
+    }
+
+    button {
+      border-color: white;
+      background-color: transparent;
+      max-width: 50%;
+      color: white;
+
+      &:hover {
+        background-color: #fff;
+        color: black;
+      }
+    }
+
+  }
+
   .flex {
     display: flex;
     flex-direction: column;

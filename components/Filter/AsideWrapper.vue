@@ -35,7 +35,11 @@
   export default {
     name: "AsideWrapper",
     props: {
-      products: Object,
+      products: {
+
+      },
+      pathRedirectFilter: String,
+      whichStoreUse: String,
     },
     data() {
       return {
@@ -58,12 +62,13 @@
           )}`,
         };
         this.$router.push({
-          path: `/catalog/filters`,
+          path: this.pathRedirectFilter,
           query: routerQuery
         })
         this.isDataFetched = false
-        await this.$store.dispatch('filters/fetchProducts', routerQuery)
+        setTimeout(() => this.$store.dispatch(`${this.whichStoreUse}/fetchProducts`, this.$route), 1000);
         this.isDataFetched = true
+
       },
 
       setCategories(array) {

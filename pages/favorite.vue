@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false" />
+      <BurgerMenu v-if="$store.state.popups.burgerMenuOpened != false" />
     </Transition>
     <Breadcrumbs />
     <main class="main">
@@ -13,26 +13,7 @@
         а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
       </p>
       <div v-if="$store.state.favorites.products.length > 0" class="catalog">
-        <aside class="aside">
-          <h3>Избранное</h3>
-          <ul>
-            <li>
-              <button><Nuxt-link to="#">Список заказов</Nuxt-link></button>
-            </li>
-            <li>
-              <button><Nuxt-link to="#">Личные данные</Nuxt-link></button>
-            </li>
-            <li>
-              <button><Nuxt-link to="#">Избранное</Nuxt-link></button>
-            </li>
-            <li>
-              <button><Nuxt-link to="#">Подписки</Nuxt-link></button>
-            </li>
-            <li>
-              <button><Nuxt-link to="#">Выйти</Nuxt-link></button>
-            </li>
-          </ul>
-        </aside>
+        <AsideInfoPages :links="asideLinks"/>
         <div class="items__main">
           <div class="aic">
             <p>{{ $store.state.favorites.products.length }} товаров</p>
@@ -71,9 +52,11 @@ import BurgerMenu from "~/components/General/BurgerMenu.vue";
 import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
 import Footer from "~/components/General/Footer.vue";
 import ButtonCart from "~/components/Buttons/ButtonCart.vue";
+import AsideInfoPages from "~/components/Aside/AsideInfoPages";
 
 export default {
   components: {
+    AsideInfoPages,
     HeaderBlack,
     Item,
     BurgerMenu,
@@ -83,6 +66,28 @@ export default {
   },
   data() {
     return {
+      asideLinks:[
+        {
+          id: 1,
+          name: "Личные данные",
+          slug: "/profile/edit"
+        },
+        {
+          id: 2,
+          name: "Мои заказы",
+          slug: "/profile"
+        },
+        {
+          id: 3,
+          name: "Подписки",
+          slug: ""
+        },
+        {
+          id: 4,
+          name: "Выйти",
+          slug: ""
+        },
+      ],
       showFilter: false,
       filterLabel: "цене",
       productsInCartId: [],
@@ -117,7 +122,7 @@ export default {
   width: 11px;
   height: 11px;
   margin-right: 9px;
-  background: url("../assets/img/icons/delete.svg");
+  background: url("@/assets/img/icons/delete.svg");
   background-size: cover;
   cursor: pointer;
 }

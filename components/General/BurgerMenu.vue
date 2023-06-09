@@ -22,8 +22,8 @@
                 ><p
                   @click="
                     $store.commit(
-                      'SET_MENU_OPENED',
-                      !$store.state.burgerMenuOpened
+                      'popups/SET_MENU_OPENED',
+                      !$store.state.popUps.burgerMenuOpened
                     )
                   "
                 >
@@ -48,7 +48,7 @@
         <Nuxt-Link to="/delivery"
           ><p
             @click="
-              $store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)
+              $store.commit('popups/SET_MENU_OPENED', !$store.state.popups.burgerMenuOpened)
             "
           >
             Оплата и доставка
@@ -57,7 +57,7 @@
         <Nuxt-Link to="/refund"
           ><p
             @click="
-              $store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)
+              $store.commit('popups/SET_MENU_OPENED', !$store.state.popups.burgerMenuOpened)
             "
           >
             Обмен и возврат
@@ -70,7 +70,7 @@
     </div>
     <div
       class="menu"
-      @click="$store.commit('SET_MENU_OPENED', !$store.state.burgerMenuOpened)"
+      @click="$store.commit('popups/SET_MENU_OPENED', !$store.state.popups.burgerMenuOpened)"
     ></div>
   </div>
 </template>

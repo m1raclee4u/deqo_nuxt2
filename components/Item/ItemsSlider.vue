@@ -5,7 +5,8 @@
       <!--      <div v-for="slide in this.splitArray" class="asd">-->
 <!--        {{slide}}-->
 <!--      </div>-->
-      <Nuxt-Link class="linkToCatalog" to="/catalog">смотреть все</Nuxt-Link>
+      <Nuxt-Link v-if="this.collection" class="linkToCatalog" :to="`collections/${collection.slug}`">смотреть все</Nuxt-Link>
+      <Nuxt-Link v-else class="linkToCatalog" to="/catalog">смотреть все</Nuxt-Link>
     </div>
     <div class="mainSlider">
       <!-- Additional required wrapper -->
@@ -46,6 +47,7 @@ Swiper.use([Navigation, Pagination, Autoplay]);
 
 export default {
   props: {
+    collection: Object,
     title: {
       type: String,
     },
@@ -77,9 +79,9 @@ export default {
 
     setTimeout(() => {
       new Swiper(".mainSlider", {
-        slidesPerView: 4,
+        slidesPerView: 'auto',
         spaceBetween: 5,
-        loop: true,
+        loop: false,
         breakpoints: {
           // when window width is >= 320px
           320: {

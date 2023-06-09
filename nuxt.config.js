@@ -63,7 +63,7 @@ export default {
       ...(isDev && {
         mode: 'debug'
       }),
-      localStorage: ['favorites', 'cart'] //  If not entered, “localStorage” is the default value
+      localStorage: ['favorites', 'cart', 'profile'] //  If not entered, “localStorage” is the default value
     }]
   ],
   // Build Configuration: https://go.nuxtjs.dev/config-build

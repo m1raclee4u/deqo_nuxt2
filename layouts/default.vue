@@ -2,7 +2,7 @@
   <div>
     <HeaderBlack/>
     <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.burgerMenuOpened != false"/>
+      <BurgerMenu v-if="$store.state.popups.burgerMenuOpened != false"/>
     </Transition>
     <Nuxt/>
     <Footer/>

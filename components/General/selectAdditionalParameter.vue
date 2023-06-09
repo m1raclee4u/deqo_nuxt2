@@ -4,8 +4,8 @@
       class="login"
       @click="
         $store.commit(
-          'SET_SELECT_PARAMETERS_OPENED',
-          !$store.state.selectParametrs
+          'popups/SET_SELECT_PARAMETERS_OPENED',
+          !$store.state.popups.selectParametrs
         )
       "
     ></div>

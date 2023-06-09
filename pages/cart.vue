@@ -141,7 +141,6 @@ export default {
         params: {
           products: this.getProducts,
         },
-        // localStorage.getItem('cart')
       });
     }
     const mediaQueryCart = window.matchMedia("(max-width:1024px)");
@@ -165,7 +164,6 @@ export default {
           delivery_type: this.cartForm.deliveryType,
       })
       window.open(order.data.order.payment_link)
-      console.log(order)
     },
     onButtonClickBuyMethod() {
       this.createOrder()
@@ -257,7 +255,7 @@ export default {
   width: 11px;
   height: 11px;
   margin-right: 9px;
-  background: url("../assets/img/icons/delete.svg");
+  background: url("@/assets/img/icons/delete.svg");
   background-size: cover;
   cursor: pointer;
 }

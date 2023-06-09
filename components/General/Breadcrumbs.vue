@@ -2,7 +2,10 @@
   <div class="breadcrumbs">
     <Nuxt-Link :to="`/`">Главная</Nuxt-Link>
     <img src="@/assets/img/icons/breadcrumbsIcon.svg" alt="" />
-    <Nuxt-Link :to="`#`">{{ currentRouteName }}</Nuxt-Link>
+    <Nuxt-Link :to="``">{{ currentRouteName }}</Nuxt-Link>
+    <img v-if="isExist" src="@/assets/img/icons/breadcrumbsIcon.svg" alt="" />
+    <Nuxt-Link v-if="isExist" :to="``">{{ isExist }}</Nuxt-Link>
+
   </div>
 </template>
 
@@ -12,6 +15,13 @@ export default {
     return {};
   },
   computed: {
+    isExist() {
+      if (this.$route.name.includes('profile') && this.$route.name.includes('edit')) {
+        return "Личные данные"
+      } else {
+        return false
+      }
+    },
     currentRouteName() {
       if (this.$route.name === "cart") {
         return "Корзина";
@@ -23,6 +33,8 @@ export default {
         return "Доставка";
       } else if (this.$route.name === "refund") {
         return "Обмен и возврат";
+      } else if (this.$route.name.includes('profile')) {
+        return "Личный кабинет"
       }
       // return this.$route.name;
     },

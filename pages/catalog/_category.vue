@@ -116,6 +116,7 @@ export default {
     const listener = (e) => (this.isMobileMenuShown = e.matches);
     mediaQuery.addListener(listener);
     this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
+
     if (this.$store.getters["catalog/getCategories"].length === 0) {
       await this.$store.dispatch("catalog/fetchCategories");
     }
@@ -146,7 +147,7 @@ export default {
     <section>
       <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
-        <aside-wrapper :products="this.products" v-if="!isMobileMenuShown"/>
+        <aside-wrapper whichStoreUse="filters" pathRedirectFilter="/catalog/filters" :products="products" v-if="!isMobileMenuShown"/>
         <div class="items__main">
           <header>
             <p v-if="this.products.meta.total > 0">Найдено {{this.products.meta.total + ' ' +
