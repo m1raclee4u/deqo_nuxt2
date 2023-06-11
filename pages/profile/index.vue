@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper">
-    <Breadcrumbs />
+    <Breadcrumbs/>
     <main class="main">
       <div class="catalog">
         <AsideInfoPages :links="asideLinks"/>
         <div class="info">
-            <div class="orders">
-              <profileOrder v-for="order in orders.orders" :order="order"/>
-            </div>
+          <div class="orders">
+            <profileOrder v-for="order in $store.getters['orders/getOrders']" :order="order"/>
+          </div>
         </div>
-        <AsideHelp />
+        <AsideHelp/>
       </div>
     </main>
   </div>
@@ -25,13 +25,12 @@
       Breadcrumbs,
       AsideInfoPages
     },
-    async asyncData({$axios}) {
-      const orders = await $axios.$get(`/orders?limit=4`)
-      return {orders}
+    async asyncData({store}) {
+      await store.dispatch('orders/fetchOrders')
     },
     data() {
       return {
-        asideLinks:[
+        asideLinks: [
           {
             id: 1,
             name: "Личные данные",
@@ -59,51 +58,44 @@
 </script>
 
 <style lang="scss" scoped>
-  .orders{
-    display: grid;
-    grid-template-rows: repeat(1, 1fr);
+  .orders {
+    display: flex;
+    flex-direction: column-reverse;
     gap: 20px;
-    .order{
-      max-width: 780px;
-      width: 100%;
-      max-height: 260px;
-      height: 100%;
 
-      padding: 33px 40px;
-
+    .left {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      max-width: 420px;
+      width: 100%;
 
-      background-color: #F0EFEF;
-      .left{
+      .text-info {
         display: flex;
-        flex-direction: column;
-        max-width: 420px;
-        width: 100%;
-        .text-info{
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          margin-bottom: 13px;
-        }
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 13px;
       }
-      .right{
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-        width: 100%;
-        max-width: 220px;
-        .number{
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
+    }
+
+    .right {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 220px;
+
+      .number {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
     }
   }
+
   .wrapper {
     gap: 50px;
   }
+
   .delete {
     display: block;
     flex-shrink: 0;
@@ -114,6 +106,7 @@
     background-size: cover;
     cursor: pointer;
   }
+
   button {
     display: flex;
     align-items: center;
@@ -130,6 +123,7 @@
     margin-bottom: 40px;
     min-height: 32px;
     gap: 20px;
+
     p {
       font-style: normal;
       font-weight: 400;
@@ -142,6 +136,7 @@
       // width: 195px;
     }
   }
+
   .items__main {
     width: 100%;
 
@@ -167,15 +162,18 @@
       color: white;
     }
   }
+
   .items {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
     // gap: 17.6px;
   }
+
   .item:nth-child(3n + 3) {
     margin-right: 0;
   }
+
   main {
     display: flex;
     flex-direction: column;
@@ -185,24 +183,28 @@
     margin: 0 auto;
     width: 100%;
     min-height: 55vh;
+
     .favoriteBlank {
       width: 100%;
       text-align: center;
       font-size: 20px;
       line-height: 24px;
       color: #685f5f;
+
       a {
         font-size: 20px;
         line-height: 24px;
         color: #685f5f;
       }
     }
+
     .catalog {
       display: flex;
       // justify-content: space-between;
       gap: 50px;
     }
   }
+
   .info {
     display: flex;
     flex-direction: column;
@@ -210,6 +212,7 @@
     max-width: 780px;
     width: 100%;
     margin-bottom: 50px;
+
     span {
       font-weight: 400;
       font-size: 16px;
@@ -219,32 +222,38 @@
 
       color: #a9a1a1;
     }
+
     .info_bullet {
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
+
     h5 {
       font-weight: 600;
       font-size: 24px;
       line-height: 43px;
       color: #685f5f;
     }
+
     font-size: 18px;
     font-weight: 400;
     line-height: 32px;
     color: #685f5f;
   }
+
   ul {
     margin: 0;
     padding: 0;
     list-style: none;
   }
+
   ul li {
     position: relative;
     padding-left: 16px;
     margin-left: 12px;
   }
+
   ul li::before {
     content: "";
     position: absolute;
@@ -257,9 +266,11 @@
     border-radius: 50%;
     background-color: #8bd74b;
   }
+
   ul li:not(:last-child) {
     margin-bottom: 8px;
   }
+
   ul li::before {
     background-color: #a9a1a1;
   }

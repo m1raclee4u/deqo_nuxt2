@@ -162,6 +162,7 @@ export default {
           cart: JSON.stringify(this.getProducts),
           comment: this.cartForm.comment,
           delivery_type: this.cartForm.deliveryType,
+          pvz_code: this.cartForm.pvz_code
       })
       window.open(order.data.order.payment_link)
     },

@@ -1,19 +1,20 @@
+<script src="../../../deco_admin/store/orders.js"></script>
 <template>
   <div class="order">
     <div class="left">
       <div class="text-info">
-        <h4>{{order.status}}</h4>
+        <h4>{{status}}</h4>
         <p>предполагаемая дата доставки <br> — 28.12.2022</p>
       </div>
-      <div class="cart" v-for="item in order.cart">
-        <img :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image.path, 100, fm = 'webp')" alt="">
+      <div class="cart">
+        <img v-for="item in order.cart" :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 100, fm = 'webp')" alt="">
       </div>
     </div>
     <div class="right">
       <div class="info-wrapper gap10">
         <div class="number">
           <p>№ заказа</p>
-          <p>{{order.id}</p>
+          <p>{{order.id}}</p>
         </div>
         <div class="date">
           <p>дата заказа</p>
@@ -21,7 +22,7 @@
         </div>
       </div>
       <div class="info-wrapper gap10">
-        <button class="button top">Отменить</button>
+        <button @click="cancelOrder" class="button top">Отменить</button>
         <button @click="$router.push(`/profile/order/${order.uuid}`)" class="button bottom">Посмотреть</button>
       </div>
 
@@ -38,16 +39,28 @@
     props: {
       order: Object
     },
+    methods: {
+      async cancelOrder() {
+        await this.$axios.$put(`/orders/${this.order.id}`, {
+          status: "CANCELLED"
+        })
+        await this.$store.dispatch('orders/fetchOrders')
+      }
+    },
     computed: {
       date() {
         return moment(this.order.created_at).utc().format('DD.MM.YYYY')
+      },
+      status(){
+        const statusObject = this.$store.state.orders.statuses.filter(status => status.key === this.order.status)
+        return statusObject[0].name
       }
     },
     data() {
       return {
         IH: new ImageHelper(),
       }
-    }
+    },
   }
 </script>
 
@@ -55,7 +68,6 @@
   .order {
     max-width: 780px;
     width: 100%;
-    max-height: 260px;
     height: 100%;
 
     padding: 33px 40px;
@@ -71,6 +83,15 @@
       flex-direction: column;
       max-width: 420px;
       width: 100%;
+
+      .cart{
+        display: flex;
+        flex-wrap: wrap;
+        img{
+          margin-right: 10px;
+          margin-bottom: 5px;
+        }
+      }
 
       .text-info {
         display: flex;
@@ -94,6 +115,7 @@
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       gap: 25px;
+      max-height: 210px;
       width: 100%;
       max-width: 220px;
 

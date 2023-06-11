@@ -15,6 +15,7 @@
           cartTel: "",
           cartAddress: "",
           deliveryType: "delivery",
+          pvz_code: "",
           paymentMethod: "creditCard",
           comment: "",
         },
@@ -24,18 +25,10 @@
       checkedPVZSetter(value) {
         this.checkedPVZ = value;
         this.cartForm.cartAddress = value.location.address;
+        this.cartForm.pvz_code = value.code
       },
       checkFilled() {
-        let emptyInputs = 0;
-        for (const [key, value] of Object.entries(this.cartForm)) {
-          if (value === "" && key != "comment") {
-            emptyInputs++;
-          }
-        }
-        if (emptyInputs === 0) {
-          this.$emit("emitAllFieldsAreFilled");
           this.$emit("cartFormGetter", this.cartForm);
-        } else if (emptyInputs > 0) this.$emit("emitAllFieldsNotFilled");
       },
       setAddress(value) {
         this.cartForm.cartAddress = value;
@@ -105,7 +98,7 @@
       </div>
       <div v-if="cartForm.deliveryType === 'PVZ'" class="input">
         <label>Пункт СДЭК *</label>
-        <div class="button"><p v-if="checkedPVZ">{{checkedPVZ.code + ', ' + checkedPVZ.location.address}}</p>
+        <div class="button"><p v-if="checkedPVZ">{{checkedPVZ.location.address}}</p>
           <p v-else>Не выбрано</p></div>
       </div>
       <div v-if="cartForm.deliveryType === 'POSTAMAT'" class="input">

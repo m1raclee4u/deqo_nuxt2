@@ -11,7 +11,7 @@
 export default {
   props: {
     links: Array,
-    orderId: String
+    orderId: Number
   },
   computed: {
     currentRouteName() {

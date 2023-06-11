@@ -5,15 +5,103 @@
       <div class="catalog">
         <AsideInfoPages :orderId="order.id" :links="asideLinks"/>
         <div class="order_info">
-          <div class="first block">
+          <div class="block">
             <header>
               <h3>
                 Спасибо за ваш заказ!
               </h3>
-              <hr>
+            </header>
+            <div class="block_info">
+              <aside>
+                <div class="aside__info">
+                  <p>№ заказа</p>
+                  <p>{{order.id}}</p>
+                </div>
+                <div class="aside__info">
+                  <p>дата заказа</p>
+                  <p>{{date}}</p>
+                </div>
+                <div class="aside__info">
+                  <p>сумма заказа</p>
+                  <p>{{order.amount}} ₽</p>
+                </div>
+                <div class="aside__info">
+                  <p>предполагаемая дата заказа</p>
+                  <p>{{'todo'}}</p>
+                </div>
+              </aside>
+              <div class="block_info-buttons">
+                <div class="block_info-buttons-status">
+                  <p class="block_info-buttons-status__subtitle">статус заказа</p>
+                  <h4>{{status}}</h4>
+                </div>
+                <div @click="cancelOrder" class="block_info-buttons__button">
+                  отменить
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="block">
+            <header>
+              <h3>
+                Подробности доставки
+              </h3>
+            </header>
+            <div class="block_info second">
+              <aside class="aside">
+                <div class="aside-info delivery_type">
+                  <p class="aside-info__title">Способ доставки</p>
+                  <div class="aside-info-delivery_type">
+                    <p class="aside-info-delivery_type__info">{{order?.delivery_type || 'Не выбран'}}</p>
+                    <p class="aside-info-delivery_type__info">{{date}}</p>
+                  </div>
+                </div>
+                <div class="aside-info">
+                  <p class="aside-info__title">Контактная информация</p>
+                  <p>{{order.name}}</p>
+                  <p>{{order.phone}}</p>
+                </div>
+              </aside>
+              <div class="second_info">
+                <div class="address info">
+                  <p class="address__title">Адрес доставки</p>
+                  <p>{{order.address}}</p>
+                </div>
+                <div v-if="order?.cdek_info" class="phone-email info">
+                  <div class="phone">
+                    <b>Тел.:</b>
+                    <div class="phones">
+                      <a v-for="phone in order.cdek_info.phones" :href="'tel:'+phone.number"><p>{{phone.number}}</p></a>
+                    </div>
+                  </div>
+                  <p class="email"><b>Эл почта.: </b>{{order.cdek_info.email}}</p>
+                </div>
+                <div v-if="order?.cdek_info" class="worktime">
+                  <p><b>Режим работы:</b></p>
+                  <p>{{order.cdek_info.work_time}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="third block">
+            <header>
+              <h3>
+                Содержимое заказа
+              </h3>
+            </header>
+            <div class="item-wrapper">
+              <item v-for="item in order.cart" :item="item"/>
+            </div>
+          </div>
+          <div class="fourth block">
+            <header>
+              <h3>
+                Детали оплаты
+              </h3>
             </header>
           </div>
         </div>
+
         <AsideHelp/>
       </div>
     </main>
@@ -24,15 +112,35 @@
   import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
   import AsideInfoPages from "~/components/Aside/AsideInfoPages";
   import profileOrder from "~/components/Profile/profileOrder";
+  import moment from "moment";
+  import Item from "~/components/Item/Item";
 
   export default {
     components: {
+      Item,
       Breadcrumbs,
       AsideInfoPages
     },
     async asyncData({$axios, route}) {
       const order = await $axios.$get(`/orders/getByUUID/${route.params.uuid}`)
       return {order}
+    },
+    methods: {
+      async cancelOrder() {
+        await this.$axios.$put(`/orders/${this.order.id}`, {
+          status: "CANCELLED"
+        })
+        this.$nuxt.refresh()
+      }
+    },
+    computed: {
+      date() {
+        return moment(this.order.created_at).utc().format('DD.MM.YYYY')
+      },
+      status(){
+        const statusObject = this.$store.state.orders.statuses.filter(status => status.key === this.order.status)
+        return statusObject[0].name
+      }
     },
     data() {
       return {
@@ -64,18 +172,179 @@
 </script>
 
 <style lang="scss" scoped>
+  .second {
+    gap: 60px;
+  }
+
+  .delivery_type {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #DBD7D2;
+    margin-bottom: 10px;
+  }
+
+  .block_info {
+    .second_info {
+      .info {
+        margin-bottom: 16px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 19px;
+      }
+
+      .phone-email {
+        .phone{
+          .phones{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+          }
+          a{
+            text-decoration: none;
+            color: #685F5F;
+          ;
+          }
+          display: flex;
+          align-items: center;
+          b {
+            margin-right: 10px;
+          }
+        }
+        .email {
+          b {
+            text-decoration: none;
+          }
+
+          text-decoration: underline;
+        }
+      }
+
+      .address {
+        .address__title {
+          font-size: 18px;
+          line-height: 21px;
+          color: #A9A1A1;
+          margin-bottom: 10px !important;
+        }
+      }
+    }
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .aside {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      align-items: flex-start;
+    }
+
+    .aside-info {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+
+      p {
+        font-size: 16px;
+        line-height: 19px;
+        color: #685F5F;
+      }
+
+      .aside-info__title {
+        font-size: 18px;
+        line-height: 21px;
+        color: #A9A1A1;
+      }
+
+      .aside-info-delivery_type {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .block_info-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+
+      .block_info-buttons__button {
+        font-size: 18px;
+        line-height: 21px;
+        color: #A9A1A1;
+        border: 2px solid #A9A1A1;
+        border-radius: 4px;
+        padding: 8px 26px;
+        max-width: 150px;
+        text-align: center;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .block_info-buttons-status {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+
+        .block_info-buttons-status__subtitle {
+          margin-right: 20px !important;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 21px;
+          color: #A9A1A1;
+        }
+
+        h4 {
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 23px;
+          text-align: center;
+          padding: 8px 26px;
+          width: 100%;
+          max-width: 150px;
+          color: #4A4444;
+          background: #DBD7D2;
+          border-radius: 4px;
+        }
+      }
+    }
+
+    aside {
+      display: grid;
+      grid-template-rows: repeat(1, 1fr);
+      gap: 4px;
+
+      .aside__info {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 10px;
+        background: #E7E5E4;
+        border-radius: 4px;
+
+        p {
+          max-width: 200px;
+          font-size: 18px;
+          line-height: 21px;
+        }
+      }
+    }
+  }
+  .item-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 5px;
+  }
   .block {
     padding: 24px 40px;
 
     max-width: 780px;
-    height: 292px;
 
     background: #F0EFEF;
     border-radius: 4px;
-  }
-
-  .first {
-    width: 100%;
 
     header {
       h3 {
@@ -85,9 +354,15 @@
 
         color: #4A4444;
       }
+
       padding-bottom: 20px;
+      margin-bottom: 30px;
       border-bottom: 1px solid #DBD7D2;
     }
+  }
+
+  .first {
+    width: 100%;
   }
 
 
