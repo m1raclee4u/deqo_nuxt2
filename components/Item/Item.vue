@@ -1,6 +1,6 @@
 <template>
   <div class="ItemCart">
-    <ButtonFavorite :item="item" inSlider="inSlider"/>
+    <ButtonFavorite v-if="!inCart" :item="item" inSlider="inSlider"/>
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('@/assets/img/item/' + item.img)" alt="" > -->
       <picture>
