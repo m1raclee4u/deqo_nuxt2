@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Breadcrumbs/>
+    <Breadcrumbs :isCartPage="true"/>
     <main class="main">
       <div class="title">
         <transition name="component-fade" mode="out-in">

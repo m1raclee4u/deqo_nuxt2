@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumbs">
+  <div class="breadcrumbs" :class="{cart: isCartPage}">
     <Nuxt-Link :to="`/`">Главная</Nuxt-Link>
     <img src="@/assets/img/icons/breadcrumbsIcon.svg" alt="" />
     <Nuxt-Link :to="``">{{ currentRouteName }}</Nuxt-Link>
@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  props: {
+    isCartPage: Boolean
+  },
   data() {
     return {};
   },
@@ -69,14 +72,14 @@ export default {
 }
 
 @media (max-width:1472px) {
-  .breadcrumbs {
+  .cart {
     max-width: 960px;
 
     padding: 0 30px;
   }
 }
 @media (max-width: 640px) {
-  .breadcrumbs{
+  .cart{
     padding: 0 10px;
   }
 }

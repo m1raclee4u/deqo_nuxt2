@@ -1,14 +1,17 @@
 <template>
   <aside class="aside">
     <h3>{{ currentRouteName }}</h3>
-    <ul>
+    <ul v-if="">
       <li v-for="link in links" :key="link.id"><button @click="$router.push(`${link?.slug}`)">{{link.name}}</button></li>
     </ul>
+    <aside-help class="asideHelp"/>
   </aside>
 </template>
 
 <script>
+import AsideHelp from "~/components/Aside/AsideHelp";
 export default {
+  components: {AsideHelp},
   props: {
     links: Array,
     orderId: Number
@@ -39,6 +42,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.asideHelp{
+  display: none;
+}
 aside {
   width: 270px;
   text-align: center;
@@ -80,6 +86,18 @@ aside {
       text-align: left;
       list-style-type: none;
       text-decoration: none;
+    }
+  }
+}
+
+@media (max-width:1472px) {
+  .asideHelp {
+    display: flex !important;
+    align-items: flex-start;
+  }
+  .help{
+    span{
+      text-align: left;
     }
   }
 }
