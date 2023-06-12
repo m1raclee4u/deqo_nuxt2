@@ -27,7 +27,12 @@
         </div>
       </div>
       <div class="info-wrapper gap10">
-        <button @click="cancelOrder" class="button top">Отменить</button>
+        <button v-if="order.status === 'CREATED' && order.status !== 'CANCELLED'" @click="payForOrder" class="button top">
+          Оплатить
+        </button>
+        <button v-if="order.status !== 'CREATED' && order.status !== 'CANCELLED'" @click="cancelOrder" class="button top">
+          Отменить
+        </button>
         <button @click="$router.push(`/profile/order/${order.uuid}`)" class="button bottom">Посмотреть</button>
       </div>
 
@@ -50,6 +55,9 @@ export default {
         status: "CANCELLED"
       })
       await this.$store.dispatch('orders/fetchOrders')
+    },
+    payForOrder() {
+      window.open(this.order.payment_link)
     }
   },
   computed: {

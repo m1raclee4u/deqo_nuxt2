@@ -35,7 +35,10 @@
                   <p class="block_info-buttons-status__subtitle">статус заказа</p>
                   <h4>{{status}}</h4>
                 </div>
-                <div @click="cancelOrder" class="block_info-buttons__button">
+                <div v-if="order.status === 'CREATED' && order.status !== 'CANCELLED'" @click="payForOrder" class="block_info-buttons__button">
+                  оплатить
+                </div>
+                <div v-if="order.status !== 'CREATED' && order.status !== 'CANCELLED'" @click="cancelOrder" class="block_info-buttons__button">
                   отменить
                 </div>
               </div>
@@ -131,6 +134,9 @@
           status: "CANCELLED"
         })
         this.$nuxt.refresh()
+      },
+      payForOrder() {
+        window.open(this.order.payment_link)
       }
     },
     computed: {
