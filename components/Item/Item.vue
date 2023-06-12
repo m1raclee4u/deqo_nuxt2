@@ -24,10 +24,20 @@
         <p class="title">{{ item.title }}</p>
         <!--        <p class="quantity">осталось {{ 3 }} шт.</p>-->
       </div>
-      <div class="ItemCart__price">
+      <div class="ItemCart__price" :style="{justifyContent: inCart ? 'space-between' : 'unset'}">
         <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
-        <p>{{ item.price }} ₽</p>
-        <div class="flex colors">
+        <div class="price">
+          <p>{{ item.price }} ₽</p>
+          <p class="old">{{ item?.old_price }} ₽</p>
+        </div>
+        <div class="ItemCart__price color-size">
+          <div v-if="inCart" :style="{
+            backgroundColor: item?.color?.value,
+            border: item?.color?.name === 'Белый' ? `1px solid lightgrey` : `none`,
+          }" class="input_color_1"></div>
+          <div v-if="inCart" class="size" :id="item?.size">{{ item?.size?.name }}</div>
+        </div>
+        <div v-if="!inCart" class="flex colors">
           <div
             class="input_color_1"
             :id="color.id"
@@ -75,6 +85,7 @@
         type: Object,
         required: true,
       },
+      inCart: Boolean,
       inSlider: {},
     },
     data() {
@@ -87,6 +98,22 @@
 </script>
 
 <style lang="scss" scoped>
+  .size {
+    width: 30px;
+    height: 30px;
+    background: #B5AFAE;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    /* identical to box height */
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    color: #ffffff;
+  }
+
   button {
     margin: 20px auto 0 auto;
     justify-content: center;
@@ -194,7 +221,12 @@
   .ItemCart__price {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
+    .price{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
     p {
       font-style: normal;
@@ -208,8 +240,10 @@
     }
 
     .old {
-      color: grey;
-      text-decoration: line-through;
+      font-size: 14px;
+      line-height: 16px;
+      text-decoration-line: line-through;
+      color: #B5AFAE;
     }
   }
 

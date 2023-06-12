@@ -90,7 +90,7 @@
               </h3>
             </header>
             <div class="item-wrapper">
-              <item v-for="item in order.cart" :item="item"/>
+              <item v-for="item in order.cart" :inCart="true" :item="item"/>
             </div>
           </div>
           <div class="fourth block">
@@ -340,7 +340,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 20px;
-    column-gap: 5px;
+    column-gap: 10px;
   }
   .block {
     padding: 24px 40px;
