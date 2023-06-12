@@ -28,7 +28,7 @@
         <!-- <p class="old">{{item.priceOld}} ₽ </p> -->
         <div class="price">
           <p>{{ item.price }} ₽</p>
-          <p class="old">{{ item?.old_price }} ₽</p>
+          <p v-if="item?.old_price" class="old">{{ item?.old_price }} ₽</p>
         </div>
         <div class="ItemCart__price color-size">
           <div v-if="inCart" :style="{
