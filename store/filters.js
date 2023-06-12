@@ -1,6 +1,12 @@
 // function for Mock API
 const sleep = m => new Promise(r => setTimeout(r, m))
 
+export const getters = () => ({
+  getDeliveryTypes: (state) => {
+    return state.deliveryTypes
+  }
+})
+
 export const state = () => ({
   filters: {
     categories: [],
@@ -8,6 +14,20 @@ export const state = () => ({
     colors: [],
     sizes: [],
   },
+  deliveryTypes: [
+    {
+      'key':'delivery',
+      'name': 'Доставка курьером'
+    },
+    {
+      'key':'PVZ',
+      'name': 'Пункт выдачи СДЭК'
+    },
+    {
+      'key':'POSTAMAT',
+      'name': 'Постамат СДЭК'
+    },
+  ],
   tags: [],
   products: []
 

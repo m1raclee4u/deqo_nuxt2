@@ -7,9 +7,9 @@
       </div>
       <div class="cart">
         <div class="item" v-for="(item, index) in cart">
-          <p v-if="order.cart.length > 4 && index === cart.length -1">+{{ order.cart.length - cart.length }}</p>
+          <p @click="$router.push(`/profile/order/${order.uuid}`)" v-if="order.cart.length > 4 && index === cart.length -1">+{{ order.cart.length - cart.length }}</p>
           <div class="image">
-            <div v-if="order.cart.length > 4 && index === cart.length - 1" class="blur"></div>
+            <div @click="$router.push(`/profile/order/${order.uuid}`)" v-if="order.cart.length > 4 && index === cart.length - 1" class="blur"></div>
             <img :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 100, fm = 'webp')" alt="">
           </div>
         </div>
@@ -99,13 +99,15 @@ export default {
       position: relative;
       p {
         position: absolute;
-        top: 50px;
-        left: 5px;
-        width: 100%;
-        height: 100%;
-        font-size: 80px;
+        top: 36px;
+        left: 21px;
+        width: 54px;
+        height: 56px;
+        font-size: 56px;
+        line-height: 56px;
         z-index: 1;
         color: white;
+        cursor: pointer;
       }
     }
     .cart {
@@ -124,6 +126,7 @@ export default {
         height: 145px;
         border-radius: 4px;
         margin-right: 5px;
+        cursor: pointer;
         .blur{
           background-color: black;
           width: 100%;

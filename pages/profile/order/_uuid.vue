@@ -52,7 +52,7 @@
                 <div class="aside-info delivery_type">
                   <p class="aside-info__title">Способ доставки</p>
                   <div class="aside-info-delivery_type">
-                    <p class="aside-info-delivery_type__info">{{order?.delivery_type || 'Не выбран'}}</p>
+                    <p class="aside-info-delivery_type__info">{{delivery || 'Не выбран'}}</p>
                     <p class="aside-info-delivery_type__info">{{date}}</p>
                   </div>
                 </div>
@@ -140,6 +140,10 @@
       status(){
         const statusObject = this.$store.state.orders.statuses.filter(status => status.key === this.order.status)
         return statusObject[0].name
+      },
+      delivery(){
+        const deliveryType = this.$store.state.filters.deliveryTypes.filter(deliveryType => deliveryType.key === this.order.delivery_type)
+        return deliveryType[0].name
       }
     },
     data() {
