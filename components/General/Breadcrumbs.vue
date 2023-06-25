@@ -38,6 +38,8 @@ export default {
         return "Обмен и возврат";
       } else if (this.$route.name.includes('profile')) {
         return "Личный кабинет"
+      } else if (this.$route.name.includes('search')) {
+        return "Поиск"
       }
       // return this.$route.name;
     },
@@ -53,6 +55,7 @@ export default {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 32px;
 
   a {
     text-decoration: none;
@@ -78,7 +81,15 @@ export default {
     padding: 0 30px;
   }
 }
+@media (max-width: 1165px) {
+  .breadcrumbs{
+    padding: 0 24px;
+  }
+}
 @media (max-width: 640px) {
+  .breadcrumbs{
+    padding: 0 10px;
+  }
   .cart{
     padding: 0 10px;
   }

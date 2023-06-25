@@ -14,7 +14,7 @@
       </picture>
 
       <div v-if="item.badge_bestseller" class="tag">
-        <p>ХИТ</p>
+        <span>ХИТ</span>
       </div>
 
       <!-- {{item}} -->
@@ -163,20 +163,21 @@
 
   .tag {
     position: absolute;
-    width: 58px;
-    height: 58px;
-    left: 14px;
-    top: 14px;
+    width: 42px;
+    height: 42px;
+    left: 9px;
+    top: 9px;
     border-radius: 50%;
     border: 1px solid #685f5f;
     text-align: center;
     line-height: 100%;
 
-    p {
+    span {
       position: absolute;
-      top: 17px;
-      left: 13px;
+      top: 10.5px;
+      left: 8px;
       color: #685f5f;
+      font-size: 12px !important;
     }
   }
 
@@ -222,7 +223,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    .price{
+
+    .price {
       display: flex;
       gap: 10px;
       align-items: center;
@@ -247,4 +249,57 @@
     }
   }
 
+  @media (max-width: 480px) {
+
+    .tag {
+      width: 30px;
+      height: 30px;
+      span {
+        font-size: 10px !important;
+        top: 5.5px;
+        left: 5px;
+      }
+    }
+
+    .input_color_1 {
+      width: 12px;
+      height: 12px;
+    }
+
+    .ItemCart {
+      img {
+        margin-bottom: 5px;
+      }
+
+      .top {
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 14px !important;
+        line-height: 130% !important;
+      }
+    }
+    .colors {
+      gap: 5px;
+    }
+    .ItemCart__price {
+      .price {
+        gap: 5px;
+      }
+    }
+  }
+
+  @media (max-width: 380px) {
+    .input_color_1 {
+      width: 10px;
+      height: 10px;
+    }
+    .ItemCart {
+      p {
+        font-size: 10px !important;
+        line-height: 130% !important;
+      }
+    }
+  }
 </style>

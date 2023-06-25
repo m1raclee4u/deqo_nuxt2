@@ -1,6 +1,6 @@
 <template>
   <div class="sort-input">
-    <p>Сортировть по</p>
+    <p>Сортировать по</p>
     <el-select v-model="value" placeholder="Select">
       <el-option
         v-for="item in options"
@@ -50,5 +50,17 @@
 
   select {
     font-weight: 600;
+  }
+
+  @media (max-width: 480px) {
+    .sort-input{
+      width: 100%;
+      justify-content: space-between;
+      p{
+        width: 120px;
+        font-size: 14px;
+      }
+    }
+
   }
 </style>

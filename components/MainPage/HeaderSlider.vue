@@ -105,6 +105,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .swiper-wrapper {
+  }
+
   .topright {
     position: absolute;
     top: 60px;
@@ -138,22 +141,25 @@
     width: 40%;
 
     h3 {
-      font-size: 80px;
+      font-size: 4vw;
       font-weight: 400;
-      margin-bottom: 20px !important;
+      margin-bottom: 0.7vw !important;
     }
 
     p {
-      font-size: 20px;
+      font-size: 1.5vw;
       line-height: 130%;
-      margin-bottom: 20px !important;
+      margin-bottom: 2vw !important;
     }
 
     button {
       border-color: white;
       background-color: transparent;
       max-width: 50%;
+      height: 5vw;
       color: white;
+      font-size: 1.5vw;
+
 
       &:hover {
         background-color: #fff;
@@ -287,7 +293,57 @@
       // margin: 0 -32px !important;
       // padding: 0 32px !important;
     }
+  }
 
+  @media (max-width: 640px) {
+    .wrapper{
+      height: calc(100vh - 50px);
+    }
+    .swiper {
+      height: calc(100vh - 50px);
+    }
+  }
+
+  @media screen and (orientation: portrait) {
+    .info {
+      padding: 0 10px;
+      position: absolute;
+      z-index: 10;
+      color: white;
+      width: 100%;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      text-align: center !important;
+      bottom: 10vw !important;
+
+      h3 {
+        font-size: 10vw;
+        font-weight: 400;
+        margin-bottom: 2vw !important;
+      }
+
+      p {
+        font-size: 3vw;
+        line-height: 130%;
+        margin-bottom: 6vw !important;
+      }
+
+      button {
+        border-color: white;
+        background-color: transparent;
+        max-width: 50%;
+        height: 9vw;
+        color: white;
+        font-size: 3vw;
+
+
+        &:hover {
+          background-color: #fff;
+          color: black;
+        }
+      }
+    }
   }
 </style>
 

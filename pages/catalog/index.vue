@@ -6,9 +6,11 @@
   import AsideMobileWrapper from "~/components/Filter/AsideMobileWrapper";
   import SortComponent from "~/components/Filter/SortComponent";
   import AsideWrapper from "~/components/Filter/AsideWrapper";
+  import Breadcrumbs from "~/components/General/Breadcrumbs";
 
   export default {
     components: {
+      Breadcrumbs,
       SortComponent,
       AsideWrapper,
       AsideMobileWrapper,
@@ -111,10 +113,12 @@
 
 <template>
   <div class="wrapper">
+    <breadcrumbs/>
     <section>
       <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
-        <aside-wrapper whichStoreUse="filters" pathRedirectFilter="/catalog/filters" :products="this.products" v-if="!isMobileMenuShown"/>
+        <aside-wrapper whichStoreUse="filters" pathRedirectFilter="/catalog/filters" :products="this.products"
+                       v-if="!isMobileMenuShown"/>
         <div class="items__main">
           <header>
             <p v-if="this.products.meta.total > 0">{{this.products.meta.total + ' ' +
@@ -269,7 +273,6 @@
     margin: 0 auto;
   }
 
-
   @media (max-width: 1024px) {
     .items__main {
       width: unset;
@@ -280,4 +283,23 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
+
+  @media (max-width: 480px) {
+    .items {
+      row-gap: 15px;
+      column-gap: 3px;
+    }
+    .items__main {
+      width: unset;
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+    }
+  }
+
+
 </style>

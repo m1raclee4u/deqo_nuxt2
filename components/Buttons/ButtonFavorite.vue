@@ -120,4 +120,14 @@ export default {
     background-image: url("@/assets/img/icons/heart_on.svg");
   }
 }
+  @media (max-width: 480px) {
+    .buttonFavorite{
+      top: 15.5px;
+      right: 9px;
+    }
+    .like{
+      width: 21px;
+      height: 20px;
+    }
+  }
 </style>

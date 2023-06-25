@@ -2,21 +2,19 @@
   <section>
     <div class="jcsb">
       <h2>{{ title }}</h2>
-      <!--      <div v-for="slide in this.splitArray" class="asd">-->
-<!--        {{slide}}-->
-<!--      </div>-->
       <Nuxt-Link v-if="this.collection" class="linkToCatalog" :to="`collections/${collection.slug}`">смотреть все</Nuxt-Link>
       <Nuxt-Link v-else class="linkToCatalog" to="/catalog">смотреть все</Nuxt-Link>
     </div>
-    <div class="mainSlider">
+    <div :class="{mainSlider: products.length > 3}">
       <!-- Additional required wrapper -->
       <div v-if="!isMobileSwiper" class="swiper-wrapper">
           <div
-            v-for="item in this.products"
+            v-for="item in products"
             :key="item.slug"
             class="swiper-slide item-slide"
+
           >
-            <item :item="item" inSlider="inSlider" :key="item.id"> </item>
+            <item :item="item" inSlider="inSlider" :key="item.id"></item>
           </div>
 
       </div>
@@ -24,7 +22,8 @@
           <div
             v-for="array in this.splitArray"
             :key="array.id"
-            class="swiper-slide item-slide"
+            class="swiper-slide"
+            :class="{moreThan4: products.length > 3, 'item-slide': products.length < 4}"
           >
             <div v-for="item in array" class="items">
               <item :item="item" inSlider="inSlider" :key="item.id"> </item>
@@ -83,20 +82,8 @@ export default {
         spaceBetween: 5,
         loop: false,
         breakpoints: {
-          // when window width is >= 320px
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          // when window width is >= 480px
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 5
-          },
-          // when window width is >= 640px
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 5,
+          768: {
+            slidesPerView: 1,
             loop: false
           }
         }
@@ -152,12 +139,35 @@ section {
     color: #685f5f;
   }
 }
+.moreThan4{
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-row-gap: 20px;
+
+}
+@media (max-width: 1200px) {
+  section {
+    gap: 45px;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    gap: 30px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .swiper-wrapper {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-row-gap: 40px;
+    display: flex;
+    .item-slide{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-row-gap: 20px;
+      width: 100% !important;
+    }
   }
 }
 </style>

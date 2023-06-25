@@ -204,6 +204,10 @@
 </template>
 
 <style lang="scss" scoped>
+  section {
+    margin: 0 auto;
+    max-width: 1676px;
+  }
 
   .modelSize {
     text-transform: uppercase;
@@ -412,15 +416,16 @@
       height: 40px !important;
     }
 
-    display: flex;
-    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 935px 435px;
+    /*max-width: 1400px;*/
     margin: 0 auto;
     // margin-top: 110px;
     // gap: 150px;
     // padding-top: 110px;
     gap: 44px;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
 
     .left {
       position: relative;
@@ -435,8 +440,6 @@
         // height: 900px;
         border: 1px solid #a9a1a1;
       }
-
-      max-width: 980px;
 
       p {
         font-weight: 400;

@@ -18,7 +18,9 @@
         <PincodeInput v-if="isPhoneRequest" class="input-wrapper"
                       v-model="code"
         />
-        <button v-if="!isPhoneRequest" :disabled="inputPhoneModel.length !== 18" @click="phoneRequest" class="button next">Далее</button>
+        <button v-if="!isPhoneRequest" :disabled="inputPhoneModel.length !== 18" @click="phoneRequest"
+                class="button next">Далее
+        </button>
         <p>войти через электронную почту</p>
       </div>
     </div>
@@ -30,7 +32,8 @@
 
   export default {
     watch: {
-      code(value){
+
+      code(value) {
         console.log(value)
         if (value === '2222') {
           this.$store.commit('popups/SET_LOGIN_OPENED', !this.$store.state.popups.login)
@@ -65,6 +68,7 @@
         if (this.$route.name === "index") return false;
         else return true;
       },
+
     },
   };
 </script>
@@ -73,7 +77,6 @@
   div.vue-pincode-input-wrapper {
     // any styles you want for wrapper
   }
-
 
 
   .input-wrapper {
@@ -109,7 +112,7 @@
       padding: 18px 20px;
       font-weight: 600;
       font-size: 24px;
-      line-height: 130%;
+      /*line-height: 130%;*/
       /* identical to box height */
       border: 1px solid #685f5f;
       border-radius: 4px;
@@ -165,6 +168,13 @@
       font-size: 24px;
       line-height: 28px;
       color: #685f5f;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .loginPopUp {
+      width: calc(100% - 10px);
+      padding: 60px 10px
     }
   }
 </style>

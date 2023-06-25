@@ -20,7 +20,7 @@ export default {
         slidesPerView: 4,
         spaceBetween: 10,
         direction: "vertical",
-        freeMode: true,
+        // freeMode: true,
         watchSlidesProgress: true,
       });
       new Swiper(".bigSlider", {
@@ -75,9 +75,12 @@ export default {
 
 <style lang="scss" scoped>
 .productPhotos {
-  display: flex;
+  display: grid;
+  grid-template-columns: 150px 1fr;
   gap: 20px;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
   max-height: 900px;
 }
 .thumbsSlider .swiper-slide-active {
@@ -86,8 +89,8 @@ export default {
 
 .bigSlider {
   width: 100%;
-  height: 100%;
   max-width: 820px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -96,13 +99,18 @@ export default {
   box-sizing: border-box;
   .swiper-slide {
     max-width: 150px;
+    max-height: 218px;
     opacity: 0.4;
     width: 100%;
-    height: 25%;
   }
+}
 
-  .leftSlider {
-    /*max-height: 180px;*/
+@media all and (max-width: 1534px){
+  .thumbsSlider{
+    display: none !important;
+  }
+  .productPhotos {
+    grid-template-columns: 1fr;
   }
 }
 </style>

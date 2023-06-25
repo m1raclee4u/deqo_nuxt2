@@ -1,29 +1,38 @@
-  /*reset*/
-  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6,
-  p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-  em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b,
-  u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
-  caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
-  embed, figure, figcaption, footer, header, menu, nav, output, ruby, section,
-  summary, time, mark, audio, video, * {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%;font-family: 'RF Dewi'; box-sizing: border-box;}
+/*reset*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+embed, figure, figcaption, footer, header, menu, nav, output, ruby, section,
+summary, time, mark, audio, video, * {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font-family: 'RF Dewi';
+  box-sizing: border-box;
+  transition: 0.5s all;
+}
 
-  h1, h2, h3, h4, h5, h6,p {
-    margin: 0 !important;
-  }
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0 !important;
+}
 
-.flex{
+.flex {
   display: flex;
 }
 
-.gap10{
+.gap10 {
   gap: 10px;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-.button{
+.button {
   font-size: 20px;
   line-height: 24px;
 
@@ -39,50 +48,60 @@ button{
 .jcsb {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   background-color: white !important;
 }
 
-.p60{
+.p60 {
   padding: 0 60px;
 }
 
-#green{
+#green {
   background-color: green;
 }
-#black{
+
+#black {
   background-color: black;
 }
-#blue{
+
+#blue {
   background-color: blue;
 }
-#red{
+
+#red {
   background-color: red;
 }
-#white{
+
+#white {
   background-color: white;
   border: 1px solid #adb5bd;
 
 }
-#brown{
+
+#brown {
   background-color: brown;
 }
-#yellow{
+
+#yellow {
   background-color: yellow;
 }
-#orange{
+
+#orange {
   background-color: orange;
 }
-#lightblue{
+
+#lightblue {
   background-color: lightblue;
 }
-#pink{
+
+#pink {
   background-color: pink;
 }
 
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   gap: 60px;
@@ -92,20 +111,22 @@ button{
 
 /*select*/
 
-  .el-input__suffix {
-    right: 15px !important;
-  }
+.el-input__suffix {
+  right: 5px !important;
+}
 
-  .el-input--suffix {
-    border: none !important;
-    color: black !important;
-    padding: 0 10px !important;
-    font-weight: bold !important;
-  }
-  .el-input--suffix .el-input__inner {
-    padding-right: 15px !important;
-    font-size: 16px;
-  }
+.el-input--suffix {
+  border: none !important;
+  color: black !important;
+  padding: 0 0 0 10px !important;
+  font-weight: bold !important;
+}
+
+.el-input--suffix .el-input__inner {
+  padding-right: 30px !important;
+  padding-left: 10px !important;
+  font-size: 16px;
+}
 
 
 /*
@@ -126,73 +147,105 @@ button{
   opacity: 0;
 }
 
-.swiper-button-prev, .swiper-button-next{
-z-index: 1 !important;
+.swiper-button-prev, .swiper-button-next {
+  z-index: 1 !important;
 }
 
 .component-fade-enter-active, .component-fade-leave-active {
   transition: opacity .5s ease;
 }
+
 .component-fade-enter, .component-fade-leave-to
-/* .component-fade-leave-active до версии 2.1.8 */ {
+  /* .component-fade-leave-active до версии 2.1.8 */
+{
   opacity: 0;
 }
+
 .list-item {
   display: inline-block;
   margin-right: 10px;
 }
+
 .list-enter-active,
 .list-leave-active {
   transition: all .5s;
 }
-.list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+
+.list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */
+{
   opacity: 0;
   transform: translateX(-30px);
 }
 
-  input.vue-pincode-input {
-    width: 100%;
-    max-width: unset;
-    border-radius: 10px;
-    font-size: 32px;
-    font-weight: 400;
-    height: 100%;
-  }
+input.vue-pincode-input {
+  width: 100%;
+  max-width: unset;
+  border-radius: 10px;
+  font-size: 32px;
+  font-weight: 400;
+  height: 100%;
+}
 
 
-@media (max-width:1900px) {
-  .p60{
+@media (max-width: 1900px) {
+  .p60 {
     padding: 0 30px;
   }
-  section{
+
+  section {
     padding-left: 32px !important;
     padding-right: 32px !important;
   }
-  .wrapper{
+
+  .wrapper {
     /* padding: 0 32px; */
   }
 }
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
   .p60 {
     padding: 0 15px;
   }
-
+  .wrapper{
+    gap: 45px;
+  }
   section {
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
 }
-.el-input__inner,
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none !important;
-        margin: 0 !important;
-    }
 
-    .todo{
-      /* padding: 5px; */
-      /* box-sizing: border-box; */
-      border: 1px solid red !important;
-    }
+@media (max-width: 640px) {
+  .wrapper{
+    gap: 30px;
+  }
+  section {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .el-input--suffix .el-input__inner {
+    font-size: 14px;
+  }
+  .wrapper{
+    gap: 30px;
+    margin-top: 90px;
+    margin-bottom: 40px;
+  }
+}
+
+.el-input__inner,
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+.todo {
+  /* padding: 5px; */
+  /* box-sizing: border-box; */
+  border: 1px solid red !important;
+}
 
