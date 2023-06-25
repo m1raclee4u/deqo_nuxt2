@@ -115,17 +115,24 @@ button {
   right: 5px !important;
 }
 
-.el-input--suffix {
+.el-input--suffix{
+  display: flex !important;
+}
+
+.el-input__suffix {
   border: none !important;
   color: black !important;
-  padding: 0 0 0 10px !important;
+  padding: 0 !important;
   font-weight: bold !important;
+  position: relative !important;
 }
 
 .el-input--suffix .el-input__inner {
-  padding-right: 30px !important;
-  padding-left: 10px !important;
+  border: none;
+  padding: 0!important;
   font-size: 16px;
+  font-weight: bold;
+
 }
 
 

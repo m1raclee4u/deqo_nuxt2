@@ -1,7 +1,7 @@
 <template>
   <div class="sort-input">
     <p>Сортировать по</p>
-    <el-select v-model="value" placeholder="Select">
+    <el-select id="inputSort" v-model="value" placeholder="Select">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -43,7 +43,7 @@
     height: 40px;
 
     p {
-      /*width: 100%;*/
+      margin-right: 6px !important;
       font-size: 16px;
     }
   }
@@ -52,12 +52,11 @@
     font-weight: 600;
   }
 
-  @media (max-width: 480px) {
-    .sort-input{
-      width: 100%;
-      justify-content: space-between;
-      p{
-        width: 120px;
+  @media (max-width: 640px) {
+    .sort-input {
+      line-height: 40px;
+
+      p {
         font-size: 14px;
       }
     }

@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <Breadcrumbs/>
+    <Breadcrumbs style="padding: 0;"/>
+
     <main class="main">
       <div class="catalog">
         <AsideInfoPages :links="asideLinks"/>

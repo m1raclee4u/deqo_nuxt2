@@ -19,6 +19,13 @@
         }
       }
     },
+    updated() {
+      const mobileMenu = document.querySelector('.mobileMenu')
+
+      if (this.isMobileMenuShown) {
+        // mobileMenu.style.bottom = '0'
+      }
+    },
     mounted() {
       const mediaQuery = window.matchMedia("(max-width:640px)");
       this.isMobileMenuShown = mediaQuery.matches;
@@ -121,34 +128,7 @@
           ></div>
         </div>
       </div>
-      <div v-if="isMobileMenuShown" class="mobileMenu buttons">
-        <div class="mobile_button">
-          <Nuxt-link to="/" class="home"></Nuxt-link>
-          <p>главная</p>
-        </div>
-        <div class="mobile_button">
-          <Nuxt-link to="/favorite" class="favorite"></Nuxt-link>
-          <p>вишлист</p>
-        </div>
-        <div class="mobile_button">
-          <Nuxt-link to="/cart" class="cart">
-
-              <span class="cartCounter" v-if="getProducts.length > 0">
-                {{ getProducts.length }}
-              </span>
-
-          </Nuxt-link>
-          <p>корзина</p>
-        </div>
-        <div class="mobile_button">
-          <div
-            @click="$store.commit('popups/SET_LOGIN_OPENED', !$store.state.popups.login)"
-            class="account"
-          ></div>
-          <p>аккаунт</p>
-        </div>
-      </div>
-    </header>
+      </header>
     <Login v-if="$store.state.popups.login != false"/>
   </div>
 </template>
@@ -156,9 +136,10 @@
 
 <style lang="scss" scoped>
   .mobileMenu {
-    position: fixed;
+    position: sticky;
     z-index: 100;
-    bottom: 0;
+    flex-basis: 100%;
+    top: calc(100vh - 50px);
     left: 0;
     right: 0;
     margin: 0 auto;

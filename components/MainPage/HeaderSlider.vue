@@ -1,13 +1,12 @@
 <template>
   <section>
     <!-- Slider main container -->
-
     <div class="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
         <div v-for="image in images" class="swiper-slide">
-          <div class="info"
+          <div v-if="!$route.path.includes('collections')" class="info"
                :class="{
                 topright: image?.position === 'topright',
                 topleft: image?.position === 'topleft',

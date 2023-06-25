@@ -7,6 +7,7 @@
   import SortComponent from "~/components/Filter/SortComponent";
   import AsideWrapper from "~/components/Filter/AsideWrapper";
 
+
   export default {
     components: {
       SortComponent,
@@ -76,6 +77,11 @@
       },
       products() {
         return this.$store.state.collections.products
+      },
+      collectionSlider() {
+        const collections = this.$store.getters["collections/getCollections"]
+        const slides = collections.filter(el => el.slug === this.$route.params.slug)
+        return slides[0]
       }
     },
     async asyncData({route, store}) {
@@ -108,15 +114,14 @@
 <template>
   <div class="wrapper">
     <section>
-      <aside-mobile-wrapper v-if="isMobileMenuShown"/>
       <main class="main">
         <aside-wrapper whichStoreUse="collections" :pathRedirectFilter="`/collections/${$route.params.slug}`"
                        :products="this.products" v-if="!isMobileMenuShown"/>
         <div class="items__main">
           <header>
-            <!--            <p v-if="this.products.meta.total > 0">{{this.products.meta.total + ' ' +-->
-            <!--              declension(this.products.meta.total)}}-->
-            <!--            </p>-->
+            <p style="line-height: 16px">
+              Коллекция {{collectionSlider.title}}
+            </p>
             <sort-component/>
           </header>
           <ul class="items">
@@ -275,6 +280,16 @@
       width: 100%;
       margin: 0 auto;
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .items__main{
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
     }
   }
 </style>
