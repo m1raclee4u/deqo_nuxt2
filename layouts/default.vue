@@ -6,7 +6,7 @@
     </Transition>
     <Nuxt/>
     <Footer/>
-    <div class="mobileMenu buttons">
+    <div v-if="isMobileMenuShown" class="mobileMenu buttons">
       <div class="mobile_button">
         <Nuxt-link to="/" class="home"></Nuxt-link>
         <p>главная</p>
@@ -43,6 +43,18 @@
 
   export default {
     name: "default.vue",
+    data(){
+      return{
+        isMobileMenuShown: false
+      }
+    },
+    mounted() {
+      const mediaQuery = window.matchMedia("(max-width:640px)");
+      this.isMobileMenuShown = mediaQuery.matches;
+      const listener = (e) => (this.isMobileMenuShown = e.matches);
+      mediaQuery.addListener(listener);
+      this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
+    },
     components: {
       Footer,
       BurgerMenu,
