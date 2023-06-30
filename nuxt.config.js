@@ -31,13 +31,13 @@ export default {
     '~/assets/css/main.css',
     '~/assets/css/fonts.css',
     'element-ui/lib/theme-chalk/index.css',
-    '~/assets/css/app.css',
+    '~/assets/css/app.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/v-mask.js',
+    '@/plugins/v-mask',
     { src: '~/plugins/ymapPlugin.js',  mode: 'client' }
   ],
   runtimeCompiler: true,
@@ -47,26 +47,27 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-  axios: {
-    baseURL: process.env.baseURL
-  },
   publicRuntimeConfig: {
     baseURL: process.env.baseURL
   },
   env: {
     apiKey: process.env.yaAPIKey
   },
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
     ['nuxt-vuex-localstorage', {
       ...(isDev && {
         mode: 'debug'
       }),
-      localStorage: ['favorites', 'cart', 'profile', 'collections'] //  If not entered, “localStorage” is the default value
+      localStorage: ['favorites', 'cart', 'profile'] //  If not entered, “localStorage” is the default value
     }]
   ],
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  axios: {
+    baseURL: process.env.baseURL
+  },
+  router: {
+    middleware: ['auth']
+  },
   build: {
   }
 }

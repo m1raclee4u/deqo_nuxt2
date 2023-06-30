@@ -1,75 +1,17 @@
 <template>
-  <div class="popup" :class="{ margin: isItemPage }">
+  <div class="popup">
     <div
       class="login"
       @click="
         $store.commit(
           'popups/SET_SELECT_PARAMETERS_OPENED',
-          !$store.state.popups.selectParametrs
+          !$store.state.popups.selectSize
         )
       "
     ></div>
     <div class="loginPopUp">
-      <h3>Выберите размер и цвет</h3>
-      <div class="check">
-        <div class="size">
-          <p>Размер</p>
-          <div class="sizes flex">
-            <div
-              class="form_radio_btn"
-              v-for="size in this.sizes"
-              :key="size.id"
-            >
-              <input
-                name="size"
-                type="radio"
-                :value="size"
-                v-model="sizeChecked"
-                :id="size"
-              />
-              <label
-                :class="{ highlightedSizeClass: highlightedSize }"
-                :id="size"
-                :for="size"
-                >{{ size }}</label
-              >
-            </div>
-          </div>
-        </div>
-        <div class="color">
-          <p>
-            Цвет <span v-if="colorChecked != ''">: {{ colorChecked.name }}</span>
-          </p>
-          <div class="flex colors">
-            <div
-              class="form_radio_btn_color"
-              v-for="color in this.colors"
-              :key="color.id"
-            >
-              <input
-                name="color"
-                type="radio"
-                :value="color"
-                v-model="colorChecked"
-                :id="color.id"
-              />
-              <label
-                :class="{ highlightedColorClass: highlightedColor }"
-                :id="color.id"
-                :for="color.id"
-              ></label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <ButtonCart
-        @highlightedSize="highlightedSizeMethod"
-        @highlightedColor="highlightedColorMethod"
-        :colorChecked="colorChecked"
-        :sizeChecked="sizeChecked"
-        :item="itemComputedPopUp"
-      />
-      <!-- <p>{{ itemComputedPopUp }}</p> -->
+      <h3>Выберите размер</h3>
+      <product-sizes @checkedSizeHandler="checkedSizeSetter" :sizes="this.item.sizes"/>
     </div>
   </div>
 </template>
@@ -87,41 +29,17 @@ export default {
     return {
       highlightedSize: false,
       highlightedColor: false,
-      colorChecked: "",
       sizeChecked: "",
       sizes: ["os", "xs", "s", "m", "l", "xl", "2xl"],
-      colors: [
-        {
-          id: "white",
-          name: "Белый",
-        },
-        {
-          id: "black",
-          name: "Черный",
-        },
-        {
-          id: "red",
-          name: "Красный",
-        },
-        {
-          id: "blue",
-          name: "Синий",
-        },
-        {
-          id: "lightblue",
-          name: "Голубой",
-        },
-        {
-          id: "green",
-          name: "Зеленоватый",
-        },
-      ],
     };
   },
   beforeDestroy() {
     this.$emit("onClosed");
   },
   methods: {
+    checkedSizeSetter(){
+
+    },
     sizeCheck() {
     //   this.$set(this.itemComputedPopUp, "size", this.sizeChecked);
     },
@@ -139,13 +57,7 @@ export default {
     ButtonCart,
   },
   computed: {
-    itemComputedPopUp() {
-      return JSON.parse(JSON.stringify(this.item));
-    },
-    isItemPage() {
-      if (this.$route.name === "index") return false;
-      else return true;
-    },
+
   },
 };
 </script>
@@ -223,9 +135,7 @@ export default {
   // gap: 10px;
   align-items: center;
 }
-.margin {
-  margin-top: -110px;
-}
+
 .buttons {
   display: flex;
   flex-direction: column;

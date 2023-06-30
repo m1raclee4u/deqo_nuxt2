@@ -123,7 +123,7 @@
           </Nuxt-link>
           <div
             v-if="!isMobileMenuShown"
-            @click="$store.commit('popups/SET_LOGIN_OPENED', !$store.state.popups.login)"
+            @click="$router.push('/user')"
             class="account"
           ></div>
         </div>

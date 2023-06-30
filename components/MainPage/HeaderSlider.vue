@@ -104,6 +104,13 @@
 </script>
 
 <style lang="scss" scoped>
+
+  .flex{
+    img{
+      //filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 1));
+    }
+  }
+
   .swiper-wrapper {
   }
 
@@ -138,6 +145,7 @@
     z-index: 10;
     color: white;
     width: 40%;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.33);
 
     h3 {
       font-size: 4vw;
@@ -158,6 +166,7 @@
       height: 5vw;
       color: white;
       font-size: 1.5vw;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.33);
 
 
       &:hover {

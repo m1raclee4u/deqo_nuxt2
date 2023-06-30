@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Breadcrumbs/>
+    <Breadcrumbs style="padding: 0;"/>
     <main class="main">
       <div class="catalog">
         <AsideInfoPages :orderId="order.id" :links="asideLinks"/>
@@ -93,7 +93,7 @@
               </h3>
             </header>
             <div class="item-wrapper">
-              <item v-for="item in order.cart" :inCart="true" :item="item"/>
+              <item v-for="item in order.cart" :key="order.id" :inCart="true" :item="item"/>
             </div>
           </div>
           <div class="fourth block">
@@ -158,7 +158,7 @@
           {
             id: 1,
             name: "Личные данные",
-            slug: "/profile/edit"
+            slug: "/user/edit"
           },
           {
             id: 2,

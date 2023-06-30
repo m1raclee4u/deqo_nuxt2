@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Breadcrumbs/>
+    <Breadcrumbs style="padding: 0;"/>
     <main class="main">
       <div class="catalog">
         <AsideInfoPages :links="asideLinks"/>
@@ -11,7 +11,7 @@
               <input
                 autocomplete="tel"
                 id="tel"
-                v-model="profileInfo.profileTel"
+                v-model="user.phone"
                 class="button"
                 type="text"
                 v-mask="'+7 (###) ###-##-##'"
@@ -22,7 +22,7 @@
               <label for="email">Email</label>
               <input
                 autocomplete="email"
-                v-model="profileInfo.profileEmail"
+                v-model="user.email"
                 class="button"
                 type="email"
                 name=""
@@ -34,7 +34,7 @@
               <label for="name">Ф.И.О.</label>
               <input
                 autocomplete="name"
-                v-model="profileInfo.profileName"
+                v-model="user.name"
                 class="button"
                 type="text"
                 name=""
@@ -44,7 +44,6 @@
             </div>
           </div>
           <button @click="saveProfileInfo" class="saveInfo button"><p>Сохранить</p></button>
-
         </div>
       </div>
     </main>
@@ -62,7 +61,7 @@
     },
     methods: {
       saveProfileInfo() {
-        this.$store.dispatch("profile/saveProfileInfo", this.profileInfo)
+        this.$store.dispatch("profile/saveProfileInfo", this.user)
 
         const h = this.$createElement;
 
@@ -72,18 +71,18 @@
         });
       }
     },
+    computed: {
+      user() {
+        return JSON.parse(JSON.stringify(this.$store.state.profile.user))
+      }
+    },
     data() {
       return {
-        profileInfo: {
-          profileEmail: this.$store.state.profile.profile.profileEmail,
-          profileTel: this.$store.state.profile.profile.profileTel,
-          profileName: this.$store.state.profile.profile.profileName
-        },
         asideLinks: [
           {
             id: 1,
             name: "Мои заказы",
-            slug: "/profile"
+            slug: "/user"
           },
           {
             id: 2,

@@ -2,23 +2,19 @@
 const sleep = m => new Promise(r => setTimeout(r, m))
 
 export const state = () => ({
-  profile: {
-    email: '',
-    phone: '',
-    name: ''
-  },
+  user: '',
 
 })
 export const mutations = {
-  SET_PROFILE_INFO(state, profile) {
-    state.profile = profile
+  SET(state, user) {
+    state.user = user
   },
 
 }
 export const actions = {
   async saveProfileInfo({ commit }, data) {
     await sleep(300)
-    await commit('SET_PROFILE_INFO', data)
+    await commit('SET', data)
   },
 
 }

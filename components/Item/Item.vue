@@ -60,7 +60,7 @@
       @click="
         $store.commit(
           'popups/SET_SELECT_PARAMETERS_OPENED',
-          !$store.state.popups.selectParametrs
+          !$store.state.popups.selectSize
         )
       "
     >
@@ -71,239 +71,241 @@
 </template>
 
 <script>
-  import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
-  import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
-  import ImageHelper from "~/plugins/imageHelper";
+import ButtonFavorite from "~/components/Buttons/ButtonFavorite.vue";
+import selectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
+import ImageHelper from "~/plugins/imageHelper";
 
-  import Swiper, {Navigation, Pagination, Autoplay} from "swiper";
-  import "swiper/swiper-bundle.css";
+import Swiper, {Navigation, Pagination, Autoplay} from "swiper";
+import "swiper/swiper-bundle.css";
 
-  Swiper.use([Navigation, Pagination, Autoplay]);
-  export default {
-    props: {
-      item: {
-        type: Object,
-        required: true,
-      },
-      inCart: Boolean,
-      inSlider: String,
+Swiper.use([Navigation, Pagination, Autoplay]);
+export default {
+  props: {
+    item: {
+      type: Object,
+      required: true,
     },
-    data() {
-      return {
-        IH: new ImageHelper(),
-      };
-    },
-    components: {ButtonFavorite, selectAdditionalParameter},
-  };
+    inCart: Boolean,
+    inSlider: String,
+  },
+  data() {
+    return {
+      IH: new ImageHelper(),
+    };
+  },
+  components: {ButtonFavorite, selectAdditionalParameter},
+};
 </script>
 
 <style lang="scss" scoped>
-  .inSlider{
-    width: 387px;
-    height: 561px;
-  }
-  .size {
-    width: 30px;
-    height: 30px;
-    background: #B5AFAE;
-    border-radius: 4px;
+.inSlider {
+  width: 387px;
+  height: 561px;
+}
+
+.size {
+  width: 30px;
+  height: 30px;
+  background: #B5AFAE;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  /* identical to box height */
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  color: #ffffff;
+}
+
+button {
+  margin: 20px auto 0 auto;
+  justify-content: center;
+  align-items: center;
+  // padding: 20px 109px;
+  gap: 10px;
+
+  width: 100%;
+  height: 64px;
+
+  /* основной */
+
+  background: #685f5f;
+  border-radius: 4px;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: white;
+}
+
+.input_color_1 {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-weight: 400;
+  gap: 10px;
+
+
+  .quantity {
+    font-size: 14px;
+    line-height: 19px;
+    color: #a9a1a1;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
-    /* identical to box height */
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: -0.02em;
+    width: 100%;
+    max-width: 100px;
+  }
+}
 
-    color: #ffffff;
+.tag {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  left: 9px;
+  top: 9px;
+  border-radius: 50%;
+  border: 1px solid #685f5f;
+  text-align: center;
+  line-height: 100%;
+
+  span {
+    position: absolute;
+    top: 10.5px;
+    left: 8px;
+    color: #685f5f;
+    font-size: 12px !important;
+  }
+}
+
+.ItemCart {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    background-color: #ebebeb;
   }
 
-  button {
-    margin: 20px auto 0 auto;
-    justify-content: center;
-    align-items: center;
-    // padding: 20px 109px;
-    gap: 10px;
+  a {
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    height: 100%;
+    //background: url("https://ru.louisvuitton.com/static_lvfront/product-card-gradients/gradient_default.svg") 0 0/cover no-repeat;
+  }
 
-    width: 100%;
-    height: 64px;
+  p {
+    font-family: "RF Dewi";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    /* основной */
+
+    color: #685f5f;
+  }
+}
+
+.colors {
+  gap: 10px;
+}
+
+.ItemCart__price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .price {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  p {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
 
     /* основной */
 
-    background: #685f5f;
-    border-radius: 4px;
+    color: #685f5f;
+  }
 
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
+  .old {
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration-line: line-through;
+    color: #B5AFAE;
+  }
+}
 
-    color: white;
+@media (max-width: 480px) {
+
+  .tag {
+    width: 30px;
+    height: 30px;
+
+    span {
+      font-size: 10px !important;
+      top: 5.5px;
+      left: 5px;
+    }
   }
 
   .input_color_1 {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  }
-
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    font-weight: 400;
-    gap: 10px;
-
-
-    .quantity {
-      font-size: 14px;
-      line-height: 19px;
-      color: #a9a1a1;
-      font-weight: 400;
-      width: 100%;
-      max-width: 100px;
-    }
-  }
-
-  .tag {
-    position: absolute;
-    width: 42px;
-    height: 42px;
-    left: 9px;
-    top: 9px;
-    border-radius: 50%;
-    border: 1px solid #685f5f;
-    text-align: center;
-    line-height: 100%;
-
-    span {
-      position: absolute;
-      top: 10.5px;
-      left: 8px;
-      color: #685f5f;
-      font-size: 12px !important;
-    }
+    width: 12px;
+    height: 12px;
   }
 
   .ItemCart {
-    height: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
     img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-      background-color: #ebebeb;
+      margin-bottom: 5px;
     }
 
-    a {
-      //display: flex;
-      //justify-content: center;
-      //align-items: center;
-      height: 100%;
-      //background: url("https://ru.louisvuitton.com/static_lvfront/product-card-gradients/gradient_default.svg") 0 0/cover no-repeat;
+    .top {
+      margin-bottom: 5px;
     }
 
     p {
-      font-family: "RF Dewi";
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* основной */
-
-      color: #685f5f;
+      font-size: 14px !important;
+      line-height: 130% !important;
     }
   }
-
   .colors {
-    gap: 10px;
+    gap: 5px;
   }
-
   .ItemCart__price {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
     .price {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    p {
-      font-style: normal;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 23px;
-
-      /* основной */
-
-      color: #685f5f;
-    }
-
-    .old {
-      font-size: 14px;
-      line-height: 16px;
-      text-decoration-line: line-through;
-      color: #B5AFAE;
-    }
-  }
-
-  @media (max-width: 480px) {
-
-    .tag {
-      width: 30px;
-      height: 30px;
-      span {
-        font-size: 10px !important;
-        top: 5.5px;
-        left: 5px;
-      }
-    }
-
-    .input_color_1 {
-      width: 12px;
-      height: 12px;
-    }
-
-    .ItemCart {
-      img {
-        margin-bottom: 5px;
-      }
-
-      .top {
-        margin-bottom: 5px;
-      }
-
-      p {
-        font-size: 14px !important;
-        line-height: 130% !important;
-      }
-    }
-    .colors {
       gap: 5px;
     }
-    .ItemCart__price {
-      .price {
-        gap: 5px;
-      }
-    }
   }
+}
 
-  @media (max-width: 380px) {
-    .input_color_1 {
-      width: 10px;
-      height: 10px;
-    }
-    .ItemCart {
-      p {
-        font-size: 10px !important;
-        line-height: 130% !important;
-      }
+@media (max-width: 380px) {
+  .input_color_1 {
+    width: 10px;
+    height: 10px;
+  }
+  .ItemCart {
+    p {
+      font-size: 10px !important;
+      line-height: 130% !important;
     }
   }
+}
 </style>

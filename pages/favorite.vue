@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.popups.burgerMenuOpened != false" />
+      <BurgerMenu v-if="$store.state.popups.burgerMenuOpened != false"/>
     </Transition>
-    <Breadcrumbs />
+    <Breadcrumbs style="padding: 0"/>
     <main class="main">
       <p
         class="favoriteBlank"
@@ -35,6 +35,8 @@
               :key="item.id"
               class="col item"
             >
+              <select-additional-parameter v-if="$store.state.popups.selectSize" :item="item"/>
+
               <item :item="item" :key="item.id"> </item>
               <!-- {{ item }} -->
             </div>
@@ -53,9 +55,11 @@ import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
 import Footer from "~/components/General/Footer.vue";
 import ButtonCart from "~/components/Buttons/ButtonCart.vue";
 import AsideInfoPages from "~/components/Aside/AsideInfoPages";
+import SelectAdditionalParameter from "~/components/General/selectAdditionalParameter.vue";
 
 export default {
   components: {
+    SelectAdditionalParameter,
     AsideInfoPages,
     HeaderBlack,
     Item,
@@ -70,12 +74,12 @@ export default {
         {
           id: 1,
           name: "Личные данные",
-          slug: "/profile/edit"
+          slug: "/user/edit"
         },
         {
           id: 2,
           name: "Мои заказы",
-          slug: "/profile"
+          slug: "/user"
         },
         {
           id: 3,

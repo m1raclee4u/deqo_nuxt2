@@ -1,14 +1,13 @@
 <template>
   <div class="wrapper">
     <Breadcrumbs style="padding: 0;"/>
-
     <main class="main">
       <div class="catalog">
         <AsideInfoPages :links="asideLinks"/>
         <div class="info">
-          <div class="orders">
-            <profileOrder v-for="order in $store.getters['orders/getOrders']" :order="order"/>
-          </div>
+<!--          <div class="orders">-->
+<!--            <profileOrder v-for="order in $store.getters['orders/getOrders']" :order="order"/>-->
+<!--          </div>-->
         </div>
         <AsideHelp class="asideHelp"/>
       </div>
@@ -26,8 +25,14 @@ export default {
     Breadcrumbs,
     AsideInfoPages
   },
-  async asyncData({store}) {
-    await store.dispatch('orders/fetchOrders')
+  async asyncData({store, $axios}) {
+    // await store.dispatch('orders/fetchOrders')
+    const user = await $axios.$post('/auth/me', {}, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+    store.commit('profile/SET', user);
   },
   mounted() {
     const mediaQuery = window.matchMedia("(max-width:1279px)");
@@ -43,7 +48,7 @@ export default {
         {
           id: 1,
           name: "Личные данные",
-          slug: "/profile/edit"
+          slug: "/user/edit"
         },
         {
           id: 2,
