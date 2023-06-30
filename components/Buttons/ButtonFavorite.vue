@@ -67,7 +67,7 @@ export default {
   z-index: 10;
   top: 14px;
   right: 14px;
-  /*height: 60px;*/
+  height: 60px;
 }
 .added {
   background-image: url("@/assets/img/icons/heart_on.svg") !important;

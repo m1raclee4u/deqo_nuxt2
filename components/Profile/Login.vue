@@ -10,11 +10,12 @@
         <input
           class="button"
           type="tel"
-          v-mask="'+7 (###) ### ## ##'"
+          v-mask="'+7 (###) ###-##-##'"
           v-model="inputPhoneModel"
           autocomplete="true"
+          placeholder="+7"
           v-focus
-        />
+        >
         <PincodeInput v-if="isPhoneRequest" class="input-wrapper"
                       v-model="code"
         />
@@ -53,14 +54,16 @@
       phoneRequest() {
         console.log(this.inputPhoneModel.length)
         this.isPhoneRequest = true
-
+        this.$axios.$post('/auth/requestCode', {
+          phone: this.inputPhoneModel
+        })
       }
     },
     data() {
       return {
         code: '',
         isPhoneRequest: false,
-        inputPhoneModel: "+7",
+        inputPhoneModel: ''
       };
     },
     computed: {

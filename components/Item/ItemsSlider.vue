@@ -8,11 +8,12 @@
     </div>
     <div :class="{mainSlider: products.length > 4}">
       <!-- Additional required wrapper -->
-      <div v-if="!isMobileSwiper" class="swiper-wrapper" :class="{notSwiper: products.length < 4}">
+      <div v-if="!isMobileSwiper" class=""
+           :class="{notSwiper: products.length < 4, 'swiper-wrapper': products.length > 4}">
         <div
           v-for="item in products.slice(0, this.products.length)"
           :key="item.slug"
-          class="swiper-slide item-slide"
+          :class="{'item-slide': products.length < 4, 'swiper-slide': products.length > 3}"
 
         >
           <item :item="item" inSlider="inSlider" :key="item.id"></item>
@@ -23,11 +24,10 @@
         <div
           v-for="array in this.splitArray"
           :key="array.id"
-          class="swiper-slide"
-          :class="{moreThan4: products.length > 3, 'item-slide': products.length < 4}"
+          :class="{moreThan4: products.length > 3, 'item-slide': products.length < 4, 'swiper-slide': products.length > 3}"
         >
           <div v-for="item in array" class="items">
-            <item :item="item" inSlider="inSlider" :key="item.id"></item>
+            <item :item="item" :key="item.id"></item>
           </div>
         </div>
 
@@ -55,6 +55,7 @@
     },
     data() {
       return {
+        wrapperWidth: 0,
         slider: null,
         isMobileSwiper: false,
       };
@@ -66,10 +67,36 @@
       },
       splitArray() {
         return _.chunk(this.products, 4)
+      },
+      slides_number() {
+        this.wrapperWidth = document.querySelector('.mainSlider').offsetWidth;
+        return (this.wrapperWidth - 20 - (this.products.length * 5)) / 387
       }
     },
-
-
+    updated() {
+      this.wrapperWidth = document.querySelector('.mainSlider').offsetWidth;
+    },
+    watch: {
+      wrapperWidth(value) {
+        new Swiper(".mainSlider", {
+          slidesPerView: 4,
+          loop: false,
+          breakpoints: {
+            0: {
+              slidesPerView: 1,
+              loop: false,
+            },
+            768: {
+              slidesPerView: this.slides_number,
+              loop: true,
+              longSwipes: false,
+              centeredSlides: true,
+              spaceBetween: 5,
+            },
+          }
+        });
+      }
+    },
     mounted() {
       const mediaQuery = window.matchMedia("(max-width:768px)");
       this.isMobileSwiper = mediaQuery.matches;
@@ -77,37 +104,40 @@
       mediaQuery.addListener(listener);
       this.$once("hook:beforeDestroy", () => mediaQuery.removeListener(listener));
 
-
-      const swiper = new Swiper(".mainSlider", {
-        slidesPerView: 'auto',
-        edgeSwipeDetection: true,
-        spaceBetween: 5,
-        loop: true,
-        loopedSlides: 4,
-        width: 387,
-        breakpoints: {
-          768: {
-            slidesPerView: 1,
-            loop: true
+      setTimeout(() => {
+        new Swiper(".mainSlider", {
+          slidesPerView: 4,
+          loop: false,
+          breakpoints: {
+            0: {
+              slidesPerView: 1,
+              loop: false,
+            },
+            768: {
+              slidesPerView: this.slides_number,
+              loop: true,
+              longSwipes: false,
+              centeredSlides: true,
+              spaceBetween: 5,
+            },
           }
-        }
-      });
+        });
+      }, 500)
+
     },
   };
 </script>
 
 <style lang="scss" scoped>
-  .notSwiper{
+  .notSwiper {
     display: flex;
     gap: 5px;
   }
+
   .mainSlider {
     position: relative;
-  }
-
-
-  .item-slide {
-    width: 387px !important;
+    max-width: 1676px;
+    width: 100%;
   }
 
   .linkToCatalog {

@@ -1,5 +1,5 @@
 <template>
-  <div class="ItemCart">
+  <div class="ItemCart" :class="{inSlider: inSlider === 'inSlider'}">
     <ButtonFavorite v-if="!inCart" :item="item" inSlider="inSlider"/>
     <Nuxt-Link :to="`/products/${item.slug}`">
       <!-- <img :src="require('@/assets/img/item/' + item.img)" alt="" > -->
@@ -86,7 +86,7 @@
         required: true,
       },
       inCart: Boolean,
-      inSlider: {},
+      inSlider: String,
     },
     data() {
       return {
@@ -98,6 +98,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .inSlider{
+    width: 387px;
+    height: 561px;
+  }
   .size {
     width: 30px;
     height: 30px;
