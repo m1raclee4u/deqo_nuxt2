@@ -11,9 +11,12 @@
         placeholder="+7"
         v-focus
       >
-      <PincodeInput v-if="isPhoneRequest" class="input-wrapper"
-                    v-model="code"
-      />
+      <div class="pin">
+        <PincodeInput v-if="isPhoneRequest" class="input-wrapper"
+                      v-model="code"
+        />
+        <span style="margin-top: 10px;" v-if="errors.wrongPincode">* {{errors.wrongPincode}}</span>
+      </div>
       <button v-if="!isPhoneRequest" :disabled="inputPhoneModel.length !== 16" @click="phoneRequest"
               class="button next">Далее
       </button>
@@ -31,7 +34,6 @@
 
 <script>
 import PincodeInput from 'vue-pincode-input';
-import {extractRepositoryUrl} from "yarn/lib/cli";
 
 export default {
   watch: {
@@ -70,7 +72,11 @@ export default {
       await this.$axios.$post('/auth/login', {
         phone: this.inputPhoneModel,
         code: this.code
-      }).then(res => this.setBearerToken(res))
+      }).then(res => {
+        this.setBearerToken(res)
+      }).catch(error => {
+        this.errors.wrongPincode = error.response.data.message
+      })
     },
     setBearerToken(res) {
       const bearerToken = res.access_token;
@@ -98,6 +104,9 @@ export default {
   },
   data() {
     return {
+      errors: {
+        wrongPincode: false,
+      },
       isResendButtonShown: false,
       isTimerShown: false,
       code: '',
@@ -118,6 +127,16 @@ export default {
 <style lang="scss" scoped>
 div.vue-pincode-input-wrapper {
   // any styles you want for wrapper
+}
+
+.pin{
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  span{
+    font-size: 12px;
+    color: #a40101;
+  }
 }
 
 .timer {
