@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     isExist() {
-      if (this.$route.name.includes('profile') && this.$route.name.includes('edit')) {
+      if (this.$route.name.includes('user') && this.$route.name.includes('edit')) {
         return "Личные данные"
       } else {
         return false
@@ -36,7 +36,7 @@ export default {
         return "Доставка";
       } else if (this.$route.name === "refund") {
         return "Обмен и возврат";
-      } else if (this.$route.name.includes('profile')) {
+      } else if (this.$route.name.includes('user')) {
         return "Личный кабинет"
       } else if (this.$route.name.includes('search')) {
         return "Поиск"

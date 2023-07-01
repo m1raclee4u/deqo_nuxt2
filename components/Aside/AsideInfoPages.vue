@@ -30,7 +30,7 @@ export default {
         return "Обмен и возврат";
       } else if (this.$route.name.includes('edit')) {
         return "Личные данные"
-      } else if (this.$route.name === 'profile') {
+      } else if (this.$route.name === 'user') {
         return "Мои заказы"
       } else if (this.$route.name.includes('order')){
         return `Заказ #${this?.orderId}`
