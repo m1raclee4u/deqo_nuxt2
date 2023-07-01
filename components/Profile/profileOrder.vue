@@ -7,9 +7,9 @@
       </div>
       <div class="cart">
         <div class="item" v-for="(item, index) in cart">
-          <p @click="$router.push(`/profile/order/${order.uuid}`)" v-if="order.cart.length > 4 && index === cart.length -1">+{{ order.cart.length - cart.length }}</p>
+          <p @click="$router.push(`/user/order/${order.uuid}`)" v-if="order.cart.length > 4 && index === cart.length -1">+{{ order.cart.length - cart.length }}</p>
           <div class="image">
-            <div @click="$router.push(`/profile/order/${order.uuid}`)" v-if="order.cart.length > 4 && index === cart.length - 1" class="blur"></div>
+            <div @click="$router.push(`/user/order/${order.uuid}`)" v-if="order.cart.length > 4 && index === cart.length - 1" class="blur"></div>
             <img :src="IH.getUrl($axios.defaults.baseURL + `/` + item.image, 100, fm = 'webp')" alt="">
           </div>
         </div>
@@ -33,7 +33,7 @@
         <button v-if="order.status !== 'CREATED' && order.status !== 'CANCELLED'" @click="cancelOrder" class="button top">
           Отменить
         </button>
-        <button @click="$router.push(`/profile/order/${order.uuid}`)" class="button bottom">Посмотреть</button>
+        <button @click="$router.push(`/user/order/${order.uuid}`)" class="button bottom">Посмотреть</button>
       </div>
 
     </div>
