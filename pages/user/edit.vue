@@ -1,54 +1,57 @@
 <template>
-  <div class="wrapper">
-    <Breadcrumbs style="padding: 0;"/>
-    <main class="main">
-      <div class="catalog">
-        <AsideInfoPages :links="asideLinks"/>
-        <div class="info">
-          <div class="form">
-            <div class="input">
-              <label for="tel">Телефон</label>
-              <input
-                autocomplete="tel"
-                id="tel"
-                v-model="user.phone"
-                class="button"
-                type="text"
-                v-mask="'+7 (###) ###-##-##'"
-                placeholder="+7"
-              />
+  <section>
+    <div class="wrapper">
+      <Breadcrumbs style="padding: 0;"/>
+      <main class="main">
+        <div class="catalog">
+          <AsideInfoPages :links="asideLinks"/>
+          <div class="info">
+            <div class="form">
+              <div class="input">
+                <label for="tel">Телефон</label>
+                <input
+                  autocomplete="tel"
+                  id="tel"
+                  v-model="user.phone"
+                  class="button"
+                  type="text"
+                  v-mask="'+7 (###) ###-##-##'"
+                  placeholder="+7"
+                />
+              </div>
+              <div class="input">
+                <label for="email">Email</label>
+                <input
+                  autocomplete="email"
+                  v-model="user.email"
+                  class="button"
+                  type="email"
+                  name=""
+                  id="email"
+                  placeholder="Электронная почта"
+                />
+              </div>
+              <div class="input">
+                <label for="name">Ф.И.О.</label>
+                <input
+                  autocomplete="name"
+                  v-model="user.name"
+                  class="button"
+                  type="text"
+                  name=""
+                  id="name"
+                  placeholder="Ф.И.О"
+                />
+              </div>
             </div>
-            <div class="input">
-              <label for="email">Email</label>
-              <input
-                autocomplete="email"
-                v-model="user.email"
-                class="button"
-                type="email"
-                name=""
-                id="email"
-                placeholder="Электронная почта"
-              />
-            </div>
-            <div class="input">
-              <label for="name">Ф.И.О.</label>
-              <input
-                autocomplete="name"
-                v-model="user.name"
-                class="button"
-                type="text"
-                name=""
-                id="name"
-                placeholder="Ф.И.О"
-              />
-            </div>
+            <button @click="saveProfileInfo" class="saveInfo button"><p>Сохранить</p></button>
           </div>
-          <button @click="saveProfileInfo" class="saveInfo button"><p>Сохранить</p></button>
         </div>
-      </div>
-    </main>
-  </div>
-</template>
+      </main>
+    </div>
+
+  </section>
+  </template>
 
 <script>
   import Breadcrumbs from "~/components/General/Breadcrumbs.vue";
@@ -360,5 +363,10 @@
 
   ul li::before {
     background-color: #a9a1a1;
+  }
+  @media (max-width: 1024px) {
+    .catalog{
+      flex-direction: column;
+    }
   }
 </style>

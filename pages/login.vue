@@ -11,8 +11,8 @@
         placeholder="+7"
         v-focus
       >
-      <div class="pin">
-        <PincodeInput v-if="isPhoneRequest" class="input-wrapper"
+      <div v-if="isPhoneRequest" class="pin">
+        <PincodeInput class="input-wrapper"
                       v-model="code"
         />
         <span style="margin-top: 10px;" v-if="errors.wrongPincode">* {{errors.wrongPincode}}</span>

@@ -1,25 +1,26 @@
 <template>
-  <div class="wrapper">
-    <Transition name="slide-fade">
-      <BurgerMenu v-if="$store.state.popups.burgerMenuOpened != false"/>
-    </Transition>
-    <Breadcrumbs style="padding: 0"/>
-    <main class="main">
-      <p
-        class="favoriteBlank"
-        v-if="$store.state.favorites.products.length < 1"
-      >
-        У вас пока нет избранных товаров,<br />
-        а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
-      </p>
-      <div v-if="$store.state.favorites.products.length > 0" class="catalog">
-        <AsideInfoPages :links="asideLinks"/>
-        <div class="items__main">
-          <div class="aic">
-            <p>{{ $store.state.favorites.products.length }} товаров</p>
-          </div>
-          <div
-            class="
+  <section>
+    <div class="wrapper">
+      <Transition name="slide-fade">
+        <BurgerMenu v-if="$store.state.popups.burgerMenuOpened != false"/>
+      </Transition>
+      <Breadcrumbs style="padding: 0"/>
+      <main class="main">
+        <p
+          class="favoriteBlank"
+          v-if="$store.state.favorites.products.length < 1"
+        >
+          У вас пока нет избранных товаров,<br />
+          а наш каталог полон <Nuxt-link to="/catalog">новинок</Nuxt-link>
+        </p>
+        <div v-if="$store.state.favorites.products.length > 0" class="catalog">
+          <AsideInfoPages :links="asideLinks"/>
+          <div class="items__main">
+            <div class="aic">
+              <p>{{ $store.state.favorites.products.length }} товаров</p>
+            </div>
+            <div
+              class="
               items
               row
               row-cols-1
@@ -29,23 +30,25 @@
               row-cols-xl-3
               g-3
             "
-          >
-            <div
-              v-for="item in $store.state.favorites.products"
-              :key="item.id"
-              class="col item"
             >
-              <select-additional-parameter v-if="$store.state.popups.selectSize" :item="item"/>
+              <div
+                v-for="item in $store.state.favorites.products"
+                :key="item.id"
+                class="col item"
+              >
+                <select-additional-parameter v-if="$store.state.popups.selectSize" :item="item"/>
 
-              <item :item="item" :key="item.id"> </item>
-              <!-- {{ item }} -->
+                <item :item="item" :key="item.id"> </item>
+                <!-- {{ item }} -->
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
-  </div>
-</template>
+      </main>
+    </div>
+
+  </section>
+  </template>
 
 <script>
 import HeaderBlack from "~/components/General/HeaderBlack.vue";

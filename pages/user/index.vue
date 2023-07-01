@@ -5,9 +5,9 @@
       <div class="catalog">
         <AsideInfoPages :links="asideLinks"/>
         <div class="info">
-<!--          <div class="orders">-->
-<!--            <profileOrder v-for="order in $store.getters['orders/getOrders']" :order="order"/>-->
-<!--          </div>-->
+          <div class="orders">
+            <profileOrder v-for="order in $store.getters['orders/getOrders']" :order="order"/>
+          </div>
         </div>
         <AsideHelp class="asideHelp"/>
       </div>
@@ -26,7 +26,7 @@ export default {
     AsideInfoPages
   },
   async asyncData({store, $axios}) {
-    // await store.dispatch('orders/fetchOrders')
+    await store.dispatch('orders/fetchOrders')
     const user = await $axios.$post('/auth/me', {}, {
       headers: {
         'Authorization': `Bearer ${localStorage.token}`
@@ -304,6 +304,9 @@ ul li::before {
 @media (max-width: 1165px) {
   .wrapper {
     padding: 0 24px;
+  }
+  .container{
+    flex-direction: column;
   }
 }
 
